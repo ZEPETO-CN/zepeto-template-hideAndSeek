@@ -1,0 +1,52 @@
+fileFormatVersion: 2
+guid: b8b0dedc36cfaf24cbc45845e035a6c5
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nclass LeaderboardItem extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    SetRankData(data) {\r\n       
+    try {\r\n            this.LoadHeadImg(data.member);\r\n            if (data.rank
+    <= 3) {\r\n                this.mRankImage.sprite = this.mRankImageArr[data.rank
+    - 1];\r\n                this.mRankImage.gameObject.SetActive(true);\r\n               
+    this.mRankText.gameObject.SetActive(false);\r\n            }\r\n            else
+    {\r\n                this.mRankText.text = data.rank.toString();\r\n               
+    this.mRankImage.gameObject.SetActive(false);\r\n                this.mRankText.gameObject.SetActive(true);\r\n           
+    }\r\n            this.mScoreText.text = data.score + \"\";\r\n            this.mNameText.text
+    = data.name + \"\";\r\n        }\r\n        catch (error) {\r\n            console.error(data.rank,
+    data.name, data.score, data.member);\r\n            console.error(error);\r\n       
+    }\r\n    }\r\n    SetPlayerInfoData(playerInfo, rank) {\r\n        this.LoadHeadImg(playerInfo.userId);\r\n       
+    if (rank <= 3 && rank > 0) {\r\n            this.mRankImage.sprite = this.mRankImageArr[rank
+    - 1];\r\n            this.mRankImage.gameObject.SetActive(true);\r\n           
+    this.mRankText.gameObject.SetActive(false);\r\n        }\r\n        else {\r\n           
+    this.mRankText.text = rank.toString();\r\n            this.mRankImage.gameObject.SetActive(false);\r\n           
+    this.mRankText.gameObject.SetActive(true);\r\n        }\r\n        this.mScoreText.text
+    = playerInfo.score ? playerInfo.score.toString() : \"0\";\r\n        this.mNameText.text
+    = playerInfo.nickName;\r\n    }\r\n    LoadHeadImg(userId) {\r\n        this.mHeadImage.enabled
+    = false;\r\n        ZEPETO_World_1.ZepetoWorldHelper.GetProfileTexture(userId,
+    (texture) => {\r\n            if (this) {\r\n                this.mHeadImage.sprite
+    = this.GetSprite(texture);\r\n                this.mHeadImage.enabled = true;\r\n           
+    }\r\n        }, (error) => {\r\n            console.error(error);\r\n       
+    });\r\n    }\r\n    GetSprite(texture) {\r\n        let rect = new UnityEngine_1.Rect(0,
+    0, texture.width, texture.height);\r\n        return UnityEngine_1.Sprite.Create(texture,
+    rect, new UnityEngine_1.Vector2(0.5, 0.5));\r\n    }\r\n}\r\nexports.default
+    = LeaderboardItem;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTGVhZGVyYm9hcmRJdGVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiTGVhZGVyYm9hcmRJdGVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUMsNkNBQXdFO0FBQ3pFLG1EQUE2QztBQUM3QyxpREFBcUQ7QUFDckQsK0NBQWlEO0FBS2pELE1BQXFCLGVBQWdCLFNBQVEscUNBQXFCO0lBV3ZELFdBQVcsQ0FBQyxJQUFVO1FBQ3pCLElBQUk7WUFDQSxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztZQUM5QixJQUFJLElBQUksQ0FBQyxJQUFJLElBQUksQ0FBQyxFQUFFO2dCQUNoQixJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxJQUFJLEdBQUcsQ0FBQyxDQUFDLENBQUM7Z0JBQzNELElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFDM0MsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO2FBQzlDO2lCQUNJO2dCQUNELElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQzNDLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDNUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO2FBQzdDO1lBRUQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLEtBQUssR0FBRyxFQUFFLENBQUM7WUFDdkMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLElBQUksR0FBRyxFQUFFLENBQUM7U0FDeEM7UUFBQyxPQUFPLEtBQUss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","assetPath":"Assets/Scripts/UI/LeaderboardItem.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mRankImageArr","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mNameText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mScoreText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRankText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRankImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mHeadImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"LeaderboardItem","description":""},"isCompiled":true}'
+  typescriptHash: 56fa85dce4955b3208bb0ca19b9a2486
+  onlyWriteTrigger: 0

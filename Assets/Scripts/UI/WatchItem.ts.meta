@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: d6eb86a0f918d4540af7017e1543aa5d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nclass WatchItem extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    SetItem(data) {\r\n        this.data = data;\r\n        this.nameText.text
+    = data.name;\r\n    }\r\n    SetSelect(isSelect) {\r\n        this.transform.GetChild(0).gameObject.SetActive(isSelect);\r\n   
+    }\r\n}\r\nexports.default = WatchItem;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiV2F0Y2hJdGVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiV2F0Y2hJdGVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBRXJELG1EQUFxQztBQUVyQyxNQUFxQixTQUFVLFNBQVEscUNBQXFCO0lBS2pELE9BQU8sQ0FBQyxJQUFtQjtRQUM5QixJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztRQUNqQixJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDO0lBQ25DLENBQUM7SUFFTSxTQUFTLENBQUMsUUFBaUI7UUFDOUIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUM5RCxDQUFDO0NBRUo7QUFkRCw0QkFjQyJ9","assetPath":"Assets/Scripts/UI/WatchItem.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"nameText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"data","type":"D:/Git/new-world-peekaboo/Assets/Scripts/UI/UIWatchGameView.WatchGameNode","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"WatchItem","description":""},"isCompiled":true}'
+  typescriptHash: 3decf8c2dc64eeec6bce36357cf1828a
+  onlyWriteTrigger: 0

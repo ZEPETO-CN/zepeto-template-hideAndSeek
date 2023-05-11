@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 0d13cae51d66b4c429003e15192b0b62
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nclass UIObserverItem extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    SetData(name) {\r\n        this.mText.text
+    = name;\r\n        this.mBtn.onClick.AddListener(() => {\r\n            this.mObserverShowName.text
+    = name;\r\n        });\r\n    }\r\n}\r\nexports.default = UIObserverItem;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlPYnNlcnZlckl0ZW0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJVSU9ic2VydmVySXRlbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCxtREFBNEM7QUFFNUMsTUFBcUIsY0FBZSxTQUFRLHFDQUFxQjtJQU03RCxPQUFPLENBQUMsSUFBWTtRQUVoQixJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7UUFDdkIsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUUvQixJQUFJLENBQUMsaUJBQWlCLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztRQUN2QyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7Q0FFSjtBQWZELGlDQWVDIn0=","assetPath":"Assets/Scripts/UI/UIObserverItem.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mObserverShowName","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIObserverItem","description":""},"isCompiled":true}'
+  typescriptHash: 4ebe23465458109377b05bcb26cfa61b
+  onlyWriteTrigger: 0

@@ -1,0 +1,130 @@
+fileFormatVersion: 2
+guid: 639d9995d950b184aaf7aa4711cd8fca
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\n// import { NavMeshAgent,
+    NavMesh } from \\\"UnityEngine.AI\\\"\\r\\nvar AnimatorState;\\r\\n(function
+    (AnimatorState) {\\r\\n    AnimatorState[AnimatorState[\\\"None\\\"] = 0] = \\\"None\\\";\\r\\n   
+    AnimatorState[AnimatorState[\\\"Forward\\\"] = 1] = \\\"Forward\\\";\\r\\n   
+    AnimatorState[AnimatorState[\\\"Back\\\"] = 2] = \\\"Back\\\";\\r\\n    AnimatorState[AnimatorState[\\\"Left\\\"]
+    = 3] = \\\"Left\\\";\\r\\n    AnimatorState[AnimatorState[\\\"Right\\\"] = 4]
+    = \\\"Right\\\";\\r\\n})(AnimatorState || (AnimatorState = {}));\\r\\nclass MoveDataPackage
+    {\\r\\n}\\r\\n// \u8868\u73B0\u5C42\\r\\n/*\\r\\n  200ms \u5EF6\u8FDF\u5185\\r\\n 
+    RenderFPS = 60 |  Logic FPS = 16, 66ms\\r\\n  \u7406\u8BBA\u4E0A60\u6BEB\u79D2\u5904\u7406\u4E00\u4E2A\u6570\u636E\u5305\\r\\n 
+    \u79FB\u52A8\u6570\u636E\u5305\uFF1A\\r\\n  \u52A8\u753B+\u76EE\u6807\u4F4D\u7F6E\\r\\n
+    */\\r\\nclass CustomCharacterController extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        //
+    private mNavAgent : NavMeshAgent;\\r\\n        this.Animator_Param_State = \\\"Move\\\";\\r\\n       
+    this.mIsLocal = false;\\r\\n        this.mGravityVelocity = UnityEngine_1.Vector3.zero;\\r\\n       
+    this.mMoveDir = UnityEngine_1.Vector3.zero;\\r\\n        this.mCurMoveSpeed =
+    0;\\r\\n        this.mMinMoveDis = 0.05;\\r\\n        this.mMaxLerpDis = 3;\\r\\n       
+    //private mMoveAccelerate : number = 3;\\r\\n        this.mTimer = 0;\\r\\n       
+    this.mMaxMoveTime = 0.5;\\r\\n        this.mRunSpeed = 0.5;\\r\\n        this.mJumpPower
+    = 8;\\r\\n        this.mGravity = 30;\\r\\n        this.mGravitySpeed = -10;\\r\\n       
+    //private  TEMP_FRAME_COUNT : number = 0;\\r\\n        this.mIsModel = false;\\r\\n       
+    this.mTargetModel = null;\\r\\n        this.mToAngle = UnityEngine_1.Vector3.zero;\\r\\n   
+    }\\r\\n    Awake() {\\r\\n        this.mAnimator = this.gameObject.GetComponentInChildren($typeof(UnityEngine_1.Animator));\\r\\n       
+    this.mCharacterController = this.gameObject.GetComponent($typeof(UnityEngine_1.CharacterController));\\r\\n       
+    this.mGravityVelocity.y = this.mGravitySpeed;\\r\\n    }\\r\\n    // FixedUpdate(){\\r\\n   
+    //     this.OnFixedMove();\\r\\n    // }\\r\\n    Update() {\\r\\n        this.OnJump();\\r\\n       
+    this.OnMove();\\r\\n    }\\r\\n    OnChangeModel(target) {\\r\\n        let isModel
+    = target != null;\\r\\n        this.mTargetModel = target;\\r\\n        this.mIsModel
+    = isModel;\\r\\n        this.mCharacterController.enabled = !isModel;\\r\\n       
+    if (isModel) {\\r\\n            this.mTargetModel.transform.eulerAngles = this.transform.eulerAngles;\\r\\n           
+    this.mRigidbody = target.AddComponent($typeof(UnityEngine_1.Rigidbody));\\r\\n           
+    this.mRigidbody.useGravity = true;\\r\\n            this.mRigidbody.mass = 100;\\r\\n           
+    this.mRigidbody.drag = 0;\\r\\n            this.mRigidbody.angularDrag = 0;\\r\\n           
+    this.mRigidbody.collisionDetectionMode = UnityEngine_1.CollisionDetectionMode.Continuous;\\r\\n           
+    this.mRigidbody.constraints = UnityEngine_1.RigidbodyConstraints.FreezeRotation;\\r\\n       
+    }\\r\\n    }\\r\\n    Jump() {\\r\\n        if (!this.mIsJumping) {\\r\\n           
+    this.mAnimator.SetTrigger(\\\"Jump\\\");\\r\\n            this.mGravityVelocity.y
+    = this.mJumpPower;\\r\\n            this.mIsJumping = true;\\r\\n           
+    console.log(\\\"\u5F00\u59CBJump\\\");\\r\\n        }\\r\\n    }\\r\\n    OnJump()
+    {\\r\\n        if (this.mIsJumping) {\\r\\n            this.mGravityVelocity.y
+    -= this.mGravity * UnityEngine_1.Time.deltaTime;\\r\\n            // if(this.mIsModel){\\r\\n           
+    //     this.mRigidbody.velocity = this.mGravityVelocity * 0.6;  // \u9650\u5236\u901F\u5EA6\\r\\n           
+    //     this.transform.position = this.mTargetModel.transform.position;\\r\\n           
+    // }\\r\\n            if (this.mGravityVelocity.y < this.mGravitySpeed) {\\r\\n               
+    this.mIsJumping = false;\\r\\n                console.log(\\\"\u505C\u6B62Jump\\\");\\r\\n               
+    if (this.mIsModel) {\\r\\n                    this.mRigidbody.velocity = UnityEngine_1.Vector3.zero;\\r\\n               
+    }\\r\\n            }\\r\\n        }\\r\\n        if (!this.mIsModel) {\\r\\n           
+    this.mCharacterController.Move(UnityEngine_1.Vector3.op_Multiply(this.mGravityVelocity,
+    UnityEngine_1.Time.deltaTime));\\r\\n        }\\r\\n    }\\r\\n    OnMove() {\\r\\n       
+    if (!this.mIsModel) {\\r\\n            if (this.mIsMoveing) {\\r\\n               
+    this.mTimer += UnityEngine_1.Time.deltaTime;\\r\\n                if (this.mTimer
+    > this.mMaxMoveTime) {\\r\\n                    this.StopMoving();\\r\\n               
+    }\\r\\n                this.mCharacterController.Move(UnityEngine_1.Vector3.op_Multiply(this.mMoveDir,
+    (this.mCurMoveSpeed * UnityEngine_1.Time.deltaTime)));\\r\\n            }\\r\\n       
+    }\\r\\n    }\\r\\n    OnFixedMove() {\\r\\n        if (this.mIsModel) {\\r\\n           
+    if (this.mIsMoveing) {\\r\\n                this.mTimer += UnityEngine_1.Time.fixedDeltaTime;\\r\\n               
+    if (this.mTimer > this.mMaxMoveTime) {\\r\\n                    this.StopMoving();\\r\\n               
+    }\\r\\n                let v = UnityEngine_1.Vector3.op_Multiply(this.mMoveDir,
+    this.mCurMoveSpeed * UnityEngine_1.Time.fixedDeltaTime);\\r\\n               
+    // if(this.mIsJumping){\\r\\n                //     v.y = this.mRigidbody.velocity.y
+    * Time.fixedDeltaTime;\\r\\n                // }else{\\r\\n                //    
+    v.y = 0;\\r\\n                // }\\r\\n                let newPos = UnityEngine_1.Vector3.op_Addition(this.mRigidbody.transform.position,
+    v);\\r\\n                this.mRigidbody.MovePosition(newPos);\\r\\n               
+    this.transform.position = this.mTargetModel.transform.position;\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    HandleMoveData(data) {\\r\\n        this.mAnimator.SetInteger(this.Animator_Param_State,
+    data.uiMoveDir);\\r\\n        this.PushAngelData(data.angle_y);\\r\\n       
+    this.mCurMoveSpeed = this.GetSpeed(data.uiMoveDir);\\r\\n        let ddis = UnityEngine_1.Vector3.Distance(this.transform.position,
+    data.curPos);\\r\\n        if (ddis >= this.mMaxLerpDis) {\\r\\n            this.transform.position
+    = data.curPos;\\r\\n            console.error(\\\"\u53D1\u751F\u6296\u52A8\uFF1A
+    \\\" + ddis);\\r\\n        }\\r\\n        else if (ddis / this.mCurMoveSpeed
+    > (this.mMaxMoveTime + 0.1)) {\\r\\n            this.mCurMoveSpeed *= 1.1; //
+    \u9632\u6B62\u6296\u52A8\\r\\n        }\\r\\n        this.mIsMoveing = true;\\r\\n       
+    this.mMoveTarget = data.targetPos;\\r\\n        this.mMoveDir = (UnityEngine_1.Vector3.op_Subtraction(data.targetPos,
+    data.curPos)).normalized;\\r\\n        this.mTimer = 0;\\r\\n        this.OnMove();\\r\\n   
+    }\\r\\n    GetSpeed(uiMoveDir) {\\r\\n        switch (uiMoveDir) {\\r\\n           
+    case AnimatorState.Forward:\\r\\n                return this.mRunSpeed;\\r\\n               
+    break;\\r\\n            case AnimatorState.Back:\\r\\n                return
+    this.mRunSpeed * 0.5;\\r\\n                break;\\r\\n            case AnimatorState.Left:\\r\\n               
+    return this.mRunSpeed * 0.8;\\r\\n                break;\\r\\n            case
+    AnimatorState.Right:\\r\\n                return this.mRunSpeed * 0.8;\\r\\n               
+    break;\\r\\n        }\\r\\n    }\\r\\n    StopMoving() {\\r\\n        this.mAnimator.SetInteger(this.Animator_Param_State,
+    0);\\r\\n        this.mIsMoveing = false;\\r\\n        this.mCurMoveSpeed = 0;\\r\\n       
+    this.mTimer = 0;\\r\\n        // if(this.mIsModel) {\\r\\n        //     this.mRigidbody.velocity
+    = Vector3.zero;\\r\\n        // }\\r\\n        console.log(\\\"stopMoving!\\\");\\r\\n       
+    // todo\\r\\n    }\\r\\n    // \u5904\u7406\u6570\u636E\\r\\n    PushMoveData(uiMoveDir,
+    angle_y, curPos, targetPos) {\\r\\n        if (uiMoveDir == 0) { // \u76EE\u6807\u70B9\\r\\n           
+    this.PushAngelData(angle_y);\\r\\n            if (this.CheckReachedTarget(targetPos))
+    {\\r\\n                this.transform.position = targetPos;\\r\\n               
+    console.log(\\\"\u5230\u8FBE\u76EE\u6807\u70B9\\\");\\r\\n                this.StopMoving();\\r\\n           
+    }\\r\\n            else {\\r\\n                this.mMoveDir = (UnityEngine_1.Vector3.op_Subtraction(targetPos,
+    this.transform.position)).normalized;\\r\\n                let dis = UnityEngine_1.Vector3.Distance(targetPos,
+    this.transform.position);\\r\\n                let tims = dis / this.mCurMoveSpeed;\\r\\n               
+    this.mTimer = this.mMaxMoveTime - tims;\\r\\n                //console.warn(dis
+    + \\\" -- \\\" + tims.toString() + \\\" -- \\\");\\r\\n            }\\r\\n       
+    }\\r\\n        else {\\r\\n            let data = new MoveDataPackage();\\r\\n           
+    data.uiMoveDir = uiMoveDir;\\r\\n            data.angle_y = angle_y;\\r\\n           
+    data.curPos = curPos;\\r\\n            data.targetPos = targetPos;\\r\\n           
+    this.HandleMoveData(data);\\r\\n            // console.log(this.TEMP_FRAME_COUNT,
+    \\\" \u5904\u7406\u6570\u636E\\\");\\r\\n        }\\r\\n    }\\r\\n    CheckReachedTarget(target)
+    {\\r\\n        let x = Math.abs(this.transform.position.x - target.x);\\r\\n       
+    let z = Math.abs(this.transform.position.z - target.z);\\r\\n        return (x
+    + z) < this.mMinMoveDis;\\r\\n    }\\r\\n    PushAngelData(toAngle) {\\r\\n       
+    this.mToAngle.y = toAngle;\\r\\n        this.transform.eulerAngles = this.mToAngle;\\r\\n       
+    // if(this.mIsModel){\\r\\n        //     this.mTargetModel.transform.eulerAngles
+    = this.mToAngle;\\r\\n        //     // this.mRigidbody.angularVelocity = ?\\r\\n       
+    // }\\r\\n    }\\r\\n}\\r\\nexports.default = CustomCharacterController;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ3VzdG9tQ2hhcmFjdGVyQ29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkN1c3RvbUNoYXJhY3RlckNvbnRyb2xsZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFFckQsNkNBWW9CO0FBRXBCLHlEQUF5RDtBQUN6RCxJQUFLLGFBTUo7QUFORCxXQUFLLGFBQWE7SUFDZCxpREFBUSxDQUFBO0lBQ1IsdURBQVcsQ0FBQTtJQUNYLGlEQUFRLENBQUE7SUFDUixpREFBUSxDQUFBO0lBQ1IsbURBQVMsQ0FBQTtBQUNiLENBQUMsRUFOSSxhQUFhLEtBQWIsYUFBYSxRQU1qQjtBQUVELE1BQU0sZUFBZTtDQUtwQjtBQUdELE1BQU07QUFDTjs7Ozs7O0dBTUc7QUFFSCxNQUFxQix5QkFBMEIsU0FBUSxxQ0FBcUI7SUFBNUU7O1FBS0ksb0NBQW9DO1FBQzVCLHlCQUFvQixHQUFXLE1BQU0sQ0FBQztRQUN2QyxhQUFRLEdBQVksS0FBSyxDQUFDO1FBSXpCLHFCQUFnQixHQUFZLHFCQUFPLENBQUMsSUFBSSxDQUFDO1FBQ3pDLGFBQVEsR0FBWSxxQkFBTyxDQUFDLElBQUksQ0FBQztRQUdqQyxrQkFBYSxHQUFXLENBQUMsQ0FBQztRQUMxQixnQkFBVyxHQUFXLElBQUksQ0FBQztRQUMzQixnQkFBVyxHQUFXLENBQUMsQ0FBQztRQUNoQyx1Q0FBdUM7UUFFL0IsV0FBTSxHQUFXLENBQUMsQ0FBQztRQUNuQixpQkFBWSxHQUFXLEdBQUcsQ0FBQztRQUM1QixjQUFTLEdBQVcsR0FBRyxDQUFDO1FBQ3hCLGVBQVUsR0FBVyxDQUFDLENBQUM7UUFDdkIsYUFBUSxHQUFXLEVBQUUsQ0FBQztRQUNyQixrQkFBYSxHQUFXLENBQUMsRUFBRSxDQUFDO1FBRXBDLHlDQUF5QztRQUNqQyxhQUFRLEdBQVksS0FBSyxDQUFDO1FBQzNCLGlCQUFZLEdBQWUsSUFBSSxDQUFDO1FBNEwvQixhQUFRLEdBQVkscUJBQU8sQ0FBQyxJQUFJ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\",\"assetPath\":\"Assets/Scripts/GameController/CustomCharacterController.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"mIsLocal\",\"type\":\"System.Boolean\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mRunSpeed\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0.5\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mJumpPower\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"8\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mGravity\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"30\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mTargetModel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"MoveDataPackage\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 62ec08744d89ee7f45f59a0734d0397b
+  onlyWriteTrigger: 0

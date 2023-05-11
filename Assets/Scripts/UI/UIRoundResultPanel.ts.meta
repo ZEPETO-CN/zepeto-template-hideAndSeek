@@ -1,0 +1,65 @@
+fileFormatVersion: 2
+guid: c41e405bc9fedc34b8bf2cb6a6812b1b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    ZEPETO_World_1 = require(\\\"ZEPETO.World\\\");\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst Localization_1
+    = require(\\\"../Common/Localization/Scripts/Localization\\\");\\r\\nconst AudioController_1
+    = require(\\\"../GameController/AudioController\\\");\\r\\nconst ScreenshotManager_1
+    = require(\\\"../../CommonModules/Screenshot/Scripts/ScreenshotManager\\\");\\r\\nconst
+    UIManager_1 = require(\\\"../GameManager/UIManager\\\");\\r\\nclass UIRoundResultPanel
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    Awake() {\\r\\n       
+    this.feedBtn.onClick.AddListener(() => {\\r\\n            this.feedBtn.interactable
+    = false;\\r\\n            ScreenshotManager_1.default.Instance.CreateFeedImmediately((result)
+    => {\\r\\n                if (result) {\\r\\n                    UIManager_1.default.Instance.TOAST.ShowFeedSuccess();\\r\\n               
+    }\\r\\n                else {\\r\\n                    UIManager_1.default.Instance.TOAST.ShowFeedFail();\\r\\n               
+    }\\r\\n            });\\r\\n        });\\r\\n    }\\r\\n    Show(roundResult,
+    myRoundScore) {\\r\\n        this.feedBtn.interactable = true;\\r\\n        AudioController_1.default.Instance.PlayRoundOver();\\r\\n       
+    this.gameObject.SetActive(true);\\r\\n        this.mRoundResult = roundResult;\\r\\n       
+    this.mMyScore.text = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Ending_tips_2\\\",
+    [myRoundScore.toString()]);\\r\\n        this.StartCoroutine(this.IE_ShowPanel());\\r\\n   
+    }\\r\\n    *IE_ShowPanel() {\\r\\n        console.log(\\\"ShowRoundPanel\\\",
+    this.mRoundResult.hunterId, this.mRoundResult.hiderId);\\r\\n        var userId
+    = this.mRoundResult.hiderId;\\r\\n        this.mTitle.text = Localization_1.default.Instance.GetLocalizedText(\\\"Ending_title_1\\\");
+    //\\\"\u8EB2\u85CF\u8005\u80DC\u5229\\\";\\r\\n        this.mContent.text = Localization_1.default.Instance.GetLocalizedText(\\\"Ending_content_1\\\");
+    //\\\"\u6700\u4F73\u8EB2\u85CF\u8005\\\";\\r\\n        if (this.mRoundResult.isHunterWin)
+    {\\r\\n            userId = this.mRoundResult.hunterId;\\r\\n            this.mTitle.text
+    = Localization_1.default.Instance.GetLocalizedText(\\\"Ending_title_2\\\");\\r\\n           
+    \\\"\u5BFB\u627E\u8005\u80DC\u5229\\\";\\r\\n            this.mContent.text =
+    Localization_1.default.Instance.GetLocalizedText(\\\"Ending_content_2\\\"); //\\\"\u6700\u4F73\u5BFB\u627E\u8005\\\";\\r\\n       
+    }\\r\\n        this.mScore.text = this.mRoundResult.bestScore.toString();\\r\\n       
+    this.LoadHeadImg(userId);\\r\\n        yield 0;\\r\\n        let ids = [userId];\\r\\n       
+    ZEPETO_World_1.ZepetoWorldHelper.GetUserInfo(ids, (info) => {\\r\\n           
+    if (this) {\\r\\n                console.log(info[0].name);\\r\\n               
+    this.mName.text = info[0].name;\\r\\n            }\\r\\n        }, (error) =>
+    {\\r\\n            console.log(error);\\r\\n        });\\r\\n    }\\r\\n    LoadHeadImg(userId)
+    {\\r\\n        this.mProfileImg.enabled = false;\\r\\n        console.log(\\\"[LoadHead]:Satrt\\\");\\r\\n       
+    ZEPETO_World_1.ZepetoWorldHelper.GetProfileTexture(userId, (texture) => {\\r\\n           
+    if (this) {\\r\\n                console.log(\\\"[LoadHead]:Success\\\");\\r\\n               
+    this.mProfileImg.sprite = this.GetSprite(texture);\\r\\n                this.mProfileImg.enabled
+    = true;\\r\\n            }\\r\\n        }, (error) => {\\r\\n            console.error(\\\"[LoadHead]:Failed\\\");\\r\\n           
+    console.log(error);\\r\\n        });\\r\\n    }\\r\\n    GetSprite(texture) {\\r\\n       
+    let rect = new UnityEngine_1.Rect(0, 0, texture.width, texture.height);\\r\\n       
+    return UnityEngine_1.Sprite.Create(texture, rect, new UnityEngine_1.Vector2(0.5,
+    0.5));\\r\\n    }\\r\\n}\\r\\nexports.default = UIRoundResultPanel;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlSb3VuZFJlc3VsdFBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlSb3VuZFJlc3VsdFBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELCtDQUF1RDtBQUV2RCw2Q0FBb0c7QUFDcEcsbURBQXFEO0FBQ3JELDhFQUF1RTtBQUN2RSx1RUFBZ0U7QUFDaEUsZ0dBQXlGO0FBQ3pGLHdEQUFpRDtBQUVqRCxNQUFxQixrQkFBbUIsU0FBUSxxQ0FBcUI7SUFjakUsS0FBSztRQUNELElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbEMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxZQUFZLEdBQUcsS0FBSyxDQUFDO1lBQ2xDLDJCQUFpQixDQUFDLFFBQVEsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDLE1BQU0sRUFBRSxFQUFFO2dCQUN4RCxJQUFJLE1BQU0sRUFBRTtvQkFDUixtQkFBUyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsZUFBZSxFQUFFLENBQUM7aUJBQzlDO3FCQUNJO29CQUNELG1CQUFTLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxZQUFZLEVBQUUsQ0FBQztpQkFDM0M7WUFDTCxDQUFDLENBQUMsQ0FBQztRQUNQLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVELElBQUksQ0FBQyxXQUF5QixFQUFFLFlBQW9CO1FBQ2hELElBQUksQ0FBQyxPQUFPLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQztRQUNqQyx5QkFBZSxDQUFDLFFBQVEsQ0FBQyxhQUFhLEVBQUUsQ0FBQztRQUN6QyxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNoQyxJQUFJLENBQUMsWUFBWSxHQUFHLFdBQVcsQ0FBQztRQUNoQyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyx5QkFBeUIsQ0FBQyxl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\",\"assetPath\":\"Assets/Scripts/UI/UIRoundResultPanel.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"mProfileImg\",\"type\":\"UnityEngine.UI.Image\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mName\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mScore\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mCoundDownTimer\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mTitle\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mContent\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mMyScore\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"feedBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UIRoundResultPanel\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 8a4d8579d1feafc5c5818ff649259328
+  onlyWriteTrigger: 0

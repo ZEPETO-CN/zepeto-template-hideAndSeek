@@ -1,0 +1,55 @@
+fileFormatVersion: 2
+guid: 02bb4bdf7b95e8442b5ab81f5a0e8f6e
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nexports.WatchGameNode = void 0;\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst UnityEngine_UI_1
+    = require(\\\"UnityEngine.UI\\\");\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UIManager_1 = require(\\\"../GameManager/UIManager\\\");\\r\\nconst WatchItem_1
+    = require(\\\"./WatchItem\\\");\\r\\nclass WatchGameNode {\\r\\n}\\r\\nexports.WatchGameNode
+    = WatchGameNode;\\r\\nclass UIWatchGameView extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        this.mItemList
+    = new Map();\\r\\n    }\\r\\n    Awake() {\\r\\n        this.mWatchBtn.onClick.AddListener(()
+    => {\\r\\n            this.mWatchViewObj.SetActive(true);\\r\\n        });\\r\\n       
+    this.mItemPrefab.SetActive(false);\\r\\n    }\\r\\n    UpdateContentData(data)
+    {\\r\\n        console.log(\\\"\u66F4\u65B0\u89C2\u6218\u5217\u8868\\\");\\r\\n       
+    this.ClearItem();\\r\\n        let isFirst = false;\\r\\n        data.forEach((node,
+    sessionId) => {\\r\\n            if (node.isLive) {\\r\\n                let
+    itemObj = UnityEngine_1.GameObject.Instantiate(this.mItemPrefab, this.mContainer);\\r\\n               
+    itemObj.SetActive(true);\\r\\n                itemObj.transform.localScale =
+    UnityEngine_1.Vector3.one;\\r\\n                if (this.mDisplayName.text ==
+    \\\"\\\")\\r\\n                    this.mDisplayName.text = node.name;\\r\\n               
+    this.mItemList.set(sessionId, itemObj);\\r\\n                let item = itemObj.GetComponent($typeof(WatchItem_1.default));\\r\\n               
+    item.SetItem(node);\\r\\n                let itemBtn = itemObj.GetComponent($typeof(UnityEngine_UI_1.Button));\\r\\n               
+    if (!isFirst && node.isLive) {\\r\\n                    isFirst = true;\\r\\n                   
+    this.ChooseWatchItem(item);\\r\\n                }\\r\\n                itemBtn.onClick.AddListener(()
+    => {\\r\\n                    this.ChooseWatchItem(item);\\r\\n               
+    });\\r\\n            }\\r\\n        });\\r\\n    }\\r\\n    ChooseWatchItem(item)
+    {\\r\\n        if (this._currentChooseItem) {\\r\\n            this._currentChooseItem.SetSelect(false);\\r\\n       
+    }\\r\\n        let sessionId = item.data.sessionId;\\r\\n        console.log(`Watch
+    ${sessionId}`);\\r\\n        this.mDisplayName.text = item.data.name;\\r\\n       
+    UIManager_1.default.Instance.OnWatchCamera(sessionId);\\r\\n        this.mWatchViewObj.SetActive(false);\\r\\n       
+    this._currentChooseItem = item;\\r\\n        this._currentChooseItem.SetSelect(true);\\r\\n   
+    }\\r\\n    ClearItem() {\\r\\n        this._currentChooseItem = undefined;\\r\\n       
+    if (this.mItemList.size == 0)\\r\\n            return;\\r\\n        this.mItemList.forEach((item,
+    sessionId) => {\\r\\n            UnityEngine_1.GameObject.Destroy(item);\\r\\n       
+    });\\r\\n    }\\r\\n}\\r\\nexports.default = UIWatchGameView;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlXYXRjaEdhbWVWaWV3LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlXYXRjaEdhbWVWaWV3LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGlEQUFxRDtBQUNyRCxtREFBNkM7QUFDN0MsNkNBQWlFO0FBQ2pFLHdEQUFnRDtBQUNoRCwyQ0FBb0M7QUFFcEMsTUFBYSxhQUFhO0NBSXpCO0FBSkQsc0NBSUM7QUFFRCxNQUFxQixlQUFnQixTQUFRLHFDQUFxQjtJQUFsRTs7UUFRWSxjQUFTLEdBQTRCLElBQUksR0FBRyxFQUFzQixDQUFDO0lBeUQvRSxDQUFDO0lBeERHLEtBQUs7UUFDRCxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3BDLElBQUksQ0FBQyxhQUFhLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ3ZDLENBQUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDdEMsQ0FBQztJQUVNLGlCQUFpQixDQUFDLElBQWdDO1FBRXJELE9BQU8sQ0FBQyxHQUFHLENBQUMsUUFBUSxDQUFDLENBQUM7UUFFdEIsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO1FBQ2pCLElBQUksT0FBTyxHQUFZLEtBQUssQ0FBQztRQUM3QixJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLFNBQVMsRUFBRSxFQUFFO1lBQzdCLElBQUksSUFBSSxDQUFDLE1BQU0sRUFBRTtnQkFDYixJQUFJLE9BQU8sR0FBRyx3QkFBVSxDQUFDLFdBQVcsQ0FBYSxJQUFJLENBQUMsV0FBVyxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztnQkFDcEYsT0FBTyxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFDeEIsT0FBTyxDQUFDLFNBQVMsQ0FBQyxVQUFVLEdBQUcscUJBQU8sQ0FBQyxHQUFHLENBQUM7Z0JBQzNDLElBQUksSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLElBQUksRUFBRTtvQkFBRSxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDO2dCQUNyRSxJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxTQUFTLEVBQUUsT0FBTyxDQUFDLENBQUM7Z0JBQ3ZDLElBQUksSUFBSSxHQUFHLE9BQU8sQ0FBQyxZQUFZLFNBQUMsbUJBQVMsRUFBRyxDQUFDO2dCQUM3QyxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO2dCQUNuQixJQUFJLE9BQU8sR0FBRyxPQUFPLENBQUMsWUFBWSxTQUFDLHVCQUFNLEVBQUcsQ0FBQztnQkFDN0MsSUFBSSxDQUFDLE9BQU8sSUFBSSxJQUFJLENBQUMsTUFBTSxFQUFFO29CQUN6QixPQUFPLEdBQUcsSUFBSSxDQUFDO29CQUNmLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLENBQUM7aUJBQzlCO2dCQUNELE9BQU8sQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtvQkFDN0IsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFDL0IsQ0FBQyxDQUFDLENBQUE7YUFDTDtRQUNMLENBQUMsQ0FBQyxDQUFBO0lBQ04sQ0FBQztJQUdPLGVBQWUsQ0FBQyxJQUFlO1FBQ25DLElBQUksSUFBSSxDQUFDLGtCQUFrQixFQUFFO1lBQ3pCLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDNUM7UUFDRCxJQUFJLFNBQVMsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQztRQUNwQyxPQUFPLENBQUMsR0FBRyxDQUFDLFNBQVMsU0FBUyxFQUFFLENBQUMsQ0FBQztRQUNsQyxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQztRQUN4QyxtQkFBUyxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDNUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDcEMsSUFBSSxDQUFDLGtCQUFrQixHQUFHLElBQUksQ0FBQztRQUMvQixJQUFJLENBQUMsa0JBQWtCLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQzVDLENBQUM7SUFFTyxTQUFTO1FBQ2IsSUFBSSxDQUFDLGtCQUFrQixHQUFHLFNBQVMsQ0FBQztRQUNwQyxJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxJQUFJLENBQUM7WUFBRSxPQUFPO1FBQ3JDLElBQUksQ0FBQyxTQUFTLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLFNBQVMsRUFBRSxFQUFFO1lBQ3ZDLHdCQUFVLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzdCLENBQUMsQ0FBQyxDQUFBO0lBQ04sQ0FBQztDQUVKO0FBakVELGtDQWlFQyJ9\",\"assetPath\":\"Assets/Scripts/UI/UIWatchGameView.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mItemPrefab\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mContainer\",\"type\":\"UnityEngine.RectTransform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mDisplayName\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mWatchViewObj\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mWatchBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"WatchGameNode\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 73bfa6150fb7281a356d4b6277e5db54
+  onlyWriteTrigger: 0

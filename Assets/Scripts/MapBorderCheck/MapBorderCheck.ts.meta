@@ -1,0 +1,50 @@
+fileFormatVersion: 2
+guid: e24f8d3d72b3744679feb48634ec6513
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nclass MapBorderCheck extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    // \u8BBE\u7F6E\u51E0\u4E2A\u7403\u5F62\u533A\u57DF\u6765\u68C0\u6D4B\\r\\n       
+    // 1. \u6839\u636E\u4F4D\u7F6E\u5224\u65AD\u5728\u90A3\u4E2A\u533A\u57DF\\r\\n       
+    // 2. \u6839\u636E\u533A\u57DF\u5224\u65AD\u662F\u5426\u53EF\u4EE5\u79FB\u52A8\\r\\n       
+    super(...arguments);\\r\\n        this.mMinY = -2;\\r\\n        this.mMaxY =
+    1.5;\\r\\n        this.mBoxPosList = [UnityEngine_1.Vector3.one, UnityEngine_1.Vector3.one,
+    UnityEngine_1.Vector3.one, UnityEngine_1.Vector3.one];\\r\\n        this.mMaxDisList
+    = [0, 0, 0, 0];\\r\\n    }\\r\\n    Start() {\\r\\n        this.mCount = this.mBorders.length;\\r\\n       
+    for (var i = 0; i < this.mCount; i++) {\\r\\n            let t = this.mBorders[i];\\r\\n           
+    this.mBoxPosList[i] = t.position;\\r\\n            let dis = t.localScale.x >
+    t.localScale.z ? t.localScale.x : t.localScale.z;\\r\\n            this.mMaxDisList[i]
+    = dis * 0.5;\\r\\n        }\\r\\n    }\\r\\n    CheckIsOK(pos) {\\r\\n       
+    if (pos.y < this.mMinY || pos.y > this.mMaxY)\\r\\n            return false;\\r\\n       
+    for (var i = 0; i < this.mCount; i++) {\\r\\n            if (UnityEngine_1.Vector3.Distance(pos,
+    this.mBoxPosList[i]) <= this.mMaxDisList[i]) {\\r\\n                let left
+    = this.mBoxPosList[i].x - this.mBorders[i].localScale.x * 0.5;\\r\\n               
+    let right = this.mBoxPosList[i].x + this.mBorders[i].localScale.x * 0.5;\\r\\n               
+    let forward = this.mBoxPosList[i].z + this.mBorders[i].localScale.z * 0.5;\\r\\n               
+    let back = this.mBoxPosList[i].z - this.mBorders[i].localScale.z * 0.5;\\r\\n               
+    let result = true;\\r\\n                if (pos.x < left || pos.x > right)\\r\\n                   
+    result = false;\\r\\n                if (pos.z > forward || pos.z < back)\\r\\n                   
+    result = false;\\r\\n                //console.error(\\\"mapcheck : \\\", i,
+    result, pos);\\r\\n                return result;\\r\\n            }\\r\\n       
+    }\\r\\n        return false;\\r\\n    }\\r\\n}\\r\\nexports.default = MapBorderCheck;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFwQm9yZGVyQ2hlY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJNYXBCb3JkZXJDaGVjay50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUErQztBQUMvQyxpREFBcUQ7QUFFckQsTUFBcUIsY0FBZSxTQUFRLHFDQUFxQjtJQUFqRTtRQUVJLGNBQWM7UUFDZCxpQkFBaUI7UUFDakIsa0JBQWtCOztRQUlELFVBQUssR0FBWSxDQUFDLENBQUMsQ0FBQztRQUNwQixVQUFLLEdBQVksR0FBRyxDQUFDO1FBRTlCLGdCQUFXLEdBQWUsQ0FBQyxxQkFBTyxDQUFDLEdBQUcsRUFBRSxxQkFBTyxDQUFDLEdBQUcsRUFBRSxxQkFBTyxDQUFDLEdBQUcsRUFBRSxxQkFBTyxDQUFDLEdBQUcsQ0FBQyxDQUFFO1FBQ2hGLGdCQUFXLEdBQWMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztJQW9DbEQsQ0FBQztJQWxDRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQztRQUVuQyxLQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBQztZQUNoQyxJQUFJLENBQUMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3pCLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLEdBQUcsQ0FBQyxDQUFDLFFBQVEsQ0FBQztZQUNqQyxJQUFJLEdBQUcsR0FBRyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsR0FBSSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDO1lBQzdFLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLEdBQUcsR0FBRyxHQUFHLEdBQUcsQ0FBQztTQUNuQztJQUNMLENBQUM7SUFFTSxTQUFTLENBQUMsR0FBYTtRQUUxQixJQUFHLEdBQUcsQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDLEtBQUssSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHLElBQUksQ0FBQyxLQUFLO1lBQUUsT0FBTyxLQUFLLENBQUM7UUFFMUQsS0FBSSxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUM7WUFDaEMsSUFBRyxxQkFBTyxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLEVBQUM7Z0JBQ2pFLElBQUksSUFBSSxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsR0FBRyxHQUFHLENBQUM7Z0JBQ3hFLElBQUksS0FBSyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsR0FBRyxHQUFHLENBQUM7Z0JBQ3pFLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsR0FBRyxHQUFHLENBQUM7Z0JBQzNFLElBQUksSUFBSSxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMsR0FBRyxHQUFHLENBQUM7Z0JBRXhFLElBQUksTUFBTSxHQUFHLElBQUksQ0FBQztnQkFFbEIsSUFBRyxHQUFHLENBQUMsQ0FBQyxHQUFHLElBQUksSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHLEtBQUs7b0JBQUUsTUFBTSxHQUFHLEtBQUssQ0FBQztnQkFDakQsSUFBRyxHQUFHLENBQUMsQ0FBQyxHQUFHLE9BQU8sSUFBSSxHQUFHLENBQUMsQ0FBQyxHQUFHLElBQUk7b0JBQUUsTUFBTSxHQUFHLEtBQUssQ0FBQztnQkFFbkQsK0NBQStDO2dCQUMvQyxPQUFPLE1BQU0sQ0FBQzthQUNqQjtTQUNKO1FBQ0QsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQztDQUVKO0FBaERELGlDQWdEQyJ9\",\"assetPath\":\"Assets/Scripts/MapBorderCheck/MapBorderCheck.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mBorders\",\"type\":\"UnityEngine.Transform[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"MapBorderCheck\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: a144e8d399cb8ffbcabe07555a71ec2e
+  onlyWriteTrigger: 0

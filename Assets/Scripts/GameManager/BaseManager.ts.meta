@@ -1,0 +1,43 @@
+fileFormatVersion: 2
+guid: b85fdf59b1b012d40857d08e0e8fbd45
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    GameMain_1 = require(\"../GameMain\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    AudioController_1 = require(\"../GameController/AudioController\");\r\nclass
+    BaseManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    get mGameState()
+    { return GameMain_1.default.Instance.mGameState; }\r\n    get mGameRule() { return
+    GameMain_1.default.Instance.mGameRule; }\r\n    OnActionEvent(eventName, message)
+    {\r\n        GameMain_1.default.Instance.OnActionEvent(eventName, message);\r\n   
+    }\r\n    SendEvent(eventName, message) {\r\n        GameMain_1.default.Instance.SendEvent(eventName,
+    message);\r\n    }\r\n    CheckGesture(gestrue) {\r\n        return GameMain_1.default.Instance.CheckGesture(gestrue);\r\n   
+    }\r\n    GetStartPoint(index, gameState) {\r\n        return GameMain_1.default.Instance.GetStartPoint(index,
+    gameState);\r\n    }\r\n    GetPlayerInfoVO(level) {\r\n        return GameMain_1.default.Instance.GetPlayerInfoVO(level);\r\n   
+    }\r\n    GetModelInfoVO(name) {\r\n        return GameMain_1.default.Instance.GetModelInfoVO(name);\r\n   
+    }\r\n    GetModelCost() {\r\n        return GameMain_1.default.Instance.GetModelCost();\r\n   
+    }\r\n    Toast(msg, duration) {\r\n        return GameMain_1.default.Instance.Toast(msg,
+    duration);\r\n    }\r\n    CheckCanChangeModel(cost) {\r\n        return GameMain_1.default.Instance.CheckCanChangeModel(cost);\r\n   
+    }\r\n    // AudioController\r\n    PlayBGM(clip) {\r\n        AudioController_1.default.Instance.PlayBGM(clip);\r\n   
+    }\r\n    PlayOneShot(clip) {\r\n        AudioController_1.default.Instance.PlayOneShot(clip);\r\n   
+    }\r\n    PlayAtPoint(clip, point) {\r\n        AudioController_1.default.Instance.PlayAtPoint(clip,
+    point);\r\n    }\r\n    SetScore(userId, score) {\r\n        GameMain_1.default.Instance.SetScore(userId,
+    score);\r\n    }\r\n}\r\nexports.default = BaseManager;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQmFzZU1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJCYXNlTWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCwwQ0FBK0M7QUFFL0MsNkNBQStDO0FBQy9DLHVFQUErRDtBQUcvRCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBRzFELElBQVcsVUFBVSxLQUFlLE9BQU8sa0JBQVEsQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUFDLENBQUEsQ0FBQztJQUV6RSxJQUFXLFNBQVMsS0FBZ0IsT0FBTyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsQ0FBQSxDQUFDO0lBRWpFLGFBQWEsQ0FBQyxTQUFrQixFQUFFLE9BQWE7UUFDbEQsa0JBQVEsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUMsQ0FBQztJQUN4RCxDQUFDO0lBRU0sU0FBUyxDQUFDLFNBQXFCLEVBQUUsT0FBYTtRQUNqRCxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsU0FBUyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQ3BELENBQUM7SUFFTSxZQUFZLENBQUMsT0FBZ0I7UUFDaEMsT0FBTyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxZQUFZLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDbkQsQ0FBQztJQUVNLGFBQWEsQ0FBQyxLQUFjLEVBQUUsU0FBa0I7UUFDbkQsT0FBTyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsS0FBSyxFQUFFLFNBQVMsQ0FBQyxDQUFDO0lBQzdELENBQUM7SUFFTSxlQUFlLENBQUMsS0FBYztRQUNqQyxPQUFPLGtCQUFRLENBQUMsUUFBUSxDQUFDLGVBQWUsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNwRCxDQUFDO0lBRU0sY0FBYyxDQUFDLElBQWE7UUFDL0IsT0FBTyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEQsQ0FBQztJQUVNLFlBQVk7UUFDZixPQUFPLGtCQUFRLENBQUMsUUFBUSxDQUFDLFlBQVksRUFBRSxDQUFDO0lBQzVDLENBQUM7SUFFTSxLQUFLLENBQUMsR0FBWSxFQUFFLFFBQWlCO1FBQ3hDLE9BQU8sa0JBQVEsQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEdBQUcsRUFBRSxRQUFRLENBQUMsQ0FBQztJQUNsRCxDQUFDO0lBRU0sbUJBQW1CLENBQUMsSUFBYTtRQUNwQyxPQUFPLGtCQUFRLENBQUMsUUFBUSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3ZELENBQUM7SUFFRCxrQkFBa0I7SUFDWCxPQUFPLENBQUMsSUFBZ0I7UUFDM0IseUJBQWUsQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQzNDLENBQUM7SUFFTSxXQUFXLENBQUMsSUFBZ0I7UUFDL0IseUJBQWUsQ0FBQyxRQUFRLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQy9DLENBQUM7SUFFTSxXQUFXLENBQUMsSUFBZ0IsRUFBRSxLQUFlO1FBQ2hELHlCQUFlLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFFdEQsQ0FBQztJQUVNLFFBQVEsQ0FBQyxNQUFlLEVBQUUsS0FBYztRQUMzQyxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQzlDLENBQUM7Q0FDSjtBQTVERCw4QkE0REMifQ==","assetPath":"Assets/Scripts/GameManager/BaseManager.ts","manifest":{"properties":[],"name":"BaseManager","description":""},"isCompiled":true}'
+  typescriptHash: 1c7a6e3153e51d324f296322cadcc5ba
+  onlyWriteTrigger: 0

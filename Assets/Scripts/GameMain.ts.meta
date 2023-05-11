@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: d390a10d7f4ecf044b96c7a7e3e4ff71
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nexports.GameRule = void 0;\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst UIManager_1 = require(\\\"./GameManager/UIManager\\\");\\r\\nconst
+    MapManager_1 = require(\\\"./GameManager/MapManager\\\");\\r\\nconst NetManager_1
+    = require(\\\"./GameManager/NetManager\\\");\\r\\nconst PlayerManager_1 = require(\\\"./GameManager/PlayerManager\\\");\\r\\nconst
+    ConfigManager_1 = require(\\\"./GameManager/ConfigManager\\\");\\r\\nconst UnityEngine_1
+    = require(\\\"UnityEngine\\\");\\r\\nconst AudioController_1 = require(\\\"./GameController/AudioController\\\");\\r\\nconst
+    ZEPETO_Multiplay_1 = require(\\\"ZEPETO.Multiplay\\\");\\r\\nconst ZEPETO_Script_Leaderboard_1
+    = require(\\\"ZEPETO.Script.Leaderboard\\\");\\r\\nconst GameData_1 = require(\\\"./GameStaticData/GameData\\\");\\r\\nconst
+    UIToast_1 = require(\\\"./UI/UIToast\\\");\\r\\nclass GameMain extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        /* Singleton */\\r\\n        super(...arguments);\\r\\n       
+    this.heartTimer = 0;\\r\\n    }\\r\\n    static get Instance() {\\r\\n       
+    if (!GameMain._instance) {\\r\\n            const targetObj = UnityEngine_1.GameObject.Find(\\\"GameMain\\\");\\r\\n           
+    if (targetObj)\\r\\n                GameMain._instance = targetObj.GetComponent($typeof(GameMain));\\r\\n       
+    }\\r\\n        return GameMain._instance;\\r\\n    }\\r\\n    get Leaderboard()
+    { return GameData_1.default.LEADERBOARD; }\\r\\n    Awake() {\\r\\n        GameMain._instance
+    = this;\\r\\n    }\\r\\n    Start() {\\r\\n        this.mNetMgr = NetManager_1.default.Instance;\\r\\n       
+    this.mPlayerMgr = PlayerManager_1.default.Instance;\\r\\n        this.mUIMgr
+    = UIManager_1.default.Instance;\\r\\n        this.mConfigMgr = ConfigManager_1.default.Instance;\\r\\n       
+    this.mMapmgr = MapManager_1.default.Instance;\\r\\n        this.mGameState =
+    NetManager_1.GameState.None;\\r\\n    }\\r\\n    Update() {\\r\\n        this.heartTimer
+    += UnityEngine_1.Time.deltaTime;\\r\\n        if (this.heartTimer > GameData_1.default.GAME_HEART_RATE)
+    {\\r\\n            this.heartTimer -= GameData_1.default.GAME_HEART_RATE;\\r\\n           
+    this.OnGameHeartUpdate();\\r\\n        }\\r\\n    }\\r\\n    InitRoomSessionId(sessionId)
+    {\\r\\n        this.mPlayerMgr.SetSessionId(sessionId);\\r\\n    }\\r\\n    OnGameHeartUpdate()
+    {\\r\\n        // console.log(\\\"\u53D1\u9001\u6E38\u620F\u5FC3\u8DF3\\\");\\r\\n       
+    this.SendEvent(NetManager_1.sEventArg.GameUpdate, null);\\r\\n    }\\r\\n   
+    OnStateUpdate(playerMap) {\\r\\n        playerMap.ForEach((userId, player) =>
+    {\\r\\n            console.log(\\\"[OnStateUpdate] \\\" + userId + \\\" -- \\\"
+    + player.id);\\r\\n        });\\r\\n    }\\r\\n    /* \u5904\u7406\u672C\u5730\u4E8B\u4EF6
+    */\\r\\n    OnActionEvent(eventName, message) {\\r\\n        // console.log(\\\"OnActionEvent
+    \\\", eventName);\\r\\n        switch (eventName) {\\r\\n            case PlayerManager_1.ActionEvent.OnFinishLoad:\\r\\n               
+    let userId = message;\\r\\n                AudioController_1.default.Instance.PlayReadyBGM();\\r\\n               
+    this.mUIMgr.OnFinishLoad(userId);\\r\\n                this.OnLeaderBoardReward(userId);\\r\\n               
+    // this.SetScore(userId, 100);\\r\\n                break;\\r\\n            //
+    case ActionEvent.OnUpdatePlayerNum:\\r\\n            //     this.mUIMgr.OnUpdatePlayerNum(Number(message));\\r\\n           
+    //     break;\\r\\n            case PlayerManager_1.ActionEvent.OnUpdateHP:\\r\\n               
+    if (this.mGameState >= NetManager_1.GameState.GameStart) {\\r\\n                   
+    this.mUIMgr.OnUpdateHP(message, this.mGameInfo.Elapsed);\\r\\n               
+    }\\r\\n                break;\\r\\n            case PlayerManager_1.ActionEvent.OnUpdateStar:\\r\\n               
+    this.mUIMgr.OnUpdateStar(message);\\r\\n                break;\\r\\n           
+    case PlayerManager_1.ActionEvent.OnUpdateBuff:\\r\\n                this.mUIMgr.OnUpdateBuff(message);\\r\\n               
+    break;\\r\\n            case PlayerManager_1.ActionEvent.OnLockCamera:\\r\\n               
+    let isLock = message;\\r\\n                this.mPlayerMgr.LockCamera(isLock);\\r\\n               
+    break;\\r\\n            case PlayerManager_1.ActionEvent.OnFreeCamera:\\r\\n               
+    let isFree = message;\\r\\n                this.mPlayerMgr.FreeCamera(isFree);\\r\\n               
+    break;\\r\\n            case PlayerManager_1.ActionEvent.OnWatchCamera:\\r\\n               
+    this.mPlayerMgr.WatchCamera(true, message);\\r\\n                break;\\r\\n           
+    case PlayerManager_1.ActionEvent.OnDie:\\r\\n                this.mUIMgr.OnDie(message);\\r\\n               
+    break;\\r\\n        }\\r\\n    }\\r\\n    /* Handle Event */\\r\\n    HandleEvent(eventName,
+    message) {\\r\\n        //console.log(`HandleEvent : [${eventName}]  !!!`);\\r\\n       
+    switch (eventName) {\\r\\n            case NetManager_1.sEventArg.DynamicMapChange:\\r\\n               
+    this.mMapmgr.OnDynamicMapChange(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.DailyTaskInfoUpdate:\\r\\n                this.mUIMgr.OnUpdateDailyTaskInfo(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.GameRule:\\r\\n               
+    this.mGameRule = JSON.parse(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.PlayerChange:\\r\\n                this.mPlayerMgr.OnPlayerChange(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.PlayerMove:\\r\\n               
+    this.mPlayerMgr.OnReceiveMoveData(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.PlayerJump:\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.PlayerInfoSync:\\r\\n                this.mPlayerMgr.UpdatePlayerInfo(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.OnShoot:\\r\\n               
+    //this.mPlayerMgr.OnShoot(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.BeAttacked:\\r\\n                //this.mMapmgr.GetAudioCtrl().OnPlayAttackedAudio();\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.PlayerDie:\\r\\n               
+    this.mPlayerMgr.OnPlayerDie(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.RandomModel:\\r\\n                this.mUIMgr.OnShowRandomModel(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.GameUpdate:\\r\\n               
+    this.mGameInfo = message;\\r\\n                UIToast_1.default.Instance.UpdateElapsed(this.mGameInfo.Elapsed);\\r\\n               
+    this.GameStateChange();\\r\\n                break;\\r\\n            case NetManager_1.sEventArg.SwitchLight:\\r\\n               
+    this.mPlayerMgr.SyncLightAction(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.SwitchSuperLight:\\r\\n                this.mPlayerMgr.SyncSuperLightAction(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.BeScan:\\r\\n               
+    this.mPlayerMgr.OnPlayerScan(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.SyncRankReward:\\r\\n                this.mUIMgr.OnSyncsRankReward(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.SyncDailyReward:\\r\\n               
+    this.mUIMgr.OnSyncsDailyReward(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.SyncWeekActivity:\\r\\n                this.mUIMgr.OnSyncWeekActivity(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.QuickMessage:\\r\\n               
+    this.mUIMgr.ReceiveQuickMessage(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.SyncStarRewardInfo:\\r\\n                this.mUIMgr.OnSyncStarRewardInfo(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.ReceiveStarReward:\\r\\n               
+    this.mUIMgr.OnReceiveStarReward(message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.SyncSeasonInfo:\\r\\n                this.mUIMgr.OnSyncSeasonRewardInfo(message);\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.SyncSeasonReward:\\r\\n               
+    this.mUIMgr.OnSyncsDailyReward(message);\\r\\n                break;\\r\\n       
+    }\\r\\n    }\\r\\n    GameStateChange() {\\r\\n        this.mPlayer = this.mPlayerMgr.GetLocalPlayer();\\r\\n       
+    this.mUIMgr.OnGameUpdate(this.mGameInfo, this.mPlayer);\\r\\n        this.mPlayerMgr.UpdateCheck(this.mGameInfo.GameState);\\r\\n       
+    if (this.mGameState != this.mGameInfo.GameState) {\\r\\n            console.log(\\\"GameStateChange\\\",
+    this.mGameInfo.GameState);\\r\\n            this.mGameState = this.mGameInfo.GameState;\\r\\n           
+    this.mMapmgr.UpdateCheck();\\r\\n            switch (this.mGameInfo.GameState)
+    {\\r\\n                case NetManager_1.GameState.GameWait:\\r\\n                   
+    PlayerManager_1.default.Instance.HideAllTeamSign();\\r\\n                   
+    UIToast_1.default.Instance.ShowGameWait();\\r\\n                    this.mUIMgr.OnGameWait();\\r\\n                   
+    break;\\r\\n                case NetManager_1.GameState.GameMatch:\\r\\n                   
+    PlayerManager_1.default.Instance.HideAllTeamSign();\\r\\n                   
+    AudioController_1.default.Instance.PlayTimeout();\\r\\n                    this.mUIMgr.OnGameReady();\\r\\n                   
+    UIToast_1.default.Instance.ShowReadyCountDown(this.mGameInfo.GameMatchTime);\\r\\n                   
+    break;\\r\\n                case NetManager_1.GameState.GameStart:\\r\\n                   
+    this.mPlayer = this.mPlayerMgr.GetLocalPlayer();\\r\\n                    this.mUIMgr.OnGameStart(this.mGameInfo,
+    this.mGameRule, this.mPlayer);\\r\\n                    AudioController_1.default.Instance.PlayStartGameBGM();\\r\\n                   
+    UIToast_1.default.Instance.ShowGameStart(this.mPlayer.isHunter, this.mGameRule.opendoorDelay);\\r\\n                   
+    this.mPlayerMgr.OnGameStart();\\r\\n                    break;\\r\\n               
+    case NetManager_1.GameState.ConfirmedModel:\\r\\n                    this.mUIMgr.OnConfirmedModel();\\r\\n                   
+    break;\\r\\n                case NetManager_1.GameState.GameOver:\\r\\n                   
+    AudioController_1.default.Instance.PlayReadyBGM();\\r\\n                    this.OnGameOver(this.mPlayerMgr.PlayerInfoMap);\\r\\n                   
+    break;\\r\\n                case NetManager_1.GameState.GameRoundOver:\\r\\n                   
+    AudioController_1.default.Instance.PlayReadyBGM();\\r\\n                    this.mRoundResult
+    = JSON.parse(this.mGameInfo.RoundResult);\\r\\n                    this.mUIMgr.OnRoundOver(this.mRoundResult);\\r\\n                   
+    let myRoundScore = this.mPlayerMgr.GetMyRoundScore();\\r\\n                   
+    UIToast_1.default.Instance.ShowRoundResult(this.mRoundResult, this.mGameInfo.GameRound,
+    this.mGameRule, myRoundScore);\\r\\n                    this.mPlayerMgr.OnRoundOver();\\r\\n                   
+    // this.StartCoroutine(this.showTime());\\r\\n                    break;\\r\\n               
+    case NetManager_1.GameState.PeakMoment:\\r\\n                    AudioController_1.default.Instance.PlayPeakBGM();\\r\\n                   
+    let isHunter = this.mPlayerMgr.GetLocalPlayer().isHunter;\\r\\n                   
+    this.mUIMgr.OnPeakMoment(this.mGameInfo.PeekHP, isHunter);\\r\\n                   
+    UIToast_1.default.Instance.ShowPeakMoment(this.mGameRule.peakMomentLength, this.mGameInfo.Elapsed);\\r\\n                   
+    this.mPlayerMgr.OnPeakMoment();\\r\\n                    break;\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    // *showTime() {\\r\\n    //     this.mRoundResult
+    = JSON.parse(this.mGameInfo.RoundResult);\\r\\n    //     if (!this.mRoundResult.isHunterWin)
+    {\\r\\n    //         let showtimeid = PlayerManager.Instance.GetShowTimeSessionID();\\r\\n   
+    //         if (showtimeid != \\\"\\\") {\\r\\n    //             PlayerManager.Instance.WatchCamera(true,
+    showtimeid);\\r\\n    //             let showpanel = GameObject.Instantiate<GameObject>(PlayerManager.Instance.showTimePanel,\\r\\n   
+    //                 PlayerManager.Instance.GetCharacter(showtimeid).transform);\\r\\n   
+    //             yield new WaitForSeconds(3);\\r\\n    //             GameObject.Destroy(showpanel);\\r\\n   
+    //         }\\r\\n    //     }\\r\\n    //     this.mUIMgr.OnRoundOver(this.mRoundResult);\\r\\n   
+    //     let myRoundScore = this.mPlayerMgr.GetMyRoundScore();\\r\\n    //    
+    UIToast.Instance.ShowRoundResult(this.mRoundResult, this.mGameInfo.GameRound,
+    this.mGameRule, myRoundScore);\\r\\n    //     this.mPlayerMgr.OnRoundOver();\\r\\n   
+    // }\\r\\n    SendEvent(eventName, message) {\\r\\n        //console.log(`SendEvent
+    : [${eventName}]  !!!`);\\r\\n        if (this.mGameState == NetManager_1.GameState.GameOver)\\r\\n           
+    return;\\r\\n        const roomData = new ZEPETO_Multiplay_1.RoomData();\\r\\n       
+    switch (eventName) {\\r\\n            case NetManager_1.sEventArg.BeAttacked:\\r\\n               
+    this.mNetMgr.SendEvent(eventName, message);\\r\\n                break;\\r\\n           
+    case NetManager_1.sEventArg.SwitchLight:\\r\\n            case NetManager_1.sEventArg.SwitchSuperLight:\\r\\n               
+    roomData.Add(\\\"state\\\", message);\\r\\n                roomData.Add(\\\"sid\\\",
+    this.mPlayerMgr.LocalPlayer.id);\\r\\n                this.mNetMgr.SendEvent(eventName,
+    roomData);\\r\\n                break;\\r\\n            case NetManager_1.sEventArg.ChangeModel:\\r\\n               
+    roomData.Add(\\\"model\\\", Number(message));\\r\\n                this.mNetMgr.SendEvent(eventName,
+    roomData);\\r\\n                break;\\r\\n            case NetManager_1.sEventArg.OnShoot:\\r\\n               
+    // let data = this.mPlayerMgr.GetShootData();\\r\\n                // if (data
+    != null) {\\r\\n                //     roomData.Add(\\\"shootData\\\", data)\\r\\n               
+    //     this.mNetMgr.SendEvent(eventName, roomData);\\r\\n                // }\\r\\n               
+    break;\\r\\n            case NetManager_1.sEventArg.UseBuff:\\r\\n               
+    roomData.Add(\\\"buff\\\", message);\\r\\n                this.mNetMgr.SendEvent(eventName,
+    roomData);\\r\\n                break;\\r\\n            case NetManager_1.sEventArg.PlayerJump:\\r\\n               
+    roomData.Add(\\\"sessionId\\\", message);\\r\\n                this.mNetMgr.SendEvent(eventName,
+    roomData);\\r\\n                break;\\r\\n            default:\\r\\n               
+    // message = null or message = roomdata\\r\\n                this.mNetMgr.SendEvent(eventName,
+    message);\\r\\n        }\\r\\n    }\\r\\n    /* Set LeaderBorad Score */\\r\\n   
+    OnGameOver(playerInfoMap) {\\r\\n        // \u6E38\u620F\u7ED3\u675F\u540E\uFF0C\u4FDD\u5B58\u6E38\u620F\u79EF\u5206\uFF0C\u4E2D\u9014\u9000\u51FA\u7684\u4E0D\u5F97\u79EF\u5206\\r\\n       
+    playerInfoMap.forEach((info, id) => {\\r\\n            if (info.sessionId ==
+    this.mPlayerMgr.mSessionId) {\\r\\n                this.SetScore(info.userId,
+    info.score);\\r\\n                console.log(`\u66F4\u65B0\u6392\u884C\u699C\u6570\u636E,\u672C\u5C40\u627E\u5230${info.hunterSum}\u4EBA,\u5B58\u6D3B${info.liveSum}\u79D2`);\\r\\n           
+    }\\r\\n        });\\r\\n        this.mUIMgr.OnGameOver();\\r\\n        this.mPlayerMgr.OnGameOver();\\r\\n       
+    UIToast_1.default.Instance.ShowGameOver(playerInfoMap);\\r\\n    }\\r\\n    SetScore(userId,
+    score) {\\r\\n        ZEPETO_Script_Leaderboard_1.LeaderboardAPI.GetRank(this.Leaderboard.WeekRank.id,
+    [userId], this.Leaderboard.WeekRank.resetRule, false, (res) => {\\r\\n           
+    let prevScore = res.rankInfo.myRank.score;\\r\\n            console.log(\\\"\u76EE\u524D\u79EF\u5206\\\",
+    prevScore, \\\"\u6700\u65B0\u79EF\u5206\\\", prevScore + score);\\r\\n           
+    this.mUIMgr.RefreshMySeasonScore(prevScore + score);\\r\\n            ZEPETO_Script_Leaderboard_1.LeaderboardAPI.SetScore(this.Leaderboard.WeekRank.id,
+    prevScore + score, this.OnResult, this.OnError);\\r\\n        });\\r\\n    }\\r\\n   
+    OnResult(result) {\\r\\n        console.log(`\u4FDD\u5B58\u6392\u884C\u699C\u529F\u80FD\u6210\u529F:
+    ${result.isSuccess}`);\\r\\n    }\\r\\n    OnError(error) {\\r\\n        console.error(\\\"\u4FDD\u5B58\u6392\u884C\u699C\u5206\u6570\u5931\u8D25\\\",
+    error);\\r\\n    }\\r\\n    OnLeaderBoardReward(userId) {\\r\\n        // LeaderboardAPI.GetRank(this.Leaderboard.WeekRank.id,
+    [userId], this.Leaderboard.WeekRank.resetRule, true, (res) => {\\r\\n       
+    //     let rank = res.rankInfo.myRank.rank;\\r\\n        //     let score = res.rankInfo.myRank.score;\\r\\n       
+    //     let totalRankCount = res.rankInfo.totalRankCount;\\r\\n        //    
+    console.log(`\u4E0A\u8D5B\u5B63\u6392\u540D:${rank}, TotalRankCount:${totalRankCount}`);\\r\\n       
+    //     if (score > 0) {\\r\\n        //         this.mNetMgr.SendReward(rank,
+    totalRankCount);\\r\\n        //     }\\r\\n        //     this.mUIMgr.RefreshMySeasonScore(score);\\r\\n       
+    //     this.GetCurrentSeasonScore(userId);\\r\\n        // });\\r\\n    }\\r\\n   
+    GetCurrentSeasonScore(userId) {\\r\\n        // LeaderboardAPI.GetRank(this.Leaderboard.WeekRank.id,
+    [userId], this.Leaderboard.WeekRank.resetRule, false, (res) => {\\r\\n       
+    //     console.log(\\\"GetRank.myRank.score:\\\", res.rankInfo.myRank.score);\\r\\n       
+    //     console.log(\\\"GetRank.myRank.rank:\\\", res.rankInfo.myRank.rank);\\r\\n       
+    //     let score = res.rankInfo.myRank.score;\\r\\n        //     this.mUIMgr.RefreshMySeasonScore(score);\\r\\n       
+    // });\\r\\n    }\\r\\n    /* Set LeaderBorad Score */\\r\\n    CheckGesture(gesture)
+    {\\r\\n        return this.mPlayerMgr.CheckGesture(gesture);\\r\\n    }\\r\\n   
+    // AudioController\\r\\n    PlayBGM(clip) {\\r\\n        AudioController_1.default.Instance.PlayBGM(clip);\\r\\n   
+    }\\r\\n    PlayOneShot(clip) {\\r\\n        AudioController_1.default.Instance.PlayOneShot(clip);\\r\\n   
+    }\\r\\n    PlayAtPoint(clip, point) {\\r\\n        AudioController_1.default.Instance.PlayAtPoint(clip,
+    point);\\r\\n    }\\r\\n    // Config VO\\r\\n    GetStartPoint(index, gameState)
+    {\\r\\n        return this.mConfigMgr.GetStartPoint(index, gameState);\\r\\n   
+    }\\r\\n    GetPlayerInfoVO(player) {\\r\\n        return this.mConfigMgr.GetPlayerInfoVO(player);\\r\\n   
+    }\\r\\n    Toast(msg, duration) {\\r\\n        this.mUIMgr.Toast(msg, duration);\\r\\n   
+    }\\r\\n    GetModelInfoVO(name) {\\r\\n        return this.mConfigMgr.GetModelInfoVO(name);\\r\\n   
+    }\\r\\n    CheckCanChangeModel(cost) {\\r\\n        return this.mPlayerMgr.CheckCanChangeModel(cost);\\r\\n   
+    }\\r\\n    GetModelCost() {\\r\\n        return this.mConfigMgr.GetModelCostVO();\\r\\n   
+    }\\r\\n    GetModelCostVOByCostId(costId) {\\r\\n        return this.mConfigMgr.GetModelCostVOByCostId(costId);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = GameMain;\\r\\nclass GameRule {\\r\\n}\\r\\nexports.GameRule
+    = GameRule;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZU1haW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHYW1lTWFpbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxpREFBcUQ7QUFDckQsdURBQStDO0FBQy9DLHlEQUFpRDtBQUNqRCx5REFBMkU7QUFDM0UsK0RBQXdFO0FBQ3hFLCtEQUF1RDtBQUN2RCw2Q0FBZ0c7QUFDaEcsc0VBQThEO0FBRTlELHVEQUE0QztBQUM1Qyx5RUFBNEU7QUFDNUUsd0RBQWdEO0FBQ2hELDBDQUFrQztBQUVsQyxNQUFxQixRQUFTLFNBQVEscUNBQXFCO0lBQTNEO1FBRUksZUFBZTs7UUF1Q1AsZUFBVSxHQUFXLENBQUMsQ0FBQztJQXdXbkMsQ0FBQztJQTVZVSxNQUFNLEtBQUssUUFBUTtRQUN0QixJQUFJLENBQUMsUUFBUSxDQUFDLFNBQVMsRUFBRTtZQUNyQixNQUFNLFNBQVMsR0FBRyx3QkFBVSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQztZQUM5QyxJQUFJLFNBQVM7Z0JBQUUsUUFBUSxDQUFDLFNBQVMsR0FBRyxTQUFTLENBQUMsWUFBWSxTQUFDLFFBQVEsRUFBRyxDQUFDO1NBQzFFO1FBQ0QsT0FBTyxRQUFRLENBQUMsU0FBUyxDQUFDO0lBQzlCLENBQUM7SUFlRCxJQUFXLFdBQVcsS0FBSyxPQUFPLGtCQUFRLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQztJQUV6RCxLQUFLO1FBQ0QsUUFBUSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7SUFDOUIsQ0FBQztJQUVELEtBQUs7UUFDRCxJQUFJLENBQUMsT0FBTyxHQUFHLG9CQUFVLENBQUMsUUFBUSxDQUFDO1FBQ25DLElBQUksQ0FBQyxVQUFVLEdBQUcsdUJBQWEsQ0FBQyxRQUFRLENBQUM7UUFDekMsSUFBSSxDQUFDLE1BQU0sR0FBRyxtQkFBUyxDQUFDLFFBQVEsQ0FBQztRQUNqQyxJQUFJLENBQUMsVUFBVSxHQUFHLHVCQUFhLENBQUMsUUFBUSxDQUFDO1FBQ3pDLElBQUks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\",\"assetPath\":\"Assets/Scripts/GameMain.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"\",\"name\":\"mGameState\",\"type\":\"GameState\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[\"None\",\"GameWait\",\"GameOver\",\"GameRoundOver\",\"GameMatch\",\"GameStart\",\"ConfirmedModel\",\"OpenDoor\",\"PeakMoment\"],\"enumValues\":[\"-1\",\"0\",\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\"],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"mGameRule\",\"type\":\"D:/Git/new-world-peekaboo/Assets/Scripts/GameMain.GameRule\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"GameMain\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 99fade5a7633e9cbd1e6e139bef9a890
+  onlyWriteTrigger: 0

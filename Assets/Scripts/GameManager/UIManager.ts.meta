@@ -1,0 +1,133 @@
+fileFormatVersion: 2
+guid: 64fb6dc10c827ef4c8c22d4221c4188b
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    PlayerManager_1 = require(\\\"./PlayerManager\\\");\\r\\nconst BaseManager_1
+    = require(\\\"./BaseManager\\\");\\r\\nconst NetManager_1 = require(\\\"./NetManager\\\");\\r\\nconst
+    UIToast_1 = require(\\\"../UI/UIToast\\\");\\r\\nconst UILoading_1 = require(\\\"../UI/UILoading\\\");\\r\\nconst
+    UIHomePanel_1 = require(\\\"../UI/UIHomePanel\\\");\\r\\nconst UIModelRandomPanel_1
+    = require(\\\"../UI/UIModelRandomPanel\\\");\\r\\nconst UIDailyTaskPanel_1 =
+    require(\\\"../UI/DailyTask/UIDailyTaskPanel\\\");\\r\\nconst Localization_1
+    = require(\\\"../Common/Localization/Scripts/Localization\\\");\\r\\nconst UIRewardPanel_1
+    = require(\\\"../UI/UIRewardPanel\\\");\\r\\nconst UIMessagePanel_1 = require(\\\"../UI/UIMessagePanel\\\");\\r\\nconst
+    UIStarRewardPanel_1 = require(\\\"../UI/UIStarRewardPanel\\\");\\r\\nconst UISeasonReward_1
+    = require(\\\"../UI/UISeasonReward\\\");\\r\\nclass UIManager extends BaseManager_1.default
+    {\\r\\n    static get Instance() {\\r\\n        return UIManager._instance;\\r\\n   
+    }\\r\\n    get CurStar() { return this.mCurStar; }\\r\\n    Awake() {\\r\\n       
+    UIManager._instance = this;\\r\\n        this.mLastModel = -1;\\r\\n    }\\r\\n   
+    Start() {\\r\\n        this.TOAST = UIToast_1.default.Instance;\\r\\n       
+    this.mLoadingPanel.SetActive(true);\\r\\n        this.mHomeCtrl = this.mHomePanel.GetComponent($typeof(UIHomePanel_1.default));\\r\\n       
+    this.mDailyTaskCtrl = this.mDailyTaskPanel.GetComponent($typeof(UIDailyTaskPanel_1.default));\\r\\n       
+    this.mMessageCtrl = this.mMessagePanel.GetComponent($typeof(UIMessagePanel_1.default));\\r\\n       
+    this.mMessageCtrl.Init();\\r\\n        this.mStarRewardCtrl = this.mStarRewardPanel.GetComponent($typeof(UIStarRewardPanel_1.default));\\r\\n       
+    this.mStarRewardCtrl.Init();\\r\\n        this.mSeasonRewardCtrl = this.mSeasonRewardPanel.GetComponent($typeof(UISeasonReward_1.default));\\r\\n       
+    this.mSeasonRewardCtrl.Init();\\r\\n    }\\r\\n    OnGameWait() {\\r\\n       
+    this.mHomeCtrl.OnGameWait();\\r\\n        if (this.mMessageCtrl) {\\r\\n           
+    this.mMessageCtrl.OnGamwWait();\\r\\n        }\\r\\n    }\\r\\n    OnGameReady()
+    {\\r\\n        // \u6E38\u620F\u5012\u8BA1\u65F6\\r\\n        this.mHomeCtrl.OnGameReady();\\r\\n   
+    }\\r\\n    OnGameStart(gameInfo, gameRule, player) {\\r\\n        if (this.mHomeCtrl
+    != null) {\\r\\n            this.mHomeCtrl.OnGameStart(gameInfo, gameRule, player);\\r\\n       
+    }\\r\\n        if (this.mMessageCtrl) {\\r\\n            this.mMessageCtrl.OnGameStart(player.isHunter);\\r\\n       
+    }\\r\\n    }\\r\\n    OnGameUpdate(gameInfo, player) {\\r\\n        this.mHomeCtrl.OnGameUpdate(gameInfo,
+    player);\\r\\n    }\\r\\n    OnPeakMoment(addHP, isHunter) {\\r\\n        //
+    this.TOAST.ShowPeakMoment(30);\\r\\n        if (!isHunter) {\\r\\n           
+    this.mHomeCtrl.OnPeakMoment(addHP);\\r\\n        }\\r\\n        this.mHomeCtrl.SetTimerColor(true);\\r\\n   
+    }\\r\\n    SendRandomModel() {\\r\\n        this.SendEvent(NetManager_1.sEventArg.RandomModel,
+    null);\\r\\n    }\\r\\n    OnShowRandomModel(targetId) {\\r\\n        this.mHomeCtrl.OpenRandomModelPanel(targetId);\\r\\n   
+    }\\r\\n    OnConfirmedModel() {\\r\\n        this.mHomeCtrl.HideRandomModelPanel();\\r\\n   
+    }\\r\\n    OnRoundOver(roundResult) {\\r\\n        console.log(\\\"Show RoundOver
+    UI\\\");\\r\\n        this.mLastModel = -1;\\r\\n        this.mHomeCtrl.OnRoundOver();\\r\\n       
+    this.mMessageCtrl.OnRoundOver();\\r\\n    }\\r\\n    OnGameOver() {\\r\\n       
+    console.log(\\\"\u6E38\u620F\u7ED3\u675F\\\");\\r\\n        this.mHomeCtrl.OnGameOver();\\r\\n   
+    }\\r\\n    OnShoot() {\\r\\n        // this.SendEvent(sEventArg.OnShoot, null);\\r\\n   
+    }\\r\\n    // OnSwitchLight() {\\r\\n    //     this.SendEvent(sEventArg.SwitchLight,
+    null);\\r\\n    // }\\r\\n    OnUseBuff(buffId) {\\r\\n        this.SendEvent(NetManager_1.sEventArg.UseBuff,
+    buffId);\\r\\n    }\\r\\n    CheckCanRestore() {\\r\\n        if (this.mLastModel
+    < 0 || this.mLastModel > 90)\\r\\n            return false;\\r\\n        return
+    true;\\r\\n    }\\r\\n    OnLockView(isLock) {\\r\\n        this.TOAST.ShowLockViewStatus(isLock);\\r\\n       
+    this.OnActionEvent(PlayerManager_1.ActionEvent.OnLockCamera, isLock);\\r\\n   
+    }\\r\\n    OnFreeCamra(isFree) {\\r\\n        this.OnActionEvent(PlayerManager_1.ActionEvent.OnFreeCamera,
+    isFree);\\r\\n    }\\r\\n    OnWatchCamera(sessionId) {\\r\\n        this.OnActionEvent(PlayerManager_1.ActionEvent.OnWatchCamera,
+    sessionId);\\r\\n    }\\r\\n    OnDie(data) {\\r\\n        this.mHomeCtrl.OnDie(data);\\r\\n   
+    }\\r\\n    OnChangeModelCost(modelId, cost) {\\r\\n        //let canChange =
+    this.CheckCanChangeModel(cost);\\r\\n        if (true) {\\r\\n            this.mLastModel
+    = modelId;\\r\\n            this.SendEvent(NetManager_1.sEventArg.ChangeModel,
+    modelId);\\r\\n            return true;\\r\\n        }\\r\\n        else {\\r\\n           
+    //this.TOAST.Show(\\\"\u661F\u661F\u503C\u4E0D\u591F!\\\", 1);\\r\\n           
+    return false;\\r\\n        }\\r\\n    }\\r\\n    OnChangeModel(modelId) {\\r\\n       
+    this.mLastModel = modelId;\\r\\n        this.SendEvent(NetManager_1.sEventArg.ChangeModel,
+    modelId);\\r\\n        return true;\\r\\n    }\\r\\n    OnUpdateHP(curHP, elasped)
+    {\\r\\n        let isBeAttacked = this.mHomeCtrl.UpdateUP(curHP);\\r\\n       
+    if (isBeAttacked) {\\r\\n            if (curHP != 0) {\\r\\n                this.TOAST.ShowHiderBeFound();\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    OnUpdateStar(curStar) {\\r\\n        this.mCurStar
+    = curStar;\\r\\n        this.mHomeCtrl.UpdateStar(curStar);\\r\\n        this.mRandomModelPanel.GetComponent($typeof(UIModelRandomPanel_1.default)).UpdateStar(curStar);\\r\\n       
+    this.mStarRewardCtrl.UpdateStar(curStar);\\r\\n    }\\r\\n    OnUpdateBuff(buffNum)
+    {\\r\\n        this.mHomeCtrl.UpdateBuff(buffNum);\\r\\n    }\\r\\n    OnSyncsRankReward(message)
+    {\\r\\n        // let index = message[0];\\r\\n        // let rank = message[1];\\r\\n       
+    let rewardAmount = message[3];\\r\\n        let rewardType = message[4];\\r\\n       
+    this.ShowRankRewardPanel(rewardAmount, rewardType);\\r\\n    }\\r\\n    OnSyncsDailyReward(message)
+    {\\r\\n        let rewardType = message[0];\\r\\n        let rewardAmount = message[1];\\r\\n       
+    this.ShowDailyRewardPanel(rewardAmount, rewardType);\\r\\n    }\\r\\n    OnSyncWeekActivity(message)
+    {\\r\\n        let weekActivityInfo = JSON.parse(message);\\r\\n        this.mDailyTaskCtrl.UpdateWeekActivity(weekActivityInfo);\\r\\n   
+    }\\r\\n    OnSyncStarRewardInfo(message) {\\r\\n        let starRewardInfo =
+    JSON.parse(message);\\r\\n        this.mStarRewardCtrl.UpdateStarRewardInfo(starRewardInfo);\\r\\n   
+    }\\r\\n    OnReceiveStarReward(message) {\\r\\n        let rewardType = message[0];\\r\\n       
+    let rewardAmount = message[1];\\r\\n        this.mStarRewardCtrl.ShowReward(rewardAmount,
+    rewardType);\\r\\n    }\\r\\n    OnSyncSeasonRewardInfo(message) {\\r\\n       
+    let seasonRewardInfo = JSON.parse(message);\\r\\n        this.mSeasonRewardCtrl.UpdateSeasonReward(seasonRewardInfo);\\r\\n   
+    }\\r\\n    /* Static Canvas Event */\\r\\n    OnFinishLoad(userId) {\\r\\n       
+    console.log(\\\"OnFinishLoad!\\\");\\r\\n        if (this.mLoadingPanel != null)
+    {\\r\\n            this.mLoadingPanel.GetComponent($typeof(UILoading_1.default)).OnFinishLoad();\\r\\n           
+    this.mLoadingPanel = null;\\r\\n        }\\r\\n        if (this.mHomeCtrl !=
+    null) {\\r\\n            this.mHomeCtrl.Init();\\r\\n        }\\r\\n    }\\r\\n   
+    OnUpdateDailyTaskInfo(dailyTaskInfo) {\\r\\n    }\\r\\n    //\u6392\u884C\u699C\u5956\u52B1\\r\\n   
+    ShowRankRewardPanel(totalAmount, rewardType) {\\r\\n        if (totalAmount)
+    {\\r\\n            let tip = \\\"\\\";\\r\\n            switch (rewardType) {\\r\\n               
+    case 0 /* COIN */:\\r\\n                    tip = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Reward_rank_tips\\\",
+    [totalAmount.toString()]);\\r\\n                    break;\\r\\n               
+    case 1 /* ZEM */:\\r\\n                    tip = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Reward_rank_tips_1\\\",
+    [totalAmount.toString()]);\\r\\n                    break;\\r\\n               
+    default:\\r\\n                    break;\\r\\n            }\\r\\n           
+    this.mRewardPanel.SetActive(true);\\r\\n            let rewardPanel = this.mRewardPanel.GetComponent($typeof(UIRewardPanel_1.default));\\r\\n           
+    rewardPanel.ShowReward(tip, rewardType);\\r\\n        }\\r\\n        else {\\r\\n           
+    console.error(\\\"\u6392\u884C\u699C\u5956\u52B1\u9519\u8BEF\uFF1A\\\", totalAmount);\\r\\n       
+    }\\r\\n    }\\r\\n    //\u6BCF\u65E5\u4EFB\u52A1\u6D3B\u8DC3\u5EA6\u5956\u52B1\\r\\n   
+    ShowDailyRewardPanel(totalAmount, rewardType) {\\r\\n        if (totalAmount)
+    {\\r\\n            let tip = \\\"\\\";\\r\\n            switch (rewardType) {\\r\\n               
+    case 0 /* COIN */:\\r\\n                    tip = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Reward_daily_task_tips\\\",
+    [totalAmount.toString()]);\\r\\n                    break;\\r\\n               
+    case 1 /* ZEM */:\\r\\n                    tip = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Reward_daily_task_tips_1\\\",
+    [totalAmount.toString()]);\\r\\n                    break;\\r\\n               
+    default:\\r\\n                    break;\\r\\n            }\\r\\n           
+    this.mRewardPanel.SetActive(true);\\r\\n            let rewardPanel = this.mRewardPanel.GetComponent($typeof(UIRewardPanel_1.default));\\r\\n           
+    rewardPanel.ShowReward(tip, rewardType);\\r\\n        }\\r\\n        else {\\r\\n           
+    console.error(\\\"\u6BCF\u65E5\u6D3B\u8DC3\u5EA6\u5956\u52B1\u9519\u8BEF\uFF1A\\\",
+    totalAmount);\\r\\n        }\\r\\n    }\\r\\n    //\u53D1\u9001\u5FEB\u6377\u6D88\u606F\\r\\n   
+    SendQuickMessage(quickMessage) {\\r\\n        this.SendEvent(NetManager_1.sEventArg.QuickMessage,
+    quickMessage);\\r\\n    }\\r\\n    //\u6536\u5230\u5FEB\u6377\u6D88\u606F\\r\\n   
+    ReceiveQuickMessage(message) {\\r\\n        this.mMessageCtrl.mBarrageUI.AddBarrageItem(message.type,
+    message.id, message.name, message.group);\\r\\n    }\\r\\n    //\u5151\u6362\u661F\u661F\u593A\u5B9D\\r\\n   
+    SendExchangeStarReward() {\\r\\n        this.SendEvent(NetManager_1.sEventArg.ExchangeStarReward,
+    null);\\r\\n    }\\r\\n    //\u5237\u65B0\u8D5B\u5B63\u79EF\u5206\\r\\n    RefreshMySeasonScore(score)
+    {\\r\\n        this.mSeasonRewardCtrl.RefreshMySeasonScore(score);\\r\\n    }\\r\\n}\\r\\nexports.default
+    = UIManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlNYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlNYW5hZ2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXlEO0FBQ3pELG1EQUE2QztBQUM3QywrQ0FBdUM7QUFDdkMsNkNBQXdDO0FBQ3hDLDJDQUFtQztBQUNuQywrQ0FBdUM7QUFDdkMsbURBQTJDO0FBRzNDLGlFQUEwRDtBQUMxRCx1RUFBZ0U7QUFDaEUsOEVBQXVFO0FBQ3ZFLHVEQUFnRDtBQUNoRCx5REFBa0Q7QUFFbEQsK0RBQXdEO0FBQ3hELHlEQUFrRDtBQUVsRCxNQUFxQixTQUFVLFNBQVEscUJBQVc7SUFJdkMsTUFBTSxLQUFLLFFBQVE7UUFDdEIsT0FBTyxTQUFTLENBQUMsU0FBUyxDQUFDO0lBQy9CLENBQUM7SUFzQkQsSUFBVyxPQUFPLEtBQUssT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztJQUc5QyxLQUFLO1FBQ0QsU0FBUyxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFDM0IsSUFBSSxDQUFDLFVBQVUsR0FBRyxDQUFDLENBQUMsQ0FBQztJQUN6QixDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxLQUFLLEdBQUcsaUJBQU8sQ0FBQyxRQUFRLENBQUM7UUFDOUIsSUFBSSxDQUFDLGFBQWEsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbkMsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQyxxQkFBVyxFQUFHLENBQUM7UUFDN0QsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDLFlBQVksU0FBQywwQkFBZ0IsRUFBRyxDQUFDO1FBQzVFLElBQUksQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxZQUFZLFNBQUMsd0JBQWMsRUFBRyxDQUFDO1FBQ3RFLElBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDekIsSUFBSSxDQUFDLGVBQWUsR0FBRyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsWUFBWSxTQUFDLDJCQUFpQixFQUFHLENBQUM7UUFDL0UsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUM1QixJQUFJLENBQUMsaUJBQWlCLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixDQUFDLFlBQVksU0FBQyx3QkFBYyxFQUFHLENBQUM7UUFDaEYsSUFBSSxDQUFDLGlCQUFpQixDQUFDLElBQUksRUFBRSxDQUFDO0lBQ2xDLENBQUM7SUFFTSxVQUFVO1FBQ2IsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsQ0FBQztRQUM1QixJQUFJLElBQUksQ0FBQyxZQUFZLEVBQUU7WUFDbkIsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLEVBQUUsQ0FBQztTQUNsQztJQUNMLENBQUM7SUFFRCxXQUFXO1FBQ1AsUUFBUTtRQUNSLElBQUksQ0FBQyxTQUFTLENBQUMsV0FBVyxFQUFFLENBQUM7SUFDakMsQ0FBQztJQUVELFdBQVcsQ0FBQyxRQUFtQixFQUFFLFFBQWtCLEVBQUUsTUFBZTtRQUNoRSxJQUFJLElBQUksQ0FBQyxTQUFTLElBQUksSUFBSSxFQUFFO1lBQ3hCLElBQUksQ0FBQyxTQUFTLENBQUMsV0FBVyxDQUFDLFFBQVEsRUFBRSxRQUFRLEVBQUUsTUFBTSxDQUFDLENBQUM7U0FDMUQ7UUFDRCxJQUFJLElBQUksQ0FBQyxZQUFZLEVBQUU7WUFDbkIsSUFBSSxDQUFDLFlBQVksQ0FBQyxXQUFXLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1NBQ2xEO0lBQ0wsQ0FBQztJQUVELFlBQVksQ0FBQyxRQUFtQixFQUFFLE1BQWU7UUFDN0MsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLENBQUMsUUFBUSxFQUFFLE1BQU0sQ0FBQyxDQUFDO0lBQ2xELENBQUM7SUFFRCxZQUFZLENBQUMsS0FBYSxFQUFFLFFBQWlCO1FBQ3pDLGlDQUFpQztRQUNqQyxJQUFJLENBQUMsUUFBUSxFQUFFO1lBQ1gsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDdEM7UUFDRCxJQUFJLENBQUMsU0FBUyxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUN2QyxDQUFDO0lBRUQsZUFBZTtRQUNYLElBQUksQ0FBQyxTQUFTLENBQUMsc0JBQVMsQ0FBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDaEQsQ0FBQztJQUVELGlCQUFpQixDQUFDLFFBQWdCO1FBQzlCLElBQUksQ0FBQyxTQUFTLENBQUMsb0JBQW9CLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDbEQsQ0FBQztJQUVELGdCQUFnQjtRQUNaLElBQUksQ0FBQyxTQUFTLENBQUMsb0JBQW9CLEVBQUUsQ0FBQztJQUMxQyxDQUFDO0lBRUQsV0FBVyxDQUFDLFdBQXlCO1FBQ2pDLE9BQU8sQ0FBQyxHQUFHLENBQUMsbUJBQW1CLENBQUMsQ0FBQztRQUNqQyxJQUFJLENBQUMsVUFBVSxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBRXJCLElBQUksQ0FBQyxTQUFTLENBQUMsV0FBVyxFQUFFLENBQUM7UUFDN0IsSUFBSSxDQUFDLFlBQVksQ0FBQyxXQUFXLEVBQUUsQ0FBQztJQUNwQyxDQUFDO0lBRUQsVUFBVTtRQUNOLE9BQU8sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDcEIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsQ0FBQztJQUNoQyxDQUFDO0lBRUQsT0FBTztRQUNILDJDQUEyQztJQUMvQyxDQUFDO0lBRUQsb0JBQW9CO0lBQ3BCLG1EQUFtRDtJQUNuRCxJQUFJO0lBRUosU0FBUyxDQUFDLE1BQWM7UUFDcEIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxzQkFBUyxDQUFDLE9BQU8sRUFBRSxNQUFNLENBQUMsQ0FBQztJQUM5QyxDQUFDO0lBRUQsZUFBZTtRQUNYLElBQUksSUFBSSxDQUFDLFVBQVUsR0FBRyxDQUFDLElBQUksSUFBSSxDQUFDLFVBQVUsR0FBRyxFQUFFO1lBQUUsT0FBTyxLQUFLLENBQUM7UUFDOUQsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELFVBQVUsQ0FBQyxNQUFlO1FBQ3RCLElBQUksQ0FBQyxLQUFLLENBQUMsa0JBQWtCLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDdEMsSUFBSSxDQUFDLGFBQWEsQ0FBQywyQkFBVyxDQUFDLFlBQVksRUFBRSxNQUFNLENBQUMsQ0FBQztJQUN6RCxDQUFDO0lBRUQsV0FBVyxDQUFDLE1BQWU7UUFDdkIsSUFBSSxDQUFDLGFBQWEsQ0FBQywyQkFBVyxDQUFDLFlBQVksRUFBRSxNQUFNLENBQUMsQ0FBQztJQUN6RCxDQUFDO0lBRUQsYUFBYSxDQUFDLFNBQWlCO1FBQzNCLElBQUksQ0FBQyxhQUFhLENBQUMsMkJBQVcsQ0FBQyxhQUFhLEVBQUUsU0FBUyxDQUFDLENBQUM7SUFDN0QsQ0FBQztJQUVELEtBQUssQ0FBQyxJQUFTO1FBQ1gsSUFBSSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDL0IsQ0FBQztJQUVELGlCQUFpQixDQUFDLE9BQWUsRUFBRSxJQUFZO1FBQzNDLGlEQUFpRDtRQUVqRCxJQUFJLElBQUksRUFBRTtZQUNOLElBQUksQ0FBQyxVQUFVLEdBQUcsT0FBTyxDQUFDO1lBQzFCLElBQUksQ0FBQyxTQUFTLENBQUMsc0JBQVMsQ0FBQyxXQUFXLEVBQUUsT0FBTyxDQUFDLENBQUE7WUFDOUMsT0FBTyxJQUFJLENBQUM7U0FDZjthQUNJO1lBQ0QsK0JBQStCO1lBQy9CLE9BQU8sS0FBSyxDQUFDO1NBQ2hCO0lBQ0wsQ0FBQztJQUVELGFBQWEsQ0FBQyxPQUFlO1FBQ3pCLElBQUksQ0FBQyxVQUFVLEdBQUcsT0FBTyxDQUFDO1FBQzFCLElBQUksQ0FBQyxTQUFTLENBQUMsc0JBQVMsQ0FBQyxXQUFXLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDL0MsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELFVBQVUsQ0FBQyxLQUFhLEVBQUUsT0FBZTtRQUNyQyxJQUFJLFlBQVksR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUNsRCxJQUFJLFlBQVksRUFBRTtZQUNkLElBQUksS0FBSyxJQUFJLENBQUMsRUFBRTtnQkFDWixJQUFJLENBQUMsS0FBSyxDQUFDLGdCQUFnQixFQUFFLENBQUM7YUFDakM7U0FDSjtJQUNMLENBQUM7SUFFRCxZQUFZLENBQUMsT0FBZTtRQUN4QixJQUFJLENBQUMsUUFBUSxHQUFHLE9BQU8sQ0FBQztRQUN4QixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUNuQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsWUFBWSxTQUFDLDRCQUFrQixHQUFJLFVBQVUsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUM5RSxJQUFJLENBQUMsZUFBZSxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUM3QyxDQUFDO0lBRUQsWUFBWSxDQUFDLE9BQWU7UUFDeEIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDdkMsQ0FBQztJQUVELGlCQUFpQixDQUFDLE9BQVk7UUFDMUIsMEJBQTBCO1FBQzFCLHlCQUF5QjtRQUN6QixJQUFJLFlBQVksR0FBRyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDOUIsSUFBSSxVQUFVLEdBQUcsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQzVCLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxZQUFZLEVBQUUsVUFBVSxDQUFDLENBQUM7SUFDdkQsQ0FBQztJQUVELGtCQUFrQixDQUFDLE9BQVk7UUFDM0IsSUFBSSxVQUFVLEdBQUcsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQzVCLElBQUksWUFBWSxHQUFHLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUM5QixJQUFJLENBQUMsb0JBQW9CLENBQUMsWUFBWSxFQUFFLFVBQVUsQ0FBQyxDQUFDO0lBQ3hELENBQUM7SUFFRCxrQkFBa0IsQ0FBQyxPQUFZO1FBQzNCLElBQUksZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUMzQyxJQUFJLENBQUMsY0FBYyxDQUFDLGtCQUFrQixDQUFDLGdCQUFnQixDQUFDLENBQUM7SUFDN0QsQ0FBQztJQUVELG9CQUFvQixDQUFDLE9BQVk7UUFDN0IsSUFBSSxjQUFjLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUN6QyxJQUFJLENBQUMsZUFBZSxDQUFDLG9CQUFvQixDQUFDLGNBQWMsQ0FBQyxDQUFDO0lBQzlELENBQUM7SUFFRCxtQkFBbUIsQ0FBQyxPQUFZO1FBQzVCLElBQUksVUFBVSxHQUFHLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUM1QixJQUFJLFlBQVksR0FBRyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDOUIsSUFBSSxDQUFDLGVBQWUsQ0FBQyxVQUFVLENBQUMsWUFBWSxFQUFFLFVBQVUsQ0FBQyxDQUFDO0lBQzlELENBQUM7SUFFRCxzQkFBc0IsQ0FBQyxPQUFZO1FBQy9CLElBQUksZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUMzQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsa0JBQWtCLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztJQUNoRSxDQUFDO0lBR0QseUJBQXlCO0lBQ3pCLFlBQVksQ0FBQyxNQUFXO1FBQ3BCLE9BQU8sQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDLENBQUM7UUFDN0IsSUFBSSxJQUFJLENBQUMsYUFBYSxJQUFJLElBQUksRUFBRTtZQUM1QixJQUFJLENBQUMsYUFBYSxDQUFDLFlBQVksU0FBQyxtQkFBUyxHQUFJLFlBQVksRUFBRSxDQUFDO1lBQzVELElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDO1NBQzdCO1FBQ0QsSUFBSSxJQUFJLENBQUMsU0FBUyxJQUFJLElBQUksRUFBRTtZQUN4QixJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksRUFBRSxDQUFDO1NBQ3pCO0lBQ0wsQ0FBQztJQUVELHFCQUFxQixDQUFDLGFBQWtCO0lBQ3hDLENBQUM7SUFFRCxPQUFPO0lBQ0EsbUJBQW1CLENBQUMsV0FBbUIsRUFBRSxVQUFzQjtRQUNsRSxJQUFJLFdBQVcsRUFBRTtZQUNiLElBQUksR0FBRyxHQUFHLEVBQUUsQ0FBQztZQUNiLFFBQVEsVUFBVSxFQUFFO2dCQUNoQjtvQkFDSSxHQUFHLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUMseUJBQXlCLENBQUMsa0JBQWtCLEVBQUUsQ0FBQyxXQUFXLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxDQUFDO29CQUNwRyxNQUFNO2dCQUNWO29CQUNJLEdBQUcsR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyx5QkFBeUIsQ0FBQyxvQkFBb0IsRUFBRSxDQUFDLFdBQVcsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLENBQUM7b0JBQ3RHLE1BQU07Z0JBQ1Y7b0JBQ0ksTUFBTTthQUNiO1lBQ0QsSUFBSSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDbEMsSUFBSSxXQUFXLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxZQUFZLFNBQUMsdUJBQWEsRUFBRyxDQUFDO1lBQ2xFLFdBQVcsQ0FBQyxVQUFVLENBQUMsR0FBRyxFQUFFLFVBQVUsQ0FBQyxDQUFDO1NBQzNDO2FBQ0k7WUFDRCxPQUFPLENBQUMsS0FBSyxDQUFDLFVBQVUsRUFBRSxXQUFXLENBQUMsQ0FBQztTQUMxQztJQUNMLENBQUM7SUFFRCxXQUFXO0lBQ0osb0JBQW9CLENBQUMsV0FBbUIsRUFBRSxVQUFzQjtRQUNuRSxJQUFJLFdBQVcsRUFBRTtZQUNiLElBQUksR0FBRyxHQUFHLEVBQUUsQ0FBQztZQUNiLFFBQVEsVUFBVSxFQUFFO2dCQUNoQjtvQkFDSSxHQUFHLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUMseUJBQXlCLENBQUMsd0JBQXdCLEVBQUUsQ0FBQyxXQUFXLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxDQUFDO29CQUMxRyxNQUFNO2dCQUNWO29CQUNJLEdBQUcsR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyx5QkFBeUIsQ0FBQywwQkFBMEIsRUFBRSxDQUFDLFdBQVcsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLENBQUM7b0JBQzVHLE1BQU07Z0JBQ1Y7b0JBQ0ksTUFBTTthQUNiO1lBQ0QsSUFBSSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDbEMsSUFBSSxXQUFXLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxZQUFZLFNBQUMsdUJBQWEsRUFBRyxDQUFDO1lBQ2xFLFdBQVcsQ0FBQyxVQUFVLENBQUMsR0FBRyxFQUFFLFVBQVUsQ0FBQyxDQUFDO1NBQzNDO2FBQ0k7WUFDRCxPQUFPLENBQUMsS0FBSyxDQUFDLFlBQVksRUFBRSxXQUFXLENBQUMsQ0FBQztTQUM1QztJQUNMLENBQUM7SUFFRCxRQUFRO0lBQ0QsZ0JBQWdCLENBQUMsWUFBaUI7UUFDckMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxzQkFBUyxDQUFDLFlBQVksRUFBRSxZQUFZLENBQUMsQ0FBQztJQUN6RCxDQUFDO0lBRUQsUUFBUTtJQUNELG1CQUFtQixDQUFDLE9BQVk7UUFDbkMsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FBQyxJQUFJLEVBQUUsT0FBTyxDQUFDLEVBQUUsRUFBRSxPQUFPLENBQUMsSUFBSSxFQUFFLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN2RyxDQUFDO0lBRUQsUUFBUTtJQUNELHNCQUFzQjtRQUN6QixJQUFJLENBQUMsU0FBUyxDQUFDLHNCQUFTLENBQUMsa0JBQWtCLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDdkQsQ0FBQztJQUVELFFBQVE7SUFDRCxvQkFBb0IsQ0FBQyxLQUFhO1FBQ3JDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxvQkFBb0IsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN2RCxDQUFDO0NBQ0o7QUF6U0QsNEJBeVNDIn0=\",\"assetPath\":\"Assets/Scripts/GameManager/UIManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mLoadingPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mHomePanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRandomModelPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mDailyTaskPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRewardPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mMessagePanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mLeaderboardPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mZemPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mStarRewardPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mSeasonRewardPanel\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"TOAST\",\"type\":\"D:/Git/new-world-peekaboo/Assets/Scripts/UI/UIToast.default\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"mHomeCtrl\",\"type\":\"D:/Git/new-world-peekaboo/Assets/Scripts/UI/UIHomePanel.default\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"mMessageCtrl\",\"type\":\"D:/Git/new-world-peekaboo/Assets/Scripts/UI/UIMessagePanel.default\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"mStarRewardCtrl\",\"type\":\"D:/Git/new-world-peekaboo/Assets/Scripts/UI/UIStarRewardPanel.default\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"mSeasonRewardCtrl\",\"type\":\"D:/Git/new-world-peekaboo/Assets/Scripts/UI/UISeasonReward.default\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"elasped\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UIManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 46706a162dd80672ee26f837e1291e29
+  onlyWriteTrigger: 0

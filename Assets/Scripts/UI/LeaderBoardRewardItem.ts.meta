@@ -1,0 +1,45 @@
+fileFormatVersion: 2
+guid: b37559023d5104f4ab187bca84128d34
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nclass
+    LeaderBoardRewardItem extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    SetItem(rewardData, index) {\r\n        this.mRewardIcon.sprite = this.mSprites[index];\r\n       
+    let rankStr = \"\";\r\n        switch (rewardData.rankType) {\r\n           
+    case 0 /* RANK */:\r\n                if (rewardData.rankValue == 1) {\r\n                   
+    rankStr = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Reward_list_1\",
+    [rewardData.rankValue.toString()]);\r\n                }\r\n                else
+    if (rewardData.rankValue == 2) {\r\n                    rankStr = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Reward_list_1\",
+    [rewardData.rankValue.toString()]);\r\n                }\r\n                else
+    {\r\n                    rankStr = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Reward_list_2\",
+    [rewardData.rankValue.toString()]);\r\n                }\r\n                break;\r\n           
+    case 1 /* RATE */:\r\n                rankStr = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Reward_list_3\",
+    [rewardData.rankValue.toString()]);\r\n                break;\r\n           
+    case 2 /* ETC */:\r\n                rankStr = Localization_1.default.Instance.GetLocalizedText(\"Reward_list_4\");\r\n               
+    break;\r\n            default:\r\n                break;\r\n        }\r\n       
+    this.mRankText.text = rankStr;\r\n        if (rewardData.rewardType == 0 /* COIN
+    */) {\r\n            this.mCoinIcon.sprite = this.mRewardSprites[0];\r\n       
+    }\r\n        else if (rewardData.rewardType == 1 /* ZEM */) {\r\n           
+    this.mCoinIcon.sprite = this.mRewardSprites[1];\r\n        }\r\n        this.mRewardAmountText.text
+    = rewardData.rewardValue.toString();\r\n    }\r\n}\r\nexports.default = LeaderBoardRewardItem;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTGVhZGVyQm9hcmRSZXdhcmRJdGVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiTGVhZGVyQm9hcmRSZXdhcmRJdGVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsbURBQXlEO0FBQ3pELGlEQUFxRDtBQUNyRCw4RUFBdUU7QUFHdkUsTUFBcUIscUJBQXNCLFNBQVEscUNBQXFCO0lBUzdELE9BQU8sQ0FBQyxVQUEwQixFQUFFLEtBQWE7UUFDcEQsSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUMvQyxJQUFJLE9BQU8sR0FBRyxFQUFFLENBQUM7UUFDakIsUUFBUSxVQUFVLENBQUMsUUFBUSxFQUFFO1lBQ3pCO2dCQUNJLElBQUksVUFBVSxDQUFDLFNBQVMsSUFBSSxDQUFDLEVBQUU7b0JBQzNCLE9BQU8sR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyx5QkFBeUIsQ0FBQyxlQUFlLEVBQUUsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQztpQkFDakg7cUJBQ0ksSUFBSSxVQUFVLENBQUMsU0FBUyxJQUFJLENBQUMsRUFBRTtvQkFDaEMsT0FBTyxHQUFHLHNCQUFZLENBQUMsUUFBUSxDQUFDLHlCQUF5QixDQUFDLGVBQWUsRUFBRSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxDQUFDO2lCQUNqSDtxQkFDSTtvQkFDRCxPQUFPLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUMseUJBQXlCLENBQUMsZUFBZSxFQUFFLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLENBQUM7aUJBQ2pIO2dCQUNELE1BQU07WUFDVjtnQkFDSSxPQUFPLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUMseUJBQXlCLENBQUMsZUFBZSxFQUFFLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxDQUFDLENBQUM7Z0JBQzlHLE1BQU07WUFDVjtnQkFDSSxPQUFPLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsZUFBZSxDQUFDLENBQUM7Z0JBQ2xFLE1BQU07WUFDVjtnQkFDSSxNQUFNO1NBQ2I7UUFDRCxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksR0FBRyxPQUFPLENBQUM7UUFDOUIsSUFBSSxVQUFVLENBQUMsVUFBVSxnQkFBbUIsRUFBRTtZQUMxQyxJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQ2xEO2FBQ0ksSUFBSSxVQUFVLENBQUMsVUFBVSxlQUFrQixFQUFFO1lBQzlDLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQyxDQUFDLENBQUM7U0FDbEQ7UUFDRCxJQUFJLENBQUMsaUJBQWlCLENBQUMsSUFBSSxHQUFHLFVBQVUsQ0FBQyxXQUFXLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDcEUsQ0FBQztDQUVKO0FBM0NELHdDQTJDQyJ9","assetPath":"Assets/Scripts/UI/LeaderBoardRewardItem.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mRewardSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRewardIcon","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRankText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRewardAmountText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mCoinIcon","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"LeaderBoardRewardItem","description":""},"isCompiled":true}'
+  typescriptHash: 4fc1a6e7f1cfcab4e66cd13720d10fda
+  onlyWriteTrigger: 0

@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 673569f9c70064b0ab54fb906bfad908
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst UnityEngine_1
+    = require(\\\"UnityEngine\\\");\\r\\nconst ZEPETO_Multiplay_1 = require(\\\"ZEPETO.Multiplay\\\");\\r\\nconst
+    NetManager_1 = require(\\\"../../GameManager/NetManager\\\");\\r\\nconst Localization_1
+    = require(\\\"../../Common/Localization/Scripts/Localization\\\");\\r\\nconst
+    ConfigManager_1 = require(\\\"../../GameManager/ConfigManager\\\");\\r\\n// const
+    enum DailyTaskType {\\r\\n//     EnterGameTask = 1,\\r\\n//     PlayGameNumTask
+    = 2,\\r\\n//     HunterNumTask = 4,\\r\\n//     HiderWinTask = 8,\\r\\n//    
+    PlayTimeTask = 16\\r\\n// }\\r\\n// const enum DailyRewardType {\\r\\n//    
+    One = 1,\\r\\n//     Two = 2,\\r\\n//     Three = 4,\\r\\n//     Four = 8,\\r\\n//
+    }\\r\\n// \u5751\u4E864\u5C0F\u65F6\u5728UI\u4E0A\uFF0C\u6700\u540E\u6CA1\u529E\u6CD5\u91CD\u65B0\u505A\u4E86\u4E00\u904DUI\\r\\nclass
+    UIDailyTaskPanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.mDailyTaskInfo = null;\\r\\n       
+    this.mFullActivityNum = 130;\\r\\n        this._isClaimingTask = false;\\r\\n       
+    this.mDailyRewardType = [1, 2, 4, 8]; // \u5956\u52B1enum \u503C\\r\\n       
+    this.mDailyTaskType = [1, 2, 4, 8, 16]; // \u4EFB\u52A1\u679A\u4E3E \u503C\\r\\n       
+    this.mPartActivityArray = [30, 60, 80, 130]; // \u6D3B\u8DC3\u5EA6\\r\\n       
+    this.mDailyTaskProgress = [1, 4, 8, 8, 30]; // \u4EFB\u52A1\u6570\u503C\\r\\n   
+    }\\r\\n    Awake() {\\r\\n        this.mZemClaimBtn.onClick.AddListener(() =>
+    {\\r\\n            this.ClickZemClaimBtn();\\r\\n        });\\r\\n        let
+    date = new Date();\\r\\n        let hours = -date.getTimezoneOffset() / 60;\\r\\n       
+    this.mWeekActivityEndText.text = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Week_activity_1\\\",
+    [hours + \\\"\\\"]);\\r\\n    }\\r\\n    UpdateData(dailyTaskInfo) {\\r\\n       
+    if (this.mDailyTaskInfo == null) {\\r\\n            //console.error(this.mRewardBtns.length,
+    this.mTaskBtns.length);\\r\\n            for (let i = 0; i < this.mRewardBtns.length;
+    i++) {\\r\\n                this.mRewardBtns[i].onClick.AddListener(() => {\\r\\n                   
+    const roomData = new ZEPETO_Multiplay_1.RoomData();\\r\\n                   
+    roomData.Add(\\\"rewardId\\\", this.mDailyRewardType[i]);\\r\\n                   
+    NetManager_1.default.Instance.SendEvent(NetManager_1.sEventArg.RequestDailyReward,
+    roomData);\\r\\n                    console.log(\\\"\u8BF7\u6C42\u83B7\u53D6\u6D3B\u8DC3\u5EA6\u5956\u52B1\\\",
+    this.mDailyRewardType[i]);\\r\\n                });\\r\\n            }\\r\\n           
+    for (let i = 0; i < this.mTaskBtns.length; i++) {\\r\\n                this.mTaskBtns[i].onClick.AddListener(()
+    => {\\r\\n                    this._isClaimingTask = true;\\r\\n                   
+    const roomData = new ZEPETO_Multiplay_1.RoomData();\\r\\n                   
+    roomData.Add(\\\"taskId\\\", this.mDailyTaskType[i]);\\r\\n                   
+    NetManager_1.default.Instance.SendEvent(NetManager_1.sEventArg.RequestDailyTaskReward,
+    roomData);\\r\\n                    console.log(\\\"\u8BF7\u6C42\u83B7\u53D6\u4EFB\u52A1\u5956\u52B1\\\",
+    this.mDailyTaskType[i]);\\r\\n                });\\r\\n            }\\r\\n           
+    this.mDailyTaskInfo = dailyTaskInfo;\\r\\n            //console.error(this.mDailyTaskInfo.activity,
+    this.mDailyTaskInfo.dailyRewardState);\\r\\n            this.mDailyTaskInfo.OnChange
+    += (changeValues) => this.UpdateUI();\\r\\n            this.UpdateUI();\\r\\n       
+    }\\r\\n    }\\r\\n    UpdateUI() {\\r\\n        console.log(\\\"\u5237\u65B0\u6BCF\u65E5\u6D3B\u8DC3\u5EA6UI\\\");\\r\\n       
+    if (this._isClaimingTask) {\\r\\n            this._isClaimingTask = false;\\r\\n           
+    if (this.mActivityTxt.text != this.mDailyTaskInfo.activity.toString()) {\\r\\n               
+    this.PlayActivityEffect();\\r\\n            }\\r\\n        }\\r\\n        this.mActivityTxt.text
+    = this.mDailyTaskInfo.activity.toString();\\r\\n        this.mActivitySlider.value
+    = this.mDailyTaskInfo.activity / this.mFullActivityNum;\\r\\n        this.UpdateDailyRewardBtn();\\r\\n   
+    }\\r\\n    PlayActivityEffect() {\\r\\n        this.mTaskPointEffect.SetActive(false);\\r\\n       
+    this.mTaskPointEffect.SetActive(true);\\r\\n    }\\r\\n    UpdateDailyRewardBtn()
+    {\\r\\n        // \u5982\u679C\u9886\u53D6\u65E5\u5E38\u5956\u52B11\uFF0C \u663E\u793A\u201CGet\\\"\\r\\n       
+    for (let i = 0; i < this.mDailyRewardType.length; i++) {\\r\\n            let
+    isReward = (this.mDailyTaskInfo.dailyRewardState & this.mDailyRewardType[i])
+    > 0;\\r\\n            this.mRewardCompleted[i].SetActive(isReward); // \u663E\u793A
+    \u5DF2\u9886\u53D6UI\\r\\n            this.mRewardGet[i].SetActive(false); //
+    \u9690\u85CF \u5F85\u9886\u53D6UI\\r\\n            this.mRewardBtns[i].interactable
+    = !isReward; // \u9886\u53D6\u540E\u7981\u7528\\r\\n        }\\r\\n        //
+    point \\r\\n        let isShowRedPoint = false;\\r\\n        for (let i = 0;
+    i < this.mRewardPoints.length; i++) {\\r\\n            // \u663E\u793A\u8FDB\u5EA6\u7EA2\u70B9\\r\\n           
+    let isOk = this.mDailyTaskInfo.activity >= this.mPartActivityArray[i];\\r\\n           
+    this.mRewardPoints[i].SetActive(isOk);\\r\\n            if (isOk && this.mRewardBtns[i].interactable)
+    {\\r\\n                isShowRedPoint = true; // \u663E\u793A \u7EA2\u70B9\\r\\n               
+    this.mRewardGet[i].SetActive(true); // \u663E\u793A \u5F85\u9886\u53D6UI\\r\\n           
+    }\\r\\n            if (!isOk && this.mRewardBtns[i].interactable) {\\r\\n               
+    this.mRewardBtns[i].interactable = false; // \u4E0D\u6EE1\u8DB3\u9886\u53D6\u6761\u4EF6
+    \u6309\u94AE\u7981\u7528\\r\\n            }\\r\\n        }\\r\\n        // \u5982\u679C\u4E0D\u6EE1\u8DB3\u6761\u4EF6
+    \uFF0C \u4EFB\u52A1\u6309\u94AE\u4E0D\u53EF\u70B9\u51FB\\r\\n        let curTaskProgress
+    = [this.mDailyTaskInfo.enterGameNum, this.mDailyTaskInfo.playGameNum,\\r\\n           
+    this.mDailyTaskInfo.hunterWinNum, this.mDailyTaskInfo.hiderWinNum, UnityEngine_1.Mathf.Floor(this.mDailyTaskInfo.playTimeNum
+    / 60)];\\r\\n        for (let i = 0; i < this.mDailyTaskProgress.length; i++)
+    {\\r\\n            let isFinish = (curTaskProgress[i] >= this.mDailyTaskProgress[i]);\\r\\n           
+    this.mTaskBtns[i].gameObject.SetActive(isFinish); // \u63A7\u5236\u663E\u793A\u548C\u9690\u85CF\\r\\n           
+    this.mTaskFinishTxt[i].text = Localization_1.default.Instance.GetLocalizedText(\\\"Daily_task_claim\\\");\\r\\n           
+    let s = this.mDailyTaskProgress[i].toString();\\r\\n            if (isFinish)
+    {\\r\\n                this.mTaskTxt[i].text = s + \\\"/\\\" + s;\\r\\n           
+    }\\r\\n            else {\\r\\n                this.mTaskTxt[i].text = curTaskProgress[i]
+    + \\\"/\\\" + s;\\r\\n            }\\r\\n        }\\r\\n        // \u4EFB\u52A1\u6309\u94AE
+    \u9886\u53D6\u540E\u9690\u85CF, \u6587\u5B57\u663E\u793A \\\"\u5DF2\u5B8C\u6210\\\"
+    \\r\\n        for (let i = 0; i < this.mDailyTaskType.length; i++) {\\r\\n           
+    let isReward = (this.mDailyTaskInfo.taskRewardState & this.mDailyTaskType[i])
+    > 0;\\r\\n            if (isReward) {\\r\\n                this.mTaskBtns[i].gameObject.SetActive(!isReward);
+    // \u9886\u5956\u540E\u9690\u85CF                                \\r\\n               
+    this.mTaskFinishTxt[i].text = Localization_1.default.Instance.GetLocalizedText(\\\"Daily_task_completed\\\");\\r\\n           
+    }\\r\\n            if (!isReward && this.mTaskBtns[i].gameObject.activeSelf)
+    {\\r\\n                isShowRedPoint = true;\\r\\n            }\\r\\n       
+    }\\r\\n        this.mRewardRedPoint.SetActive(isShowRedPoint);\\r\\n    }\\r\\n   
+    ClickZemClaimBtn() {\\r\\n        const roomData = new ZEPETO_Multiplay_1.RoomData();\\r\\n       
+    NetManager_1.default.Instance.SendEvent(NetManager_1.sEventArg.ClaimWeekActivityReward,
+    roomData);\\r\\n        console.log(\\\"\u8BF7\u6C42\u6BCF\u5468\u6D3B\u8DC3\u5EA6\u5956\u52B1\\\");\\r\\n   
+    }\\r\\n    UpdateWeekActivity(weekActivityInfo) {\\r\\n        console.log(\\\"\u5237\u65B0\u6BCF\u5468\u6D3B\u8DC3\u5EA6UI\\\");\\r\\n       
+    this._weekNeedAmount = ConfigManager_1.default.WEEK_NEED_ACTIVITY.activityValue;\\r\\n       
+    this.mWeekNeedAmountText.text = this._weekNeedAmount + \\\"\\\";\\r\\n       
+    this.mZemAmountText.text = ConfigManager_1.default.WEEK_NEED_ACTIVITY.rewardValue
+    + \\\"\\\";\\r\\n        this.mWeekStatusDesText.text = \\\"\u53EF\u9886\u53D6\\\";\\r\\n       
+    this.mWeekActivityAmountText.text = weekActivityInfo.activity + \\\"\\\";\\r\\n       
+    this.RefreshWeekRewardStatus(weekActivityInfo.activity, weekActivityInfo.claimCount);\\r\\n   
+    }\\r\\n    RefreshWeekRewardStatus(activity, claimCount) {\\r\\n        let status
+    = 0; //0\uFF1A\u4E0D\u53EF\u9886\u53D6 1\uFF1A\u53EF\u9886\u53D6 2\uFF1A\u5DF2\u9886\u53D6       
+    \\r\\n        if (activity >= this._weekNeedAmount * (claimCount + 1)) {\\r\\n           
+    status = 1;\\r\\n        }\\r\\n        else {\\r\\n            if (claimCount
+    > 0) {\\r\\n                status = 2;\\r\\n            }\\r\\n            else
+    {\\r\\n                status = 0;\\r\\n            }\\r\\n        }\\r\\n       
+    this.mZemGet.SetActive(false);\\r\\n        this.mZemCompleted.SetActive(false);\\r\\n       
+    this.mZemClaimBtn.interactable = false;\\r\\n        if (status == 0) {\\r\\n           
+    // this.mWeekStatusDesText.text = \\\"\u672A\u8FBE\u5230\\\";\\r\\n           
+    // this.mZemAmountText.color = new Color(0.6, 0.6, 0.6, 1);\\r\\n        }\\r\\n       
+    else if (status == 1) {\\r\\n            this.mZemGet.SetActive(true);\\r\\n           
+    // this.mWeekStatusDesText.text = \\\"\u53EF\u9886\u53D6\\\";\\r\\n           
+    // this.mZemAmountText.color = new Color(0.98, 0.42, 0.3, 1);\\r\\n           
+    this.mZemClaimBtn.interactable = true;\\r\\n        }\\r\\n        else if (status
+    == 2) {\\r\\n            this.mZemCompleted.SetActive(true);\\r\\n           
+    // this.mWeekStatusDesText.text = \\\"\u5DF2\u9886\u53D6\\\";\\r\\n           
+    // this.mZemAmountText.color = new Color(0.98, 0.42, 0.3, 1);\\r\\n        }\\r\\n   
+    }\\r\\n    OnEnable() {\\r\\n        this.mTaskPointEffect.SetActive(false);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = UIDailyTaskPanel;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlEYWlseVRhc2tQYW5lbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJRGFpbHlUYXNrUGFuZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsbURBQXNEO0FBQ3RELDZDQUFnRTtBQUNoRSx1REFBNEM7QUFDNUMsNkRBQXFFO0FBQ3JFLGlGQUEwRTtBQUMxRSxtRUFBNEQ7QUFFNUQsNkJBQTZCO0FBQzdCLHlCQUF5QjtBQUN6QiwyQkFBMkI7QUFDM0IseUJBQXlCO0FBQ3pCLHdCQUF3QjtBQUN4Qix3QkFBd0I7QUFDeEIsSUFBSTtBQUdKLCtCQUErQjtBQUMvQixlQUFlO0FBQ2YsZUFBZTtBQUNmLGlCQUFpQjtBQUNqQixnQkFBZ0I7QUFDaEIsSUFBSTtBQUVKLDBCQUEwQjtBQUUxQixNQUFxQixnQkFBaUIsU0FBUSxxQ0FBcUI7SUFBbkU7O1FBR1ksbUJBQWMsR0FBUSxJQUFJLENBQUM7UUFFM0IscUJBQWdCLEdBQVcsR0FBRyxDQUFDO1FBeUIvQixvQkFBZSxHQUFHLEtBQUssQ0FBQztRQWlFeEIscUJBQWdCLEdBQWEsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFTLFdBQVc7UUFDOUQsbUJBQWMsR0FBYSxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFPLFNBQVM7UUFDNUQsdUJBQWtCLEdBQWEsQ0FBQyxFQUFFLEVBQUUsRUFBRSxFQUFFLEVBQUUsRUFBRSxHQUFHLENBQUMsQ0FBQyxDQUFFLE1BQU07UUFDekQsdUJBQWtCLEdBQWEsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBRSxPQUFPO0lBaUhyRSxDQUFDO0lBakxHLEtBQUs7UUFDRCxJQUFJLENBQUMsWUFBWSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FB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\",\"assetPath\":\"Assets/Scripts/UI/DailyTask/UIDailyTaskPanel.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"mActivityTxt\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mActivitySlider\",\"type\":\"UnityEngine.UI.Slider\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRewardRedPoint\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mTaskPointEffect\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRewardGet\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRewardCompleted\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mRewardBtns\",\"type\":\"UnityEngine.UI.Button[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mRewardPoints\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mTaskBtns\",\"type\":\"UnityEngine.UI.Button[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mTaskFinishTxt\",\"type\":\"UnityEngine.UI.Text[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mTaskTxt\",\"type\":\"UnityEngine.UI.Text[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mZemClaimBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mZemGet\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mZemCompleted\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mWeekActivityAmountText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mWeekStatusDesText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mWeekNeedAmountText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mZemAmountText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mWeekActivityEndText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UIDailyTaskPanel\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 59353ebe7b9fb86182e6a96963018643
+  onlyWriteTrigger: 0

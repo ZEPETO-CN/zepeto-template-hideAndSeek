@@ -1,0 +1,125 @@
+fileFormatVersion: 2
+guid: 5012d63f1feb2634d81fb409a913c084
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.QuickMessageType = void 0;\r\nconst UnityEngine_1
+    = require(\"UnityEngine\");\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Multiplay_1 = require(\"ZEPETO.Multiplay\");\r\nconst ZEPETO_Script_1
+    = require(\"ZEPETO.Script\");\r\nconst Barrage_1 = require(\"../Data/Barrage\");\r\nconst
+    PlayerManager_1 = require(\"../GameManager/PlayerManager\");\r\nconst UIManager_1
+    = require(\"../GameManager/UIManager\");\r\nconst BarrageItem_1 = require(\"./BarrageItem\");\r\nconst
+    EmojiItem_1 = require(\"./EmojiItem\");\r\nconst QuickMessageItem_1 = require(\"./QuickMessageItem\");\r\nconst
+    UIBarragePanel_1 = require(\"./UIBarragePanel\");\r\nvar QuickMessageType;\r\n(function
+    (QuickMessageType) {\r\n    QuickMessageType[QuickMessageType[\"message\"] =
+    1] = \"message\";\r\n    QuickMessageType[QuickMessageType[\"emoji\"] = 2] =
+    \"emoji\";\r\n})(QuickMessageType = exports.QuickMessageType || (exports.QuickMessageType
+    = {}));\r\nclass UIMessagePanel extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.currentGroup
+    = \"\";\r\n        this.messageCD = 10;\r\n        this._qmTimeId = 0;\r\n       
+    this._emojiTimeId = 0;\r\n    }\r\n    Awake() {\r\n        this.mQuickMessageBtn.onClick.AddListener(()
+    => { this.ClickQuickMessageBtn(); });\r\n        this.mEmojiBtn.onClick.AddListener(()
+    => { this.ClickEmojiBtn(); });\r\n        this.mBarrageToggle.onValueChanged.AddListener((isOn)
+    => { this.ClickBarrageToggle(isOn); });\r\n        this.qmScrollView = this.mQuickMessagePanel.transform.GetChild(0).GetComponent($typeof(UnityEngine_UI_1.ScrollRect));\r\n       
+    this.emojiScrollView = this.mEmojiPanel.transform.GetChild(0).GetComponent($typeof(UnityEngine_UI_1.ScrollRect));\r\n   
+    }\r\n    Update() {\r\n        this.UpdateMessageCD();\r\n    }\r\n    Init()
+    {\r\n        this.mBarrageUI = this.mBarragePanel.GetComponent($typeof(UIBarragePanel_1.default));\r\n       
+    this.mBarrageUI.Init();\r\n        this.barrageGroup = new Map();\r\n       
+    this.mBarrageUI.mBarrageMap = new Barrage_1.BarrageMap().data;\r\n        this.mBarrageUI.mBarrageMap.forEach((v,
+    k) => {\r\n            if (!this.barrageGroup.has(v.group)) {\r\n               
+    this.barrageGroup.set(v.group, []);\r\n            }\r\n            this.barrageGroup.get(v.group).push(v);\r\n       
+    });\r\n        this.gameObject.SetActive(false);\r\n        this.quickMessageItems
+    = [];\r\n        this.quickMessageItems.push(this.mQuickMessageItemObj.GetComponent($typeof(QuickMessageItem_1.default)));\r\n       
+    this.emojiItems = [];\r\n        this.emojiItems.push(this.mEmojiItemObj.GetComponent($typeof(EmojiItem_1.default)));\r\n       
+    this.SetEmojiItems();\r\n        this.InitQuickMessage();\r\n    }\r\n    InitQuickMessage()
+    {\r\n        this.gameObject.SetActive(true);\r\n        this.isStart = false;\r\n       
+    this.SetQMTouchable(true);\r\n        this.SetEmojiTouchable(true);\r\n       
+    this.mBarragePanel.SetActive(this.mBarrageToggle.isOn);\r\n        this.RefreshQuickMessage(BarrageItem_1.BarrageGroup.common);\r\n   
+    }\r\n    SetEmojiItems() {\r\n        for (let i = 0; i < this.mBarrageUI.mEmojiSprites.length;
+    i++) {\r\n            var item;\r\n            if (i > this.emojiItems.length
+    - 1) {\r\n                let obj = UnityEngine_1.GameObject.Instantiate(this.mEmojiItemObj,
+    this.emojiScrollView.content);\r\n                item = obj.GetComponent($typeof(EmojiItem_1.default));\r\n               
+    this.emojiItems.push(item);\r\n            }\r\n            else {\r\n               
+    item = this.emojiItems[i];\r\n            }\r\n            item.transform.localScale
+    = UnityEngine_1.Vector3.one;\r\n            item.SetEmoji(i, this.mBarrageUI.mEmojiSprites[i]);\r\n           
+    item.SetClickCallback(this.ClickEmojiItem.bind(this));\r\n            item.gameObject.SetActive(true);\r\n       
+    }\r\n    }\r\n    ClickQuickMessageBtn() {\r\n        if (this.mQuickMessagePanel.activeSelf)
+    {\r\n            this.mQuickMessagePanel.SetActive(false);\r\n        }\r\n       
+    else {\r\n            this.mQuickMessagePanel.SetActive(true);\r\n           
+    this.mEmojiPanel.SetActive(false);\r\n        }\r\n    }\r\n    ClickEmojiBtn()
+    {\r\n        if (this.mEmojiPanel.activeSelf) {\r\n            this.mEmojiPanel.SetActive(false);\r\n       
+    }\r\n        else {\r\n            this.mEmojiPanel.SetActive(true);\r\n           
+    this.mQuickMessagePanel.SetActive(false);\r\n        }\r\n    }\r\n    ClickBarrageToggle(isOn)
+    {\r\n        this.mBarrageUI.SetBarrageVisiable(isOn);\r\n    }\r\n    OnGamwWait()
+    {\r\n        this.InitQuickMessage();\r\n    }\r\n    OnGameStart(isHunter) {\r\n       
+    this.gameObject.SetActive(true);\r\n        this.mQuickMessagePanel.SetActive(false);\r\n       
+    this.mEmojiPanel.SetActive(false);\r\n        this.mBarragePanel.SetActive(this.mBarrageToggle.isOn);\r\n       
+    this.isStart = true;\r\n        this.isHunter = isHunter;\r\n        let group
+    = isHunter ? BarrageItem_1.BarrageGroup.hunter : BarrageItem_1.BarrageGroup.hider;\r\n       
+    if (this.currentGroup == group) {\r\n            return;\r\n        }\r\n       
+    this.RefreshQuickMessage(group);\r\n    }\r\n    OnRoundOver() {\r\n        this.mQuickMessagePanel.SetActive(false);\r\n       
+    this.mEmojiPanel.SetActive(false);\r\n        this.mBarragePanel.SetActive(false);\r\n       
+    this.gameObject.SetActive(false);\r\n    }\r\n    RefreshQuickMessage(group)
+    {\r\n        for (let i = 0; i < this.quickMessageItems.length; i++) {\r\n           
+    const item = this.quickMessageItems[i];\r\n            item.gameObject.SetActive(false);\r\n       
+    }\r\n        let barrages = this.barrageGroup.get(group);\r\n        for (let
+    i = 0; i < barrages.length; i++) {\r\n            var item;\r\n            if
+    (i > this.quickMessageItems.length - 1) {\r\n                let obj = UnityEngine_1.GameObject.Instantiate(this.mQuickMessageItemObj,
+    this.qmScrollView.content);\r\n                item = obj.GetComponent($typeof(QuickMessageItem_1.default));\r\n               
+    this.quickMessageItems.push(item);\r\n            }\r\n            else {\r\n               
+    item = this.quickMessageItems[i];\r\n            }\r\n            item.transform.localScale
+    = UnityEngine_1.Vector3.one;\r\n            item.SetQuickMessage(barrages[i]);\r\n           
+    item.SetClickCallback(this.ClickQuickMessageItem.bind(this));\r\n           
+    item.gameObject.SetActive(true);\r\n        }\r\n        this.currentGroup =
+    group;\r\n    }\r\n    ClickQuickMessageItem(barrage) {\r\n        this.mQuickMessagePanel.SetActive(false);\r\n       
+    this.SetQMTouchable(false);\r\n        this._qmTimeId = setTimeout(() => {\r\n           
+    this.SetQMTouchable(true);\r\n            clearTimeout(this._qmTimeId);\r\n           
+    this._qmTimeId = 0;\r\n        }, this.messageCD * 1000);\r\n        const data
+    = new ZEPETO_Multiplay_1.RoomData();\r\n        data.Add(\"name\", PlayerManager_1.default.Instance.LocalPlayer.name);\r\n       
+    data.Add(\"type\", QuickMessageType.message);\r\n        data.Add(\"id\", barrage.id);\r\n       
+    data.Add(\"group\", barrage.group);\r\n        UIManager_1.default.Instance.SendQuickMessage(data);\r\n   
+    }\r\n    ClickEmojiItem(id) {\r\n        this.mEmojiPanel.SetActive(false);\r\n       
+    this.SetEmojiTouchable(false);\r\n        this._emojiTimeId = setTimeout(() =>
+    {\r\n            this.SetEmojiTouchable(true);\r\n            clearTimeout(this._emojiTimeId);\r\n           
+    this._emojiTimeId = 0;\r\n        }, this.messageCD * 1000);\r\n        const
+    data = new ZEPETO_Multiplay_1.RoomData();\r\n        data.Add(\"name\", PlayerManager_1.default.Instance.LocalPlayer.name);\r\n       
+    data.Add(\"type\", QuickMessageType.emoji);\r\n        data.Add(\"id\", id);\r\n       
+    let group = BarrageItem_1.BarrageGroup.common;\r\n        if (this.isStart) {\r\n           
+    group = this.isHunter ? BarrageItem_1.BarrageGroup.hunter : BarrageItem_1.BarrageGroup.hider;\r\n       
+    }\r\n        data.Add(\"group\", group);\r\n        UIManager_1.default.Instance.SendQuickMessage(data);\r\n   
+    }\r\n    UpdateMessageCD() {\r\n        if (!this.mQuickMessageBtn.interactable)
+    {\r\n            this.currentQMTime += UnityEngine_1.Time.deltaTime;\r\n           
+    this.mQMCDImage.fillAmount = this.currentQMTime / this.messageCD;\r\n           
+    if (this.currentQMTime >= this.messageCD) {\r\n                this.SetQMTouchable(true);\r\n           
+    }\r\n        }\r\n        if (!this.mEmojiBtn.interactable) {\r\n           
+    this.currentEmojiTime += UnityEngine_1.Time.deltaTime;\r\n            this.mEmojiCDImage.fillAmount
+    = this.currentEmojiTime / this.messageCD;\r\n            if (this.currentEmojiTime
+    >= this.messageCD) {\r\n                this.SetEmojiTouchable(true);\r\n           
+    }\r\n        }\r\n    }\r\n    SetQMTouchable(touchable) {\r\n        if (touchable)
+    {\r\n            this.mQMCDImage.fillAmount = 1;\r\n            this.currentQMTime
+    = 0;\r\n            this.mQuickMessageBtn.interactable = true;\r\n        }\r\n       
+    else {\r\n            this.mQMCDImage.fillAmount = 0;\r\n            this.mQuickMessageBtn.interactable
+    = false;\r\n        }\r\n    }\r\n    SetEmojiTouchable(touchable) {\r\n       
+    if (touchable) {\r\n            this.mEmojiCDImage.fillAmount = 1;\r\n           
+    this.currentEmojiTime = 0;\r\n            this.mEmojiBtn.interactable = true;\r\n       
+    }\r\n        else {\r\n            this.mEmojiCDImage.fillAmount = 0;\r\n           
+    this.mEmojiBtn.interactable = false;\r\n        }\r\n    }\r\n}\r\nexports.default
+    = UIMessagePanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlNZXNzYWdlUGFuZWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJVSU1lc3NhZ2VQYW5lbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSw2Q0FBZ0U7QUFDaEUsbURBQWtFO0FBRWxFLHVEQUE0QztBQUM1QyxpREFBcUQ7QUFDckQsNkNBQXNEO0FBQ3RELGdFQUF5RDtBQUN6RCx3REFBaUQ7QUFDakQsK0NBQTZDO0FBQzdDLDJDQUFvQztBQUNwQyx5REFBa0Q7QUFDbEQscURBQThDO0FBRTlDLElBQVksZ0JBR1g7QUFIRCxXQUFZLGdCQUFnQjtJQUN4Qiw2REFBVyxDQUFBO0lBQ1gseURBQVMsQ0FBQTtBQUNiLENBQUMsRUFIVyxnQkFBZ0IsR0FBaEIsd0JBQWdCLEtBQWhCLHdCQUFnQixRQUczQjtBQUNELE1BQXFCLGNBQWUsU0FBUSxxQ0FBcUI7SUFBakU7O1FBb0JZLGlCQUFZLEdBQVcsRUFBRSxDQUFDO1FBQzFCLGNBQVMsR0FBVyxFQUFFLENBQUM7UUE0SXZCLGNBQVMsR0FBVyxDQUFDLENBQUM7UUFrQnRCLGlCQUFZLEdBQVcsQ0FBQyxDQUFDO0lBK0RyQyxDQUFDO0lBdE5HLEtBQUs7UUFDRCxJQUFJLENBQUMsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxJQUFJLENBQUMsb0JBQW9CLEVBQUUsQ0FBQSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ2pGLElBQUksQ0FBQyxTQUFTLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUUsR0FBRyxJQUFJLENBQUMsYUFBYSxFQUFFLENBQUEsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNuRSxJQUFJLENBQUMsY0FBYyxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQyxJQUFhLEVBQUUsRUFBRSxHQUFHLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsQ0FBQSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3JHLElBQUksQ0FB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","assetPath":"Assets/Scripts/UI/UIMessagePanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mQuickMessageBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mEmojiBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mBarrageToggle","type":"UnityEngine.UI.Toggle","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mQuickMessagePanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mEmojiPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mBarragePanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"mBarrageUI","type":"D:/Git/new-world-peekaboo/Assets/Scripts/UI/UIBarragePanel.default","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mQuickMessageItemObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mEmojiItemObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mQMCDImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mEmojiCDImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIMessagePanel","description":""},"isCompiled":true}'
+  typescriptHash: df20760afbbbd0533fc433388715443a
+  onlyWriteTrigger: 0

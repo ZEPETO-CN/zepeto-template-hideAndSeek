@@ -1,0 +1,45 @@
+fileFormatVersion: 2
+guid: c7f2f91339d1a2a42b2488607c5dd8b2
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UIObserverItem_1 = require(\"./UIObserverItem\");\r\nclass UIObserverPanel extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n        super(...arguments);\r\n       
+    this.mObserverList = [];\r\n    }\r\n    Start() {\r\n        this.mFreeCameraToggle.onValueChanged.AddListener((isOn)
+    => {\r\n            if (isOn) {\r\n                console.log(\"exit free\");\r\n           
+    }\r\n            else {\r\n                console.log(\"free\");\r\n           
+    }\r\n        });\r\n        this.mChangeViewBtn.onValueChanged.AddListener((isOn)
+    => {\r\n            this.mChangeView.SetActive(isOn);\r\n        });\r\n    }\r\n   
+    Update() {\r\n        if (UnityEngine_1.Input.GetKeyDown(UnityEngine_1.KeyCode.Z))
+    {\r\n            //test\r\n            var test = [\"11\", \"22\", \"33\"];\r\n           
+    this.UpdateGameUser(test);\r\n        }\r\n        if (UnityEngine_1.Input.GetKeyDown(UnityEngine_1.KeyCode.X))
+    {\r\n            //test\r\n            var test = [\"33\", \"44\", \"55\"];\r\n           
+    this.UpdateGameUser(test);\r\n        }\r\n    }\r\n    UpdateGameUser(users)
+    {\r\n        if (this.mObserverList.length > 0) {\r\n            for (var i =
+    0; i < this.mObserverList.length; i++) {\r\n                UnityEngine_1.GameObject.Destroy(this.mObserverList[i]);\r\n           
+    }\r\n        }\r\n        for (var i = 0; i < users.length; i++) {\r\n           
+    var item = UnityEngine_1.GameObject.Instantiate(this.mChangeViewItem, this.mChangeViewContent);\r\n           
+    var uiItem = item.transform.GetComponent($typeof(UIObserverItem_1.default));\r\n           
+    uiItem.SetData(users[i]);\r\n            this.mObserverList.push(item);\r\n           
+    item.SetActive(true);\r\n        }\r\n    }\r\n}\r\nexports.default = UIObserverPanel;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlPYnNlcnZlclBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlPYnNlcnZlclBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQW9FO0FBQ3BFLG1EQUE2QztBQUM3QyxpREFBcUQ7QUFDckQscURBQThDO0FBRTlDLE1BQXFCLGVBQWdCLFNBQVEscUNBQXFCO0lBQWxFOztRQVdZLGtCQUFhLEdBQWlCLEVBQUUsQ0FBQztJQWdEN0MsQ0FBQztJQS9DRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLGlCQUFpQixDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUV2RCxJQUFJLElBQUksRUFBRTtnQkFDTixPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQyxDQUFDO2FBQzVCO2lCQUNJO2dCQUNELE9BQU8sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLENBQUM7YUFFdkI7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxjQUFjLENBQUMsY0FBYyxDQUFDLFdBQVcsQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1lBRXBELElBQUksQ0FBQyxXQUFXLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ3JDLENBQUMsQ0FBQyxDQUFDO0lBRVAsQ0FBQztJQUNELE1BQU07UUFDRixJQUFJLG1CQUFLLENBQUMsVUFBVSxDQUFDLHFCQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7WUFDN0IsTUFBTTtZQUNOLElBQUksSUFBSSxHQUFHLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLENBQUMsQ0FBQztZQUM5QixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxDQUFDO1NBQzdCO1FBQ0QsSUFBSSxtQkFBSyxDQUFDLFVBQVUsQ0FBQyxxQkFBTyxDQUFDLENBQUMsQ0FBQyxFQUFFO1lBQzdCLE1BQU07WUFDTixJQUFJLElBQUksR0FBRyxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsSUFBSSxDQUFDLENBQUM7WUFDOUIsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUM3QjtJQUNMLENBQUM7SUFFTSxjQUFjLENBQUMsS0FBZ0I7UUFFbEMsSUFBSSxJQUFJLENBQUMsYUFBYSxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUU7WUFDL0IsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO2dCQUNoRCx3QkFBVSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDN0M7U0FDSjtRQUVELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxLQUFLLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQ25DLElBQUksSUFBSSxHQUFHLHdCQUFVLENBQUMsV0FBVyxDQUFhLElBQUksQ0FBQyxlQUFlLEVBQUUsSUFBSSxDQUFDLGtCQUFrQixDQUFDLENBQUM7WUFDN0YsSUFBSSxNQUFNLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsd0JBQWMsRUFBRyxDQUFDO1lBQzNELE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDekIsSUFBSSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDOUIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUN4QjtJQUNMLENBQUM7Q0FFSjtBQTNERCxrQ0EyREMifQ==","assetPath":"Assets/Scripts/UI/UIObserverPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mFreeCameraToggle","type":"UnityEngine.UI.Toggle","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mChangeViewBtn","type":"UnityEngine.UI.Toggle","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mObserverName","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mChangeView","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mChangeViewItem","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mChangeViewContent","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIObserverPanel","description":""},"isCompiled":true}'
+  typescriptHash: e11985aa22c437e3e902df5eb92e59a2
+  onlyWriteTrigger: 0

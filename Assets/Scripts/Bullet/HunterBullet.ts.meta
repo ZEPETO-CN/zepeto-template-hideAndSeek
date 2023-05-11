@@ -1,0 +1,50 @@
+fileFormatVersion: 2
+guid: 777f2e20b5609b545b91214dcd18ba19
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst __UnityEngine__ = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst UnityEngine = require(\"UnityEngine\");\r\nconst
+    PoolManager_1 = require(\"../GameManager/PoolManager\");\r\nclass HunterBullet
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this.mTimer = 0;\r\n        this.HitTag = \"Player\";\r\n   
+    }\r\n    OnEnable() {\r\n        this.mIsFlying = true;\r\n        this.mTimer
+    = 0;\r\n        this.mIsLocal = false;\r\n        this.mBulletPS.gameObject.SetActive(true);\r\n       
+    this.mExplosionPS.gameObject.SetActive(false);\r\n        this.mBulletCollider.enabled
+    = true;\r\n        this.mExplosionTirgger.enabled = false;\r\n        this.mBulletPS.Play();\r\n   
+    }\r\n    OnDisable() {\r\n        this.transform.rotation = UnityEngine.Quaternion.identity;\r\n       
+    if (this.mIsLocal) {\r\n            this.mExplosionEvent.RemoveAllListeners();\r\n       
+    }\r\n    }\r\n    SetIsLocal(v, id, moveDir) {\r\n        this.mIsLocal = v;\r\n       
+    this.mOwnerId = id;\r\n        this.mMoveDir = moveDir;\r\n    }\r\n    Update()
+    {\r\n        if (this.mIsFlying) {\r\n            this.transform.position = __UnityEngine__.Vector3.op_Addition(this.transform.position,
+    __UnityEngine__.Vector3.op_Multiply(__UnityEngine__.Vector3.op_Multiply(this.mMoveDir,
+    this.mSpeed), UnityEngine.Time.deltaTime));\r\n        }\r\n        this.mTimer
+    += UnityEngine.Time.deltaTime;\r\n        if (this.mTimer > this.mDuration) {\r\n           
+    PoolManager_1.default.Instance.UnSpawn(this.gameObject);\r\n        }\r\n   
+    }\r\n    OnCollisionEnter(coll) {\r\n        if (this.mIsFlying) {\r\n           
+    this.mBulletCollider.enabled = false;\r\n            this.mExplosionTirgger.enabled
+    = true;\r\n            this.mIsFlying = false;\r\n            this.mBulletPS.gameObject.SetActive(false);\r\n           
+    this.mExplosionPS.gameObject.SetActive(true);\r\n            this.mExplosionPS.Play();\r\n           
+    this.mTimer = this.mDuration - this.mExplosionDuration;\r\n        }\r\n    }\r\n   
+    OnTriggerEnter(coll) {\r\n        // todo\r\n        if (this.mIsLocal) {\r\n           
+    let obj = coll.gameObject;\r\n            if (obj.tag == this.HitTag) {\r\n               
+    console.log(`OnTriggerEnter ${coll.gameObject.name}.`);\r\n                this.mExplosionEvent.Invoke(obj);\r\n           
+    }\r\n        }\r\n    }\r\n}\r\nexports.default = HunterBullet;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSHVudGVyQnVsbGV0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiSHVudGVyQnVsbGV0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGlEQUFxRDtBQUNyRCwyQ0FBMkM7QUFDM0MsNERBQW9EO0FBR3BELE1BQXFCLFlBQWEsU0FBUSxxQ0FBcUI7SUFBL0Q7O1FBWVksV0FBTSxHQUFZLENBQUMsQ0FBQztRQUtYLFdBQU0sR0FBWSxRQUFRLENBQUM7SUE0RGhELENBQUM7SUExRFcsUUFBUTtRQUNaLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1FBQ3RCLElBQUksQ0FBQyxNQUFNLEdBQUcsQ0FBQyxDQUFDO1FBQ2hCLElBQUksQ0FBQyxRQUFRLEdBQUcsS0FBSyxDQUFDO1FBQ3RCLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUMxQyxJQUFJLENBQUMsWUFBWSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDOUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO1FBQ3BDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO1FBQ3ZDLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxFQUFFLENBQUM7SUFDMUIsQ0FBQztJQUVPLFNBQVM7UUFDYixJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxXQUFXLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQztRQUMxRCxJQUFHLElBQUksQ0FBQyxRQUFRLEVBQUM7WUFDYixJQUFJLENBQUMsZUFBZSxDQUFDLGtCQUFrQixFQUFFLENBQUM7U0FDN0M7SUFDTCxDQUFDO0lBRUQsVUFBVSxDQUFDLENBQVcsRUFBRSxFQUFXLEVBQUUsT0FBNkI7UUFDOUQsSUFBSSxDQUFDLFFBQVEsR0FBRyxDQUFDLENBQUM7UUFDbEIsSUFBSSxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7UUFDbkIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUM7SUFDNUIsQ0FBQztJQUVELE1BQU07UUFDRixJQUFHLElBQUksQ0FBQyxTQUFTLEVBQUM7WUFDZCxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsMkJBZ0NvK2xCLFdBQVksQ0FoQ3ZnbUIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxRQUFRLDBCQWdDb3dtQixXQUFZLHlCQUFaLFdBQVksQ0FoQzV3bUIsSUFBSSxDQUFDLFFBQVEsRUFBRyxJQUFJLENBQUMsTUFBTSxHQUFHLFdBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxHQUFDO1NBQ3ZGO1FBQ0QsSUFBSSxDQUFDLE1BQU0sSUFBSSxXQUFXLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQztRQUMxQyxJQUFHLElBQUksQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLFNBQVMsRUFBQztZQUM1QixxQkFBVyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO1NBQ2pEO0lBQ0wsQ0FBQztJQUVELGdCQUFnQixDQUFDLElBQTJCO1FBQ3hDLElBQUcsSUFBSSxDQUFDLFNBQVMsRUFBQztZQUNkLElBQUksQ0FBQyxlQUFlLENBQUMsT0FBTyxHQUFHLEtBQUssQ0FBQztZQUNyQyxJQUFJLENBQUMsaUJBQWlCLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQztZQUN0QyxJQUFJLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQztZQUN2QixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDM0MsSUFBSSxDQUFDLFlBQVksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQzdDLElBQUksQ0FBQyxZQUFZLENBQUMsSUFBSSxFQUFFLENBQUM7WUFDekIsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQyxrQkFBa0IsQ0FBQztTQUMxRDtJQUNMLENBQUM7SUFFRCxjQUFjLENBQUMsSUFBMEI7UUFDckMsT0FBTztRQUNQLElBQUcsSUFBSSxDQUFDLFFBQVEsRUFBQztZQUNiLElBQUksR0FBRyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7WUFDMUIsSUFBRyxHQUFHLENBQUMsR0FBRyxJQUFJLElBQUksQ0FBQyxNQUFNLEVBQUM7Z0JBQ3RCLE9BQU8sQ0FBQyxHQUFHLENBQUMsa0JBQWtCLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxHQUFHLENBQUMsQ0FBQztnQkFDdkQsSUFBSSxDQUFDLGVBQWUsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUM7YUFDcEM7U0FDSjtJQUVMLENBQUM7Q0FFSjtBQTdFRCwrQkE2RUMifQ==","assetPath":"Assets/Scripts/Bullet/HunterBullet.ts","manifest":{"properties":[{"assembly":"UnityEngine.ParticleSystemModule","name":"mBulletPS","type":"UnityEngine.ParticleSystem","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.ParticleSystemModule","name":"mExplosionPS","type":"UnityEngine.ParticleSystem","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mSpeed","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mDuration","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mExplosionDuration","type":"System.Single","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.PhysicsModule","name":"mBulletCollider","type":"UnityEngine.BoxCollider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.PhysicsModule","name":"mExplosionTirgger","type":"UnityEngine.BoxCollider","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mMoveDir","type":"UnityEngine.Vector3","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"mExplosionEvent","type":"UnityEngine.Events.UnityEvent$1","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"HunterBullet","description":""},"isCompiled":true}'
+  typescriptHash: dda3867903efdba3299a3cc144285e6b
+  onlyWriteTrigger: 0

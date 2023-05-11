@@ -1,0 +1,58 @@
+fileFormatVersion: 2
+guid: 5078ee646e8f4d549b9630d35aca0dd7
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.BarrageGroup = void 0;\r\nconst UnityEngine_1 =
+    require(\"UnityEngine\");\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nvar
+    BarrageGroup;\r\n(function (BarrageGroup) {\r\n    BarrageGroup[\"hunter\"] =
+    \"hunter\";\r\n    BarrageGroup[\"hider\"] = \"hider\";\r\n    BarrageGroup[\"common\"]
+    = \"common\";\r\n})(BarrageGroup = exports.BarrageGroup || (exports.BarrageGroup
+    = {}));\r\nclass BarrageItem extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    Awake() {\r\n        this.animator = this.GetComponent($typeof(UnityEngine_1.Animator));\r\n   
+    }\r\n    PlayBarrageItem(des, group) {\r\n        this.gameObject.SetActive(false);\r\n       
+    this.SetBarrageTeamType(group);\r\n        if (group == BarrageGroup.hunter)
+    {\r\n            des = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Barrage_tip_1\",
+    [des]);\r\n        }\r\n        else if (group == BarrageGroup.hider) {\r\n           
+    des = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Barrage_tip_2\",
+    [des]);\r\n        }\r\n        this.mText.text = des;\r\n        this.gameObject.SetActive(true);\r\n   
+    }\r\n    PlayBarrageEmojiItem(des, group, sprite) {\r\n        this.gameObject.SetActive(false);\r\n       
+    this.SetBarrageTeamType(group);\r\n        if (group == BarrageGroup.hunter)
+    {\r\n            des = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Barrage_tip_1\",
+    [des]);\r\n        }\r\n        else if (group == BarrageGroup.hider) {\r\n           
+    des = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Barrage_tip_2\",
+    [des]);\r\n        }\r\n        this.mText.text = des;\r\n        this.mEmoji.sprite
+    = sprite;\r\n        this.gameObject.SetActive(true);\r\n    }\r\n    SetBarrageTeamType(group)
+    {\r\n        this.mTeamIcon.gameObject.SetActive(false);\r\n        let bgSprite;\r\n       
+    switch (group) {\r\n            case BarrageGroup.hunter:\r\n               
+    bgSprite = this.mBGSprites[1];\r\n                this.mTeamIcon.sprite = this.mTeamSprites[0];\r\n               
+    this.mTeamIcon.gameObject.SetActive(true);\r\n                break;\r\n           
+    case BarrageGroup.hider:\r\n                bgSprite = this.mBGSprites[2];\r\n               
+    this.mTeamIcon.sprite = this.mTeamSprites[1];\r\n                this.mTeamIcon.gameObject.SetActive(true);\r\n               
+    break;\r\n            case BarrageGroup.common:\r\n                bgSprite =
+    this.mBGSprites[0];\r\n                break;\r\n            default:\r\n               
+    bgSprite = this.mBGSprites[0];\r\n                break;\r\n        }\r\n       
+    this.mImage.sprite = bgSprite;\r\n    }\r\n    SetCompletedAction(action) {\r\n       
+    this.completedAction = action;\r\n    }\r\n    Update() {\r\n        let info
+    = this.animator.GetCurrentAnimatorStateInfo(0);\r\n        if (info.normalizedTime
+    >= 0.95) {\r\n            this.completedAction?.(this);\r\n        }\r\n    }\r\n}\r\nexports.default
+    = BarrageItem;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQmFycmFnZUl0ZW0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJCYXJyYWdlSXRlbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSw2Q0FBa0U7QUFDbEUsbURBQTRDO0FBQzVDLGlEQUFxRDtBQUNyRCw4RUFBdUU7QUFFdkUsSUFBWSxZQUlYO0FBSkQsV0FBWSxZQUFZO0lBQ3BCLGlDQUFpQixDQUFBO0lBQ2pCLCtCQUFlLENBQUE7SUFDZixpQ0FBaUIsQ0FBQTtBQUNyQixDQUFDLEVBSlcsWUFBWSxHQUFaLG9CQUFZLEtBQVosb0JBQVksUUFJdkI7QUFFRCxNQUFxQixXQUFZLFNBQVEscUNBQXFCO0lBVzFELEtBQUs7UUFDRCxJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxZQUFZLFNBQUMsc0JBQVEsRUFBRyxDQUFDO0lBQ2xELENBQUM7SUFFTSxlQUFlLENBQUMsR0FBVyxFQUFFLEtBQWE7UUFDN0MsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDakMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQy9CLElBQUksS0FBSyxJQUFJLFlBQVksQ0FBQyxNQUFNLEVBQUU7WUFDOUIsR0FBRyxHQUFHLHNCQUFZLENBQUMsUUFBUSxDQUFDLHlCQUF5QixDQUFDLGVBQWUsRUFBRSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7U0FDakY7YUFDSSxJQUFJLEtBQUssSUFBSSxZQUFZLENBQUMsS0FBSyxFQUFFO1lBQ2xDLEdBQUcsR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyx5QkFBeUIsQ0FBQyxlQUFlLEVBQUUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDO1NBQ2pGO1FBQ0QsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLEdBQUcsR0FBRyxDQUFDO1FBQ3RCLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3BDLENBQUM7SUFFTSxv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","assetPath":"Assets/Scripts/UI/BarrageItem.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mImage","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mTeamIcon","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mEmoji","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mBGSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mTeamSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"BarrageItem","description":""},"isCompiled":true}'
+  typescriptHash: b745782349e7211a38b674e0ab273111
+  onlyWriteTrigger: 0

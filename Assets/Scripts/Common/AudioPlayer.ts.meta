@@ -1,0 +1,39 @@
+fileFormatVersion: 2
+guid: c61cdf48c9dea114e853ac36ea0f3665
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nexports.AudioPlayerOption = void 0;\r\nconst ZEPETO_Script_1
+    = require(\"ZEPETO.Script\");\r\nconst AudioController_1 = require(\"../GameController/AudioController\");\r\nvar
+    AudioPlayerOption;\r\n(function (AudioPlayerOption) {\r\n    AudioPlayerOption[AudioPlayerOption[\"PlayOneShot\"]
+    = 0] = \"PlayOneShot\";\r\n    AudioPlayerOption[AudioPlayerOption[\"PlayAtPoint\"]
+    = 1] = \"PlayAtPoint\";\r\n})(AudioPlayerOption = exports.AudioPlayerOption ||
+    (exports.AudioPlayerOption = {}));\r\nclass AudioPlayer extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.mAutoPlay
+    = true;\r\n    }\r\n    OnEnable() {\r\n        if (this.mAutoPlay) {\r\n           
+    this.Play();\r\n        }\r\n    }\r\n    Play() {\r\n        if (this.mAudioClip
+    == null) {\r\n            console.error(\"audioclip is null\");\r\n           
+    return;\r\n        }\r\n        switch (this.mPlayMode) {\r\n            case
+    AudioPlayerOption.PlayAtPoint:\r\n                AudioController_1.default.Instance.PlayAtPoint(this.mAudioClip,
+    this.transform.position);\r\n                break;\r\n            default:\r\n               
+    //AudioController.Instance.PlayAtPoint(this.mAudioClip, this.transform.position);\r\n               
+    AudioController_1.default.Instance.PlayOneShot(this.mAudioClip);\r\n               
+    break;\r\n        }\r\n    }\r\n}\r\nexports.default = AudioPlayer;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQXVkaW9QbGF5ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJBdWRpb1BsYXllci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSxpREFBcUQ7QUFDckQsdUVBQStEO0FBRy9ELElBQVksaUJBR1g7QUFIRCxXQUFZLGlCQUFpQjtJQUN6Qix1RUFBVyxDQUFBO0lBQ1gsdUVBQVcsQ0FBQTtBQUNmLENBQUMsRUFIVyxpQkFBaUIsR0FBakIseUJBQWlCLEtBQWpCLHlCQUFpQixRQUc1QjtBQUVELE1BQXFCLFdBQVksU0FBUSxxQ0FBcUI7SUFBOUQ7O1FBR1csY0FBUyxHQUFhLElBQUksQ0FBQztJQXVCdEMsQ0FBQztJQXJCRyxRQUFRO1FBQ0osSUFBRyxJQUFJLENBQUMsU0FBUyxFQUFDO1lBQ2QsSUFBSSxDQUFDLElBQUksRUFBRSxDQUFDO1NBQ2Y7SUFDTCxDQUFDO0lBRUQsSUFBSTtRQUNBLElBQUcsSUFBSSxDQUFDLFVBQVUsSUFBSSxJQUFJLEVBQUM7WUFDdkIsT0FBTyxDQUFDLEtBQUssQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDO1lBQ25DLE9BQVE7U0FDWDtRQUNELFFBQVEsSUFBSSxDQUFDLFNBQVMsRUFBQztZQUNuQixLQUFLLGlCQUFpQixDQUFDLFdBQVc7Z0JBQzlCLHlCQUFlLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUM7Z0JBQy9FLE1BQU07WUFDVjtnQkFDSSxpRkFBaUY7Z0JBQ2pGLHlCQUFlLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUM7Z0JBQ3RELE1BQU07U0FDYjtJQUNMLENBQUM7Q0FDSjtBQTFCRCw4QkEwQkMifQ==","assetPath":"Assets/Scripts/Common/AudioPlayer.ts","manifest":{"properties":[{"assembly":"UnityEngine.AudioModule","name":"mAudioClip","type":"UnityEngine.AudioClip","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"mPlayMode","type":"AudioPlayerOption","isArray":false,"initValue":[],"enumKeys":["PlayOneShot","PlayAtPoint"],"enumValues":["0","1"],"attributes":[]},{"assembly":"mscorlib","name":"mAutoPlay","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"AudioPlayer","description":""},"isCompiled":true}'
+  typescriptHash: 218cd6c84668f547e33d670ec8f04c2c
+  onlyWriteTrigger: 0

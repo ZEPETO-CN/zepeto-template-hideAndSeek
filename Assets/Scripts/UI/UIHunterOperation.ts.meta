@@ -1,0 +1,41 @@
+fileFormatVersion: 2
+guid: 8df0fbed45cc3f443982869e6280f1c1
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_EventSystems_1 = require(\"UnityEngine.EventSystems\");\r\nconst
+    UIManager_1 = require(\"../GameManager/UIManager\");\r\nconst UnityEngine_1 =
+    require(\"UnityEngine\");\r\nconst ZEPETO_Character_Controller_1 = require(\"ZEPETO.Character.Controller\");\r\nconst
+    TransformHelper_1 = require(\"../Common/TransformHelper\");\r\nconst UnityEngine_UI_1
+    = require(\"UnityEngine.UI\");\r\nconst AudioController_1 = require(\"../GameController/AudioController\");\r\nclass
+    UIHunterOperation extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    static
+    get Instance() {\r\n        return UIHunterOperation._instance;\r\n    }\r\n   
+    Awake() {\r\n        UIHunterOperation._instance = this;\r\n    }\r\n    SetFlashImgOff()
+    {\r\n        this.ObjLight.GetComponent($typeof(UnityEngine_UI_1.Button)).interactable
+    = false;\r\n        this.ImgFlash_off.SetActive(true);\r\n        this.ImgFlash_on.SetActive(false);\r\n   
+    }\r\n    SetFlashImgOn() {\r\n        this.ObjLight.GetComponent($typeof(UnityEngine_UI_1.Button)).interactable
+    = true;\r\n        this.ImgFlash_off.SetActive(false);\r\n        this.ImgFlash_on.SetActive(true);\r\n   
+    }\r\n    SetSuperFlashImgOff() {\r\n        this.ObjSuperLight.GetComponent($typeof(UnityEngine_UI_1.Button)).interactable
+    = false;\r\n        this.ImgSuperFlash_off.SetActive(true);\r\n        this.ImgSuperFlash_on.SetActive(false);\r\n   
+    }\r\n    SetSuperFlashImgOn() {\r\n        this.ObjSuperLight.GetComponent($typeof(UnityEngine_UI_1.Button)).interactable
+    = true;\r\n        this.ImgSuperFlash_off.SetActive(false);\r\n        this.ImgSuperFlash_on.SetActive(true);\r\n   
+    }\r\n}\r\nexports.default = UIHunterOperation;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlIdW50ZXJPcGVyYXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJVSUh1bnRlck9wZXJhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGlEQUFxRDtBQUNyRCx1RUFBMkY7QUFHM0Ysd0RBQWdEO0FBQ2hELDZDQUEwSjtBQUMxSiw2RUFBeUc7QUFDekcsK0RBQXdEO0FBQ3hELG1EQUFnRDtBQUNoRCx1RUFBZ0U7QUFHaEUsTUFBcUIsaUJBQWtCLFNBQVEscUNBQXFCO0lBS3pELE1BQU0sS0FBSyxRQUFRO1FBQ3RCLE9BQU8saUJBQWlCLENBQUMsU0FBUyxDQUFDO0lBQ3ZDLENBQUM7SUFPRCxLQUFLO1FBQ0QsaUJBQWlCLENBQUMsU0FBUyxHQUFHLElBQUksQ0FBQztJQUN2QyxDQUFDO0lBRUQsY0FBYztRQUNWLElBQUksQ0FBQyxRQUFRLENBQUMsWUFBWSxTQUFDLHVCQUFNLEdBQUksWUFBWSxHQUFHLEtBQUssQ0FBQztRQUMxRCxJQUFJLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNsQyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN0QyxDQUFDO0lBRUQsYUFBYTtRQUNULElBQUksQ0FBQyxRQUFRLENBQUMsWUFBWSxTQUFDLHVCQUFNLEdBQUksWUFBWSxHQUFHLElBQUksQ0FBQztRQUN6RCxJQUFJLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUNuQyxJQUFJLENBQUMsV0FBVyxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNyQyxDQUFDO0lBQ0QsbUJBQW1CO1FBQ2YsSUFBSSxDQUFDLGFBQWEsQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxZQUFZLEdBQUcsS0FBSyxDQUFDO1FBQy9ELElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDdkMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUMzQyxDQUFDO0lBRUQsa0JBQWtCO1FBQ2QsSUFBSSxDQUFDLGFBQWEsQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxZQUFZLEdBQUcsSUFBSSxDQUFDO1FBQzlELElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDeEMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUMxQyxDQUFDO0NBR0o7QUExQ0Qsb0NBMENDIn0=","assetPath":"Assets/Scripts/UI/UIHunterOperation.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"ObjLight","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ObjSuperLight","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ImgFlash_on","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ImgFlash_off","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ImgSuperFlash_on","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ImgSuperFlash_off","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIHunterOperation","description":""},"isCompiled":true}'
+  typescriptHash: c8e566ca82d9b7556855ccdb59899f6c
+  onlyWriteTrigger: 0

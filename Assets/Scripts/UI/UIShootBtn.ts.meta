@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: d7943f668aa94ad4bb17ec0f480de50e
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    UnityEngine_EventSystems_1 = require(\\\"UnityEngine.EventSystems\\\");\\r\\nconst
+    PlayerManager_1 = require(\\\"../GameManager/PlayerManager\\\");\\r\\nconst UnityEngine_1
+    = require(\\\"UnityEngine\\\");\\r\\nconst TransformHelper_1 = require(\\\"../Common/TransformHelper\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst AudioController_1
+    = require(\\\"../GameController/AudioController\\\");\\r\\nconst UIHunterOperation_1
+    = require(\\\"./UIHunterOperation\\\");\\r\\nconst GameMain_1 = require(\\\"../GameMain\\\");\\r\\nconst
+    NetManager_1 = require(\\\"../GameManager/NetManager\\\");\\r\\nclass UIShootBtn
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this.scaneTime = 0;\\r\\n        // public
+    *IE_DoCooldown() {\\r\\n        //     // this.mBtn.interactable = false;\\r\\n       
+    //     let timer: number = 0;\\r\\n        //     // this.mCooldownImg.enabled
+    = true;\\r\\n        //     while (timer < PlayerManager.Instance.mLocalZepetoNetPlayer.MaxLightBattle)
+    {\\r\\n        //         this.mCooldownImg.value = (PlayerManager.Instance.mLocalZepetoNetPlayer.LightBattle
+    / PlayerManager.Instance.mLocalZepetoNetPlayer.MaxLightBattle);\\r\\n       
+    //         timer += Time.deltaTime;\\r\\n        //         yield null;\\r\\n       
+    //     }\\r\\n        //     // this.mCooldownImg.enabled = false;\\r\\n       
+    //     // this.mIsCooling = false;\\r\\n        //     // this.mBtn.interactable
+    = true;\\r\\n        // }\\r\\n    }\\r\\n    Start() {\\r\\n        // this.mEventTrigger
+    = this.gameObject.GetComponent<EventTrigger>();\\r\\n        // let _PotClick
+    = new Entry();\\r\\n        // _PotClick.eventID = EventTriggerType.PointerClick;\\r\\n       
+    // _PotClick.callback.AddListener((eventData: PointerEventData) => {\\r\\n       
+    this.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(() =>
+    {\\r\\n            console.log(\\\"_PotClick\\\", this.name);\\r\\n           
+    let locPlay = PlayerManager_1.default.Instance.mLocalZepetoNetPlayer;\\r\\n           
+    if (this.name == \\\"Flashlight\\\") {\\r\\n                if (locPlay.LightState
+    == PlayerManager_1.LightState.OFF && locPlay.GetLightBattle() > 0) {\\r\\n                   
+    AudioController_1.default.Instance.PlayOpenLight();\\r\\n                   
+    locPlay.SetLightAction(PlayerManager_1.LightState.ON);\\r\\n                   
+    this.ImgHandLine_off.SetActive(false);\\r\\n                    this.ImgHandLine_on.SetActive(true);\\r\\n               
+    }\\r\\n                else {\\r\\n                    locPlay.SetLightAction(PlayerManager_1.LightState.OFF);\\r\\n                   
+    this.ImgHandLine_off.SetActive(true);\\r\\n                    this.ImgHandLine_on.SetActive(false);\\r\\n               
+    }\\r\\n                PlayerManager_1.default.Instance.SendLightState(locPlay.LightState);\\r\\n               
+    this.mCooldownImg.value = (locPlay.LightBattle / locPlay.MaxLightBattle);\\r\\n               
+    // this.StopCoroutine(this.RunRay());\\r\\n                // this.StartCoroutine(this.RunRay());\\r\\n           
+    }\\r\\n            else if (this.name == \\\"SuperFlashlight\\\") { //\u5F3A\u624B\u7535\\r\\n               
+    if (locPlay.SuperLightCurTimes > 0) {\\r\\n                    if (locPlay.SuperLightState
+    == PlayerManager_1.LightState.OFF) {\\r\\n                        // AudioController.Instance.PlayOpenLight();\\r\\n                       
+    locPlay.SetSuperLightAction(PlayerManager_1.LightState.ON);\\r\\n                       
+    locPlay.bSuperLightOpen = true;\\r\\n                        locPlay.SuperLightBattle
+    = locPlay.MaxSuperLightBattle;\\r\\n                        this.ImgHandLine_off.SetActive(false);\\r\\n                       
+    this.ImgHandLine_on.SetActive(true);\\r\\n                        //\u8BBE\u7F6E\u666E\u901A\u624B\u7535\u5173\u95ED\\r\\n                       
+    UIHunterOperation_1.default.Instance.SetSuperFlashImgOff();\\r\\n                       
+    this.mCooldownImg.value = (locPlay.LightBattle / locPlay.MaxLightBattle);\\r\\n                       
+    PlayerManager_1.default.Instance.SendSuperLightState(locPlay.SuperLightState);\\r\\n                       
+    this.Progress.fillAmount = 1;\\r\\n                        locPlay.SuperLightCurTimes--;\\r\\n                       
+    //    if( locPlay.SuperLightCurTimes<=0){\\r\\n                        //    
+    UIHunterOperation.Instance.ObjSuperLight.SetActive(false);\\r\\n                       
+    //    }\\r\\n                        locPlay.SuperLightCurCDTime = 0;\\r\\n                       
+    PlayerManager_1.default.Instance.showScaneRound(PlayerManager_1.default.Instance.mLocalZepetoNetPlayer);\\r\\n                   
+    }\\r\\n                }\\r\\n            }\\r\\n        });\\r\\n        //
+    this.mEventTrigger.triggers.Add(_PotClick);\\r\\n        // let _startDragEntry
+    = new Entry();\\r\\n        // _startDragEntry.eventID = EventTriggerType.EndDrag;\\r\\n       
+    // _startDragEntry.callback.AddListener((eventData: PointerEventData) => {\\r\\n       
+    //     this.mLastPos = eventData.position;\\r\\n        // })\\r\\n        //
+    this.mEventTrigger.triggers.Add(_startDragEntry);\\r\\n        // if (!Application.isEditor)
+    this.mSpeed = 0.2;\\r\\n        // let _endDragEntry = new Entry();\\r\\n       
+    // _endDragEntry.eventID = EventTriggerType.EndDrag;\\r\\n        // _endDragEntry.callback.AddListener((eventData:
+    PointerEventData) => {\\r\\n        //     console.log(\\\"\u62D6\u62FD\u7ED3\u675F
+    \u5C04\u51FB\\\");\\r\\n        //     // UIManager.Instance.OnShoot();\\r\\n       
+    // })\\r\\n        // this.mEventTrigger.triggers.Add(_endDragEntry);\\r\\n       
+    // let _dragEntry = new Entry();\\r\\n        // _dragEntry.eventID = EventTriggerType.Drag;\\r\\n       
+    // _dragEntry.callback.AddListener((eventData: PointerEventData) => {\\r\\n       
+    //     this.mOffSet = (eventData.position - this.mLastPos).normalized;\\r\\n       
+    //     this.mLastPos = eventData.position;\\r\\n        //     if (this.mCamera
+    == null) {\\r\\n        //         this.mCamera = PlayerManager.Instance.LocalCamera;\\r\\n       
+    //     }\\r\\n        //     this.mOffSet.y = -this.mOffSet.y;\\r\\n        //    
+    this.mCamera.Rotate(this.mOffSet * Time.deltaTime * this.mSpeed);\\r\\n       
+    // })\\r\\n        // this.mEventTrigger.triggers.Add(_dragEntry);\\r\\n    }\\r\\n   
+    Update() {\\r\\n        if (GameMain_1.default.Instance.mGameState == NetManager_1.GameState.GameStart
+    && this.name == \\\"SuperFlashlight\\\") {\\r\\n            this.Progress.fillAmount
+    = 1;\\r\\n        }\\r\\n        if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer)
+    {\\r\\n            if (this.name == \\\"Flashlight\\\") {\\r\\n               
+    if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState == PlayerManager_1.LightState.OFF)
+    {\\r\\n                    if (this.mCooldownImg.value < PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle)
+    {\\r\\n                        this.mCooldownImg.value += (UnityEngine_1.Time.deltaTime
+    / (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle / 2));\\r\\n                   
+    }\\r\\n                }\\r\\n                else if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.ON) {\\r\\n                    if (this.mCooldownImg.value
+    > 0) {\\r\\n                        this.mCooldownImg.value -= (UnityEngine_1.Time.deltaTime
+    / PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle);\\r\\n                   
+    }\\r\\n                }\\r\\n                PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightBattle
+    = this.mCooldownImg.value * PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxLightBattle;\\r\\n               
+    this.mTimer += UnityEngine_1.Time.deltaTime;\\r\\n                if (this.mTimer
+    >= 1) {\\r\\n                    this.mTimer = 0;\\r\\n                    this.ImgHandLine_off.SetActive(PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.OFF);\\r\\n                    this.ImgHandLine_on.SetActive(PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.ON);\\r\\n                }\\r\\n               
+    //\u5728\u6B64\u91CD\u5199\u626B\u63CF\u903B\u8F91\\r\\n                this.scaneTime
+    += UnityEngine_1.Time.deltaTime;\\r\\n                if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.LightState
+    == PlayerManager_1.LightState.ON && this.scaneTime > 0.2) {\\r\\n                   
+    this.scaneTime = 0;\\r\\n                    PlayerManager_1.default.Instance.CheckPlayerInSectorArea(20,
+    20, 3);\\r\\n                }\\r\\n            }\\r\\n            else {\\r\\n               
+    if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.bSuperLightOpen &&
+    this.Progress) {\\r\\n                    if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurTimes
+    <= 0) {\\r\\n                        this.gameObject.SetActive(false);\\r\\n                   
+    }\\r\\n                    if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightBattle
+    <= 0) {\\r\\n                        PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightBattle
+    = PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.MaxSuperLightBattle;\\r\\n                       
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SetSuperLightAction(PlayerManager_1.LightState.OFF);\\r\\n                   
+    }\\r\\n                }\\r\\n                if (PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime
+    < PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCDTime) {\\r\\n                   
+    UIHunterOperation_1.default.Instance.SetSuperFlashImgOff();\\r\\n                   
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime +=
+    UnityEngine_1.Time.deltaTime;\\r\\n                    this.Progress.fillAmount
+    = PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime
+    / PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCDTime;\\r\\n                   
+    if (this.Progress.fillAmount == 1) {\\r\\n                        UIHunterOperation_1.default.Instance.SetSuperFlashImgOn();\\r\\n                       
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCurCDTime =
+    PlayerManager_1.default.Instance.mLocalZepetoNetPlayer.SuperLightCDTime;\\r\\n                   
+    }\\r\\n                }\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n   
+    // * RunRay() {\\r\\n    //     while (LightState.OFF != PlayerManager.Instance.mLocalZepetoNetPlayer.LightState)
+    {\\r\\n    //         if (PlayerManager.Instance.mLocalZepetoNetPlayer.LightState
+    == LightState.ON) {\\r\\n    //             PlayerManager.Instance.CheckPlayerInSectorArea(30,
+    20, 3);\\r\\n    //             yield new WaitForSeconds(0.2);\\r\\n    //        
+    }\\r\\n    //     }\\r\\n    // }\\r\\n    Vector2ToAngle(input) {\\r\\n       
+    if (input.x < 0) {\\r\\n            return 360 - (UnityEngine_1.Mathf.Atan2(input.x,
+    input.y) * UnityEngine_1.Mathf.Rad2Deg * -1);\\r\\n        }\\r\\n        else
+    {\\r\\n            return (UnityEngine_1.Mathf.Atan2(input.x, input.y) * UnityEngine_1.Mathf.Rad2Deg);\\r\\n       
+    }\\r\\n    }\\r\\n}\\r\\nexports.default = UIShootBtn;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlTaG9vdEJ0bi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJU2hvb3RCdG4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsdUVBQXdEO0FBQ3hELGdFQUF3RTtBQUN4RSw2Q0FBK0Q7QUFFL0QsK0RBQXdEO0FBQ3hELG1EQUF1RDtBQUN2RCx1RUFBZ0U7QUFDaEUsMkRBQW9EO0FBQ3BELDBDQUFrQztBQUNsQywwREFBNEU7QUFDNUUsTUFBcUIsVUFBVyxTQUFRLHFDQUFxQjtJQUE3RDs7UUFZVyxjQUFTLEdBQVcsQ0FBQyxDQUFDO1FBc0s3Qiw0QkFBNEI7UUFDNUIseUNBQXlDO1FBQ3pDLDZCQUE2QjtRQUM3QiwyQ0FBMkM7UUFDM0Msb0ZBQW9GO1FBQ3BGLDhKQUE4SjtRQUM5SixtQ0FBbUM7UUFDbkMsc0JBQXNCO1FBQ3RCLFFBQVE7UUFDUiw0Q0FBNEM7UUFDNUMsa0NBQWtDO1FBQ2xDLHdDQUF3QztRQUN4QyxJQUFJO0lBQ1IsQ0FBQztJQWxMRyxLQUFLO1FBQ0QscUVBQXFFO1FBQ3JFLCtCQUErQjtRQUMvQixxREFBcUQ7UUFDckQsb0VBQW9FO1FBQ3BFLElBQUksQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNqRCxPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDcEMsSUFBSSxPQUFPLEdBQUcsdUJBQWEsQ0FBQyxRQUFRLENBQUMscUJBQXFCLENBQUM7WUFDM0QsSUFBSSxJQUFJLENBQUMsSUFBSSxJQUFJLFlBQVksRUFBRTtnQkFDM0IsSUFBSSxPQUFPLENBQUMsVUFBVSxJQUFJLDBCQUFVLENBQUMsR0FBRyxJQUFJLE9BQU8sQ0FBQyxjQUFjLEVBQUUsR0FBRyxDQUFDLEVBQUU7b0JBQ3RFLHlCQUFlLENBQUMsUUFBUSxDQUFDLGFBQWEsRUFBRSxDQUFDO29CQUV6QyxPQUFPLENB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\",\"assetPath\":\"Assets/Scripts/UI/UIShootBtn.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"mCooldownImg\",\"type\":\"UnityEngine.UI.Slider\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mTimer\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"ImgHandLine_on\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"ImgHandLine_off\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"Progress\",\"type\":\"UnityEngine.UI.Image\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"scaneTime\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UIShootBtn\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: b88a97ebcfca549e0053b741262ad3d6
+  onlyWriteTrigger: 0

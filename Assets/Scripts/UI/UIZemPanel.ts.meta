@@ -1,0 +1,53 @@
+fileFormatVersion: 2
+guid: 2a57d2e530b1741418a750a034762f7d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nconst
+    TutorialBtnItem_1 = require(\"./TutorialBtnItem\");\r\nclass UIZemPanel extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake() {\r\n        this.Localization();\r\n       
+    this.InitBtnItems();\r\n    }\r\n    Localization() {\r\n        let localization
+    = Localization_1.default.Instance;\r\n        this.btnNames = [\r\n           
+    localization.GetLocalizedText(\"Zem_btn_4\"),\r\n            // localization.GetLocalizedText(\"Zem_btn_3\"),\r\n           
+    localization.GetLocalizedText(\"Zem_btn_1\"),\r\n            localization.GetLocalizedText(\"Zem_btn_2\"),\r\n       
+    ];\r\n    }\r\n    InitBtnItems() {\r\n        this.btnItems = [];\r\n       
+    let btnItem = this.mBtnLayout.transform.GetChild(0).GetComponent($typeof(TutorialBtnItem_1.default));\r\n       
+    btnItem.SetItem(this.btnNames[0], 0);\r\n        this.btnItems.push(btnItem);\r\n       
+    for (let i = 1; i < this.btnNames.length; i++) {\r\n            let btnItem =
+    UnityEngine_1.GameObject.Instantiate(this.mBtn.gameObject, this.mBtnLayout.transform).GetComponent($typeof(TutorialBtnItem_1.default));\r\n           
+    btnItem.transform.SetSiblingIndex(i);\r\n            btnItem.SetItem(this.btnNames[i],
+    i);\r\n            btnItem.SetStatus(false);\r\n            this.btnItems.push(btnItem);\r\n       
+    }\r\n        for (let i = 0; i < this.btnItems.length; i++) {\r\n           
+    let btnItem = this.btnItems[i];\r\n            btnItem.SetStatus(false);\r\n           
+    let btn = btnItem.GetComponent($typeof(UnityEngine_UI_1.Button));\r\n           
+    btn.onClick.AddListener(() => {\r\n                this.SelectBtn(btnItem);\r\n           
+    });\r\n        }\r\n    }\r\n    Start() {\r\n        this.SelectBtn(this.btnItems[0]);\r\n   
+    }\r\n    SelectBtn(item) {\r\n        if (this.currentBtnItem) {\r\n           
+    if (this.currentBtnItem == item) {\r\n                return;\r\n           
+    }\r\n            else {\r\n                this.currentBtnItem.SetStatus(false);\r\n           
+    }\r\n        }\r\n        this.currentBtnItem = item;\r\n        this.currentBtnItem.SetStatus(true);\r\n       
+    this.RefreshShowInfo(this.currentBtnItem.index);\r\n    }\r\n    RefreshShowInfo(btnIndex)
+    {\r\n        this.mSeasonRewardPanel.SetActive(btnIndex == 0);\r\n        //
+    this.mStarRewardPanel.SetActive(btnIndex == 1);\r\n        this.mLeaderboardPanel.SetActive(btnIndex
+    == 1);\r\n        this.mDailyTaskPanel.SetActive(btnIndex == 2);\r\n    }\r\n}\r\nexports.default
+    = UIZemPanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlaZW1QYW5lbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJWmVtUGFuZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBeUM7QUFDekMsbURBQThDO0FBQzlDLGlEQUFzRDtBQUN0RCw4RUFBdUU7QUFDdkUsdURBQWdEO0FBRWhELE1BQXFCLFVBQVcsU0FBUSxxQ0FBcUI7SUFnQnpELEtBQUs7UUFDRCxJQUFJLENBQUMsWUFBWSxFQUFFLENBQUM7UUFDcEIsSUFBSSxDQUFDLFlBQVksRUFBRSxDQUFDO0lBQ3hCLENBQUM7SUFFTyxZQUFZO1FBQ2hCLElBQUksWUFBWSxHQUFHLHNCQUFZLENBQUMsUUFBUSxDQUFDO1FBRXpDLElBQUksQ0FBQyxRQUFRLEdBQUc7WUFDWixZQUFZLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxDQUFDO1lBQzFDLDhDQUE4QztZQUM5QyxZQUFZLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxDQUFDO1lBQzFDLFlBQVksQ0FBQyxnQkFBZ0IsQ0FBQyxXQUFXLENBQUM7U0FDN0MsQ0FBQztJQUNOLENBQUM7SUFFTyxZQUFZO1FBQ2hCLElBQUksQ0FBQyxRQUFRLEdBQUcsRUFBRSxDQUFDO1FBQ25CLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxZQUFZLFNBQUMseUJBQWUsRUFBRyxDQUFDO1FBQ3BGLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztRQUNyQyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUM1QixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDM0MsSUFBSSxPQUFPLEdBQW9CLHdCQUFVLENBQUMsV0FBVyxDQUFhLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLENBQUMsWUFBWSxTQUFDLHlCQUFlLEVBQUcsQ0FBQztZQUNuSixPQUFPLENBQUMsU0FBUyxDQUFDLGVBQWUsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNyQyxPQUFPLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDckMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUN6QixJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztTQUMvQjtRQUNELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUMzQyxJQUFJLE9BQU8sR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQy9CLE9BQU8sQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDekIsSUFBSSxHQUFHLEdBQUcsT0FBTyxDQUFDLFlBQVksU0FBQyx1QkFBTSxFQUFHLENBQUM7WUFDekMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO2dCQUN6QixJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQzVCLENBQUMsQ0FBQyxDQUFBO1NBQ0w7SUFDTCxDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3JDLENBQUM7SUFFTyxTQUFTLENBQUMsSUFBcUI7UUFDbkMsSUFBSSxJQUFJLENBQUMsY0FBYyxFQUFFO1lBQ3JCLElBQUksSUFBSSxDQUFDLGNBQWMsSUFBSSxJQUFJLEVBQUU7Z0JBQzdCLE9BQU87YUFDVjtpQkFDSTtnQkFDRCxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQzthQUN4QztTQUNKO1FBQ0QsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUM7UUFDM0IsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDcEMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3BELENBQUM7SUFFTyxlQUFlLENBQUMsUUFBZ0I7UUFDcEMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLFNBQVMsQ0FBQyxRQUFRLElBQUksQ0FBQyxDQUFDLENBQUM7UUFDakQsa0RBQWtEO1FBQ2xELElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsUUFBUSxJQUFJLENBQUMsQ0FBQyxDQUFDO1FBQ2hELElBQUksQ0FBQyxlQUFlLENBQUMsU0FBUyxDQUFDLFFBQVEsSUFBSSxDQUFDLENBQUMsQ0FBQztJQUNsRCxDQUFDO0NBQ0o7QUE5RUQsNkJBOEVDIn0=","assetPath":"Assets/Scripts/UI/UIZemPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mTitleText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mCloseBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mBtnLayout","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mLeaderboardPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mDailyTaskPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mStarRewardPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mSeasonRewardPanel","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIZemPanel","description":""},"isCompiled":true}'
+  typescriptHash: 05d902657fb1fd6df868d70d69d3716a
+  onlyWriteTrigger: 0

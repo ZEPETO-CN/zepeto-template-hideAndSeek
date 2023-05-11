@@ -1,0 +1,37 @@
+fileFormatVersion: 2
+guid: 0f17146bf4f66d64199d8c049e7a6f74
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_1 = require(\"UnityEngine\");\r\nclass IKCtrl extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    constructor() {\r\n        super(...arguments);\r\n        this.ikActive
+    = false;\r\n        this.ikObj = null;\r\n        this.ikGoal = UnityEngine_1.AvatarIKGoal.RightHand;\r\n   
+    }\r\n    // public ikanimator: Animator;\r\n    Start() {\r\n        this.animator
+    = this.transform.GetComponent($typeof(UnityEngine_1.Animator));\r\n    }\r\n   
+    OnAnimatorIK() {\r\n        if (this.animator) {\r\n            if (this.ikActive)
+    {\r\n                this.animator.SetIKPositionWeight(this.ikGoal, 1);\r\n               
+    this.animator.SetIKRotationWeight(this.ikGoal, 1);\r\n                if (this.ikObj
+    != null) {\r\n                    this.animator.SetIKPosition(this.ikGoal, this.ikObj.position);\r\n                   
+    this.animator.SetIKRotation(this.ikGoal, this.ikObj.rotation);\r\n               
+    }\r\n            }\r\n            else {\r\n                this.animator.SetIKPositionWeight(this.ikGoal,
+    0);\r\n                this.animator.SetIKRotationWeight(this.ikGoal, 0);\r\n           
+    }\r\n        }\r\n    }\r\n}\r\nexports.default = IKCtrl;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiSUtDdHJsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiSUtDdHJsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXFEO0FBQ3JELDZDQUE0RztBQUU1RyxNQUFxQixNQUFPLFNBQVEscUNBQXFCO0lBQXpEOztRQUVXLGFBQVEsR0FBUyxLQUFLLENBQUM7UUFDdkIsVUFBSyxHQUFjLElBQUksQ0FBQztRQUN4QixXQUFNLEdBQVcsMEJBQVksQ0FBQyxTQUFTLENBQUM7SUF5Qm5ELENBQUM7SUF4QkcsK0JBQStCO0lBRS9CLEtBQUs7UUFDRCxJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsWUFBWSxTQUFDLHNCQUFRLEVBQUcsQ0FBQztJQUM1RCxDQUFDO0lBRUQsWUFBWTtRQUNSLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRTtZQUNmLElBQUksSUFBSSxDQUFDLFFBQVEsRUFBRTtnQkFDZixJQUFJLENBQUMsUUFBUSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxDQUFDLENBQUM7Z0JBQ2xELElBQUksQ0FBQyxRQUFRLENBQUMsbUJBQW1CLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxDQUFDLENBQUMsQ0FBQztnQkFFbEQsSUFBSSxJQUFJLENBQUMsS0FBSyxJQUFJLElBQUksRUFBRTtvQkFDcEIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxDQUFDO29CQUM5RCxJQUFJLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7aUJBQ2pFO2FBQ0o7aUJBQ0k7Z0JBQ0QsSUFBSSxDQUFDLFFBQVEsQ0FBQyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsQ0FBQyxDQUFDO2dCQUNsRCxJQUFJLENBQUMsUUFBUSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQyxDQUFDLENBQUM7YUFDckQ7U0FDSjtJQUNMLENBQUM7Q0FFSjtBQTdCRCx5QkE2QkMifQ==","assetPath":"Assets/Scripts/Common/IKCtrl.ts","manifest":{"properties":[{"assembly":"mscorlib","name":"ikActive","type":"System.Boolean","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"ikObj","type":"UnityEngine.Transform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"ikGoal","type":"System.Single","isArray":false,"initValue":["RightHand"],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"IKCtrl","description":""},"isCompiled":true}'
+  typescriptHash: aaf3a280e4ce60e1e0a37caf28cfeb75
+  onlyWriteTrigger: 0

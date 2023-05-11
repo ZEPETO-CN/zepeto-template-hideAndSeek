@@ -1,0 +1,75 @@
+fileFormatVersion: 2
+guid: a20faec5b15835c4d91efc87b4e14831
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nexports.ZepetoNetTransformPackage
+    = exports.sNetTransform = void 0;\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nclass
+    sNetTransform {\\r\\n    SetPosition(pos) {\\r\\n        this.x = Math.round(pos.x
+    * 100);\\r\\n        this.y = Math.round(pos.y * 100);\\r\\n        this.z =
+    Math.round(pos.z * 100);\\r\\n    }\\r\\n}\\r\\nexports.sNetTransform = sNetTransform;\\r\\nconst
+    CacheNum = 2;\\r\\nclass ZepetoNetTransformPackage {\\r\\n    constructor() {\\r\\n       
+    this.mDatas = new Queue();\\r\\n        this.mNum = 0;\\r\\n    }\\r\\n    IsEmpty()
+    {\\r\\n        if (this.mDatas == null)\\r\\n            return true;\\r\\n       
+    else if (this.mDatas.Size() == 0)\\r\\n            return true;\\r\\n       
+    else\\r\\n            return false;\\r\\n    }\\r\\n    IsCacheData() {\\r\\n       
+    return (this.mDatas.Size() - this.mNum) <= CacheNum;\\r\\n    }\\r\\n    GetNextPosData()
+    {\\r\\n        if (this.mDatas.Size() == 0)\\r\\n            return null;\\r\\n       
+    else {\\r\\n            this.mNum++;\\r\\n            return this.mDatas.Dequeue();\\r\\n       
+    }\\r\\n    }\\r\\n    ParseJson(dataJson) {\\r\\n        let result = JSON.parse(dataJson);\\r\\n       
+    this.mNum = 0;\\r\\n        this.mIndex = result.index;\\r\\n        this.mDatas.Clear();\\r\\n       
+    this.mDatas.items = this.obj2Map(JSON.parse(result.data));\\r\\n    }\\r\\n   
+    obj2Map(obj) {\\r\\n        let strMap = new Map();\\r\\n        for (let k of
+    Object.keys(obj)) {\\r\\n            strMap.set(Number(k), obj[k]);\\r\\n       
+    }\\r\\n        return strMap;\\r\\n    }\\r\\n}\\r\\nexports.ZepetoNetTransformPackage
+    = ZepetoNetTransformPackage;\\r\\n// \u5C01\u88C5\u6D88\u606F\u961F\u5217\\r\\nclass
+    Queue {\\r\\n    constructor() {\\r\\n        this.count = 0;\\r\\n        this.lowestCount
+    = 0;\\r\\n        this.items = new Map();\\r\\n    }\\r\\n    /**\\r\\n     *
+    @description: \u5728count\u65B9\u5411\uFF08\u961F\u5217\u5E95\u90E8\uFF09\u5165\u961F\\r\\n    
+    * @param {T} element\\r\\n     */\\r\\n    Enqueue(element) {\\r\\n        this.items.set(this.count,
+    element);\\r\\n        this.count++;\\r\\n    }\\r\\n    /**\\r\\n     * @description:
+    \u5728lowestCount\u65B9\u5411\uFF08\u961F\u5217\u9876\u90E8\uFF09\u51FA\u961F\\r\\n    
+    * @return {T} element\\r\\n     */\\r\\n    Dequeue() {\\r\\n        if (this.IsEmpty())
+    {\\r\\n            console.warn(\\\"IsEmpty!!!\\\");\\r\\n            return
+    undefined;\\r\\n        }\\r\\n        const result = this.items.get(this.lowestCount);\\r\\n       
+    this.items.delete(this.lowestCount);\\r\\n        this.lowestCount++;\\r\\n       
+    return result;\\r\\n    }\\r\\n    /**\\r\\n     * @description: \u8FD4\u56DE\u961F\u5217\u9876\u90E8\u7684\u5143\u7D20\\r\\n    
+    * @return {T} element\\r\\n     */\\r\\n    Peek() {\\r\\n        if (this.IsEmpty())
+    {\\r\\n            return undefined;\\r\\n        }\\r\\n        return this.items.get(this.lowestCount);\\r\\n   
+    }\\r\\n    /**\\r\\n     * @description: \u8FD4\u56DE\u961F\u5217\u662F\u5426\u4E3A\u7A7A\\r\\n    
+    * @return {Boolean}\\r\\n     */\\r\\n    IsEmpty() {\\r\\n        return this.items.size
+    === 0;\\r\\n    }\\r\\n    /**\\r\\n     * @description: \u6E05\u7A7A\u961F\u5217\\r\\n    
+    */\\r\\n    Clear() {\\r\\n        this.items = new Map();\\r\\n        this.count
+    = 0;\\r\\n        this.lowestCount = 0;\\r\\n    }\\r\\n    /**\\r\\n     * @description:
+    \u8FD4\u56DE\u961F\u5217\u5143\u7D20\u7684\u6570\u76EE\\r\\n     * @return {Number}\\r\\n    
+    */\\r\\n    Size() {\\r\\n        return this.items.size;\\r\\n    }\\r\\n   
+    /**\\r\\n     * @description: \u8986\u76D6Object\u9ED8\u8BA4\u7684toString\\r\\n    
+    * @return {String}\\r\\n     */\\r\\n    toString() {\\r\\n        if (this.IsEmpty())
+    {\\r\\n            return '';\\r\\n        }\\r\\n        let objString = `${this.items.get(this.lowestCount)}`;\\r\\n       
+    for (let i = this.lowestCount + 1; i < this.count; i++) {\\r\\n            objString
+    = `${objString},${this.items.get(i)}`;\\r\\n        }\\r\\n        return objString;\\r\\n   
+    }\\r\\n    toJson(id, index) {\\r\\n        if (this.IsEmpty()) {\\r\\n           
+    return \\\"\\\";\\r\\n        }\\r\\n        const target = { 0: this.items.get(this.lowestCount)
+    };\\r\\n        for (let i = this.lowestCount + 1; i < this.count; i++) {\\r\\n           
+    target[i] = this.items.get(i);\\r\\n        }\\r\\n        let dataJson = JSON.stringify(target);\\r\\n       
+    const result = { \\\"id\\\": id, \\\"index\\\": index, \\\"data\\\": dataJson
+    };\\r\\n        return JSON.stringify(result);\\r\\n    }\\r\\n}\\r\\nexports.default
+    = Queue;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiWmVwZXRvTmV0VHJhbnNmb3JtUGFja2FnZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlplcGV0b05ldFRyYW5zZm9ybVBhY2thZ2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQ0EsNkNBQTZDO0FBRTdDLE1BQWEsYUFBYTtJQU9mLFdBQVcsQ0FBQyxHQUFhO1FBQzVCLElBQUksQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLEdBQUcsQ0FBQyxDQUFDO1FBQ2pDLElBQUksQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLEdBQUcsQ0FBQyxDQUFDO1FBQ2pDLElBQUksQ0FBQyxDQUFDLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLEdBQUcsQ0FBQyxDQUFDO0lBQ3JDLENBQUM7Q0FDSjtBQVpELHNDQVlDO0FBRUQsTUFBTyxRQUFRLEdBQVksQ0FBQyxDQUFDO0FBQzdCLE1BQWEseUJBQXlCO0lBQXRDO1FBR1csV0FBTSxHQUEwQixJQUFJLEtBQUssRUFBaUIsQ0FBQztRQUMxRCxTQUFJLEdBQVksQ0FBQyxDQUFDO0lBc0M5QixDQUFDO0lBcENVLE9BQU87UUFDVixJQUFHLElBQUksQ0FBQyxNQUFNLElBQUksSUFBSTtZQUFFLE9BQU8sSUFBSSxDQUFDO2FBRS9CLElBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDO1lBQUUsT0FBTyxJQUFJLENBQUM7O1lBQ3hDLE9BQU8sS0FBSyxDQUFDO0lBQ3RCLENBQUM7SUFFTSxXQUFXO1FBQ2QsT0FBTyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxFQUFFLEdBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLFFBQVEsQ0FBQztJQUN4RCxDQUFDO0lBRU0sY0FBYztRQUVqQixJQUFHLElBQUksQ0FBQyxNQUFNLENBQUMs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\",\"assetPath\":\"Assets/Scripts/NetTransform/ZepetoNetTransformPackage.ts\",\"manifest\":{\"properties\":[],\"name\":\"sNetTransform\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 77104b4a4bfe1b51c054f9cd71d7b74e
+  onlyWriteTrigger: 0

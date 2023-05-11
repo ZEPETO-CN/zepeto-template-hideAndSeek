@@ -1,0 +1,295 @@
+fileFormatVersion: 2
+guid: 3a343848f12ea7642b090bdf9b7675ff
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    ZepetoNetTransformPackage_1 = require(\\\"./ZepetoNetTransformPackage\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst NetManager_1 = require(\\\"../GameManager/NetManager\\\");\\r\\nconst
+    ZEPETO_Multiplay_1 = require(\\\"ZEPETO.Multiplay\\\");\\r\\nconst PlayerManager_1
+    = require(\\\"../GameManager/PlayerManager\\\");\\r\\nconst IKCtrl_1 = require(\\\"../Common/IKCtrl\\\");\\r\\nconst
+    UIHunterOperation_1 = require(\\\"../UI/UIHunterOperation\\\");\\r\\nconst PoolManager_1
+    = require(\\\"../GameManager/PoolManager\\\");\\r\\nvar MoveDirState;\\r\\n(function
+    (MoveDirState) {\\r\\n    MoveDirState[MoveDirState[\\\"None\\\"] = 0] = \\\"None\\\";\\r\\n   
+    MoveDirState[MoveDirState[\\\"Forward\\\"] = 1] = \\\"Forward\\\";\\r\\n    MoveDirState[MoveDirState[\\\"Back\\\"]
+    = 2] = \\\"Back\\\";\\r\\n    MoveDirState[MoveDirState[\\\"Left\\\"] = 3] =
+    \\\"Left\\\";\\r\\n    MoveDirState[MoveDirState[\\\"Right\\\"] = 4] = \\\"Right\\\";\\r\\n   
+    MoveDirState[MoveDirState[\\\"Jump\\\"] = 5] = \\\"Jump\\\";\\r\\n})(MoveDirState
+    || (MoveDirState = {}));\\r\\nclass ZepetoNetPlayerBase extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        this.MaxLightBattle
+    = 10;\\r\\n        this.LightBattle = this.MaxLightBattle;\\r\\n        this.mIsLocal
+    = false;\\r\\n        this.mMinMoveDis = 0.05;\\r\\n        this.mMaxMoveDis
+    = 3;\\r\\n        //superLight\\r\\n        this.SuperLightCDTime = 60; //60\\r\\n       
+    this.SuperLightCurCDTime = this.SuperLightCDTime;\\r\\n        this.SuperLightMaxUseTimes
+    = 2; //\u6BCF\u5C40\u4F7F\u7528\u6B21\u65702\\r\\n        this.SuperLightCurTimes
+    = this.SuperLightMaxUseTimes; //\u5F53\u524D\u4F7F\u7528\u6B21\u6570\\r\\n       
+    this.MaxSuperLightBattle = 20; //\u4F7F\u7528\u6301\u7EED\u65F6\u95F420\\r\\n       
+    this.SuperLightBattle = this.MaxSuperLightBattle;\\r\\n        this.bSuperLightOpen
+    = false;\\r\\n        // 3\u5E27\u53D1\u9001\u4E00\u6B21\uFF0C \u6D4B\u8BD5\u5305\\r\\n       
+    // @HideInInspector()\\r\\n        this.mSendPakRate = 3; // 60ms\u53D1\u9001\u4E00\u6B21
+    = 16.6FPS\\r\\n        this.mFrameIndex = 0;\\r\\n        // \u662F\u5426\u4F7F\u7528\u9884\u5224\\r\\n       
+    this.mUsePredict = true;\\r\\n        // \u8BA1\u5E27\u5668\\r\\n        this.mSendPakCount
+    = 0;\\r\\n        // \u7F51\u7EDC\u5305 \\r\\n        this.mSendLocalPackage
+    = new ZepetoNetTransformPackage_1.ZepetoNetTransformPackage();\\r\\n        this.mAnimatorState
+    = 0;\\r\\n        this.LightState = PlayerManager_1.LightState.OFF;\\r\\n       
+    this.SuperLightState = PlayerManager_1.LightState.OFF;\\r\\n        this.lightTime
+    = 0;\\r\\n        this.lightSuperTime = 0;\\r\\n        // public TeamSignObj:
+    GameObject;\\r\\n        this.ANIMATOR_STATE_PARAM = \\\"Move\\\";\\r\\n       
+    /**\\r\\n         * @description: \u5C5E\u6027\\r\\n         */\\r\\n       
+    this.mRunSpeed = 0.5;\\r\\n    }\\r\\n    // \u5047\u8BBE1\u4E2A\u53C2\u6570
+    \u7279\u6B8A\u903B\u8F91\u7279\u6B8A\u5904\u7406\\r\\n    UpdateAnimatorState(state)
+    {\\r\\n        if (this.mAnimatorState != state) {\\r\\n            this.mAnimatorState
+    = state;\\r\\n            switch (state) {\\r\\n                case MoveDirState.Jump:\\r\\n                   
+    this.mAnimator.SetTrigger(\\\"Jump\\\");\\r\\n                    break;\\r\\n               
+    default:\\r\\n                    this.mAnimator.SetInteger(this.ANIMATOR_STATE_PARAM,
+    this.mAnimatorState);\\r\\n                    break;\\r\\n            }\\r\\n       
+    }\\r\\n    }\\r\\n    SendMoveData() {\\r\\n        this.mSendPakCount++;\\r\\n       
+    let dataJson = this.mSendLocalPackage.mDatas.toJson(this.mId, this.mSendPakCount);\\r\\n       
+    this.mSendLocalPackage.mDatas.Clear();\\r\\n        let roomData = new ZEPETO_Multiplay_1.RoomData();\\r\\n       
+    roomData.Add(\\\"data\\\", dataJson);\\r\\n        // let lightrot = this.objLight.transform.localRotation.x
+    + \\\";\\\" +\\r\\n        //     this.objLight.transform.localRotation.y + \\\";\\\"
+    +\\r\\n        //     this.objLight.transform.localRotation.z;\\r\\n        //
+    let lightRotArray = [this.objLight.transform.localRotation.x, this.objLight.transform.localRotation.y,
+    this.objLight.transform.localRotation.z];\\r\\n        // let lightRotArray =
+    [];\\r\\n        // lightRotArray.push(this.objLight.transform.localEulerAngles.x);\\r\\n       
+    // lightRotArray.push(this.objLight.transform.localEulerAngles.y);\\r\\n       
+    // lightRotArray.push(this.objLight.transform.localEulerAngles.z);\\r\\n       
+    // roomData.Add(\\\"lightrot\\\", JSON.stringify(lightRotArray));\\r\\n       
+    NetManager_1.default.Instance.SendEvent(NetManager_1.sEventArg.PlayerMove, roomData);\\r\\n   
+    }\\r\\n    /**\\r\\n     * @description: \u8FD4\u56DE\u79FB\u52A8\u901F\u5EA6\\r\\n    
+    */\\r\\n    GetMoveSpeedByDir(moveState) {\\r\\n        let factor = 0;\\r\\n       
+    switch (moveState) {\\r\\n            case MoveDirState.Forward:\\r\\n               
+    factor = 1;\\r\\n                break;\\r\\n            case MoveDirState.Back:\\r\\n               
+    factor = 0.5;\\r\\n                break;\\r\\n            case MoveDirState.Left:\\r\\n               
+    factor = 0.8;\\r\\n                break;\\r\\n            case MoveDirState.Right:\\r\\n               
+    factor = 0.8;\\r\\n                break;\\r\\n            default:\\r\\n               
+    factor = 1;\\r\\n                break;\\r\\n        }\\r\\n        return this.mRunSpeed
+    * factor;\\r\\n    }\\r\\n}\\r\\nclass ZepetoNetPlayerRemote extends ZepetoNetPlayerBase
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        //
+    \u5F53\u521D\u5904\u7406\u5E27\u5668\\r\\n        this.mCurFrameIndex = 0;\\r\\n       
+    this.mMoveCacheData = new ZepetoNetTransformPackage_1.default();\\r\\n       
+    this.mCurMoveData = null;\\r\\n        this.mRemoteAngle = UnityEngine_1.Vector3.zero;\\r\\n       
+    this.mHasTarget = false;\\r\\n        this.mTargetData = null;\\r\\n        this.mTargetPos
+    = UnityEngine_1.Vector3.zero;\\r\\n        this.mLastTargetPos = UnityEngine_1.Vector3.zero;\\r\\n       
+    this.mLerpSum = 0;\\r\\n        this.mLerpDis = 0;\\r\\n        this.mCurLerp
+    = 1;\\r\\n        this.mCurPos = UnityEngine_1.Vector3.zero;\\r\\n        this.mAccelearte
+    = 1;\\r\\n        this.mMaxCachaNum = 10;\\r\\n        this.mAcceNum = 4;\\r\\n       
+    this.mDataPool = new ZepetoNetTransformPackage_1.default();\\r\\n    }\\r\\n   
+    GetPackageFromPool() {\\r\\n        if (this.mDataPool.Size() > 0) {\\r\\n           
+    let data = this.mDataPool.Dequeue();\\r\\n            return data;\\r\\n       
+    }\\r\\n        return new ZepetoNetTransformPackage_1.ZepetoNetTransformPackage();\\r\\n   
+    }\\r\\n    /**\\r\\n     * @description: \u63A5\u53D7\u670D\u52A1\u5668\u53D1\u9001\u8FC7\u6765\u7684\u6570\u636E\u5305\\r\\n    
+    * @param\\r\\n     */\\r\\n    ReceiveMoveData(dataJson) {\\r\\n        if (this.mIsLocal)\\r\\n           
+    return;\\r\\n        let data = this.GetPackageFromPool();\\r\\n        data.ParseJson(dataJson);\\r\\n       
+    this.AddMoveDataPackage(data);\\r\\n    }\\r\\n    AddMoveDataPackage(pak) {\\r\\n       
+    let cacheSize = this.mMoveCacheData.Size();\\r\\n        if (cacheSize > this.mMaxCachaNum)
+    {\\r\\n            console.error(\\\"[\u6570\u636E\u7F13\u5B58\u5305\u8FC7\u591A\u5F02\u5E38]
+    receive lots move cache date!\\\", cacheSize);\\r\\n            this.mMoveCacheData.Clear();\\r\\n           
+    this.mAccelearte = 1;\\r\\n        }\\r\\n        else if (cacheSize > this.mAcceNum)
+    {\\r\\n            console.warn(\\\"[\u7F51\u7EDC\u6CE2\u52A8\u5BFC\u81F4\u6570\u636E\u963B\u585E,
+    \u52A0\u901Flerp] !\\\", cacheSize);\\r\\n            this.mAccelearte = 2;\\r\\n       
+    }\\r\\n        else {\\r\\n            this.mAccelearte = 1;\\r\\n        }\\r\\n       
+    if (this.mCurFrameIndex > pak.mIndex) {\\r\\n            console.error(\\\"[\u6570\u636E\u5305\u7D22\u5F15\u5F02\u5E38]
+    !\\\");\\r\\n            return;\\r\\n        }\\r\\n        this.mMoveCacheData.Enqueue(pak);\\r\\n   
+    }\\r\\n    GetMoveData() {\\r\\n        if (this.mMoveCacheData.Size() > 0) {\\r\\n           
+    this.mCurMoveData = this.mMoveCacheData.Dequeue();\\r\\n            this.mCurFrameIndex
+    = this.mCurMoveData.mIndex;\\r\\n        }\\r\\n        else {\\r\\n           
+    this.mCurMoveData = null;\\r\\n        }\\r\\n    }\\r\\n    RemotePlayerMove()
+    {\\r\\n        // \u83B7\u53D6\u79FB\u52A8\u6570\u636E\\r\\n        if (this.mCurMoveData
+    == null) {\\r\\n            this.GetMoveData();\\r\\n        }\\r\\n        else
+    if (!this.mHasTarget) {\\r\\n            if (this.mCurMoveData.IsEmpty()) {\\r\\n               
+    this.mDataPool.Enqueue(this.mCurMoveData);\\r\\n                this.GetMoveData();\\r\\n           
+    }\\r\\n            else if (this.mCurMoveData.IsCacheData() && this.mMoveCacheData.Size()
+    > 0) {\\r\\n                this.mDataPool.Enqueue(this.mCurMoveData);\\r\\n               
+    this.GetMoveData();\\r\\n            }\\r\\n        }\\r\\n        // \u6A21\u62DF\u79FB\u52A8\\r\\n       
+    if (this.mCurMoveData != null) {\\r\\n            this.SimulateMove();\\r\\n       
+    }\\r\\n    }\\r\\n    SimulateMove() {\\r\\n        // \u5982\u679C\u6CA1\u6709\u79FB\u52A8\u76EE\u6807\\r\\n       
+    if (!this.mHasTarget) {\\r\\n            this.mTargetData = this.mCurMoveData.GetNextPosData();\\r\\n           
+    if (this.mTargetData != null) {\\r\\n                this.UpdateAnimatorState(this.mTargetData.s);\\r\\n               
+    this.GetPosition(this.mTargetData);\\r\\n                this.transform.eulerAngles
+    = this.GetAngle(this.mTargetData);\\r\\n                this.mHasTarget = true;\\r\\n           
+    }\\r\\n        }\\r\\n        // \u671D\u7740\u76EE\u6807\u70B9lerp \u79FB\u52A8\uFF0C
+    \u89D2\u5EA6\u6682\u65F6\u4E0D\u8003\u8651lerp\\r\\n        if (this.mHasTarget)
+    {\\r\\n            this.transform.position = UnityEngine_1.Vector3.Lerp(this.mCurPos,
+    this.mTargetPos, this.mCurLerp / this.mLerpSum);\\r\\n            this.mCurLerp++;\\r\\n       
+    }\\r\\n        // \u5982\u679C\u5B8C\u6210\\r\\n        if (this.mCurLerp > this.mLerpSum)
+    {\\r\\n            this.mHasTarget = false;\\r\\n            this.mCurLerp =
+    1;\\r\\n            this.mLerpSum = 1;\\r\\n        }\\r\\n    }\\r\\n    GetAngle(data)
+    {\\r\\n        this.mRemoteAngle.y = data.a;\\r\\n        return this.mRemoteAngle;\\r\\n   
+    }\\r\\n    /**\\r\\n     * @description: \u6839\u636E\u7269\u7406\u5E27\u8BA1\u7B97\uFF01\uFF01\uFF01\\r\\n    
+    */\\r\\n    GetPosition(data) {\\r\\n        this.mTargetPos.x = data.x * 0.01;\\r\\n       
+    this.mTargetPos.y = data.y * 0.01;\\r\\n        this.mTargetPos.z = data.z *
+    0.01;\\r\\n        this.mLerpDis = UnityEngine_1.Vector3.Distance(this.mTargetPos,
+    this.transform.position);\\r\\n        if (this.mLerpDis > this.mMaxMoveDis ||
+    this.mLerpDis <= this.mMinMoveDis) {\\r\\n            this.transform.position
+    = this.mTargetPos;\\r\\n            //console.warn(\\\"[\u77AC\u79FB\u8C03\u6574\u4F4D\u7F6E]\\\");\\r\\n           
+    this.mLerpSum = 1;\\r\\n        }\\r\\n        else {\\r\\n            let speed
+    = this.GetMoveSpeedByDir(this.mAnimatorState) * UnityEngine_1.Time.fixedDeltaTime;\\r\\n           
+    this.mLerpSum = Math.round(this.mLerpDis / (speed * this.mAccelearte));\\r\\n       
+    }\\r\\n        this.mCurPos = this.transform.position;\\r\\n        this.mCurLerp
+    = 1;\\r\\n        if (this.mLerpSum < 1)\\r\\n            this.mLerpSum = 1;\\r\\n       
+    this.mLastTargetPos = this.mTargetPos;\\r\\n    }\\r\\n}\\r\\nclass ZepetoNetPlayer
+    extends ZepetoNetPlayerRemote {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n       
+    /**\\r\\n         * @description: \u5E38\u91CF\\r\\n         */\\r\\n       
+    this.mGravity = 10;\\r\\n        this.mMaxMoveTime = 0.5;\\r\\n        /**\\r\\n       
+    * @description: \u53D8\u91CF\\r\\n        */\\r\\n        this.mJumpPower = 8;\\r\\n       
+    this.mCurMoveSpeed = 0;\\r\\n        this.mGravityVelocity = UnityEngine_1.Vector3.zero;\\r\\n       
+    this.mMoveDir = UnityEngine_1.Vector3.zero;\\r\\n        this.mTimer = 0;\\r\\n       
+    this.mToAngle = UnityEngine_1.Vector3.zero;\\r\\n        /**\\r\\n         *
+    @description: \u7269\u7406\u8DF3\u8DC3\u903B\u8F91\\r\\n         *********/\\r\\n       
+    this.mHeartDataTimer = 0;\\r\\n        this.mHeartDataConst = 50;\\r\\n    }\\r\\n   
+    /**\\r\\n     * @description: Unity CallBack\\r\\n     */\\r\\n    Awake() {\\r\\n       
+    this.mAnimator = this.GetComponentInChildren($typeof(UnityEngine_1.Animator));\\r\\n       
+    if (this.mAnimator == null) {\\r\\n            console.error(\\\"Missing Animator!\\\");\\r\\n       
+    }\\r\\n        this.mCharacterController = this.GetComponent($typeof(UnityEngine_1.CharacterController));\\r\\n       
+    if (this.mCharacterController == null) {\\r\\n            console.error(\\\"Missing
+    CharacterController!\\\");\\r\\n        }\\r\\n        this.mGravityVelocity.y
+    = -this.mGravity;\\r\\n    }\\r\\n    Start() {\\r\\n        this.InitLight();\\r\\n   
+    }\\r\\n    SetLightObj(obj) {\\r\\n        this.objLight = obj;\\r\\n    }\\r\\n   
+    SetIKCtrl(ikctrl) {\\r\\n        this.IKCtrl = ikctrl;\\r\\n    }\\r\\n    GetIKCtrl()
+    {\\r\\n        return this.IKCtrl;\\r\\n    }\\r\\n    InitLight() {\\r\\n       
+    this.SuperLightCurTimes = this.SuperLightMaxUseTimes;\\r\\n        this.SuperLightCurCDTime
+    = this.SuperLightCDTime;\\r\\n        this.LightBattle = this.MaxLightBattle;\\r\\n       
+    this.SuperLightBattle = this.MaxSuperLightBattle;\\r\\n        this.bSuperLightOpen
+    = false;\\r\\n        this.SetLightAction(PlayerManager_1.LightState.OFF);\\r\\n       
+    this.SetSuperLightAction(PlayerManager_1.LightState.OFF);\\r\\n        UIHunterOperation_1.default.Instance.SetFlashImgOn();\\r\\n       
+    UIHunterOperation_1.default.Instance.SetSuperFlashImgOn();\\r\\n        PlayerManager_1.default.Instance.ResetSuperLight();\\r\\n   
+    }\\r\\n    // \u903B\u8F91\u5E27\\r\\n    FixedUpdate() {\\r\\n        if (this.mIsLocal)
+    {\\r\\n            this.LockStepData();\\r\\n        }\\r\\n        else {\\r\\n           
+    this.RemotePlayerMove();\\r\\n        }\\r\\n        // if (this.TeamSignObj.activeSelf
+    && this != PlayerManager.Instance.mLocalZepetoNetPlayer) {\\r\\n        //    
+    let dis = Vector3.Distance(PlayerManager.Instance.mLocalZepetoNetPlayer.transform.position,
+    this.transform.position);\\r\\n        //     // console.log(dis);\\r\\n       
+    //     dis = Math.max(dis, 3);\\r\\n        //     let baseScale = 0.01;\\r\\n       
+    //     this.TeamSignObj.transform.GetChild(0).transform.localScale =\\r\\n       
+    //         new Vector3(baseScale * (dis / 4), baseScale, baseScale * (dis / 4));\\r\\n       
+    // }\\r\\n    }\\r\\n    // \u6E32\u67D3\u5E27\\r\\n    Update() {\\r\\n       
+    if (this.mIsLocal) {\\r\\n            this.LocalPlayerMove();\\r\\n           
+    this.PlayerJump();\\r\\n        }\\r\\n        this.UpdateLight();\\r\\n       
+    this.UpdateSuperLight();\\r\\n    }\\r\\n    UpdateLight() {\\r\\n        if
+    (this.LightState == PlayerManager_1.LightState.ON && this.mIsLocal) {\\r\\n           
+    this.objLight.transform.LookAt(this.mLightTar);\\r\\n        }\\r\\n        this.lightTime
+    += UnityEngine_1.Time.deltaTime;\\r\\n        if (this.lightTime >= 1) {\\r\\n           
+    if (this.LightState == PlayerManager_1.LightState.ON) {\\r\\n               
+    // this.LightBattle--;\\r\\n                if (this.LightBattle <= 0) {\\r\\n                   
+    this.LightBattle = 0;\\r\\n                    this.lightTime = 0;\\r\\n                   
+    this.SetLightAction(PlayerManager_1.LightState.OFF);\\r\\n                   
+    PlayerManager_1.default.Instance.SendLightState(this.LightState);\\r\\n               
+    }\\r\\n            }\\r\\n            else {\\r\\n                if (this.LightBattle
+    < this.MaxLightBattle) {\\r\\n                    // this.LightBattle += 2;\\r\\n               
+    }\\r\\n            }\\r\\n            this.lightTime = 0;\\r\\n        }\\r\\n   
+    }\\r\\n    UpdateSuperLight() {\\r\\n        if (!this.bSuperLightOpen) {\\r\\n           
+    return;\\r\\n        }\\r\\n        if (this.SuperLightState == PlayerManager_1.LightState.ON
+    && this.mIsLocal) {\\r\\n            this.objSuperLight.transform.LookAt(this.mLightTar);\\r\\n       
+    }\\r\\n        this.lightSuperTime += UnityEngine_1.Time.deltaTime;\\r\\n       
+    if (this.lightSuperTime >= 1) {\\r\\n            if (this.SuperLightState ==
+    PlayerManager_1.LightState.ON) {\\r\\n                this.SuperLightBattle--;\\r\\n               
+    if (this.SuperLightBattle <= 0) {\\r\\n                    this.SuperLightBattle
+    = 0;\\r\\n                    this.lightSuperTime = 0;\\r\\n                   
+    this.SetSuperLightAction(PlayerManager_1.LightState.OFF);\\r\\n                   
+    // UIHunterOperation.Instance.SetFlashImgOn();\\r\\n                    // PlayerManager.Instance.SendLightState(LightState.OFF);\\r\\n                   
+    PlayerManager_1.default.Instance.SendSuperLightState(this.SuperLightState);\\r\\n                   
+    // this.SetSuperLightCD();\\r\\n                    // this.SuperLightCurCDTime
+    = 0;\\r\\n                }\\r\\n            }\\r\\n            else {\\r\\n               
+    PlayerManager_1.default.Instance.CloseScaneRound();\\r\\n                this.SuperLightBattle
+    = this.MaxSuperLightBattle;\\r\\n                this.bSuperLightOpen = false;\\r\\n           
+    }\\r\\n            this.lightSuperTime = 0;\\r\\n        }\\r\\n    }\\r\\n   
+    /**\\r\\n     * @description: Public \u8DF3\u8DC3\u6309\u94AE\u6309\u4E0B\u65F6\\r\\n    
+    */\\r\\n    Jump() {\\r\\n        if (!this.mIsJumping) {\\r\\n            this.mGravityVelocity.y
+    = this.mJumpPower;\\r\\n            this.mIsJumping = true;\\r\\n           
+    this.UpdateAnimatorState(MoveDirState.Jump);\\r\\n            this.AddPlayerCurrentData();\\r\\n           
+    console.log(\\\"\u5F00\u59CBJump\\\");\\r\\n        }\\r\\n    }\\r\\n    SetLightAction(state)
+    {\\r\\n        if (this.objLight) {\\r\\n            this.LightState = state;\\r\\n           
+    this.objLight.SetActive(this.LightState == PlayerManager_1.LightState.ON);\\r\\n           
+    this.IKCtrl.ikActive = this.objLight.activeSelf;\\r\\n        }\\r\\n    }\\r\\n   
+    SetSuperLightAction(state) {\\r\\n        // if (this.objSuperLight) {\\r\\n       
+    this.SuperLightState = state;\\r\\n        //     this.objSuperLight.SetActive(this.SuperLightState
+    == LightState.ON);\\r\\n        //     this.IKCtrl.ikActive = this.objSuperLight.activeSelf;\\r\\n       
+    // }\\r\\n    }\\r\\n    /**\\r\\n     * @description: \u505C\u6B62\u79FB\u52A8\\r\\n    
+    */\\r\\n    StopMoving() {\\r\\n        if (this.mIsMoving) {\\r\\n           
+    this.mIsMoving = false;\\r\\n            this.UpdateAnimatorState(0);\\r\\n           
+    this.mCurMoveSpeed = 0;\\r\\n            this.mTimer = 0;\\r\\n            this.AddPlayerCurrentData();\\r\\n       
+    }\\r\\n    }\\r\\n    /**\\r\\n     * @description: \u5C1D\u8BD5\u79FB\u52A8\\r\\n    
+    */\\r\\n    StartMove(uiMoveDir) {\\r\\n        let moveState = this.CalMoveStateByUI(uiMoveDir);\\r\\n       
+    this.UpdateAnimatorState(moveState);\\r\\n        let curForward = UnityEngine_1.Vector3.op_Multiply(this.transform.forward,
+    uiMoveDir.y);\\r\\n        let curRight = UnityEngine_1.Vector3.op_Multiply(this.transform.right,
+    uiMoveDir.x);\\r\\n        this.mMoveDir = UnityEngine_1.Vector3.op_Addition(curForward,
+    curRight).normalized;\\r\\n        this.mCurMoveSpeed = this.GetMoveSpeedByDir(moveState);\\r\\n       
+    this.mTimer = 0;\\r\\n        this.mIsMoving = true;\\r\\n    }\\r\\n    /**\\r\\n    
+    * @description: \u66F4\u65B0\u89D2\u5EA6\\r\\n     */\\r\\n    UpdateAngel(toAngle)
+    {\\r\\n        this.mToAngle.y = toAngle;\\r\\n        this.transform.eulerAngles
+    = this.mToAngle;\\r\\n    }\\r\\n    CalMoveStateByUI(uiDir) {\\r\\n        let
+    abs_y = Math.abs(uiDir.y);\\r\\n        let abs_x = Math.abs(uiDir.x);\\r\\n       
+    if (abs_y >= abs_x) {\\r\\n            if (uiDir.y > 0) {\\r\\n               
+    return MoveDirState.Forward;\\r\\n            }\\r\\n            else {\\r\\n               
+    return MoveDirState.Back;\\r\\n            }\\r\\n        }\\r\\n        else
+    {\\r\\n            if (uiDir.x > 0) {\\r\\n                return MoveDirState.Left;\\r\\n           
+    }\\r\\n            else {\\r\\n                return MoveDirState.Right;\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    /********\\r\\n     * @description: \u7269\u7406\u79FB\u52A8\u903B\u8F91\\r\\n    
+    */\\r\\n    LocalPlayerMove() {\\r\\n        if (this.mIsMoving) {\\r\\n           
+    this.mTimer += UnityEngine_1.Time.deltaTime;\\r\\n            if (this.mTimer
+    > this.mMaxMoveTime) {\\r\\n                this.StopMoving();\\r\\n           
+    }\\r\\n            if (this.mCharacterController.enabled)\\r\\n               
+    this.mCharacterController.Move(UnityEngine_1.Vector3.op_Multiply(this.mMoveDir,
+    this.mCurMoveSpeed * UnityEngine_1.Time.deltaTime));\\r\\n        }\\r\\n   
+    }\\r\\n    /**\\r\\n     * @description: \u7269\u7406\u8DF3\u8DC3\u903B\u8F91\\r\\n    
+    *********/\\r\\n    PlayerJump() {\\r\\n        if (this.mIsJumping) {\\r\\n           
+    this.mGravityVelocity.y -= this.mGravity * 2.5 * UnityEngine_1.Time.deltaTime;\\r\\n           
+    if (this.mGravityVelocity.y < -this.mGravity * 1.5) {\\r\\n                this.mIsJumping
+    = false;\\r\\n                if (this.mIsMoving)\\r\\n                    this.UpdateAnimatorState(MoveDirState.Forward);\\r\\n               
+    else\\r\\n                    this.UpdateAnimatorState(MoveDirState.None);\\r\\n               
+    console.log(\\\"\u505C\u6B62Jump\\\");\\r\\n            }\\r\\n        }\\r\\n       
+    if (this.mCharacterController.enabled)\\r\\n            this.mCharacterController.Move(UnityEngine_1.Vector3.op_Multiply(this.mGravityVelocity,
+    UnityEngine_1.Time.deltaTime));\\r\\n    }\\r\\n    LockStepData() {\\r\\n       
+    this.mFrameIndex++;\\r\\n        if (this.mIsJumping || this.mIsMoving) {\\r\\n           
+    this.AddPlayerCurrentData();\\r\\n        }\\r\\n        else {\\r\\n           
+    this.mHeartDataTimer++;\\r\\n            if (this.mHeartDataTimer > this.mHeartDataConst)
+    {\\r\\n                this.AddPlayerCurrentData();\\r\\n                this.SendMoveData();\\r\\n           
+    }\\r\\n        }\\r\\n        if (this.mFrameIndex >= this.mSendPakRate) {\\r\\n           
+    this.mFrameIndex = 0;\\r\\n            if (!this.mSendLocalPackage.IsEmpty())
+    {\\r\\n                if (!this.mIsJumping && this.mIsMoving)\\r\\n                   
+    this.AddPredictData();\\r\\n                this.SendMoveData();\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n    AddPlayerCurrentData() {\\r\\n        this.mHeartDataTimer
+    = 0;\\r\\n        let data = new ZepetoNetTransformPackage_1.sNetTransform();\\r\\n       
+    data.SetPosition(this.transform.position);\\r\\n        data.a = Math.round(this.transform.eulerAngles.y);\\r\\n       
+    data.s = this.mAnimatorState;\\r\\n        this.mSendLocalPackage.mDatas.Enqueue(data);\\r\\n   
+    }\\r\\n    AddPredictData() {\\r\\n        let data = new ZepetoNetTransformPackage_1.sNetTransform();\\r\\n       
+    let nextPosOffset = UnityEngine_1.Vector3.op_Multiply(this.mMoveDir, this.mRunSpeed
+    * UnityEngine_1.Time.fixedDeltaTime);\\r\\n        let nextPos = UnityEngine_1.Vector3.op_Addition(this.transform.position,
+    nextPosOffset);\\r\\n        data.SetPosition(nextPos);\\r\\n        data.a =
+    Math.round(this.transform.eulerAngles.y);\\r\\n        data.s = this.mAnimatorState;\\r\\n       
+    this.mSendLocalPackage.mDatas.Enqueue(data);\\r\\n        let data2 = new ZepetoNetTransformPackage_1.sNetTransform();\\r\\n       
+    nextPosOffset = UnityEngine_1.Vector3.op_Multiply(this.mMoveDir, this.mRunSpeed
+    * UnityEngine_1.Time.fixedDeltaTime * 2);\\r\\n        let nextPos2 = UnityEngine_1.Vector3.op_Addition(this.transform.position,
+    nextPosOffset);\\r\\n        data2.SetPosition(nextPos2);\\r\\n        data2.a
+    = Math.round(this.transform.eulerAngles.y);\\r\\n        data2.s = this.mAnimatorState;\\r\\n       
+    this.mSendLocalPackage.mDatas.Enqueue(data2);\\r\\n    }\\r\\n    GetLightBattle()
+    {\\r\\n        return this.LightBattle;\\r\\n    }\\r\\n    NetSetTeamSignVisible(b)
+    {\\r\\n        // this.TeamSignObj.SetActive(b);\\r\\n        // console.log(\\\"NetSetTeamSignVisible\\\",
+    b);\\r\\n        // if (!b) return;\\r\\n        // if (this.transform.childCount
+    <= 1) {\\r\\n        //     return;\\r\\n        // }\\r\\n        // let matarr:
+    Material[] = [];\\r\\n        // let go = this.transform.GetChild(1).gameObject;\\r\\n       
+    // if (go) {\\r\\n        //     //\u9690\u85CF\u8005\u7ED3\u6784\\r\\n       
+    //     let gosun = go.transform.GetChild(0).gameObject;\\r\\n        //     matarr.push(gosun.GetComponent<MeshRenderer>().materials[0]);\\r\\n       
+    //     matarr.push(PlayerManager.Instance.wallmat);\\r\\n        //     GameObject.DestroyImmediate(gosun.GetComponent<MeshRenderer>());\\r\\n       
+    //     let mr = gosun.AddComponent<MeshRenderer>();\\r\\n        //     mr.materials
+    = matarr;\\r\\n        //     return;\\r\\n        // }\\r\\n    }\\r\\n}\\r\\nexports.default
+    = ZepetoNetPlayer;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiWmVwZXRvTmV0UGxheWVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiWmVwZXRvTmV0UGxheWVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQXNEO0FBQ3RELDJFQUE4RjtBQUM5Riw2Q0FBa0s7QUFDbEssMERBQWtFO0FBQ2xFLHVEQUE0QztBQUM1QyxnRUFBeUU7QUFDekUsNkNBQXNDO0FBQ3RDLCtEQUF3RDtBQUN4RCw0REFBcUQ7QUFFckQsSUFBSyxZQU9KO0FBUEQsV0FBSyxZQUFZO0lBQ2IsK0NBQVEsQ0FBQTtJQUNSLHFEQUFXLENBQUE7SUFDWCwrQ0FBUSxDQUFBO0lBQ1IsK0NBQVEsQ0FBQTtJQUNSLGlEQUFTLENBQUE7SUFDVCwrQ0FBUSxDQUFBO0FBQ1osQ0FBQyxFQVBJLFlBQVksS0FBWixZQUFZLFFBT2hCO0FBRUQsTUFBZSxtQkFBb0IsU0FBUSxxQ0FBcUI7SUFBaEU7O1FBR1csbUJBQWMsR0FBVyxFQUFFLENBQUM7UUFDNUIsZ0JBQVcsR0FBVyxJQUFJLENBQUMsY0FBYyxDQUFDO1FBRTFDLGFBQVEsR0FBWSxLQUFLLENBQUM7UUFDMUIsZ0JBQVcsR0FBVyxJQUFJLENBQUM7UUFDM0IsZ0JBQVcsR0FBVyxDQUFDLENBQUM7UUFFL0IsWUFBWTtRQUNMLHFCQUFnQixHQUFHLEVBQUUsQ0FBQyxDQUFBLElBQUk7UUFDMUIsd0JBQW1CLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixDQUFDO1FBQzVDLDBCQUFxQixHQUFHLENBQUMsQ0FBQyxDQUFBLFNBQVM7UUFDbkMsdUJBQWtCLEdBQUcsSUFBSSxDQUFDLHFCQUFxQixDQUFDLENBQUEsUUFBUTtRQUV4RCx3QkFBbUIsR0FBRyxFQUFFLENBQUMsQ0FBQSxVQUFVO1FBQ25DLHFCQUFnQixHQUFXLElBQUksQ0FBQyxtQkFBbUIsQ0FBQztRQUNwRCxvQkFBZSxHQUFTLEtBQUssQ0FBQztRQUNyQyxjQUFjO1FBQ2QscUJBQXFCO1FBQ0YsaUJBQVksR0FBVyxDQUFDLENB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\",\"assetPath\":\"Assets/Scripts/NetTransform/ZepetoNetPlayer.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"mJumpPower\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"8\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"HideInInspector\",\"args\":[]}]},{\"assembly\":\"mscorlib\",\"name\":\"MaxLightBattle\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"10\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[{\"name\":\"HideInInspector\",\"args\":[]}]},{\"assembly\":\"mscorlib\",\"name\":\"LightBattle\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"MaxLightBattle\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mId\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mIsLocal\",\"type\":\"System.Boolean\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mMinMoveDis\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0.05\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mMaxMoveDis\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"3\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"SuperLightCDTime\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"60\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"SuperLightCurCDTime\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"SuperLightCDTime\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"SuperLightMaxUseTimes\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"2\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"SuperLightCurTimes\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"SuperLightMaxUseTimes\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"MaxSuperLightBattle\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"20\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"SuperLightBattle\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"MaxSuperLightBattle\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"bSuperLightOpen\",\"type\":\"System.Boolean\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"objLight\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"objSuperLight\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"IKCtrl\",\"type\":\"D:/Git/new-world-peekaboo/Assets/Scripts/Common/IKCtrl.default\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"weaponInRoot\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"weaponOutRoot\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"weaponObj\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mLightTar\",\"type\":\"UnityEngine.Transform\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"LightState\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"OFF\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"SuperLightState\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"OFF\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"lightTime\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"lightSuperTime\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"HandLightObj\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"mRunSpeed\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[\"0.5\"],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"ZepetoNetPlayerBase\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 7ba3ac49056f9bf5972843ddd9a25d4c
+  onlyWriteTrigger: 0

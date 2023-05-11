@@ -1,0 +1,79 @@
+fileFormatVersion: 2
+guid: 1d92105ebe099ae44b2d8f809317a0b0
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst ZEPETO_Script_1
+    = require(\\\"ZEPETO.Script\\\");\\r\\nclass ToastAnimator extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    /** \uD1A0\uC2A4\uD2B8\uCC3D \uB0B4\uB824\uC90C */\\r\\n    ShowToastWindow()
+    {\\r\\n        // if(this._coroutine) {\\r\\n        //     this.StopCoroutine(this._coroutine);\\r\\n       
+    //     this._coroutine = null;\\r\\n        // }\\r\\n        if (!this.gameObject.activeSelf)
+    {\\r\\n            this.gameObject.SetActive(true);\\r\\n        }\\r\\n       
+    this.StartCoroutine(this.CoEnagleToastWindow());\\r\\n        // } else {\\r\\n       
+    //     this.HideAndShowWindow();\\r\\n        // }\\r\\n    }\\r\\n    *CoEnagleToastWindow()
+    {\\r\\n        this._rectTransform = this.gameObject.GetComponent($typeof(UnityEngine_1.RectTransform));\\r\\n       
+    let waitForEndofFrame = new UnityEngine_1.WaitForEndOfFrame();\\r\\n        let
+    _timeElapsed = 0;\\r\\n        let _currentPos = this._rectTransform.anchoredPosition3D;\\r\\n       
+    while (true) {\\r\\n            let _adjustedTime = this.showMotionAnimCurve.Evaluate(_timeElapsed
+    / this.showMotionDuration);\\r\\n            let _newYPos = UnityEngine_1.Mathf.Lerp(this._rectTransform.anchoredPosition3D.y,
+    this.targetYPos, _adjustedTime);\\r\\n            this._rectTransform.anchoredPosition3D
+    = new UnityEngine_1.Vector3(_currentPos.x, _newYPos, _currentPos.z);\\r\\n           
+    _timeElapsed += UnityEngine_1.Time.deltaTime;\\r\\n            yield waitForEndofFrame;\\r\\n           
+    if (_timeElapsed > this.showMotionDuration)\\r\\n                break;\\r\\n       
+    }\\r\\n        this._rectTransform.anchoredPosition3D = new UnityEngine_1.Vector3(_currentPos.x,
+    this.targetYPos, _currentPos.z);\\r\\n    }\\r\\n    /** \uD1A0\uC2A4\uD2B8\uCC3D\uC774
+    \uC774\uBBF8 \uB0B4\uB824\uC640 \uC788\uC744 \uB54C \uB2E4\uC2DC \uBCF4\uC5EC\uC918\uC57C
+    \uD560 \uACBD\uC6B0 \uC0AC\uC6A9. \uBC18\uB9CC \uC62C\uB77C\uAC14\uB2E4\uAC00
+    \uB2E4\uC2DC \uB0B4\uB824\uC634 */\\r\\n    HideAndShowWindow() {\\r\\n       
+    // this.StartCoroutine(this.CoHideAndShowWindow());\\r\\n    }\\r\\n    // *CoHideAndShowWindow()
+    {\\r\\n    //     if (this._coroutine) {\\r\\n    //         this.StopCoroutine(this._coroutine);\\r\\n   
+    //         this._coroutine = null;\\r\\n    //     }\\r\\n    //     let waitForEndofFrame
+    = new WaitForEndOfFrame();\\r\\n    //     while (this._rectTransform.anchoredPosition3D.y
+    < this.originalYPos / 2) {\\r\\n    //         let Ypos = this._rectTransform.anchoredPosition3D.y
+    + Time.deltaTime * this.speed;\\r\\n    //         this._rectTransform.anchoredPosition3D
+    = new Vector3(this._rectTransform.anchoredPosition3D.x, Ypos, this._rectTransform.anchoredPosition3D.z);\\r\\n   
+    //         yield waitForEndofFrame;\\r\\n    //     }\\r\\n    //     while (this._rectTransform.anchoredPosition3D.y
+    > this.targetYPos) {\\r\\n    //         let Ypos = this._rectTransform.anchoredPosition3D.y
+    - Time.deltaTime * this.speed;\\r\\n    //         this._rectTransform.anchoredPosition3D
+    = new Vector3(this._rectTransform.anchoredPosition3D.x, Ypos, this._rectTransform.anchoredPosition3D.z);\\r\\n   
+    //         yield waitForEndofFrame;\\r\\n    //     }\\r\\n    //     this._coroutine
+    = null;\\r\\n    // }\\r\\n    /** \uD1A0\uC2A4\uD2B8\uCC3D \uC62C\uB9B0 \uD6C4
+    \uC228\uAE30\uAE30 */\\r\\n    HideToastWindow() {\\r\\n        if (this.gameObject.activeSelf)
+    {\\r\\n            this._coroutine = this.StartCoroutine(this.CoHideToastWindow());\\r\\n       
+    }\\r\\n    }\\r\\n    *CoHideToastWindow() {\\r\\n        this._rectTransform
+    = this.gameObject.GetComponent($typeof(UnityEngine_1.RectTransform));\\r\\n       
+    let waitForEndofFrame = new UnityEngine_1.WaitForEndOfFrame();\\r\\n        let
+    _timeElapsed = 0;\\r\\n        let _currentPos = this._rectTransform.anchoredPosition3D;\\r\\n       
+    while (true) {\\r\\n            let _adjustedTime = this.hideMotionAnimCurve.Evaluate(_timeElapsed
+    / this.hideMotionDuration);\\r\\n            let _newYPos = UnityEngine_1.Mathf.Lerp(this._rectTransform.anchoredPosition3D.y,
+    this.originalYPos, _adjustedTime);\\r\\n            this._rectTransform.anchoredPosition3D
+    = new UnityEngine_1.Vector3(_currentPos.x, _newYPos, _currentPos.z);\\r\\n           
+    _timeElapsed += UnityEngine_1.Time.deltaTime;\\r\\n            yield waitForEndofFrame;\\r\\n           
+    if (_timeElapsed > this.hideMotionDuration)\\r\\n                break;\\r\\n       
+    }\\r\\n        this._rectTransform.anchoredPosition3D = new UnityEngine_1.Vector3(_currentPos.x,
+    this.originalYPos, _currentPos.z);\\r\\n        this.gameObject.SetActive(false);\\r\\n       
+    UnityEngine_1.GameObject.Destroy(this.gameObject);\\r\\n        this._coroutine
+    = null;\\r\\n    }\\r\\n    DestoryToastWindow(timer) {\\r\\n        this.StartCoroutine(this.CoDestoryToastWindow(timer));\\r\\n   
+    }\\r\\n    *CoDestoryToastWindow(timer) {\\r\\n        let waitForSeconds = new
+    UnityEngine_1.WaitForSeconds(timer);\\r\\n        yield waitForSeconds;\\r\\n       
+    UnityEngine_1.GameObject.Destroy(this.gameObject);\\r\\n    }\\r\\n}\\r\\nexports.default
+    = ToastAnimator;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVG9hc3RBbmltYXRvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlRvYXN0QW5pbWF0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBNEk7QUFDNUksbURBQXdDO0FBQ3hDLGlEQUFxRDtBQUVyRCxNQUFxQixhQUFjLFNBQVEscUNBQXFCO0lBZ0I1RCxlQUFlO0lBQ2YsZUFBZTtRQUNYLHdCQUF3QjtRQUN4QiwyQ0FBMkM7UUFDM0MsOEJBQThCO1FBQzlCLElBQUk7UUFFSixJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxVQUFVLEVBQUU7WUFDN0IsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDbkM7UUFDRCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxtQkFBbUIsRUFBRSxDQUFDLENBQUM7UUFFaEQsV0FBVztRQUNYLGdDQUFnQztRQUNoQyxJQUFJO0lBQ1IsQ0FBQztJQUVELENBQUMsbUJBQW1CO1FBQ2hCLElBQUksQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsMkJBQWEsRUFBRyxDQUFDO1FBQ3BFLElBQUksaUJBQWlCLEdBQUcsSUFBSSwrQkFBaUIsRUFBRSxDQUFDO1FBQ2hELElBQUksWUFBWSxHQUFHLENBQUMsQ0FBQztRQUNyQixJQUFJLFdBQVcsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLGtCQUFrQixDQUFDO1FBRXpELE9BQU8sSUFBSSxFQUFFO1lBQ1QsSUFBSSxhQUFhLEdBQUcsSUFBSSxDQUFDLG1CQUFtQixDQUFDLFFBQVEsQ0FBQyxZQUFZLEdBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLENBQUM7WUFDNUYsSUFBSSxRQUFRLEdBQUcsbUJBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLFVBQVUsRUFBRSxhQUFhLENBQUMsQ0FBQztZ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\",\"assetPath\":\"Assets/CommonModules/Screenshot/Scripts/ToastAnimator.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"originalYPos\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"targetYPos\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"showMotionDuration\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"showMotionAnimCurve\",\"type\":\"UnityEngine.AnimationCurve\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"mscorlib\",\"name\":\"hideMotionDuration\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"hideMotionAnimCurve\",\"type\":\"UnityEngine.AnimationCurve\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"ToastAnimator\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 0ddfeeacebb668eacd7427c2a9f48c32
+  onlyWriteTrigger: 0

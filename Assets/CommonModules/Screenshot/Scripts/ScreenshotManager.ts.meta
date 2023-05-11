@@ -1,0 +1,307 @@
+fileFormatVersion: 2
+guid: 6f0f74846e85c40a0a39848fc2984774
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst UnityEngine_Video_1
+    = require(\\\"UnityEngine.Video\\\");\\r\\nconst ZEPETO_Character_Controller_1
+    = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nconst ZEPETO_Script_1 =
+    require(\\\"ZEPETO.Script\\\");\\r\\n// import QuestManager from '../../../Scripts/QuestManager';\\r\\n//
+    import SoundManager from '../../../Scripts/SoundManager';\\r\\nconst ScreenshotController_1
+    = require(\\\"./ScreenshotController\\\");\\r\\nconst ScreenshotUIController_1
+    = require(\\\"./ScreenshotUIController\\\");\\r\\nconst ToastAnimator_1 = require(\\\"./ToastAnimator\\\");\\r\\nclass
+    ScreenshotManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    /**
+    \uC2A4\uD06C\uB9B0\uC0F7 UI on/off\uD558\uB294 \uD568\uC218 */\\r\\n    ToggleScreenshotUI()
+    {\\r\\n        if (this._screenshotUIController.IsUIActive) {\\r\\n           
+    this.HideScreenshotUI();\\r\\n        }\\r\\n        else {\\r\\n           
+    this.ShowScreenshotUI();\\r\\n        }\\r\\n    }\\r\\n    /** \uC2A4\uD06C\uB9B0\uC0F7
+    UI \uBCF4\uC5EC\uC8FC\uB294 \uD568\uC218 */\\r\\n    ShowScreenshotUI() {\\r\\n       
+    // \uC2A4\uD06C\uB9B0\uC0F7 UI\uB97C \uBCC0\uACBD\uD560 \uC218 \uC788\uB294 \uC0C1\uD669\uC774
+    \uC544\uB2C8\uBA74 \uD568\uC218 \uC885\uB8CC\\r\\n        if (!this._canEnterOrExit)
+    {\\r\\n            return;\\r\\n        }\\r\\n        this._screenshotUIController.ShowUI();\\r\\n       
+    // \uC720\uC800 \uC774\uB984 \uB514\uC2A4\uD50C\uB808\uC774 \uAD00\uB828 \uC124\uC815\\r\\n       
+    this.ToggleUserNameDisplay(true);\\r\\n        this._screenshotUIController.UserNameOnButton.gameObject.SetActive(false);\\r\\n       
+    // this._screenshotUIController.UserNameOffButton.gameObject.SetActive(true);\\r\\n   
+    }\\r\\n    /** \uC2A4\uD06C\uB9B0\uC0F7 UI \uC228\uACA8\uC8FC\uB294 \uD568\uC218
+    */\\r\\n    HideScreenshotUI() {\\r\\n        // \uC2A4\uD06C\uB9B0\uC0F7 UI\uB97C
+    \uBCC0\uACBD\uD560 \uC218 \uC788\uB294 \uC0C1\uD669\uC774 \uC544\uB2C8\uBA74
+    \uD568\uC218 \uC885\uB8CC\\r\\n        if (!this._canEnterOrExit) {\\r\\n           
+    return;\\r\\n        }\\r\\n        this._screenshotUIController.HideUI();\\r\\n       
+    // \uC720\uC800 \uC774\uB984 \uB514\uC2A4\uD50C\uB808\uC774 \uAD00\uB828 \uC124\uC815\\r\\n       
+    this.ToggleUserNameDisplay(true);\\r\\n        this._screenshotUIController.UserNameOnButton.gameObject.SetActive(false);\\r\\n       
+    // this._screenshotUIController.UserNameOffButton.gameObject.SetActive(true);\\r\\n   
+    }\\r\\n    /**\\r\\n     * \uC720\uC800 \uC774\uB984\uC744 \uBCF4\uC5EC\uC8FC\uAC70\uB098
+    \uC228\uACA8\uC8FC\uB294 \uD568\uC218\\r\\n     * @param {bool} showUserName
+    true\uBA74 \uC720\uC800 \uC774\uB984 \uBCF4\uC5EC\uC8FC\uACE0, false\uBA74 \uC720\uC800
+    \uC774\uB984 \uC228\uACA8\uC90C\\r\\n     */\\r\\n    ToggleUserNameDisplay(showUserName)
+    {\\r\\n        //TODO: [\uC778\uD615\uC758\uC9D1, \uB124\uC628\uD30C\uD2F0] \uC544\uB798
+    \uB0B4\uC6A9 ZepetoPlayersCustomizer \uD1B5\uD574\uC11C \uAD6C\uD604 \uD544\uC694.
+    \\r\\n        if (showUserName) {\\r\\n            // \uC720\uC800 \uB124\uC784
+    \uBCF4\uC5EC\uC8FC\uAE30\\r\\n            // ZepetoPlayersCustomizer.Instance.ShowFloatingUIs();\\r\\n       
+    }\\r\\n        else {\\r\\n            //\uC720\uC800 \uB124\uC784 \uC228\uAE30\uAE30\\r\\n           
+    // ZepetoPlayersCustomizer.Instance.HideFloatingUIs();\\r\\n        }\\r\\n   
+    }\\r\\n    /** \uD504\uB85C\uADF8\uB798\uC2A4 \uB3C4\uB11B \uCC3E\uC544\uC11C
+    \uC800\uC7A5\uD558\uB294 \uD568\uC218 */\\r\\n    ProgressImageSetting() {\\r\\n       
+    let children = this._screenshotUIController.ProgressToast.GetComponentsInChildren($typeof(UnityEngine_UI_1.Image));\\r\\n       
+    children.forEach(i => {\\r\\n            if (i.name == \\\"ProgressDoughnut\\\")
+    {\\r\\n                this._progressDoughnut = i;\\r\\n            }\\r\\n       
+    });\\r\\n    }\\r\\n    /** \uC790\uB3D9\uC73C\uB85C \uB3C4\uB11B \uCC44\uC6B0\uB294
+    \uD568\uC218 */\\r\\n    AutoLoading() {\\r\\n        this._coProgressToast =
+    this.StartCoroutine(this.CoAutoLoading());\\r\\n    }\\r\\n    /** \uD504\uB85C\uADF8\uB798\uC2A4
+    \uB3C4\uB11B\uC744 \uCC44\uC6B0\uB294 \uCF54\uB8E8\uD2F4 \uD568\uC218 */\\r\\n   
+    *CoAutoLoading() {\\r\\n        let startTime = UnityEngine_1.Time.time;\\r\\n       
+    this._progressDoughnut.color = new UnityEngine_1.Color(92, 70, 255);\\r\\n       
+    this._progressDoughnut.fillAmount = 0;\\r\\n        while (true) {\\r\\n           
+    if (UnityEngine_1.GameObject.op_Equality(this._progressDoughnut, null)) {\\r\\n               
+    return;\\r\\n            }\\r\\n            this._screenshotUIController.FillProgressDoughnut(startTime,
+    9.0, this._progressDoughnut);\\r\\n            yield null;\\r\\n        }\\r\\n   
+    }\\r\\n    /**\\r\\n     * \uC9C4\uD589\uBC14 \uBA48\uCD94\uB294 \uD568\uC218\\r\\n    
+    * @param {bool} result true\uBA74 \uB3C4\uB11B\uC744 full\uB85C \uCC44\uC6B0\uACE0
+    false\uBA74 \uADF8\uB300\uB85C \uB460\\r\\n     */\\r\\n    StopProgressAutoLoading(result)
+    {\\r\\n        if (this._coProgressToast) {\\r\\n            this.StopCoroutine(this._coProgressToast);\\r\\n           
+    this._coProgressToast = null;\\r\\n        }\\r\\n        if (result) {\\r\\n           
+    this.StartCoroutine(this.CoAutoLoadingFastComplete(0.5));\\r\\n        }\\r\\n   
+    }\\r\\n    /**\\r\\n     * \uB3C4\uB11B\uC744 \uC790\uB3D9\uC73C\uB85C \uBE60\uB974\uAC8C
+    \uCC44\uC6B0\uB294 \uCF54\uB8E8\uD2F4 \uD568\uC218\\r\\n     * @param {number}
+    duration \uB3C4\uB11B\uC744 \uCC44\uC6B0\uAE30\uAE4C\uC9C0 \uAC78\uB9AC\uB294
+    \uC2DC\uAC04. e.g. 0.5 \uC804\uB2EC \uC2DC 0.5\uB0B4\uB85C \uB3C4\uB11B\uC744
+    \uBE60\uB974\uAC8C \uCC44\uC6C0.\\r\\n     */\\r\\n    *CoAutoLoadingFastComplete(duration)
+    {\\r\\n        let startingFillAmount = this._progressDoughnut.fillAmount;\\r\\n       
+    let timeElapsed = 0;\\r\\n        while (true) {\\r\\n            if (UnityEngine_1.GameObject.op_Equality(this._progressDoughnut,
+    null)) {\\r\\n                return;\\r\\n            }\\r\\n            if
+    (this._progressDoughnut.fillAmount >= 1) {\\r\\n                break;\\r\\n           
+    }\\r\\n            this._progressDoughnut.fillAmount = UnityEngine_1.Mathf.SmoothStep(startingFillAmount,
+    1, timeElapsed / duration);\\r\\n            timeElapsed += UnityEngine_1.Time.deltaTime;\\r\\n           
+    yield null;\\r\\n        }\\r\\n    }\\r\\n    /**\\r\\n     * \uC77C\uC815 \uC2DC\uAC04
+    \uB4A4 \uD1A0\uC2A4\uD2B8\uCC3D \uC228\uAE30\uB294 \uCF54\uB8E8\uD2F4 \uD568\uC218\\r\\n    
+    * @param {GameObject} toast \uC228\uACA8\uC57C \uD558\uB294 \uD1A0\uC2A4\uD2B8\uCC3D\\r\\n    
+    * @param {number} timer \uD1A0\uC2A4\uD2B8 \uCC3D\uC744 \uC228\uAE30\uAE30 \uC704\uD55C
+    \uD0C0\uC774\uBA38. 1\uCD08 \uC804\uB2EC \uC2DC 1\uCD08 \uD6C4\uC5D0 \uD1A0\uC2A4\uD2B8\uCC3D
+    \uC228\uAE40.\\r\\n     */\\r\\n    *CoHideToastWithTimer(toast, timer) {\\r\\n       
+    let waitForSeconds = new UnityEngine_1.WaitForSeconds(timer);\\r\\n        yield
+    waitForSeconds;\\r\\n        if (UnityEngine_1.GameObject.op_Equality(toast,
+    null)) {\\r\\n            return;\\r\\n        }\\r\\n        else {\\r\\n           
+    toast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n       
+    }\\r\\n    }\\r\\n    /**\\r\\n     * \uD1A0\uC2A4\uD2B8\uCC3D\uC744 \uBCF4\uC5EC\uC8FC\uB294
+    \uCF54\uB8E8\uD2F4 \uD568\uC218\\r\\n     * @param {bool} result true\uBA74 success
+    toast\uCC3D \uBCF4\uC5EC\uC90C. false\uBA74 fail toast\uCC3D \uBCF4\uC5EC\uC90C.\\r\\n    
+    */\\r\\n    *CoShowToastWindow(result) {\\r\\n        // \uD504\uB85C\uADF8\uB798\uC2A4
+    \uD1A0\uC2A4\uD2B8\uCC3D\uC774 \uC874\uC7AC\uD560 \uACBD\uC6B0\uC5D0\uB9CC \uD1A0\uC2A4\uD2B8\uCC3D
+    \uD30C\uAD34\\r\\n        if (!UnityEngine_1.GameObject.op_Equality(this._screenshotUIController.ProgressToast,
+    null)) {\\r\\n            this.StopProgressAutoLoading(result);\\r\\n           
+    this._screenshotUIController.ProgressToast.GetComponent($typeof(ToastAnimator_1.default)).DestoryToastWindow(0.5);\\r\\n           
+    this._screenshotUIController.ProgressToast = null;\\r\\n        }\\r\\n       
+    if (result) {\\r\\n            yield new UnityEngine_1.WaitForSeconds(0.7);\\r\\n           
+    this._screenshotUIController.ShowSuccessToastWindow();\\r\\n            this._screenshotUIController.SuccessToast.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => {\\r\\n                this._screenshotUIController.SuccessToast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n               
+    this._screenshotUIController.SuccessToast = null;\\r\\n            });\\r\\n           
+    if (this._screenshotUIController.IsPreviewWindowActive) {\\r\\n               
+    this._screenshotUIController.PreviewWindow.SetActive(false);\\r\\n               
+    this._screenshotUIController.PreviewInputField.text = this._screenshotUIController.OriginalFeedMsg;\\r\\n               
+    this.HideScreenshotUI();\\r\\n                // Show character ui input controller\\r\\n               
+    // ZepetoPlayersCustomizer.Instance.ShowInputController();\\r\\n            }\\r\\n           
+    this.StartCoroutine(this.CoHideToastWithTimer(this._screenshotUIController.SuccessToast,
+    3));\\r\\n            this._screenshotUIController.SuccessToast = null;\\r\\n           
+    this._screenshotUIController.AllowOnlyOneClick(true);\\r\\n        }\\r\\n       
+    else {\\r\\n            yield new UnityEngine_1.WaitForSeconds(0.7);\\r\\n           
+    this._screenshotUIController.ShowFailToastWindow();\\r\\n            this._screenshotUIController.FailToast.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => {\\r\\n                this._screenshotUIController.FailToast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n               
+    this._screenshotUIController.FailToast = null;\\r\\n            });\\r\\n           
+    this.StartCoroutine(this.CoHideToastWithTimer(this._screenshotUIController.FailToast,
+    3));\\r\\n            this._screenshotUIController.FailToast = null;\\r\\n           
+    this._screenshotUIController.AllowOnlyOneClick(true);\\r\\n        }\\r\\n   
+    }\\r\\n    /** Toast\uCC3D \uC138\uD305\uD558\uB294 \uD568\uC218 */\\r\\n   
+    SetToastWindows() {\\r\\n        // \uD504\uB85C\uADF8\uB798\uC2A4 \uC774\uBCA4\uD2B8
+    \uC9C0\uC815\uD558\uAE30\\r\\n        this._screenshotController.OnProgressEvent.AddListener(()
+    => {\\r\\n            this._screenshotUIController.ShowProgressToastWindow();\\r\\n           
+    this._screenshotUIController.AllowOnlyOneClick(false);\\r\\n            // \uD504\uB85C\uADF8\uB798\uC2A4
+    \uD1A0\uC2A4\uD2B8\uCC3D \uBC84\uD2BC \uC774\uBCA4\uD2B8 \uC9C0\uC815\uD558\uAE30\\r\\n           
+    this._screenshotUIController.ProgressToast.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => {\\r\\n                this._screenshotUIController.ProgressToast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n               
+    this._screenshotUIController.ProgressToast = null;\\r\\n            });\\r\\n           
+    this.ProgressImageSetting();\\r\\n            this.AutoLoading();\\r\\n       
+    });\\r\\n        // \uC2E4\uD328 \uC774\uBCA4\uD2B8\\r\\n        this._screenshotController.OnFailEvent.AddListener(()
+    => {\\r\\n            this.StartCoroutine(this.CoShowToastWindow(false));\\r\\n       
+    });\\r\\n        // \uC131\uACF5 \uC774\uBCA4\uD2B8\\r\\n        this._screenshotController.OnSuccessEvent.AddListener(()
+    => {\\r\\n            this.StartCoroutine(this.CoShowToastWindow(true));\\r\\n       
+    });\\r\\n    }\\r\\n    /** \uC0AC\uC9C4/\uBE44\uB514\uC624 \uC5C5\uB85C\uB4DC\uD558\uB294
+    \uD568\uC218 */\\r\\n    OnClickUploadButton() {\\r\\n        if (this._isPhoto)
+    {\\r\\n            this._screenshotController.PhotoPostToFeed(this._screenshotUIController.PreviewInputField.text);\\r\\n       
+    }\\r\\n        else {\\r\\n            this._screenshotController.VideoPostToFeed(this._screenshotUIController.PreviewInputField.text);\\r\\n       
+    }\\r\\n    }\\r\\n    /** \uC2A4\uD06C\uB9B0\uC0F7 \uAC04\uD3B8 \uC5C5\uB85C\uB4DC
+    \uD1A0\uC2A4\uD2B8\uCC3D \uBC84\uD2BC \uC138\uD305\uD558\uB294 \uD568\uC218 */\\r\\n   
+    ResultToastButtonSetting(easyUploadToast) {\\r\\n        let buttons = easyUploadToast.GetComponentsInChildren($typeof(UnityEngine_UI_1.Button));\\r\\n       
+    buttons.forEach(button => {\\r\\n            console.log(button.name);\\r\\n           
+    switch (button.name) {\\r\\n                case \\\"ScreenshotEditButton\\\":\\r\\n                   
+    button.onClick.AddListener(() => {\\r\\n                        console.log(\\\"screenshotResultEditButton!\\\");\\r\\n                       
+    this.OnClickEditButton(easyUploadToast);\\r\\n                    });\\r\\n                   
+    break;\\r\\n                case \\\"ScreenshotUploadButton\\\":\\r\\n                   
+    this._screenshotUIController.UploadButton = button;\\r\\n                   
+    button.onClick.AddListener(() => {\\r\\n                        console.log(\\\"screenshotResultUploadButton!\\\");\\r\\n                       
+    this.OnClickUploadButton();\\r\\n                        easyUploadToast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n                       
+    easyUploadToast = null;\\r\\n                        this._screenshotUIController.EasyUploadToast
+    = null;\\r\\n                        this._screenshotUIController.ActivateScreenshotButtons(true);\\r\\n                   
+    });\\r\\n                    break;\\r\\n                case \\\"ScreenshotResultExit\\\":\\r\\n                   
+    button.onClick.AddListener(() => {\\r\\n                        console.log(\\\"exitButtonClicked!\\\");\\r\\n                       
+    easyUploadToast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n                       
+    easyUploadToast = null;\\r\\n                        this._screenshotUIController.EasyUploadToast
+    = null;\\r\\n                        this._screenshotUIController.ActivateScreenshotButtons(true);\\r\\n                   
+    });\\r\\n                    break;\\r\\n                default:\\r\\n                   
+    break;\\r\\n            }\\r\\n        });\\r\\n        // \uC9C4\uD589\uC911
+    \uBE44\uD65C\uC131\uD654\uD55C \uBC84\uD2BC \uD65C\uC131\uD654\uD558\uAE30\\r\\n       
+    this._screenshotUIController.AllowOnlyOneClick(true);\\r\\n    }\\r\\n    /**
+    \uC0AC\uC9C4/\uBE44\uB514\uC624 \uC218\uC815\uD558\uB294 \uD568\uC218 */\\r\\n   
+    OnClickEditButton(easyUploadToast) {\\r\\n        this._screenshotUIController.PreviewWindow.SetActive(true);\\r\\n       
+    this.HideScreenshotUI();\\r\\n        easyUploadToast.GetComponent($typeof(ToastAnimator_1.default)).DestoryToastWindow(0);\\r\\n       
+    easyUploadToast = null;\\r\\n        this._screenshotUIController.EasyUploadToast
+    = null;\\r\\n        this._screenshotUIController.ActivateScreenshotButtons(true);\\r\\n       
+    if (this._isPhoto) {\\r\\n            this._screenshotUIController.PreviewRawImage.GetComponent($typeof(UnityEngine_UI_1.RawImage)).texture
+    = this._screenshotController.ScreenshotRenderTexture;\\r\\n            UnityEngine_1.GameObject.Destroy(this._screenshotUIController.PreviewRawImage.GetComponent($typeof(UnityEngine_Video_1.VideoPlayer)));\\r\\n       
+    }\\r\\n        else {\\r\\n            this._screenshotController.PlayPreviewVideo(this._screenshotUIController.PreviewRawImage,
+    640, 360);\\r\\n        }\\r\\n        // \uC9C4\uD589\uC911 \uBE44\uD65C\uC131\uD654\uD55C
+    \uBC84\uD2BC \uD65C\uC131\uD654\uD558\uAE30\\r\\n        this._screenshotUIController.AllowOnlyOneClick(true);\\r\\n       
+    // Hide character ui input controller\\r\\n        // ZepetoPlayersCustomizer.Instance.HideInputController();\\r\\n   
+    }\\r\\n    /** \uC0AC\uC9C4\uCC0D\uAE30 \uBC84\uD2BC \uD074\uB9AD \uC2DC \uB3D9\uC791
+    \uC124\uC815\uD558\uB294 \uD568\uC218 */\\r\\n    TakePhotoScreenshotButtonAction()
+    {\\r\\n        this._screenshotController.OnScreenshotDone.AddListener(() =>
+    {\\r\\n            this._screenshotUIController.ShowEasyUploadToastWindow();\\r\\n           
+    this._isPhoto = true;\\r\\n            this.ResultToastButtonSetting(this._screenshotUIController.EasyUploadToast);\\r\\n           
+    // QuestManager.Instance.CheckMrBoneInScreen();\\r\\n            // AudioMgr.Ins.PlaySFX(\\\"sfx_0001\\\",
+    1, 1);\\r\\n        });\\r\\n        this._screenshotController.StartTakePhotoScreenshot();\\r\\n   
+    }\\r\\n    /** \uBE44\uB514\uC624 \uB808\uCF54\uB529 \uD0C0\uC774\uBA38 \uC2DC\uC791\uD558\uB294
+    \uD568\uC218 */\\r\\n    StartTimer() {\\r\\n        this._coRecordingTimer =
+    this.StartCoroutine(this.CoStartTimer());\\r\\n        // \uBE44\uB514\uC624
+    \uCD2C\uC601 \uC2DC\uC791\uD558\uBA74 \uC0AC\uC9C4\uCC0D\uAE30 \uBC84\uD2BC \uBE44\uD65C\uC131\uD654\\r\\n       
+    this._screenshotUIController.TakePhotoScreenshotButton.interactable = false;\\r\\n       
+    // \uBE44\uB514\uC624 \uCD2C\uC601 \uB05D\uB0A0 \uB54C \uAE4C\uC9C0 \uBA54\uB274
+    Exit \uBD88\uAC00\uB2A5\\r\\n        this._screenshotUIController.ExitButton.interactable
+    = false;\\r\\n        this._canEnterOrExit = false;\\r\\n        this.StartCoroutine(this.ImageColorPingpong(this._screenshotUIController.VideoTimer.GetComponent($typeof(UnityEngine_UI_1.Image))));\\r\\n   
+    }\\r\\n    /** \uBE44\uB514\uC624 \uB808\uCF54\uB529 \uD0C0\uC774\uBA38 \uB9C8\uBB34\uB9AC\uD558\uB294
+    \uD568\uC218 */\\r\\n    StopTimer() {\\r\\n        this.StopCoroutine(this._coRecordingTimer);\\r\\n       
+    this._screenshotUIController.VideoTimer.SetActive(false);\\r\\n        // \uCD2C\uC601
+    \uD504\uB85C\uADF8\uB808\uC2A4 \uB3C4\uB11B \uC228\uAE30\uAE30\\r\\n        this._screenshotUIController.RecordingProgressDoughnut.gameObject.SetActive(false);\\r\\n       
+    // \uBE44\uB514\uC624 \uB179\uD654 \uB05D\uB098\uBA74 \uBA54\uB274 Exit\uD560
+    \uC218 \uC788\uB294 \uBC84\uD2BC \uD65C\uC131\uD654\\r\\n        this._screenshotUIController.ExitButton.interactable
+    = true;\\r\\n        this._canEnterOrExit = true;\\r\\n    }\\r\\n    /** \uC804\uB2EC\uBC1B\uC740
+    \uC774\uBBF8\uC9C0\uC758 \uC0C9\uC0C1\uC744 lerp\uD558\uB294 \uD568\uC218. \uBE44\uB514\uC624
+    \uB179\uD654 \uD0C0\uC774\uBA38 \uBC30\uACBD \uC124\uC815) */\\r\\n    *ImageColorPingpong(image)
+    {\\r\\n        while (image.gameObject.activeSelf) {\\r\\n            image.color
+    = UnityEngine_1.Color.Lerp(new UnityEngine_1.Color(1.000, 0.271, 0.235, 1.000),
+    new UnityEngine_1.Color(0.851, 0.243, 0.208, 1.000), UnityEngine_1.Mathf.PingPong(UnityEngine_1.Time.time,
+    1));\\r\\n            yield null;\\r\\n        }\\r\\n    }\\r\\n    /** \uBE44\uB514\uC624
+    \uB179\uD654 \uC2DC\uC791 \uD6C4 \uACBD\uACFC \uC2DC\uAC04 \uBCF4\uC5EC\uC8FC\uB294
+    \uCF54\uB8E8\uD2F4 \uD568\uC218 */\\r\\n    *CoStartTimer() {\\r\\n        let
+    elapsedTime = 0;\\r\\n        this._screenshotUIController.VideoTimer.SetActive(true);\\r\\n       
+    this._screenshotUIController.RecordingProgressDoughnut.gameObject.SetActive(true);\\r\\n       
+    while (true) {\\r\\n            elapsedTime += UnityEngine_1.Time.deltaTime;\\r\\n           
+    let time = Math.floor(elapsedTime);\\r\\n            let timetext = \\\"\\\";\\r\\n           
+    if (time < 60) {\\r\\n                timetext = `00:${time >= 10 ? time : '0'
+    + time}`;\\r\\n            }\\r\\n            else {\\r\\n                timetext
+    = `${time % 60 >= 10 ? time % 60 : '0' + time % 60}:${time / 60 >= 10 ? time
+    / 60 : '0' + time / 60}`;\\r\\n            }\\r\\n            this._videoTimerText.text
+    = timetext;\\r\\n            yield null;\\r\\n        }\\r\\n    }\\r\\n    /**
+    \uBE44\uB514\uC624 \uCC0D\uAE30 \uBC84\uD2BC \uD074\uB9AD \uC2DC \uB3D9\uC791
+    \uC124\uC815\uD558\uB294 \uD568\uC218 */\\r\\n    TakeVideoScreenshotButtonAction()
+    {\\r\\n        this._isPhoto = false;\\r\\n        // \uB179\uD654 \uC2DC\uC791
+    \uC2DC \uC774\uBCA4\uD2B8\\r\\n        this._screenshotController.ResetOnVideoRecordingStartEvent();\\r\\n       
+    this._screenshotController.OnVideoRecordingStartEvent.AddListener(() => {\\r\\n           
+    this.StartTimer();\\r\\n            this._screenshotUIController.RecordingProgressDoughnut.color
+    = UnityEngine_1.Color.white;\\r\\n            this._screenshotUIController.RecordingProgressDoughnut.fillAmount
+    = 0;\\r\\n        });\\r\\n        this._screenshotController.ResetOnDuringVideoRecordingEvent();\\r\\n       
+    let startTimer = UnityEngine_1.Time.time;\\r\\n        this._screenshotController.OnDuringVideoRecordingEvent.AddListener(()
+    => {\\r\\n            this._screenshotUIController.FillProgressDoughnut(startTimer,
+    this._screenshotController.MaxDuration);\\r\\n        });\\r\\n        this._screenshotController.ResetOnVideoRecordingStopEvent();\\r\\n       
+    this._screenshotController.OnVideoRecordingStopEvent.AddListener(() => {\\r\\n           
+    this._screenshotController.StartTakePhotoScreenshot(true);\\r\\n            this._screenshotUIController.ShowEasyUploadToastWindow();\\r\\n           
+    this.ResultToastButtonSetting(this._screenshotUIController.EasyUploadToast);\\r\\n           
+    this.StopTimer();\\r\\n            // \uBE44\uB514\uC624 \uCD2C\uC601 \uC885\uB8CC
+    \uD6C4 \uC0AC\uC9C4\uCC0D\uAE30 \uBC84\uD2BC \uD65C\uC131\uD654\\r\\n           
+    this._screenshotUIController.TakePhotoScreenshotButton.interactable = true;\\r\\n           
+    // \uBE44\uB514\uC624 \uCD2C\uC601 \uC885\uB8CC \uD6C4 Exit \uBC84\uD2BC \uD65C\uC131\uD654\\r\\n           
+    this._screenshotUIController.ExitButton.interactable = true;\\r\\n           
+    //JH \uC0AC\uC6B4\uB4DC\\r\\n            // AudioMgr.Ins.PlaySFX(\\\"sfx_0032\\\",
+    0.5, 1);\\r\\n        });\\r\\n        this._screenshotController.RecordVideo();\\r\\n       
+    //JH \uC0AC\uC6B4\uB4DC\\r\\n        // AudioMgr.Ins.PlaySFX(\\\"sfx_0031\\\",
+    0.5, 1);\\r\\n    }\\r\\n    /** \uC800\uC7A5/\uACF5\uC720/\uC5C5\uB4DC\uB974
+    \uAD00\uB828 \uC2E4\uD328\uC2DC \uD1A0\uC2A4\uD2B8\uCC3D \uB744\uC6B0\uB294 \uCF54\uB8E8\uD2F4
+    \uD568\uC218 */\\r\\n    *CoResultToastWindow(timer) {\\r\\n        let waitForSeconds
+    = new UnityEngine_1.WaitForSeconds(timer);\\r\\n        yield waitForSeconds;\\r\\n       
+    if (this._screenshotController.EventResult == true) {\\r\\n            return;\\r\\n       
+    }\\r\\n        this.StartCoroutine(this.CoShowToastWindow(false));\\r\\n    }\\r\\n   
+    /** \uCD08\uAE30\uD654 \uD568\uC218 */\\r\\n    InitialzeScreenshotManager()
+    {\\r\\n        this._canEnterOrExit = true;\\r\\n        this._screenshotController
+    = this.gameObject.GetComponent($typeof(ScreenshotController_1.default));\\r\\n       
+    this._screenshotUIController = this.gameObject.GetComponent($typeof(ScreenshotUIController_1.default));\\r\\n       
+    this._videoTimerText = this._screenshotUIController.VideoTimer.GetComponentInChildren($typeof(UnityEngine_UI_1.Text));\\r\\n       
+    this._screenshotUIController.TakePhotoScreenshotButton.onClick.AddListener(()
+    => {\\r\\n            this.TakePhotoScreenshotButtonAction();\\r\\n        });\\r\\n       
+    this._screenshotUIController.TakeVideoScreenshotButton.onClick.AddListener(()
+    => {\\r\\n            this.TakeVideoScreenshotButtonAction();\\r\\n        });\\r\\n       
+    this._screenshotUIController.ExitButton.onClick.AddListener(() => {\\r\\n           
+    this.HideScreenshotUI();\\r\\n        });\\r\\n        this._screenshotUIController.PreviewExitButton.onClick.AddListener(()
+    => {\\r\\n            this._screenshotUIController.PreviewWindow.SetActive(false);\\r\\n           
+    this._screenshotUIController.PreviewInputField.text = this._screenshotUIController.OriginalFeedMsg;\\r\\n           
+    if (this._screenshotUIController.TextLimitToast) {\\r\\n                this._screenshotUIController.TextLimitToast.GetComponent($typeof(ToastAnimator_1.default)).DestoryToastWindow(0);\\r\\n               
+    this._screenshotUIController.TextLimitToast = null;\\r\\n            }\\r\\n           
+    // ZepetoPlayersCustomizer.Instance.ShowInputController();\\r\\n        });\\r\\n       
+    this._screenshotUIController.PreviewInputField.onValueChanged.AddListener(()
+    => {\\r\\n            if (this._screenshotUIController.PreviewInputField.text.length
+    == this._screenshotUIController.PreviewInputField.characterLimit) {\\r\\n               
+    this._screenshotUIController.ShowTextLimitToastWindow();\\r\\n               
+    this._screenshotUIController.TextLimitToast.GetComponent($typeof(UnityEngine_UI_1.Button)).onClick.AddListener(()
+    => {\\r\\n                    this._screenshotUIController.TextLimitToast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n                   
+    this._screenshotUIController.TextLimitToast = null;\\r\\n                });\\r\\n           
+    }\\r\\n            else {\\r\\n                if (this._screenshotUIController.TextLimitToast)
+    {\\r\\n                    this._screenshotUIController.TextLimitToast.GetComponent($typeof(ToastAnimator_1.default)).HideToastWindow();\\r\\n                   
+    this._screenshotUIController.TextLimitToast = null;\\r\\n                }\\r\\n           
+    }\\r\\n        });\\r\\n        this._screenshotUIController.PreviewUploadButton.onClick.AddListener(()
+    => {\\r\\n            this.OnClickUploadButton();\\r\\n        });\\r\\n       
+    this._screenshotUIController.PreviewShareButton.onClick.AddListener(() => {\\r\\n           
+    this._screenshotController.ResetOnFailCheckEvent();\\r\\n            this._screenshotController.OnFailCheckEvent.AddListener(()
+    => {\\r\\n                let timer = 0;\\r\\n                if (this._isPhoto)
+    {\\r\\n                    timer = 3;\\r\\n                }\\r\\n               
+    else {\\r\\n                    timer = 9;\\r\\n                }\\r\\n               
+    this.StartCoroutine(this.CoResultToastWindow(timer));\\r\\n            });\\r\\n           
+    if (this._isPhoto) {\\r\\n                this._screenshotController.PhotoShare();\\r\\n           
+    }\\r\\n            else {\\r\\n                this._screenshotController.VideoShare();\\r\\n           
+    }\\r\\n        });\\r\\n        this._screenshotUIController.PreviewSaveButton.onClick.AddListener(()
+    => {\\r\\n            this._screenshotController.ResetOnFailCheckEvent();\\r\\n           
+    this._screenshotController.OnFailCheckEvent.AddListener(() => {\\r\\n               
+    this.StartCoroutine(this.CoResultToastWindow(3));\\r\\n            });\\r\\n           
+    if (this._isPhoto) {\\r\\n                this._screenshotController.PhotoSave();\\r\\n           
+    }\\r\\n            else {\\r\\n                this._screenshotController.VideoSave();\\r\\n           
+    }\\r\\n        });\\r\\n        this.SetToastWindows();\\r\\n        this._screenshotUIController.InitializeUserNameButtonEvent.AddListener(()
+    => {\\r\\n            this._screenshotUIController.UserNameOnButton.gameObject.SetActive(false);\\r\\n           
+    this._screenshotUIController.UserNameOffButton.gameObject.SetActive(true);\\r\\n       
+    });\\r\\n        this._screenshotUIController.UserNameOffButton.onClick.AddListener(()
+    => {\\r\\n            this.ToggleUserNameDisplay(false);\\r\\n            this._screenshotUIController.UserNameOnButton.gameObject.SetActive(true);\\r\\n           
+    this._screenshotUIController.UserNameOffButton.gameObject.SetActive(false);\\r\\n       
+    });\\r\\n        this._screenshotUIController.UserNameOnButton.onClick.AddListener(()
+    => {\\r\\n            this.ToggleUserNameDisplay(true);\\r\\n            this._screenshotUIController.UserNameOnButton.gameObject.SetActive(false);\\r\\n           
+    this._screenshotUIController.UserNameOffButton.gameObject.SetActive(true);\\r\\n       
+    });\\r\\n    }\\r\\n    CreateFeedImmediately(callback) {\\r\\n        this._screenshotController.CreateFeedImmediately(callback);\\r\\n   
+    }\\r\\n    static get Instance() {\\r\\n        return ScreenshotManager._instance;\\r\\n   
+    }\\r\\n    Awake() {\\r\\n        ScreenshotManager._instance = this;\\r\\n       
+    this.InitialzeScreenshotManager();\\r\\n    }\\r\\n    Start() {\\r\\n       
+    ZEPETO_Character_Controller_1.ZepetoPlayers.instance.OnAddedLocalPlayer.AddListener(()
+    => {\\r\\n            this._screenshotController.SetScreenshotCamera(UnityEngine_1.GameObject.FindGameObjectWithTag(\\\"MainCamera\\\").GetComponent($typeof(UnityEngine_1.Camera)));\\r\\n       
+    });\\r\\n    }\\r\\n}\\r\\nexports.default = ScreenshotManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU2NyZWVuc2hvdE1hbmFnZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTY3JlZW5zaG90TWFuYWdlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFnRztBQUNoRyxtREFBK0Q7QUFDL0QseURBQWdEO0FBQ2hELDZFQUE0RDtBQUM1RCxpREFBc0Q7QUFDdEQsNERBQTREO0FBQzVELDREQUE0RDtBQUM1RCxpRUFBMEQ7QUFDMUQscUVBQThEO0FBQzlELG1EQUE0QztBQUU1QyxNQUFxQixpQkFBa0IsU0FBUSxxQ0FBcUI7SUFlaEUsMEJBQTBCO0lBQ25CLGtCQUFrQjtRQUNyQixJQUFJLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxVQUFVLEVBQUU7WUFDekMsSUFBSSxDQUFDLGdCQUFnQixFQUFFLENBQUM7U0FDM0I7YUFBTTtZQUNILElBQUksQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDO1NBQzNCO0lBQ0wsQ0FBQztJQUVELHNCQUFzQjtJQUNmLGdCQUFnQjtRQUNuQixrQ0FBa0M7UUFDbEMsSUFBSSxDQUFDLElBQUksQ0FBQyxlQUFlLEVBQUU7WUFDdkIsT0FBTztTQUNWO1FBQ0QsSUFBSSxDQUFDLHVCQUF1QixDQUFDLE1BQU0sRUFBRSxDQUFDO1FBRXRDLG9CQUFvQjtRQUNwQixJQUFJLENBQUMscUJBQXFCLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDakMsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGdCQUFnQixDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDMUUsNkVBQTZFO0lBQ2pGLENBQUM7SUFFRCxzQkFBc0I7SUFDZixnQkFBZ0I7UUFDbkIsa0NBQWtDO1FBQ2xDLElBQUksQ0FBQyxJQUFJLENBQUMsZUFBZSxFQUFFO1lBQ3ZCLE9BQU87U0FDVjtRQUNELElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxNQUFNLEVBQUUsQ0FBQztRQUV0QyxvQkFBb0I7UUFDcEIsSUFBSSxDQUFDLHFCQUFxQixDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2pDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQzFFLDZFQUE2RTtJQUNqRixDQUFDO0lBR0Q7OztPQUdHO0lBQ0kscUJBQXFCLENBQUMsWUFBa0I7UUFDM0MsOERBQThEO1FBQzlELElBQUksWUFBWSxFQUFFO1lBQ2QsYUFBYTtZQUNiLHNEQUFzRDtTQUN6RDthQUFNO1lBQ0gsV0FBVztZQUNYLHNEQUFzRDtTQUN6RDtJQUNMLENBQUM7SUFFRCwyQkFBMkI7SUFDbkIsb0JBQW9CO1FBQ3hCLElBQUksUUFBUSxHQUFHLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxhQUFhLENBQUMsdUJBQXVCLFNBQUMsc0JBQUssRUFBRyxDQUFDO1FBQzNGLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7WUFDakIsSUFBSSxDQUFDLENBQUMsSUFBSSxJQUFJLGtCQUFrQixFQUFFO2dCQUM5QixJQUFJLENBQUMsaUJBQWlCLEdBQUcsQ0FBQyxDQUFDO2FBQzlCO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQscUJBQXFCO0lBQ2IsV0FBVztRQUNmLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQyxDQUFDO0lBQ3RFLENBQUM7SUFFRCwyQkFBMkI7SUFDbkIsQ0FBQyxhQUFhO1FBQ2xCLElBQUksU0FBUyxHQUFHLGtCQUFJLENBQUMsSUFBSSxDQUFDO1FBQzFCLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLEdBQUcsSUFBSSxtQkFBSyxDQUFDLEVBQUUsRUFBRSxFQUFFLEVBQUUsR0FBRyxDQUFDLENBQUM7UUFDdEQsSUFBSSxDQUFDLGlCQUFpQixDQUFDLFVBQVUsR0FBRyxDQUFDLENBQUM7UUFFdEMsT0FBTyxJQUFJLEVBQUU7WUFDVCxJQUFJLHdCQUFVLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxJQUFJLENBQUMsRUFBRTtnQkFDdEQsT0FBTzthQUNWO1lBQ0QsSUFBSSxDQUFDLHVCQUF1QixDQUFDLG9CQUFvQixDQUFDLFNBQVMsRUFBRSxHQUFHLEVBQUUsSUFBSSxDQUFDLGlCQUFpQixDQUFDLENBQUM7WUFDMUYsTUFBTSxJQUFJLENBQUM7U0FDZDtJQUNMLENBQUM7SUFFRDs7O09BR0c7SUFDSyx1QkFBdUIsQ0FBQyxNQUFZO1FBQ3hDLElBQUksSUFBSSxDQUFDLGdCQUFnQixFQUFFO1lBQ3ZCLElBQUksQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDLGdCQUFnQixDQUFDLENBQUM7WUFDMUMsSUFBSSxDQUFDLGdCQUFnQixHQUFHLElBQUksQ0FBQztTQUNoQztRQUVELElBQUksTUFBTSxFQUFFO1lBQ1IsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMseUJBQXlCLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztTQUM1RDtJQUNMLENBQUM7SUFFRDs7O09BR0c7SUFDSyxDQUFDLHlCQUF5QixDQUFDLFFBQWdCO1FBQy9DLElBQUksa0JBQWtCLEdBQUcsSUFBSSxDQUFDLGlCQUFpQixDQUFDLFVBQVUsQ0FBQztRQUMzRCxJQUFJLFdBQVcsR0FBRyxDQUFDLENBQUM7UUFFcEIsT0FBTyxJQUFJLEVBQUU7WUFDVCxJQUFJLHdCQUFVLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxJQUFJLENBQUMsRUFBRTtnQkFDdEQsT0FBTzthQUNWO1lBRUQsSUFBSSxJQUFJLENBQUMsaUJBQWlCLENBQUMsVUFBVSxJQUFJLENBQUMsRUFBRTtnQkFDeEMsTUFBTTthQUNUO1lBQ0QsSUFBSSxDQUFDLGlCQUFpQixDQUFDLFVBQVUsR0FBRyxtQkFBSyxDQUFDLFVBQVUsQ0FBQyxrQkFBa0IsRUFBRSxDQUFDLEVBQUUsV0FBVyxHQUFHLFFBQVEsQ0FBQyxDQUFDO1lBQ3BHLFdBQVcsSUFBSSxrQkFBSSxDQUFDLFNBQVMsQ0FBQztZQUM5QixNQUFNLElBQUksQ0FBQztTQUNkO0lBQ0wsQ0FBQztJQUVEOzs7O09BSUc7SUFDSyxDQUFDLG9CQUFvQixDQUFDLEtBQWlCLEVBQUUsS0FBYTtRQUMxRCxJQUFJLGNBQWMsR0FBRyxJQUFJLDRCQUFjLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDL0MsTUFBTSxjQUFjLENBQUM7UUFFckIsSUFBSSx3QkFBVSxDQUFDLFdBQVcsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDLEVBQUU7WUFDckMsT0FBTztTQUNWO2FBQ0k7WUFDRCxLQUFLLENBQUMsWUFBWSxTQUFDLHVCQUFhLEdBQUksZUFBZSxFQUFFLENBQUM7U0FDekQ7SUFDTCxDQUFDO0lBRUQ7OztPQUdHO0lBQ0ssQ0FBQyxpQkFBaUIsQ0FBQyxNQUFZO1FBQ25DLCtCQUErQjtRQUMvQixJQUFJLENBQUMsd0JBQVUsQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGFBQWEsRUFBRSxJQUFJLENBQUMsRUFBRTtZQUMzRSxJQUFJLENBQUMsdUJBQXVCLENBQUMsTUFBTSxDQUFDLENBQUM7WUFDckMsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGFBQWEsQ0FBQyxZQUFZLFNBQUMsdUJBQWEsR0FBSSxrQkFBa0IsQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUNqRyxJQUFJLENBQUMsdUJBQXVCLENBQUMsYUFBYSxHQUFHLElBQUksQ0FBQztTQUNyRDtRQUVELElBQUksTUFBTSxFQUFFO1lBQ1IsTUFBTSxJQUFJLDRCQUFjLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDOUIsSUFBSSxDQUFDLHVCQUF1QixDQUFDLHNCQUFzQixFQUFFLENBQUM7WUFDdEQsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFlBQVksQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtnQkFDdEYsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFlBQVksQ0FBQyxZQUFZLFNBQUMsdUJBQWEsR0FBSSxlQUFlLEVBQUUsQ0FBQztnQkFDMUYsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFlBQVksR0FBRyxJQUFJLENBQUM7WUFDckQsQ0FBQyxDQUFDLENBQUM7WUFDSCxJQUFJLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxxQkFBcUIsRUFBRTtnQkFDcEQsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGFBQWEsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7Z0JBQzVELElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGVBQWUsQ0FBQztnQkFDbkcsSUFBSSxDQUFDLGdCQUFnQixFQUFFLENBQUM7Z0JBRXhCLHFDQUFxQztnQkFDckMsMERBQTBEO2FBQzdEO1lBQ0QsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFlBQVksRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQzdGLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDO1lBRWpELElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUN4RDthQUNJO1lBQ0QsTUFBTSxJQUFJLDRCQUFjLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDOUIsSUFBSSxDQUFDLHVCQUF1QixDQUFDLG1CQUFtQixFQUFFLENBQUM7WUFDbkQsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsdUJBQU0sR0FBSSxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtnQkFDbkYsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFNBQVMsQ0FBQyxZQUFZLFNBQUMsdUJBQWEsR0FBSSxlQUFlLEVBQUUsQ0FBQztnQkFDdkYsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7WUFDbEQsQ0FBQyxDQUFDLENBQUM7WUFDSCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxJQUFJLENBQUMsdUJBQXVCLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDMUYsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUM7WUFDOUMsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ3hEO0lBQ0wsQ0FBQztJQUVELHFCQUFxQjtJQUNiLGVBQWU7UUFDbkIsaUJBQWlCO1FBQ2pCLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxlQUFlLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN4RCxJQUFJLENBQUMsdUJBQXVCLENBQUMsdUJBQXVCLEVBQUUsQ0FBQztZQUN2RCxJQUFJLENBQUMsdUJBQXVCLENBQUMsaUJBQWlCLENBQUMsS0FBSyxDQUFDLENBQUM7WUFFdEQseUJBQXlCO1lBQ3pCLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxhQUFhLENBQUMsWUFBWSxTQUFDLHVCQUFNLEdBQUksT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7Z0JBQ3ZGLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxhQUFhLENBQUMsWUFBWSxTQUFDLHVCQUFhLEdBQUksZUFBZSxFQUFFLENBQUM7Z0JBQzNGLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDO1lBQ3RELENBQUMsQ0FBQyxDQUFDO1lBRUgsSUFBSSxDQUFDLG9CQUFvQixFQUFFLENBQUM7WUFDNUIsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1FBQ3ZCLENBQUMsQ0FBQyxDQUFBO1FBRUYsU0FBUztRQUNULElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxXQUFXLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNwRCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO1FBQ3ZELENBQUMsQ0FBQyxDQUFDO1FBRUgsU0FBUztRQUNULElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN2RCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1FBQ3RELENBQUMsQ0FBQyxDQUFBO0lBQ04sQ0FBQztJQUVELHNCQUFzQjtJQUNkLG1CQUFtQjtRQUN2QixJQUFJLElBQUksQ0FBQyxRQUFRLEVBQUU7WUFDZixJQUFJLENBQUMscUJBQXFCLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUNuRzthQUNJO1lBQ0QsSUFBSSxDQUFDLHFCQUFxQixDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsdUJBQXVCLENBQUMsaUJBQWlCLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDbkc7SUFDTCxDQUFDO0lBRUQsa0NBQWtDO0lBQzFCLHdCQUF3QixDQUFDLGVBQTJCO1FBQ3hELElBQUksT0FBTyxHQUFHLGVBQWUsQ0FBQyx1QkFBdUIsU0FBQyx1QkFBTSxFQUFHLENBQUM7UUFFaEUsT0FBTyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsRUFBRTtZQUNyQixPQUFPLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUN6QixRQUFRLE1BQU0sQ0FBQyxJQUFJLEVBQUU7Z0JBQ2pCLEtBQUssc0JBQXNCO29CQUN2QixNQUFNLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7d0JBQzVCLE9BQU8sQ0FBQyxHQUFHLENBQUMsNkJBQTZCLENBQUMsQ0FBQzt3QkFDM0MsSUFBSSxDQUFDLGlCQUFpQixDQUFDLGVBQWUsQ0FBQyxDQUFDO29CQUM1QyxDQUFDLENBQUMsQ0FBQztvQkFDSCxNQUFNO2dCQUNWLEtBQUssd0JBQXdCO29CQUN6QixJQUFJLENBQUMsdUJBQXVCLENBQUMsWUFBWSxHQUFHLE1BQU0sQ0FBQztvQkFDbkQsTUFBTSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO3dCQUM1QixPQUFPLENBQUMsR0FBRyxDQUFDLCtCQUErQixDQUFDLENBQUM7d0JBQzdDLElBQUksQ0FBQyxtQkFBbUIsRUFBRSxDQUFDO3dCQUMzQixlQUFlLENBQUMsWUFBWSxTQUFDLHVCQUFhLEdBQUksZUFBZSxFQUFFLENBQUM7d0JBQ2hFLGVBQWUsR0FBRyxJQUFJLENBQUM7d0JBQ3ZCLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDO3dCQUNwRCxJQUFJLENBQUMsdUJBQXVCLENBQUMseUJBQXlCLENBQUMsSUFBSSxDQUFDLENBQUM7b0JBQ2pFLENBQUMsQ0FBQyxDQUFDO29CQUNILE1BQU07Z0JBQ1YsS0FBSyxzQkFBc0I7b0JBQ3ZCLE1BQU0sQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTt3QkFDNUIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO3dCQUNsQyxlQUFlLENBQUMsWUFBWSxTQUFDLHVCQUFhLEdBQUksZUFBZSxFQUFFLENBQUM7d0JBQ2hFLGVBQWUsR0FBRyxJQUFJLENBQUM7d0JBQ3ZCLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDO3dCQUNwRCxJQUFJLENBQUMsdUJBQXVCLENBQUMseUJBQXlCLENBQUMsSUFBSSxDQUFDLENBQUM7b0JBQ2pFLENBQUMsQ0FBQyxDQUFDO29CQUNILE1BQU07Z0JBQ1Y7b0JBQ0ksTUFBTTthQUNiO1FBQ0wsQ0FBQyxDQUFDLENBQUM7UUFFSCxxQkFBcUI7UUFDckIsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3pELENBQUM7SUFFRCxxQkFBcUI7SUFDYixpQkFBaUIsQ0FBQyxlQUEyQjtRQUNqRCxJQUFJLENBQUMsdUJBQXVCLENBQUMsYUFBYSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUMzRCxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQztRQUV4QixlQUFlLENBQUMsWUFBWSxTQUFDLHVCQUFhLEdBQUksa0JBQWtCLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDcEUsZUFBZSxHQUFHLElBQUksQ0FBQztRQUN2QixJQUFJLENBQUMsdUJBQXVCLENBQUMsZUFBZSxHQUFHLElBQUksQ0FBQztRQUNwRCxJQUFJLENBQUMsdUJBQXVCLENBQUMseUJBQXlCLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFN0QsSUFBSSxJQUFJLENBQUMsUUFBUSxFQUFFO1lBQ2YsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGVBQWUsQ0FBQyxZQUFZLFNBQUMseUJBQVEsR0FBSSxPQUFPLEdBQUcsSUFBSSxDQUFDLHFCQUFxQixDQUFDLHVCQUF1QixDQUFDO1lBQ25JLHdCQUFVLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxlQUFlLENBQUMsWUFBWSxTQUFDLCtCQUFXLEdBQUksQ0FBQztTQUNoRzthQUFNO1lBQ0gsSUFBSSxDQUFDLHFCQUFxQixDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxlQUFlLEVBQUUsR0FBRyxFQUFFLEdBQUcsQ0FBQyxDQUFDO1NBQ3ZHO1FBRUQscUJBQXFCO1FBQ3JCLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUVyRCxxQ0FBcUM7UUFDckMsMERBQTBEO0lBQzlELENBQUM7SUFFRCw4QkFBOEI7SUFDdEIsK0JBQStCO1FBQ25DLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxnQkFBZ0IsQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3pELElBQUksQ0FBQyx1QkFBdUIsQ0FBQyx5QkFBeUIsRUFBRSxDQUFDO1lBQ3pELElBQUksQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDO1lBQ3JCLElBQUksQ0FBQyx3QkFBd0IsQ0FBQyxJQUFJLENBQUMsdUJBQXVCLENBQUMsZUFBZSxDQUFDLENBQUM7WUFFNUUsK0NBQStDO1lBQy9DLDBDQUEwQztRQUM5QyxDQUFDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxxQkFBcUIsQ0FBQyx3QkFBd0IsRUFBRSxDQUFDO0lBQzFELENBQUM7SUFFRCwwQkFBMEI7SUFDbEIsVUFBVTtRQUNkLElBQUksQ0FBQyxpQkFBaUIsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxZQUFZLEVBQUUsQ0FBQyxDQUFDO1FBRWxFLDJCQUEyQjtRQUMzQixJQUFJLENBQUMsdUJBQXVCLENBQUMseUJBQXlCLENBQUMsWUFBWSxHQUFHLEtBQUssQ0FBQztRQUU1RSw2QkFBNkI7UUFDN0IsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFVBQVUsQ0FBQyxZQUFZLEdBQUcsS0FBSyxDQUFDO1FBQzdELElBQUksQ0FBQyxlQUFlLEdBQUcsS0FBSyxDQUFDO1FBQzdCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxVQUFVLENBQUMsWUFBWSxTQUFDLHNCQUFLLEdBQUksQ0FBQyxDQUFDO0lBQ2hILENBQUM7SUFFRCwyQkFBMkI7SUFDbkIsU0FBUztRQUNiLElBQUksQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDLGlCQUFpQixDQUFDLENBQUM7UUFDM0MsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFFekQsa0JBQWtCO1FBQ2xCLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyx5QkFBeUIsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBRW5GLGtDQUFrQztRQUNsQyxJQUFJLENBQUMsdUJBQXVCLENBQUMsVUFBVSxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUM7UUFDNUQsSUFBSSxDQUFDLGVBQWUsR0FBRyxJQUFJLENBQUM7SUFDaEMsQ0FBQztJQUVELGlEQUFpRDtJQUN6QyxDQUFDLGtCQUFrQixDQUFDLEtBQVk7UUFDcEMsT0FBTyxLQUFLLENBQUMsVUFBVSxDQUFDLFVBQVUsRUFBRTtZQUNoQyxLQUFLLENBQUMsS0FBSyxHQUFHLG1CQUFLLENBQUMsSUFBSSxDQUFDLElBQUksbUJBQUssQ0FBQyxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLENBQUMsRUFBRSxJQUFJLG1CQUFLLENBQUMsS0FBSyxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUUsS0FBSyxDQUFDLEVBQUUsbUJBQUssQ0FBQyxRQUFRLENBQUMsa0JBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNySSxNQUFNLElBQUksQ0FBQztTQUNkO0lBQ0wsQ0FBQztJQUVELG9DQUFvQztJQUM1QixDQUFDLFlBQVk7UUFDakIsSUFBSSxXQUFXLEdBQUcsQ0FBQyxDQUFDO1FBQ3BCLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ3hELElBQUksQ0FBQyx1QkFBdUIsQ0FBQyx5QkFBeUIsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBRWxGLE9BQU8sSUFBSSxFQUFFO1lBQ1QsV0FBVyxJQUFJLGtCQUFJLENBQUMsU0FBUyxDQUFDO1lBQzlCLElBQUksSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsV0FBVyxDQUFDLENBQUM7WUFDbkMsSUFBSSxRQUFRLEdBQUcsRUFBRSxDQUFDO1lBRWxCLElBQUksSUFBSSxHQUFHLEVBQUUsRUFBRTtnQkFDWCxRQUFRLEdBQUcsTUFBTSxJQUFJLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLEdBQUcsR0FBRyxJQUFJLEVBQUUsQ0FBQzthQUNyRDtpQkFBTTtnQkFDSCxRQUFRLEdBQUcsR0FBRyxJQUFJLEdBQUcsRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUMsR0FBRyxHQUFHLElBQUksR0FBRyxFQUFFLElBQUksSUFBSSxHQUFHLEVBQUUsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDLEdBQUcsR0FBRyxJQUFJLEdBQUcsRUFBRSxFQUFFLENBQUM7YUFDbEg7WUFDRCxJQUFJLENBQUMsZUFBZSxDQUFDLElBQUksR0FBRyxRQUFRLENBQUM7WUFDckMsTUFBTSxJQUFJLENBQUM7U0FDZDtJQUNMLENBQUM7SUFFRCxnQ0FBZ0M7SUFDeEIsK0JBQStCO1FBQ25DLElBQUksQ0FBQyxRQUFRLEdBQUcsS0FBSyxDQUFDO1FBRXRCLGNBQWM7UUFDZCxJQUFJLENBQUMscUJBQXFCLENBQUMsK0JBQStCLEVBQUUsQ0FBQztRQUM3RCxJQUFJLENBQUMscUJBQXFCLENBQUMsMEJBQTBCLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNuRSxJQUFJLENBQUMsVUFBVSxFQUFFLENBQUM7WUFDbEIsSUFBSSxDQUFDLHVCQUF1QixDQUFDLHlCQUF5QixDQUFDLEtBQUssR0FBRyxtQkFBSyxDQUFDLEtBQUssQ0FBQztZQUMzRSxJQUFJLENBQUMsdUJBQXVCLENBQUMseUJBQXlCLENBQUMsVUFBVSxHQUFHLENBQUMsQ0FBQztRQUMxRSxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxnQ0FBZ0MsRUFBRSxDQUFDO1FBQzlELElBQUksVUFBVSxHQUFHLGtCQUFJLENBQUMsSUFBSSxDQUFDO1FBQzNCLElBQUksQ0FBQyxxQkFBcUIsQ0FBQywyQkFBMkIsQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3BFLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxvQkFBb0IsQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLHFCQUFxQixDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQzFHLENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLHFCQUFxQixDQUFDLDhCQUE4QixFQUFFLENBQUM7UUFDNUQsSUFBSSxDQUFDLHFCQUFxQixDQUFDLHlCQUF5QixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbEUsSUFBSSxDQUFDLHFCQUFxQixDQUFDLHdCQUF3QixDQUFDLElBQUksQ0FBQyxDQUFDO1lBQzFELElBQUksQ0FBQyx1QkFBdUIsQ0FBQyx5QkFBeUIsRUFBRSxDQUFDO1lBQ3pELElBQUksQ0FBQyx3QkFBd0IsQ0FBQyxJQUFJLENBQUMsdUJBQXVCLENBQUMsZUFBZSxDQUFDLENBQUM7WUFDNUUsSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO1lBRWpCLDBCQUEwQjtZQUMxQixJQUFJLENBQUMsdUJBQXVCLENBQUMseUJBQXlCLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQztZQUMzRSwwQkFBMEI7WUFDMUIsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFVBQVUsQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDO1lBQzVELFFBQVE7WUFDUiw0Q0FBNEM7UUFDaEQsQ0FBQyxDQUFDLENBQUM7UUFDSCxJQUFJLENBQUMscUJBQXFCLENBQUMsV0FBVyxFQUFFLENBQUM7UUFFekMsUUFBUTtRQUNSLDRDQUE0QztJQUNoRCxDQUFDO0lBRUQsdUNBQXVDO0lBQy9CLENBQUMsbUJBQW1CLENBQUMsS0FBYTtRQUN0QyxJQUFJLGNBQWMsR0FBRyxJQUFJLDRCQUFjLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDL0MsTUFBTSxjQUFjLENBQUM7UUFFckIsSUFBSSxJQUFJLENBQUMscUJBQXFCLENBQUMsV0FBVyxJQUFJLElBQUksRUFBRTtZQUNoRCxPQUFPO1NBQ1Y7UUFFRCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQ3ZELENBQUM7SUFFRCxhQUFhO0lBQ0wsMEJBQTBCO1FBQzlCLElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDO1FBQzVCLElBQUksQ0FBQyxxQkFBcUIsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQyw4QkFBb0IsRUFBRyxDQUFDO1FBQ2xGLElBQUksQ0FBQyx1QkFBdUIsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQyxnQ0FBc0IsRUFBRyxDQUFDO1FBQ3RGLElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFVBQVUsQ0FBQyxzQkFBc0IsU0FBQyxxQkFBSSxFQUFHLENBQUM7UUFFOUYsSUFBSSxDQUFDLHVCQUF1QixDQUFDLHlCQUF5QixDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQzVFLElBQUksQ0FBQywrQkFBK0IsRUFBRSxDQUFDO1FBQzNDLENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLHVCQUF1QixDQUFDLHlCQUF5QixDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQzVFLElBQUksQ0FBQywrQkFBK0IsRUFBRSxDQUFDO1FBQzNDLENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLHVCQUF1QixDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUM3RCxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQztRQUM1QixDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNwRSxJQUFJLENBQUMsdUJBQXVCLENBQUMsYUFBYSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUM1RCxJQUFJLENBQUMsdUJBQXVCLENBQUMsaUJBQWlCLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxlQUFlLENBQUM7WUFFbkcsSUFBSSxJQUFJLENBQUMsdUJBQXVCLENBQUMsY0FBYyxFQUFFO2dCQUM3QyxJQUFJLENBQUMsdUJBQXVCLENBQUMsY0FBYyxDQUFDLFlBQVksU0FBQyx1QkFBYSxHQUFJLGtCQUFrQixDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUNoRyxJQUFJLENBQUMsdUJBQXVCLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQzthQUN0RDtZQUVELDBEQUEwRDtRQUM5RCxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxjQUFjLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUMzRSxJQUFJLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsTUFBTSxJQUFJLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxjQUFjLEVBQUU7Z0JBQzdILElBQUksQ0FBQyx1QkFBdUIsQ0FBQyx3QkFBd0IsRUFBRSxDQUFDO2dCQUN4RCxJQUFJLENBQUMsdUJBQXVCLENBQUMsY0FBYyxDQUFDLFlBQVksU0FBQyx1QkFBTSxHQUFJLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO29CQUN4RixJQUFJLENBQUMsdUJBQXVCLENBQUMsY0FBYyxDQUFDLFlBQVksU0FBQyx1QkFBYSxHQUFJLGVBQWUsRUFBRSxDQUFDO29CQUM1RixJQUFJLENBQUMsdUJBQXVCLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQztnQkFDdkQsQ0FBQyxDQUFDLENBQUM7YUFDTjtpQkFBTTtnQkFDSCxJQUFJLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxjQUFjLEVBQUU7b0JBQzdDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxjQUFjLENBQUMsWUFBWSxTQUFDLHVCQUFhLEdBQUksZUFBZSxFQUFFLENBQUM7b0JBQzVGLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDO2lCQUN0RDthQUNKO1FBQ0wsQ0FBQyxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsdUJBQXVCLENBQUMsbUJBQW1CLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDdEUsSUFBSSxDQUFDLG1CQUFtQixFQUFFLENBQUM7UUFDL0IsQ0FBQyxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsdUJBQXVCLENBQUMsa0JBQWtCLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDckUsSUFBSSxDQUFDLHFCQUFxQixDQUFDLHFCQUFxQixFQUFFLENBQUM7WUFDbkQsSUFBSSxDQUFDLHFCQUFxQixDQUFDLGdCQUFnQixDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7Z0JBQ3pELElBQUksS0FBSyxHQUFHLENBQUMsQ0FBQztnQkFDZCxJQUFJLElBQUksQ0FBQyxRQUFRLEVBQUU7b0JBQ2YsS0FBSyxHQUFHLENBQUMsQ0FBQztpQkFDYjtxQkFBTTtvQkFDSCxLQUFLLEdBQUcsQ0FBQyxDQUFDO2lCQUNiO2dCQUNELElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLG1CQUFtQixDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7WUFDekQsQ0FBQyxDQUFDLENBQUM7WUFFSCxJQUFJLElBQUksQ0FBQyxRQUFRLEVBQUU7Z0JBQ2YsSUFBSSxDQUFDLHFCQUFxQixDQUFDLFVBQVUsRUFBRSxDQUFDO2FBQzNDO2lCQUFNO2dCQUNILElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxVQUFVLEVBQUUsQ0FBQzthQUMzQztRQUNMLENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGlCQUFpQixDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3BFLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxxQkFBcUIsRUFBRSxDQUFDO1lBQ25ELElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxnQkFBZ0IsQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO2dCQUN6RCxJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3JELENBQUMsQ0FBQyxDQUFDO1lBRUgsSUFBSSxJQUFJLENBQUMsUUFBUSxFQUFFO2dCQUNmLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxTQUFTLEVBQUUsQ0FBQzthQUMxQztpQkFBTTtnQkFDSCxJQUFJLENBQUMscUJBQXFCLENBQUMsU0FBUyxFQUFFLENBQUM7YUFDMUM7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxlQUFlLEVBQUUsQ0FBQztRQUV2QixJQUFJLENBQUMsdUJBQXVCLENBQUMsNkJBQTZCLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN4RSxJQUFJLENBQUMsdUJBQXVCLENBQUMsZ0JBQWdCLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUMxRSxJQUFJLENBQUMsdUJBQXVCLENBQUMsaUJBQWlCLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUM5RSxDQUFDLENBQUMsQ0FBQTtRQUVGLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUNwRSxJQUFJLENBQUMscUJBQXFCLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDbEMsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGdCQUFnQixDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDekUsSUFBSSxDQUFDLHVCQUF1QixDQUFDLGlCQUFpQixDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDL0UsQ0FBQyxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsdUJBQXVCLENBQUMsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbkUsSUFBSSxDQUFDLHFCQUFxQixDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2pDLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQzFFLElBQUksQ0FBQyx1QkFBdUIsQ0FBQyxpQkFBaUIsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzlFLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVNLHFCQUFxQixDQUFDLFFBQWtCO1FBQzNDLElBQUksQ0FBQyxxQkFBcUIsQ0FBQyxxQkFBcUIsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUMvRCxDQUFDO0lBR00sTUFBTSxLQUFLLFFBQVE7UUFDdEIsT0FBTyxpQkFBaUIsQ0FBQyxTQUFTLENBQUM7SUFDdkMsQ0FBQztJQUVELEtBQUs7UUFDRCxpQkFBaUIsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1FBQ25DLElBQUksQ0FBQywwQkFBMEIsRUFBRSxDQUFDO0lBQ3RDLENBQUM7SUFFRCxLQUFLO1FBQ0QsMkNBQWEsQ0FBQyxRQUFRLENBQUMsa0JBQWtCLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUN2RCxJQUFJLENBQUMscUJBQXFCLENBQUMsbUJBQW1CLENBQzFDLHdCQUFVLENBQUMscUJBQXFCLENBQUMsWUFBWSxDQUFDLENBQUMsWUFBWSxTQUFDLG9CQUFNLEdBQ3JFLENBQUM7UUFDTixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7Q0FDSjtBQTloQkQsb0NBOGhCQyJ9\",\"assetPath\":\"Assets/CommonModules/Screenshot/Scripts/ScreenshotManager.ts\",\"manifest\":{\"properties\":[],\"name\":\"ScreenshotManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: f8e154e259525286fe648e865b4229de
+  onlyWriteTrigger: 0

@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: 40541d655180be748ac6ae214d89a4fa
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nclass
+    StarRewardItem extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    SetItem(amount,
+    rewardType) {\r\n        this.amountText.text = amount + \"\";\r\n        switch
+    (rewardType) {\r\n            case 1 /* ZEM */:\r\n                this.icon.sprite
+    = this.sprites[0];\r\n                break;\r\n            case 0 /* COIN */:\r\n               
+    this.icon.sprite = this.sprites[1];\r\n                break;\r\n           
+    default:\r\n                break;\r\n        }\r\n    }\r\n    SetSelect(selected)
+    {\r\n        this.select.SetActive(selected);\r\n    }\r\n}\r\nexports.default
+    = StarRewardItem;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU3RhclJld2FyZEl0ZW0uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTdGFyUmV3YXJkSXRlbS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFpRDtBQUNqRCxtREFBNkM7QUFDN0MsaURBQXFEO0FBR3JELE1BQXFCLGNBQWUsU0FBUSxxQ0FBcUI7SUFRdEQsT0FBTyxDQUFDLE1BQWMsRUFBRSxVQUFzQjtRQUNqRCxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksR0FBRyxNQUFNLEdBQUcsRUFBRSxDQUFDO1FBQ25DLFFBQVEsVUFBVSxFQUFFO1lBQ2hCO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQ25DLE1BQU07WUFDVjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUNuQyxNQUFNO1lBQ1Y7Z0JBQ0ksTUFBTTtTQUNiO0lBQ0wsQ0FBQztJQUVNLFNBQVMsQ0FBQyxRQUFpQjtRQUM5QixJQUFJLENBQUMsTUFBTSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUNwQyxDQUFDO0NBRUo7QUExQkQsaUNBMEJDIn0=","assetPath":"Assets/Scripts/UI/StarRewardItem.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"icon","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"amountText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"select","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"sprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"StarRewardItem","description":""},"isCompiled":true}'
+  typescriptHash: 80b3d59420d33f364418faa634d5ce01
+  onlyWriteTrigger: 0

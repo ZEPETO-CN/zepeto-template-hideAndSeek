@@ -1,0 +1,70 @@
+fileFormatVersion: 2
+guid: e391e66f7f39eb243a9c027acda82c39
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst ZEPETO_Script_1
+    = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZEPETO_Script_Leaderboard_1 = require(\\\"ZEPETO.Script.Leaderboard\\\");\\r\\nconst
+    GameData_1 = require(\\\"../GameStaticData/GameData\\\");\\r\\nconst GameMain_1
+    = require(\\\"../GameMain\\\");\\r\\nconst LeaderboardItem_1 = require(\\\"./LeaderboardItem\\\");\\r\\nconst
+    UIToast_1 = require(\\\"./UIToast\\\");\\r\\nconst Localization_1 = require(\\\"../Common/Localization/Scripts/Localization\\\");\\r\\nclass
+    UILeaderboardPanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.GET_RANK_START = 1;\\r\\n       
+    this.GET_RANK_END = 50;\\r\\n    }\\r\\n    get Leaderboard() { return GameData_1.default.LEADERBOARD;
+    }\\r\\n    Awake() {\\r\\n        this.leaderboardItemObjs = [];\\r\\n       
+    this.leaderboardItemObjs.push(this.mLeaderboardItem);\\r\\n        this.mCloseBtn.onClick.AddListener(this.clickClose.bind(this));\\r\\n       
+    this.mRewardBtn.onClick.AddListener(this.clickReward.bind(this));\\r\\n       
+    let date = new Date();\\r\\n        let hours = -date.getTimezoneOffset() / 60;\\r\\n       
+    this.mEndText.text = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Rank_tips\\\",
+    [hours + \\\"\\\"]);\\r\\n    }\\r\\n    clickClose() {\\r\\n        this.gameObject.SetActive(false);\\r\\n   
+    }\\r\\n    clickReward() {\\r\\n        this.mLeaderboardReward.SetActive(true);\\r\\n   
+    }\\r\\n    Start() {\\r\\n        this.mScrollView.content.gameObject.SetActive(false);\\r\\n       
+    this.mMyRank.text = \\\"--\\\";\\r\\n        this.mMyScore.text = \\\"--\\\";\\r\\n       
+    this.StartCoroutine(this.IE_DealyShow());\\r\\n    }\\r\\n    *IE_DealyShow()
+    {\\r\\n        console.log(\\\"\u52A0\u8F7D\u6392\u884C\u699C\\\");\\r\\n       
+    yield new UnityEngine_1.WaitForSeconds(0.1);\\r\\n        this.GetRangeRank(this.GET_RANK_START,
+    this.GET_RANK_END, false);\\r\\n    }\\r\\n    GetRangeRank(startRank, endRank,
+    prevRanking) {\\r\\n        ZEPETO_Script_Leaderboard_1.LeaderboardAPI.GetRangeRank(this.Leaderboard.WeekRank.id,
+    startRank, endRank, this.Leaderboard.WeekRank.resetRule, prevRanking, (x) =>
+    this.OnResultWeekRank(x), (x) => this.OnErrorGetRangeRank(x));\\r\\n        console.log(`GetRangeRank...`);\\r\\n   
+    }\\r\\n    OnResultWeekRank(result) {\\r\\n        if (result.rankInfo.rankList
+    == null) {\\r\\n            console.log('rankInfo is empty!');\\r\\n           
+    return;\\r\\n        }\\r\\n        console.log(`GetRank success!} `);\\r\\n       
+    let rankList = result.rankInfo.rankList;\\r\\n        for (let i = 0; i < this.leaderboardItemObjs.length;
+    i++) {\\r\\n            const obj = this.leaderboardItemObjs[i];\\r\\n           
+    obj.SetActive(false);\\r\\n        }\\r\\n        for (var i = 0; i < rankList.length;
+    i++) {\\r\\n            // console.log(rankList[i].rank, rankList[i].name, rankList[i].score,
+    rankList[i].member);\\r\\n            var item;\\r\\n            if (i > this.leaderboardItemObjs.length
+    - 1) {\\r\\n                item = UnityEngine_1.GameObject.Instantiate(this.mLeaderboardItem,
+    this.mScrollView.content);\\r\\n                this.leaderboardItemObjs.push(item);\\r\\n           
+    }\\r\\n            else {\\r\\n                item = this.leaderboardItemObjs[i];\\r\\n           
+    }\\r\\n            item.transform.localScale = UnityEngine_1.Vector3.one;\\r\\n           
+    item.GetComponent($typeof(LeaderboardItem_1.default)).SetRankData(rankList[i]);\\r\\n           
+    item.SetActive(true);\\r\\n        }\\r\\n        this.mScrollView.content.gameObject.SetActive(true);\\r\\n       
+    let myRankInfo = result.rankInfo.myRank;\\r\\n        console.log(\\\"GetRangeRank.myRank.score:\\\",
+    result.rankInfo.myRank.score);\\r\\n        console.log(\\\"GetRangeRank.myRank.rank:\\\",
+    result.rankInfo.myRank.rank);\\r\\n        if (myRankInfo) {\\r\\n           
+    this.mMyRank.text = myRankInfo.rank.toString();\\r\\n            this.mMyScore.text
+    = myRankInfo.score.toString();\\r\\n        }\\r\\n        else {\\r\\n           
+    this.mMyRank.text = \\\"--\\\";\\r\\n            this.mMyScore.text = \\\"--\\\";\\r\\n       
+    }\\r\\n    }\\r\\n    OnErrorGetRangeRank(error) {\\r\\n        console.log(error);\\r\\n   
+    }\\r\\n}\\r\\nexports.default = UILeaderboardPanel;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlMZWFkZXJib2FyZFBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlMZWFkZXJib2FyZFBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXVGO0FBQ3ZGLG1EQUEwRDtBQUMxRCxpREFBcUQ7QUFFckQseUVBQW9JO0FBQ3BJLHlEQUFpRDtBQUNqRCwwQ0FBa0M7QUFDbEMsdURBQWdEO0FBQ2hELHVDQUFnQztBQUNoQyw4RUFBdUU7QUFFdkUsTUFBcUIsa0JBQW1CLFNBQVEscUNBQXFCO0lBQXJFOztRQWtCcUIsbUJBQWMsR0FBVyxDQUFDLENBQUM7UUFDM0IsaUJBQVksR0FBVyxFQUFFLENBQUM7SUEyRi9DLENBQUM7SUF6RkcsSUFBWSxXQUFXLEtBQUssT0FBTyxrQkFBUSxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUM7SUFFMUQsS0FBSztRQUNELElBQUksQ0FBQyxtQkFBbUIsR0FBRyxFQUFFLENBQUM7UUFDOUIsSUFBSSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsQ0FBQztRQUNyRCxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztRQUMvRCxJQUFJLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztRQUNqRSxJQUFJLElBQUksR0FBRyxJQUFJLElBQUksRUFBRSxDQUFDO1FBQ3RCLElBQUksS0FBSyxHQUFHLENBQUMsSUFBSSxDQUFDLGlCQUFpQixFQUFFLEdBQUcsRUFBRSxDQUFDO1FBQzNDLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxHQUFHLHNCQUFZLENBQUMsUUFBUSxDQUFDLHlCQUF5QixDQUFDLFdBQVcsRUFBRSxDQUFDLEtBQUssR0FB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\",\"assetPath\":\"Assets/Scripts/UI/UILeaderboardPanel.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"mTitleText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mEndText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mTipText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mMyRankTip\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mMyRank\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mMyScoreTip\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mMyScore\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mRewardBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mCloseBtn\",\"type\":\"UnityEngine.UI.Button\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mScrollView\",\"type\":\"UnityEngine.UI.ScrollRect\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mLeaderboardItem\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mLeaderboardReward\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UILeaderboardPanel\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 7b5d841d85f100973e4efa81508c7f30
+  onlyWriteTrigger: 0

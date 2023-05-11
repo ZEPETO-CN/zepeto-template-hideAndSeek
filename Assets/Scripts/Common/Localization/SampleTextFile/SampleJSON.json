@@ -1,0 +1,373 @@
+{
+    "camera_feed": {
+      "EN": "#ZEPETOWorld #NeonParty #DJ",
+      "KR": "#ZEPETOWorld #NeonParty #DJ",
+      "JP": "#ZEPETOWorld #NeonParty #DJ",
+      "TH": "#ZEPETOWorld #NeonParty #DJ",
+      "ID": "#ZEPETOWorld #NeonParty #DJ"
+    },
+    "emoji_title": {
+      "EN": "Emoji",
+      "KR": "Emoji",
+      "JP": "Emoji",
+      "TH": "Emoji",
+      "ID": "Emoji"
+    },
+    "gesture_title": {
+      "EN": "Gesture",
+      "KR": "Gesture",
+      "JP": "Gesture",
+      "TH": "Gesture",
+      "ID": "Gesture"
+    },
+    "photo_save": {
+      "EN": "Save",
+      "KR": "저장",
+      "JP": "保存",
+      "TH": "บันทึก",
+      "ID": "Simpan"
+    },
+    "photo_share": {
+      "EN": "Share",
+      "KR": "공유",
+      "JP": "シェア",
+      "TH": "แชร์",
+      "ID": "Bagikan"
+    },
+    "photo_post": {
+      "EN": "Post",
+      "KR": "게시물등록",
+      "JP": "投稿する",
+      "TH": "อัปโหลดโพสต์",
+      "ID": "Posting"
+    },
+    "photo_uploading": {
+      "EN": "Uploading...",
+      "KR": "업로드 중...",
+      "JP": "投稿中…",
+      "TH": "กำลังอัปโหลด...",
+      "ID": "Mengunggah ..."
+    },
+    "photo_done": {
+      "EN": "Done",
+      "KR": "완료",
+      "JP": "完了",
+      "TH": "สำเร็จ",
+      "ID": "Selesai"
+    },
+    "photo_fail": {
+      "EN": "FAIL",
+      "KR": "FAIL",
+      "JP": "FAIL",
+      "TH": "FAIL",
+      "ID": "GAGAL"
+    },
+    "photo_saved": {
+      "EN": "Saved!",
+      "KR": "저장 완료!",
+      "JP": "保存成功！",
+      "TH": "บันทึกสำเร็จ!",
+      "ID": "Disimpan!"
+    },
+    "photo_shared": {
+      "EN": "Shared!",
+      "KR": "공유 완료!",
+      "JP": "シェア完了！",
+      "TH": "แชร์สำเร็จ!",
+      "ID": "Dibagikan!"
+    },
+    "notice_earphones": {
+      "EN": "A party isn't a party without good music!\nTurn up your volume! Put in your earphones!",
+      "KR": "파티에 음악이 빠질 수 없죠?\n볼륨을 높여주세요! 이어폰도 OK!",
+      "JP": "NO MUSIC NO PARTY！\n音量上げて！パーティーを楽しもう！",
+      "TH": "งานปาร์ตี้ขาดดนตรีไม่ได้ใช่มั้ยล่ะ?\nกรุณาเพิ่มเสียง! หูฟังก็ OK นะ!",
+      "ID": "Pesta tanpa musik, bukanlah pesta!\nNaikkan volumenya! Pakai earphonenya!"
+    },
+    "warning_momory": {
+      "EN": "You can't enjoy the party if you don't have enough storage on your device.\nDo you still want to attend the party?",
+      "KR": "기기 메모리가 부족하면, 파티를 즐기기 어려워요.\n그래도 파티장으로 가볼까요?",
+      "JP": "モバイル端末のメモリが不足だとパーティーを楽しめないよ..それでもパーティー会場に移動する？",
+      "TH": "หากเมมโมรี่อุปกรณ์ไม่เพียงพอเข้าร่วมปาร์ตี้คงยาก\nยังไปงานปาร์ตี้หรือไม่?",
+      "ID": "Jika perangkat kekurangan memori, sulit untuk menikmati pesta.\nApakah masih ingin pergi ke pesta?"
+    },
+    "settings_title": {
+      "EN": "Settings",
+      "KR": "설정",
+      "JP": "設定",
+      "TH": "ตั้งค่า",
+      "ID": "Pengaturan"
+    },
+    "settings_item_npc": {
+      "EN": "NPC",
+      "KR": "NPC",
+      "JP": "NPC",
+      "TH": "NPC",
+      "ID": "NPC"
+    },
+    "settings_item_tutorial": {
+      "EN": "Tutorial",
+      "KR": "튜토리얼",
+      "JP": "チュートリアル",
+      "TH": "โหมดฝึกสอน",
+      "ID": "Tutorial"
+    },
+    "settings_item_tutorial_text": {
+      "EN": "Watch tutorial",
+      "KR": "튜토리얼 확인하기",
+      "JP": "チュートリアルを見る",
+      "TH": "เช็คโหมดฝึกสอน",
+      "ID": "Lihat tutorial"
+    },
+    "tutorial_0_title": {
+      "EN": "DJ Neon Party",
+      "KR": "DJ Neon Party",
+      "JP": "DJ Neon Party",
+      "TH": "DJ Neon Party",
+      "ID": "DJ Neon Party"
+    },
+    "tutorial_0_subtitle_1": {
+      "EN": "Upbeat music and flashy lights",
+      "KR": "강렬한 음악과 화려한 네온 라이트",
+      "JP": "華やかな音楽と煌びやかなネオンライト",
+      "TH": "เพลงเพราะๆและไฟนีออนหลากสีสัน",
+      "ID": "Musik upbeat dan lampu neon mencolok"
+    },
+    "tutorial_0_subtitle_2": {
+      "EN": "Hidden rooms",
+      "KR": "곳곳에 숨겨진 신비로운 공간",
+      "JP": "あちこちに隠された神秘的な空間",
+      "TH": "สถานที่ลึกลับซ่อนอยู่หลายที่",
+      "ID": "Ruang rahasia tersembunyi"
+    },
+    "tutorial_0_subtitle_3": {
+      "EN": "The party's about to get started!",
+      "KR": "이제 파티가 시작된다!",
+      "JP": "パーティーが始まるよ！",
+      "TH": "ปาร์ตี้จะเริ่มตอนนี้เลย!",
+      "ID": "Pesta akan segera dimulai!"
+    },
+    "tutorial_1_title": {
+      "EN": "The Party Room",
+      "KR": "The Party Room",
+      "JP": "The Party Room",
+      "TH": "The Party Room",
+      "ID": "The Party Room"
+    },
+    "tutorial_1_subtitle_1": {
+      "EN": "Express yourself with emojis and gestures",
+      "KR": "이모지와 제스쳐로\u001d기분을 표현하고",
+      "JP": "絵文字やジェスチャーで気持ちを表して",
+      "TH": "ใช้อิโมจิและท่าทางเพื่อแสดงความรู้สึก",
+      "ID": "Ekspresikan dengan emoji dan pose"
+    },
+    "tutorial_1_subtitle_2": {
+      "EN": "Dance with friends!",
+      "KR": "친구들과 함께 현란한 댄스타임!",
+      "JP": "友達とレッツダンスターイム！",
+      "TH": "เวลาเต้นรำที่ยอดเยี่ยมกับเพื่อนๆ !",
+      "ID": "Menari dengan teman-teman!"
+    },
+    "tutorial_2_title": {
+      "EN": "Photo Countdown",
+      "KR": "Photo Countdown",
+      "JP": "Photo Countdown",
+      "TH": "Photo Countdown",
+      "ID": "Photo Countdown"
+    },
+    "tutorial_2_subtitle_1": {
+      "EN": "A neon camera will appear when the music starts",
+      "KR": "특별한 음악이 시작되면 등장하는 네온 카메라",
+      "JP": "スペシャルミュージックが始まるとネオンカメラが登場！",
+      "TH": "กล้องนีออนที่ปรากฏขึ้นเมื่อเพลงพิเศษเริ่ม",
+      "ID": "Kamera neon yang muncul ketika musik dimulai"
+    },
+    "tutorial_2_subtitle_2": {
+      "EN": "Follow the neon camera for a photo!",
+      "KR": "네온 카메라를 따라가 나만의 포즈로 찰칵!",
+      "JP": "ネオンカメラを追いかけて写真撮ってもらおう！",
+      "TH": "ทำตามกล้องนีออนและถ่ายภาพใช้ท่าทางตัวเอง!",
+      "ID": "Ikuti kamera neon untuk berfoto!"
+    },
+    "tutorial_2_subtitle_3": {
+      "EN": "See your photo on the main screen!",
+      "KR": "DJ 스테이지 스크린에서 멋진 내 사진을 구경해요!",
+      "JP": "DJ台のスクリーンに映される写真を要チェック！",
+      "TH": "ดูภาพสุดเจ๋งของเราบนหน้าจอเวที DJ!",
+      "ID": "Lihat fotoku di layar panggung!"
+    },
+    "tutorial_3_title": {
+      "EN": "The Social Lounge",
+      "KR": "The Social Lounge",
+      "JP": "The Social Lounge",
+      "TH": "The Social Lounge",
+      "ID": "The Social Lounge"
+    },
+    "tutorial_3_subtitle_1": {
+      "EN": "Check out the neon aquarium with glowing fish",
+      "KR": "빛나는 물고기가 있는 네온 수족관과",
+      "JP": "キラキラの魚いっぱいネオン水族館と",
+      "TH": "พิพิธภัณฑ์สัตว์น้ำที่มีปลานีออน",
+      "ID": "Lihat akuarium neon dengan ikan mengkilap"
+    },
+    "tutorial_3_subtitle_2": {
+      "EN": "admire the neon sculptures",
+      "KR": "흥미로운 네온 조각상을 구경하고",
+      "JP": "なにこれ？ネオン彫刻！？",
+      "TH": "ชมรูปปั้นอันนีออนน่าทึ่ง",
+      "ID": "dan patung neon"
+    },
+    "tutorial_3_subtitle_3": {
+      "EN": "and chat with new friends from the party in front of the fireplace.",
+      "KR": "파티에서 만난 친구들과 따뜻한 벽난로 앞에서 이야기 나눠요",
+      "JP": "パーティーで仲良くなった友達と暖炉前でお喋り会！",
+      "TH": "คุยกับเพื่อนๆที่พบในปาร์ตี้นีออนหน้าเตาผิงอันอบอุ่น",
+      "ID": "dan mengobrol dengan teman-teman baru dari pesta di depan perapian."
+    },
+    "tutorial_4_title": {
+      "EN": "The Secret Room",
+      "KR": "The Secret Room",
+      "JP": "The Secret Room",
+      "TH": "The Secret Room",
+      "ID": "The Secret Room"
+    },
+    "tutorial_4_subtitle_1": {
+      "EN": "The secret room! Can you find it?!",
+      "KR": "숨겨진 비밀의 방! 어디에 있을까요? 지금 찾아봐요!",
+      "JP": "隠された秘密のルーム！どこかな？見つけられるかな？",
+      "TH": "ห้องลับที่ซ่อน! อยู่ทีไหนเอย? ไปตามหากันเถอะ!",
+      "ID": "Ruang rahasia! Bisakah kamu menemukannya?!"
+    },
+    "warning_connection": {
+      "EN": "You've lost your connection to ZEPETO World.\nTry again?",
+      "KR": "제페토 월드와의 통신이 끊어졌어요.\n다시 접속할까요?",
+      "JP": "ZEPETO Worldとの通信が\n切れてしまいました。\nもう一度接続しますか？",
+      "TH": "การเชื่อมต่อกับ ZEPETO WORLD ถูกตัดขาด\nต้องการเชื่อมต่ออีกครั้งหรือไม่?",
+      "ID": "Kamu kehilangan koneksi Dunia ZEPETO.\nApakah kamu ingin mencoba untuk terhubung lagi?"
+    },
+    "ok": {
+      "EN": "OK",
+      "KR": "OK",
+      "JP": "確認",
+      "TH": "OK",
+      "ID": "OK"
+    },
+    "cancel": {
+      "EN": "Cancel",
+      "KR": "취소",
+      "JP": "キャンセル",
+      "TH": "ยกเลิก",
+      "ID": "Batalkan"
+    },
+    "warning_relocate": {
+      "EN": "You have lost your connection.\nZEPETO World has closed.",
+      "KR": "제페토 월드와의 통신이 끊어졌어요.\n월드에서 나갑니다.",
+      "JP": "ZEPETO Worldとの接続が中断されました。\nワールドから退出します。",
+      "TH": "การเชื่อมต่อกับ ZEPETO WORLD ถูกตัดขาด\nคุณได้ออกจาก ZEPETO WORLD แล้ว",
+      "ID": "Kamu telah kehilangan koneksi Dunai ZEPETO.\nDunia ZEPETO telah berakhir."
+    },
+    "warning_photogame_npc": {
+      "EN": "You cannot call an NPC during a photo game.",
+      "KR": "포토게임 중에는 NPC를 불러올 수 없어요.",
+      "JP": "フォトゲーム中はNPC読み込めないよ",
+      "TH": "",
+      "ID": "Anda tidak dapat memanggil NPC selama Photo Game."
+    },
+    "tutorial_url_1": {
+      "EN": "https://cdn-asset.zepeto.me/assets/pve993wK87Pt4chURpl4DhX",
+      "KR": "https://cdn-asset.zepeto.me/assets/js63W3wK87Lt4cjtFZlaA22",
+      "JP": "https://cdn-asset.zepeto.me/assets/1UbYV3wK87Pt4cjeClTBIWR",
+      "TH": "https://cdn-asset.zepeto.me/assets/yO6NX3wK87Lt4cjIaQQ9uKG",
+      "ID": "https://cdn-asset.zepeto.me/assets/e5Eh03wK87Pt4ciXD24SxlR"
+    },
+    "tutorial_url_2": {
+      "EN": "https://cdn-asset.zepeto.me/assets/fF3Dn3wK87Lt4chURqM22gF",
+      "KR": "https://cdn-asset.zepeto.me/assets/mqxAV3wK87Pt4cjtG0CxFde",
+      "JP": "https://cdn-asset.zepeto.me/assets/SqgYC3wK884t4cjeCn1cJWr",
+      "TH": "https://cdn-asset.zepeto.me/assets/7g0Yq3wK87Pt4cjIaSbbzMZ",
+      "ID": "https://cdn-asset.zepeto.me/assets/1w7SW3wK884t4ciXD09zWuG"
+    },
+    "tutorial_url_3": {
+      "EN": "https://cdn-asset.zepeto.me/assets/VrUsd3wK884t4chURs5YoBw",
+      "KR": "https://cdn-asset.zepeto.me/assets/2cgSP3wK884t4cjtFZNoRX3",
+      "JP": "https://cdn-asset.zepeto.me/assets/C9qLt3wK87Qt4cjeCoR53m8",
+      "TH": "https://cdn-asset.zepeto.me/assets/eytTU3wK884t4cjIaQNeP0r",
+      "ID": "https://cdn-asset.zepeto.me/assets/83dlb3wK87Qt4ciXD1xcHy5"
+    },
+    "tutorial_url_4": {
+      "EN": "https://cdn-asset.zepeto.me/assets/4KAk83wK87Qt4chURwHfDLG",
+      "KR": "https://cdn-asset.zepeto.me/assets/ab9ZL3wK87Qt4cjtFZJtiUT",
+      "JP": "https://cdn-asset.zepeto.me/assets/rxevm3wK87Lt4cjeCwQ6L4I",
+      "TH": "https://cdn-asset.zepeto.me/assets/CArUR3wK87Qt4cjIaSzX1ZI",
+      "ID": "https://cdn-asset.zepeto.me/assets/BlMsd3wK87Lt4ciXD5fzfGF"
+    },
+    "tutorial_url_5": {
+      "EN": "https://cdn-asset.zepeto.me/assets/y37c43wK87Qt4chURxD0hVZ",
+      "KR": "https://cdn-asset.zepeto.me/assets/ew9oa3wK87Qt4cjtFYeiddW",
+      "JP": "https://cdn-asset.zepeto.me/assets/DS4hq3wK87Lt4cjeCsvKbXF",
+      "TH": "https://cdn-asset.zepeto.me/assets/uMdw53wK87Qt4cjIaRDwMQI",
+      "ID": "https://cdn-asset.zepeto.me/assets/2kJS33wK87Lt4ciXD7dXpPc"
+    },
+    "screenshot_screenshotShootDone": {
+      "EN": "Photo shoot complete! Upload now?",
+      "KR": "촬영 완료! 올리시겠습니까?",
+      "JP": "撮影完了！さっそくアップする？",
+      "TH": "ถ่ายสำเร็จ! ต้องการอัปโหลดหรือไม่?",
+      "ID": "Selesai! Unggah?"
+    },
+    "screenshot_screenshotEdit": {
+      "EN": "Edit",
+      "KR": "편집",
+      "JP": "編集",
+      "TH": "แก้ไข",
+      "ID": "Mengedit"
+    },
+    "screenshotUpload": {
+      "EN": "Post",
+      "KR": "게시물 등록",
+      "JP": "投稿する",
+      "TH": "อัปโหลดโพสต์",
+      "ID": "Posting"
+    },
+    "screenshot_toastFail": {
+      "EN": "FAIL",
+      "KR": "FAIL",
+      "JP": "FAIL",
+      "TH": "FAIL",
+      "ID": "GAGAL"
+    },
+    "screenshot_toastSuccess": {
+      "EN": "Done",
+      "KR": "완료",
+      "JP": "完了",
+      "TH": "สำเร็จ",
+      "ID": "Selesai"
+    },
+    "screenshot_toastProgress": {
+      "EN": "In progress...",
+      "KR": "진행 중...",
+      "JP": "進行中…",
+      "TH": "กำลังดำเนินการ...",
+      "ID": "Sedang berlangsung"
+    },
+    "screenshot_previewUpload": {
+      "EN": "Post",
+      "KR": "게시물 등록",
+      "JP": "投稿する",
+      "TH": "อัปโหลดโพสต์",
+      "ID": "Posting"
+    },
+    "screenshot_previewDescriptionTitle": {
+      "EN": "Description",
+      "KR": "설명",
+      "JP": "説明",
+      "TH": "คำอธิบาย",
+      "ID": "Deskripsi"
+    },
+    "screenshot_previewFeedMessagePlaceHolder": {
+      "EN": "#ZEPETOWorld #NeonParty #DJ",
+      "KR": "#ZEPETOWorld #NeonParty #DJ",
+      "JP": "#ZEPETOWorld #NeonParty #DJ",
+      "TH": "#ZEPETOWorld #NeonParty #DJ",
+      "ID": "#ZEPETOWorld #NeonParty #DJ"
+    }
+}

@@ -1,0 +1,47 @@
+fileFormatVersion: 2
+guid: 98036bba166ff944ead247710ac2326d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst ChangeModelItem_1 = require(\"./ActionBar/ChangeModelItem\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst UnityEngine_Events_1
+    = require(\"UnityEngine.Events\");\r\nconst UIManager_1 = require(\"../GameManager/UIManager\");\r\nconst
+    ModelImageConverter_1 = require(\"../Model/ModelImageConverter\");\r\nclass UIChangeModelPanel
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this.mSelected = -1;\r\n        this.DEF_MODEL
+    = 99;\r\n    }\r\n    Awake() {\r\n        this.mChangeModelBtn.onClick.AddListener(()
+    => {\r\n            if (this.mSelected >= 0) {\r\n                console.log(\"OnChanged!\");\r\n               
+    UIManager_1.default.Instance.OnChangeModel(this.mSelected);\r\n            }\r\n           
+    this.gameObject.SetActive(false);\r\n        });\r\n        this.mRestoreBtn.onClick.AddListener(()
+    => {\r\n            UIManager_1.default.Instance.OnChangeModel(this.DEF_MODEL);\r\n           
+    this.gameObject.SetActive(false);\r\n        });\r\n    }\r\n    Start() {\r\n       
+    this.UIChangeModelPanel();\r\n    }\r\n    UIChangeModelPanel() {\r\n       
+    for (var i = 0; i < this.modelImage.targetObject.modelList.length; i++) {\r\n           
+    if (!this.modelImage.targetObject.isHide[i]) {\r\n                let go = UnityEngine_1.GameObject.Instantiate(this.mItem);\r\n               
+    go.transform.SetParent(this.mItemParent);\r\n                go.transform.localScale
+    = UnityEngine_1.Vector3.one;\r\n                let img = this.modelImage.targetObject.modelList[i];\r\n               
+    let item = go.GetComponent($typeof(ChangeModelItem_1.default));\r\n               
+    item.OnClickEvent = new ($generic(UnityEngine_Events_1.UnityEvent$1, $typeof(\"int\")))();\r\n               
+    item.OnClickEvent.AddListener((id) => {\r\n                    this.mSelected
+    = id;\r\n                });\r\n                item.SetData(img, i);\r\n               
+    go.SetActive(true);\r\n            }\r\n        }\r\n    }\r\n}\r\nexports.default
+    = UIChangeModelPanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlDaGFuZ2VNb2RlbFBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlDaGFuZ2VNb2RlbFBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWdFO0FBQ2hFLGlEQUEyRTtBQUMzRSxpRUFBeUQ7QUFDekQsbURBQXdDO0FBQ3hDLDJEQUFnRDtBQUNoRCx3REFBZ0Q7QUFDaEQsc0VBQStEO0FBRy9ELE1BQXFCLGtCQUFtQixTQUFRLHFDQUFxQjtJQUFyRTs7UUFPWSxjQUFTLEdBQVksQ0FBQyxDQUFDLENBQUM7UUFDZixjQUFTLEdBQVcsRUFBRSxDQUFDO0lBMkM1QyxDQUFDO0lBekNHLEtBQUs7UUFDRCxJQUFJLENBQUMsZUFBZSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRSxFQUFFO1lBQ3pDLElBQUcsSUFBSSxDQUFDLFNBQVMsSUFBSSxDQUFDLEVBQUM7Z0JBQ25CLE9BQU8sQ0FBQyxHQUFHLENBQUMsWUFBWSxDQUFDLENBQUM7Z0JBQzFCLG1CQUFTLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7YUFDcEQ7WUFDRCxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUNyQyxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFFLEVBQUU7WUFDckMsbUJBQVMsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQztZQUNqRCxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLGtCQUFrQixFQUFFLENBQUM7SUFDOUIsQ0FBQztJQUVNLGtCQUFrQjtRQUNyQixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLENBQUMsU0FBUyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFDdEU7WUFDSSxJQUFHLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFDO2dCQUN2QyxJQUFJLEVBQUUsR0FBRyx3QkFBVSxDQUFDLFdBQVcsQ0FBYSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7Z0JBQ3hELEVBQUUsQ0FBQyxTQUFTLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsQ0FBQztnQkFDekMsRUFBRSxDQUFDLFNBQVMsQ0FBQyxVQUFVLEdBQUcscUJBQU8sQ0FBQyxHQUFHLENBQUM7Z0JBQ3RDLElBQUksR0FBRyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsWUFBWSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDcEQsSUFBSSxJQUFJLEdBQUksRUFBRSxDQUFDLFlBQVksU0FBQyx5QkFBZSxFQUFHLENBQUM7Z0JBQy9DLElBQUksQ0FBQyxZQUFZLGlCQUFPLGlDQUFZLG9CQUFPLENBQUM7Z0JBRTVDLElBQUksQ0FBQyxZQUFZLENBQUMsV0FBVyxDQUFDLENBQUMsRUFBRSxFQUFDLEVBQUU7b0JBQ2hDLElBQUksQ0FBQyxTQUFTLEdBQUcsRUFBRSxDQUFDO2dCQUN4QixDQUFDLENBQUMsQ0FBQztnQkFDSCxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQztnQkFDckIsRUFBRSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQzthQUN0QjtTQUVKO0lBQ0wsQ0FBQztDQUdKO0FBbkRELHFDQW1EQyJ9","assetPath":"Assets/Scripts/UI/UIChangeModelPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mItem","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mItemParent","type":"UnityEngine.RectTransform","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mChangeModelBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRestoreBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"ZEPETO.Script","name":"modelImage","type":"ZEPETO.Script.ZepetoScriptableObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIChangeModelPanel","description":""},"isCompiled":true}'
+  typescriptHash: 887d3c4a71e6d2a7e5a002d2573be0c4
+  onlyWriteTrigger: 0

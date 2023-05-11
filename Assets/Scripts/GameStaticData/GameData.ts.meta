@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 7321ce51e4b9ba24d86708bc40d1a1f5
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_Leaderboard_1 = require(\"ZEPETO.Script.Leaderboard\");\r\nclass
+    GameData {\r\n}\r\nexports.default = GameData;\r\nGameData.LEADERBOARD = {\r\n   
+    WeekRank: {\r\n        id: \"\",\r\n        resetRule: ZEPETO_Script_Leaderboard_1.ResetRule.week,\r\n       
+    resetDay: 1,\r\n        resetHour: 0,\r\n        resetMin: 0,\r\n        resetSec:
+    0,\r\n    },\r\n    playerStar: {\r\n        id: \"\",\r\n        resetRule:
+    ZEPETO_Script_Leaderboard_1.ResetRule.none,\r\n    }\r\n};\r\nGameData.GAME_HEART_RATE
+    = 5;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiR2FtZURhdGEuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJHYW1lRGF0YS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLHlFQUFzRDtBQUV0RCxNQUFxQixRQUFROztBQUE3QiwyQkFtQkM7QUFqQlUsb0JBQVcsR0FBRztJQUNqQixRQUFRLEVBQUU7UUFDTixFQUFFLEVBQUUsRUFBRTtRQUNOLFNBQVMsRUFBRSxxQ0FBUyxDQUFDLElBQUk7UUFDekIsUUFBUSxFQUFFLENBQUM7UUFDWCxTQUFTLEVBQUUsQ0FBQztRQUNaLFFBQVEsRUFBRSxDQUFDO1FBQ1gsUUFBUSxFQUFFLENBQUM7S0FDZDtJQUNELFVBQVUsRUFBRTtRQUNSLEVBQUUsRUFBRSxFQUFFO1FBQ04sU0FBUyxFQUFFLHFDQUFTLENBQUMsSUFBSTtLQUM1QjtDQUNKLENBQUE7QUFFTSx3QkFBZSxHQUFHLENBQUMsQ0FBQyJ9","assetPath":"Assets/Scripts/GameStaticData/GameData.ts","manifest":{"properties":[],"name":"GameData","description":""},"isCompiled":true}'
+  typescriptHash: b1f5d556d048e3940aa9b695ab61f1a3
+  onlyWriteTrigger: 0

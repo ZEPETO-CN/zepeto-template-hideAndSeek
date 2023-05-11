@@ -1,0 +1,31 @@
+fileFormatVersion: 2
+guid: c202b50cbf1571747aa3fc21531f8735
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nclass
+    QuickMessageItem extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake()
+    {\r\n        this.mBtn.onClick.AddListener(() => {\r\n            this.ClickCallback?.(this.mBarrage);\r\n       
+    });\r\n    }\r\n    SetQuickMessage(barrage) {\r\n        this.mBarrage = barrage;\r\n       
+    this.mText.text = Localization_1.default.Instance.GetLocalizedText(barrage.des);\r\n   
+    }\r\n    SetClickCallback(callback) {\r\n        this.ClickCallback = callback;\r\n   
+    }\r\n}\r\nexports.default = QuickMessageItem;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUXVpY2tNZXNzYWdlSXRlbS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlF1aWNrTWVzc2FnZUl0ZW0udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFDckQsbURBQTZDO0FBRTdDLDhFQUF1RTtBQUV2RSxNQUFxQixnQkFBaUIsU0FBUSxxQ0FBcUI7SUFRL0QsS0FBSztRQUNELElBQUksQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDL0IsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUN4QyxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRCxlQUFlLENBQUMsT0FBZ0I7UUFDNUIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUM7UUFDeEIsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQzFFLENBQUM7SUFFRCxnQkFBZ0IsQ0FBQyxRQUFrQjtRQUMvQixJQUFJLENBQUMsYUFBYSxHQUFHLFFBQVEsQ0FBQztJQUNsQyxDQUFDO0NBRUo7QUF2QkQsbUNBdUJDIn0=","assetPath":"Assets/Scripts/UI/QuickMessageItem.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"","name":"mBarrage","type":"D:/Git/new-world-peekaboo/Assets/Scripts/Data/Barrage.Barrage","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"QuickMessageItem","description":""},"isCompiled":true}'
+  typescriptHash: 62d163181144731eecb7c6f01891fa16
+  onlyWriteTrigger: 0

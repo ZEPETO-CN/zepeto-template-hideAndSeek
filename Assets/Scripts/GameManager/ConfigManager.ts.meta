@@ -1,0 +1,91 @@
+fileFormatVersion: 2
+guid: 8c56e2f9d6edaa94d9b6a6fffeba1cb5
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ZEPETO_World_1 = require(\"ZEPETO.World\");\r\nclass ConfigManager extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    static get Instance() {\r\n        return ConfigManager._instance;\r\n   
+    }\r\n    Awake() {\r\n        ConfigManager._instance = this;\r\n        this.mSpawnInfoVO
+    = JSON.parse(this.mStartPointsJson.text);\r\n        this.mPlayerInfoVO = JSON.parse(this.mPlayerInfoJson.text);\r\n       
+    this.mModelInfoVO = JSON.parse(this.mModelInfoJson.text);\r\n        this.mModelCostVO
+    = JSON.parse(this.mModelCostJson.text);\r\n    }\r\n    GetStartPoint(index,
+    gameState) {\r\n        let result = null;\r\n        switch (gameState) {\r\n           
+    case 0:\r\n                index %= this.mSpawnInfoVO.idle.length;\r\n               
+    result = this.mSpawnInfoVO.idle[index];\r\n                break;\r\n           
+    case 1:\r\n                index %= this.mSpawnInfoVO.hider.length;\r\n               
+    result = this.mSpawnInfoVO.hider[index];\r\n                break;\r\n           
+    case 2:\r\n                index %= this.mSpawnInfoVO.hunter.length;\r\n               
+    result = this.mSpawnInfoVO.hunter[index];\r\n                break;\r\n       
+    }\r\n        return result;\r\n    }\r\n    GetPlayerInfoVO(playerRole) {\r\n       
+    for (var i = 0; i < this.mPlayerInfoVO.length; i++) {\r\n            if (this.mPlayerInfoVO[i].playerRole
+    == playerRole) {\r\n                return this.mPlayerInfoVO[i];\r\n           
+    }\r\n        }\r\n    }\r\n    GetModelInfoVO(name) {\r\n        for (var i =
+    0; i < this.mModelInfoVO.length; i++) {\r\n            if (this.mModelInfoVO[i].name
+    === name) {\r\n                return this.mModelInfoVO[i];\r\n            }\r\n       
+    }\r\n    }\r\n    GetModelInfoVOById(id) {\r\n        return this.mModelInfoVO[id];\r\n   
+    }\r\n    GetModelCostVO() {\r\n        return this.mModelCostVO;\r\n    }\r\n   
+    GetModelCostVOByCostId(costId) {\r\n        for (var i = 0; i < this.mModelCostVO.length;
+    i++) {\r\n            if (this.mModelCostVO[i].costId === costId) {\r\n               
+    return this.mModelCostVO[i];\r\n            }\r\n        }\r\n    }\r\n    GetRankRewardTable()
+    {\r\n        return ConfigManager.RANK_REWARD_TABLE;\r\n    }\r\n}\r\nexports.default
+    = ConfigManager;\r\nConfigManager.RANK_REWARD_TABLE = [\r\n    {\r\n        rankType:
+    0 /* RANK */,\r\n        rankValue: 1,\r\n        rewardType: 1 /* ZEM */,\r\n       
+    rewardValue: 50,\r\n    }, {\r\n        rankType: 0 /* RANK */,\r\n        rankValue:
+    2,\r\n        rewardType: 1 /* ZEM */,\r\n        rewardValue: 25,\r\n    },
+    {\r\n        rankType: 0 /* RANK */,\r\n        rankValue: 5,\r\n        rewardType:
+    1 /* ZEM */,\r\n        rewardValue: 5,\r\n    }, {\r\n        rankType: 0 /*
+    RANK */,\r\n        rankValue: 10,\r\n        rewardType: 1 /* ZEM */,\r\n       
+    rewardValue: 1,\r\n    }, {\r\n        rankType: 0 /* RANK */,\r\n        rankValue:
+    50,\r\n        rewardType: 0 /* COIN */,\r\n        rewardValue: 5000,\r\n   
+    }, {\r\n        rankType: 1 /* RATE */,\r\n        rankValue: 30,\r\n       
+    rewardType: 0 /* COIN */,\r\n        rewardValue: 1000,\r\n    }, {\r\n       
+    rankType: 1 /* RATE */,\r\n        rankValue: 60,\r\n        rewardType: 0 /*
+    COIN */,\r\n        rewardValue: 500,\r\n    }, {\r\n        rankType: 2 /* ETC
+    */,\r\n        rankValue: 0,\r\n        rewardType: 0 /* COIN */,\r\n       
+    rewardValue: 100,\r\n    }\r\n];\r\nConfigManager.WEEK_NEED_ACTIVITY = {\r\n   
+    activityValue: 580,\r\n    rewardType: 1 /* ZEM */,\r\n    rewardValue: 3,\r\n};\r\nConfigManager.STAR_REWARD_ARRAY
+    = [\r\n    {\r\n        id: 1,\r\n        amount: 8,\r\n        rewardType: 1
+    /* ZEM */\r\n    },\r\n    {\r\n        id: 2,\r\n        amount: 5888,\r\n       
+    rewardType: 0 /* COIN */\r\n    },\r\n    {\r\n        id: 3,\r\n        amount:
+    20,\r\n        rewardType: 1 /* ZEM */\r\n    },\r\n    {\r\n        id: 4,\r\n       
+    amount: 388,\r\n        rewardType: 0 /* COIN */\r\n    },\r\n    {\r\n       
+    id: 5,\r\n        amount: 3,\r\n        rewardType: 1 /* ZEM */\r\n    },\r\n   
+    {\r\n        id: 6,\r\n        amount: 88,\r\n        rewardType: 0 /* COIN */\r\n   
+    },\r\n    {\r\n        id: 7,\r\n        amount: 1,\r\n        rewardType: 1
+    /* ZEM */\r\n    },\r\n    {\r\n        id: 8,\r\n        amount: 228,\r\n       
+    rewardType: 0 /* COIN */\r\n    },\r\n    {\r\n        id: 9,\r\n        amount:
+    10,\r\n        rewardType: 1 /* ZEM */\r\n    },\r\n    {\r\n        id: 10,\r\n       
+    amount: 888,\r\n        rewardType: 0 /* COIN */\r\n    },\r\n    {\r\n       
+    id: 11,\r\n        amount: 2,\r\n        rewardType: 1 /* ZEM */\r\n    },\r\n   
+    {\r\n        id: 12,\r\n        amount: 108,\r\n        rewardType: 0 /* COIN
+    */\r\n    },\r\n];\r\nConfigManager.SEASON_REWARD_ARRAY = [\r\n    {\r\n       
+    id: 1,\r\n        amount: 10,\r\n        rewardType: 1 /* ZEM */,\r\n       
+    score: 400000\r\n    },\r\n    {\r\n        id: 2,\r\n        amount: 25,\r\n       
+    rewardType: 1 /* ZEM */,\r\n        score: 800000\r\n    },\r\n    {\r\n       
+    id: 3,\r\n        amount: 50,\r\n        rewardType: 1 /* ZEM */,\r\n       
+    score: 1200000\r\n    },\r\n    {\r\n        id: 4,\r\n        amount: 150,\r\n       
+    rewardType: 1 /* ZEM */,\r\n        score: 1600000\r\n    },\r\n    {\r\n       
+    id: 5,\r\n        amount: 300,\r\n        rewardType: 1 /* ZEM */,\r\n       
+    score: 2000000\r\n    },\r\n];\r\nConfigManager.STAR_REWARD = {\r\n    cost:
+    80,\r\n    luckMax: 100,\r\n    luckAdd: 2,\r\n    exchangeMax: 5,\r\n};\r\nclass
+    SpawnPointVO {\r\n}\r\nclass StartPoint {\r\n}\r\nclass PlayerInfoVO {\r\n}\r\nclass
+    ModelInfoVO {\r\n}\r\nclass ModelCostVO {\r\n}\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ29uZmlnTWFuYWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkNvbmZpZ01hbmFnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxpREFBcUQ7QUFFckQsK0NBQW9EO0FBY3BELE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUF5S3JELE1BQU0sS0FBSyxRQUFRO1FBQ3RCLE9BQU8sYUFBYSxDQUFDLFNBQVMsQ0FBQztJQUNuQyxDQUFDO0lBQ0QsS0FBSztRQUNELGFBQWEsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1FBRS9CLElBQUksQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDM0QsSUFBSSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDM0QsSUFBSSxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDekQsSUFBSSxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLENBQUM7SUFFN0QsQ0FBQztJQUVNLGFBQWEsQ0FBQyxLQUFhLEVBQUUsU0FBaUI7UUFFakQsSUFBSSxNQUFNLEdBQWUsSUFBSSxDQUFDO1FBQzlCLFFBQVEsU0FBUyxFQUFFO1lBQ2YsS0FBSyxDQUFDO2dCQUNGLEtBQUssSUFBSSxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUM7Z0JBQ3ZDLE1BQU0sR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDdkMsTUFBTTtZQUNWLEtBQUssQ0FBQztnQkFDRixLQUFLLElBQUksSUFBSSxDQUFDLFlBQVksQ0FBQyxLQUFLLENBQUMs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","assetPath":"Assets/Scripts/GameManager/ConfigManager.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"mStartPointsJson","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mPlayerInfoJson","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mModelInfoJson","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mModelCostJson","type":"UnityEngine.TextAsset","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"ConfigManager","description":""},"isCompiled":true}'
+  typescriptHash: fafa391b6b3559f26b4afe687c19f259
+  onlyWriteTrigger: 0

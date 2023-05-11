@@ -1,0 +1,58 @@
+fileFormatVersion: 2
+guid: a348128417da5ab4b86a28167ce7efbf
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst Localization_1 =
+    require(\\\"../Common/Localization/Scripts/Localization\\\");\\r\\nconst PoolManager_1
+    = require(\\\"../GameManager/PoolManager\\\");\\r\\nconst BarrageItem_1 = require(\\\"./BarrageItem\\\");\\r\\nconst
+    UIMessagePanel_1 = require(\\\"./UIMessagePanel\\\");\\r\\nclass UIBarragePanel
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    Init() {\\r\\n       
+    this.gameObject.SetActive(false);\\r\\n        this.barrageItems = [];\\r\\n   
+    }\\r\\n    SetBarrageVisiable(visiable) {\\r\\n        this.gameObject.SetActive(visiable);\\r\\n       
+    if (!visiable) {\\r\\n            this.CleanAllBarrage();\\r\\n        }\\r\\n   
+    }\\r\\n    AddBarrageItem(type, id, playerName, group) {\\r\\n        if (!this.gameObject.activeSelf)
+    {\\r\\n            return;\\r\\n        }\\r\\n        let obj;\\r\\n       
+    if (type == UIMessagePanel_1.QuickMessageType.message) {\\r\\n            obj
+    = PoolManager_1.default.Instance.Spawn(\\\"BarrageItem\\\");\\r\\n           
+    let raw = this.RandomRaw();\\r\\n            obj.transform.SetParent(raw.transform);\\r\\n           
+    obj.transform.localScale = UnityEngine_1.Vector3.one;\\r\\n            obj.GetComponent($typeof(UnityEngine_1.RectTransform)).anchoredPosition
+    = UnityEngine_1.Vector2.zero;\\r\\n            let item = obj.GetComponent($typeof(BarrageItem_1.default));\\r\\n           
+    let barrage = this.mBarrageMap.get(id);\\r\\n            let des = `${playerName}\uFF1A${Localization_1.default.Instance.GetLocalizedText(barrage.des)}`;\\r\\n           
+    item.PlayBarrageItem(des, group);\\r\\n            item.SetCompletedAction(this.OnCompletedAction.bind(this));\\r\\n           
+    this.barrageItems.push(item);\\r\\n        }\\r\\n        else if (type == UIMessagePanel_1.QuickMessageType.emoji)
+    {\\r\\n            obj = PoolManager_1.default.Instance.Spawn(\\\"BarrageEmojiItem\\\");\\r\\n           
+    let raw = this.RandomRaw();\\r\\n            obj.transform.SetParent(raw.transform);\\r\\n           
+    obj.transform.localScale = UnityEngine_1.Vector3.one;\\r\\n            obj.GetComponent($typeof(UnityEngine_1.RectTransform)).anchoredPosition
+    = UnityEngine_1.Vector2.zero;\\r\\n            let item = obj.GetComponent($typeof(BarrageItem_1.default));\\r\\n           
+    let des = `${playerName}\uFF1A`;\\r\\n            item.PlayBarrageEmojiItem(des,
+    group, this.mEmojiSprites[id]);\\r\\n            item.SetCompletedAction(this.OnCompletedAction.bind(this));\\r\\n           
+    this.barrageItems.push(item);\\r\\n        }\\r\\n    }\\r\\n    RandomRaw()
+    {\\r\\n        let index = Math.round(Math.random() * (this.raws.length - 1));\\r\\n       
+    return this.raws[index];\\r\\n    }\\r\\n    OnCompletedAction(item) {\\r\\n       
+    this.barrageItems.pop();\\r\\n        item.gameObject.SetActive(false);\\r\\n       
+    PoolManager_1.default.Instance.UnSpawn(item.gameObject);\\r\\n    }\\r\\n   
+    CleanAllBarrage() {\\r\\n        for (let i = 0; i < this.barrageItems.length;
+    i++) {\\r\\n            let item = this.barrageItems[i];\\r\\n            item.gameObject.SetActive(false);\\r\\n           
+    PoolManager_1.default.Instance.UnSpawn(item.gameObject);\\r\\n        }\\r\\n       
+    this.barrageItems = [];\\r\\n    }\\r\\n}\\r\\nexports.default = UIBarragePanel;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlCYXJyYWdlUGFuZWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJVSUJhcnJhZ2VQYW5lbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUFrRjtBQUNsRixpREFBcUQ7QUFDckQsOEVBQXVFO0FBRXZFLDREQUFxRDtBQUNyRCwrQ0FBd0M7QUFDeEMscURBQW9EO0FBRXBELE1BQXFCLGNBQWUsU0FBUSxxQ0FBcUI7SUFPdEQsSUFBSTtRQUNQLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ2pDLElBQUksQ0FBQyxZQUFZLEdBQUcsRUFBRSxDQUFDO0lBQzNCLENBQUM7SUFFTSxrQkFBa0IsQ0FBQyxRQUFpQjtRQUN2QyxJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUNwQyxJQUFJLENBQUMsUUFBUSxFQUFFO1lBQ1gsSUFBSSxDQUFDLGVBQWUsRUFBRSxDQUFDO1NBQzFCO0lBQ0wsQ0FBQztJQUVNLGNBQWMsQ0FBQyxJQUFzQixFQUFFLEVBQVUsRUFBRSxVQUFrQixFQUFFLEtBQWE7UUFDdkYsSUFBSSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxFQUFFO1lBQzdCLE9BQU87U0FDVjtRQUNELElBQUksR0FBZSxDQUFDO1FBQ3BCLElBQUksSUFBSSxJQUFJLGlDQUFnQixDQUFDLE9BQU8sRUFBRTtZQUNsQyxHQUFHLEdBQUcscUJBQVcsQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLGFBQWEsQ0FBQyxDQUFDO1lBQ2hELElBQUksR0FBRyxHQUFHLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQztZQUMzQixHQUFHLENBQUMsU0FBUyxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7WUFDdkMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxVQUFVLEdBQUcscUJBQU8sQ0FBQyxHQUFHLENBQUM7WUFDdkMsR0FBRyxDQUFDLFlBQVksU0FB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\",\"assetPath\":\"Assets/Scripts/UI/UIBarragePanel.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mEmojiSprites\",\"type\":\"UnityEngine.Sprite[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"raws\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UIBarragePanel\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: f3b4192c87a683990887f3bb962d30a6
+  onlyWriteTrigger: 0

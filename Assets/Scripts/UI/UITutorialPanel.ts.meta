@@ -1,0 +1,106 @@
+fileFormatVersion: 2
+guid: c5d128daa74a8e040ad1e71946657001
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nconst
+    TutorialBtnItem_1 = require(\"./TutorialBtnItem\");\r\nconst TutorialItem_1 =
+    require(\"./TutorialItem\");\r\nclass UITutorialPanel extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\r\n    Awake() {\r\n        this.InitImages();\r\n        this.Localization();\r\n       
+    this.InitBtnItems();\r\n        this.InitDotToggles();\r\n        this.InitTipItems();\r\n       
+    this.mLeftArrowBtn.onClick.AddListener(this.clickLeft.bind(this));\r\n       
+    this.mRighArrowtBtn.onClick.AddListener(this.clickRight.bind(this));\r\n       
+    // this.mMaskBtn.onClick.AddListener(this.clickMaskImg.bind(this));\r\n    }\r\n   
+    Localization() {\r\n        let localization = Localization_1.default.Instance;\r\n       
+    this.guideTips = [\r\n            [localization.GetLocalizedText(\"Rule_Desc_1_1\"),
+    localization.GetLocalizedText(\"Rule_Desc_1_2\")],\r\n            [localization.GetLocalizedText(\"Rule_Desc_2_1\"),
+    localization.GetLocalizedText(\"Rule_Desc_2_2\"), localization.GetLocalizedText(\"Rule_Desc_2_3\"),
+    localization.GetLocalizedText(\"Rule_Desc_2_4\")]\r\n        ];\r\n        this.btnNames
+    = [\r\n            localization.GetLocalizedText(\"Rule_button_1\"),\r\n           
+    localization.GetLocalizedText(\"Rule_button_2\"),\r\n        ];\r\n    }\r\n   
+    InitImages() {\r\n        this.spriteMap = new Map();\r\n        this.mSprites.forEach((sprite)
+    => {\r\n            this.spriteMap.set(sprite.name, sprite);\r\n        });\r\n       
+    this.guideImgRess = [\r\n            [\"Rule_Desc_1_1\", \"Rule_Desc_1_2\"],\r\n           
+    [\"Rule_Desc_2_1\", \"Rule_Desc_2_2\", \"Rule_Desc_2_3\", \"Rule_Desc_2_4\"],\r\n       
+    ];\r\n    }\r\n    InitTipItems() {\r\n        let tipItem = this.mScroll.content.transform.GetChild(0).gameObject.GetComponent($typeof(TutorialItem_1.default));\r\n       
+    this.tipItems = [];\r\n        this.tipItems.push(tipItem);\r\n    }\r\n    InitBtnItems()
+    {\r\n        this.btnItems = [];\r\n        let leftBtnItem = this.mBtnLayout.transform.GetChild(0).GetComponent($typeof(TutorialBtnItem_1.default));\r\n       
+    leftBtnItem.SetItem(this.btnNames[0], 0);\r\n        this.btnItems.push(leftBtnItem);\r\n       
+    let lastChileIndex = this.mBtnLayout.transform.childCount - 1;\r\n        let
+    rightBtnItem = this.mBtnLayout.transform.GetChild(lastChileIndex).GetComponent($typeof(TutorialBtnItem_1.default));\r\n       
+    rightBtnItem.SetItem(this.btnNames[this.btnNames.length - 1], this.btnNames.length
+    - 1);\r\n        this.btnItems.push(rightBtnItem);\r\n        for (let i = 1;
+    i < this.btnNames.length - 1; i++) {\r\n            let btnItem = UnityEngine_1.GameObject.Instantiate(this.mMiddleBtn.gameObject,
+    this.mBtnLayout.transform).GetComponent($typeof(TutorialBtnItem_1.default));\r\n           
+    btnItem.transform.SetSiblingIndex(i);\r\n            btnItem.SetItem(this.btnNames[i],
+    i);\r\n            btnItem.SetStatus(false);\r\n            this.btnItems.push(btnItem);\r\n       
+    }\r\n        for (let i = 0; i < this.btnItems.length; i++) {\r\n           
+    let btnItem = this.btnItems[i];\r\n            btnItem.SetStatus(false);\r\n           
+    let btn = btnItem.GetComponent($typeof(UnityEngine_UI_1.Button));\r\n           
+    btn.onClick.AddListener(() => {\r\n                this.SelectBtn(btnItem);\r\n           
+    });\r\n        }\r\n    }\r\n    Start() {\r\n        this.SelectBtn(this.btnItems[0]);\r\n   
+    }\r\n    InitDotToggles() {\r\n        let dotToggle = this.mDotLayout.transform.GetChild(0).GetComponent($typeof(UnityEngine_UI_1.Toggle));\r\n       
+    this.dotToggles = [];\r\n        this.dotToggles.push(dotToggle);\r\n    }\r\n   
+    clickMaskImg() {\r\n        this.gameObject.SetActive(false);\r\n    }\r\n   
+    SelectBtn(item) {\r\n        if (this.currentBtnItem) {\r\n            if (this.currentBtnItem
+    == item) {\r\n                return;\r\n            }\r\n            else {\r\n               
+    this.currentBtnItem.SetStatus(false);\r\n            }\r\n        }\r\n       
+    this.currentBtnItem = item;\r\n        this.currentBtnItem.SetStatus(true);\r\n       
+    this.RefreshShowInfo(this.currentBtnItem.index);\r\n    }\r\n    RefreshShowInfo(btnIndex)
+    {\r\n        this.currentTips = this.guideTips[btnIndex];\r\n        this.currentImgRess
+    = this.guideImgRess[btnIndex];\r\n        this.SetDots(btnIndex);\r\n       
+    this.SetItems(btnIndex);\r\n    }\r\n    SetDots(btnIndex) {\r\n        let num
+    = this.guideImgRess[btnIndex].length;\r\n        for (let i = 0; i < this.dotToggles.length;
+    i++) {\r\n            let dotToggle = this.dotToggles[i];\r\n            dotToggle.isOn
+    = false;\r\n            dotToggle.GetComponent($typeof(UnityEngine_1.RectTransform)).rect.width
+    = 14;\r\n            dotToggle.gameObject.SetActive(false);\r\n        }\r\n       
+    for (let i = 0; i < num; i++) {\r\n            let dotToggle;\r\n           
+    if (i < this.dotToggles.length) {\r\n                dotToggle = this.dotToggles[i];\r\n           
+    }\r\n            else {\r\n                dotToggle = UnityEngine_1.GameObject.Instantiate(this.dotToggles[0],
+    this.mDotLayout.transform);\r\n                this.dotToggles.push(dotToggle);\r\n           
+    }\r\n            dotToggle.gameObject.SetActive(true);\r\n        }\r\n    }\r\n   
+    SetItems(btnIndex) {\r\n        let num = this.guideImgRess[btnIndex].length;\r\n       
+    for (let i = 0; i < this.tipItems.length; i++) {\r\n            let item = this.tipItems[i];\r\n           
+    item.gameObject.SetActive(false);\r\n        }\r\n        for (let i = 0; i <
+    num; i++) {\r\n            let item;\r\n            if (i < this.tipItems.length)
+    {\r\n                item = this.tipItems[i];\r\n            }\r\n           
+    else {\r\n                let obj = UnityEngine_1.GameObject.Instantiate(this.tipItems[0].gameObject,
+    this.mScroll.content.transform);\r\n                ;\r\n                item
+    = obj.GetComponent($typeof(TutorialItem_1.default));\r\n                this.tipItems.push(item);\r\n           
+    }\r\n            item.setImg(this.spriteMap.get(this.currentImgRess[i]));\r\n           
+    item.gameObject.SetActive(true);\r\n        }\r\n        this.RefreshPage(0);\r\n   
+    }\r\n    RefreshPage(pageNum) {\r\n        this.currentPage = pageNum;\r\n       
+    for (let i = 0; i < this.dotToggles.length; i++) {\r\n            let dotToggle
+    = this.dotToggles[i];\r\n            dotToggle.isOn = i == pageNum;\r\n           
+    dotToggle.GetComponent($typeof(UnityEngine_1.RectTransform)).sizeDelta = dotToggle.isOn
+    ? new UnityEngine_1.Vector2(44, 14) : new UnityEngine_1.Vector2(14, 14);\r\n       
+    }\r\n        this.mTipText.text = this.currentTips[pageNum];\r\n        this.SetArrowBtnVisiable(pageNum);\r\n       
+    for (let i = 0; i < this.tipItems.length; i++) {\r\n            let item = this.tipItems[i];\r\n           
+    item.gameObject.SetActive(i == pageNum);\r\n        }\r\n    }\r\n    SetArrowBtnVisiable(pageNumber)
+    {\r\n        this.mLeftArrowBtn.gameObject.SetActive(pageNumber != 0);\r\n       
+    this.mRighArrowtBtn.gameObject.SetActive(pageNumber < this.currentImgRess.length
+    - 1);\r\n    }\r\n    clickLeft() {\r\n        this.ChangePage(-1);\r\n    }\r\n   
+    clickRight() {\r\n        this.ChangePage(1);\r\n    }\r\n    ChangePage(direction)
+    {\r\n        let pageNum = this.currentPage + direction;\r\n        if (pageNum
+    >= 0 && pageNum <= this.currentImgRess.length - 1) {\r\n            this.RefreshPage(pageNum);\r\n       
+    }\r\n    }\r\n}\r\nexports.default = UITutorialPanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlUdXRvcmlhbFBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlUdXRvcmlhbFBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQXVHO0FBRXZHLG1EQUFzRjtBQUN0RixpREFBc0Q7QUFDdEQsOEVBQXVFO0FBQ3ZFLHVEQUFnRDtBQUNoRCxpREFBMEM7QUFFMUMsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUE4QjlELEtBQUs7UUFDRCxJQUFJLENBQUMsVUFBVSxFQUFFLENBQUM7UUFDbEIsSUFBSSxDQUFDLFlBQVksRUFBRSxDQUFDO1FBQ3BCLElBQUksQ0FBQyxZQUFZLEVBQUUsQ0FBQztRQUNwQixJQUFJLENBQUMsY0FBYyxFQUFFLENBQUM7UUFDdEIsSUFBSSxDQUFDLFlBQVksRUFBRSxDQUFDO1FBQ3BCLElBQUksQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1FBQ2xFLElBQUksQ0FBQyxjQUFjLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1FBQ3BFLG1FQUFtRTtJQUN2RSxDQUFDO0lBRU8sWUFBWTtRQUNoQixJQUFJLFlBQVksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQztRQUV6QyxJQUFJLENBQUMsU0FBUyxHQUFHO1lBQ2IsQ0FBQyxZQUFZLENBQUMsZ0JBQWdCLENBQUMsZUFBZSxDQUFDLEVBQUUsWUFBWSxDQUFDLGdCQUFnQixDQUFDLGVBQWUsQ0FBQyxDQUFDO1lBQ2hHLENBQUMsWUFBWSxDQUFDLGdCQUFnQixDQUFDLGVBQWUsQ0FBQyxFQUFFLFlBQVksQ0FBQyxnQkFBZ0IsQ0FBQyxlQUFlLENBQUMsRUFBRSxZQUFZLENBQUMsZ0JBQWdCLENBQUMsZUFBZSxDQUFDLEVBQUUsWUFBWSxDQUFDLGdCQUFnQixDQUFDLGVBQWUsQ0FBQyxDQUFDO1NBQ25NLENBQUM7UUFFRixJQUFJLENBQUMsUUFBUSxHQUFHO1lBQ1osWUFBWSxDQUFDLGdCQUFnQixDQUFDLGVBQWUsQ0FBQztZQUM5QyxZQUFZLENBQUMsZ0JBQWdCLENBQUMsZUFBZSxDQUFDO1NBQ2pELENBQUM7SUFDTixDQUFDO0lBRU8sVUFBVTtRQUNkLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxHQUFHLEVBQWtCLENBQUM7UUFDM0MsSUFBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxNQUFjLEVBQUUsRUFBRTtZQUNyQyxJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsSUFBSSxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBQzVDLENBQUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLFlBQVksR0FBRztZQUNoQixDQUFDLGVBQWUsRUFBRSxlQUFlLENBQUM7WUFDbEMsQ0FBQyxlQUFlLEVBQUUsZUFBZSxFQUFFLGVBQWUsRUFBRSxlQUFlLENBQUM7U0FDdkUsQ0FBQztJQUNOLENBQUM7SUFFTyxZQUFZO1FBQ2hCLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUMsVUFBVSxDQUFDLFlBQVksU0FBQyxzQkFBWSxFQUFHLENBQUM7UUFDakcsSUFBSSxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7UUFDbkIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDaEMsQ0FBQztJQUVPLFlBQVk7UUFDaEIsSUFBSSxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7UUFDbkIsSUFBSSxXQUFXLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLFlBQVksU0FBQyx5QkFBZSxFQUFHLENBQUM7UUFDeEYsV0FBVyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQ3pDLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ2hDLElBQUksY0FBYyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFVBQVUsR0FBRyxDQUFDLENBQUM7UUFDOUQsSUFBSSxZQUFZLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFDLGNBQWMsQ0FBQyxDQUFDLFlBQVksU0FBQyx5QkFBZSxFQUFHLENBQUM7UUFDdEcsWUFBWSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBQ3hGLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDO1FBRWpDLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDL0MsSUFBSSxPQUFPLEdBQW9CLHdCQUFVLENBQUMsV0FBVyxDQUFhLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLENBQUMsWUFBWSxTQUFDLHlCQUFlLEVBQUcsQ0FBQztZQUN6SixPQUFPLENBQUMsU0FBUyxDQUFDLGVBQWUsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNyQyxPQUFPLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDckMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUN6QixJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztTQUMvQjtRQUVELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUMzQyxJQUFJLE9BQU8sR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQy9CLE9BQU8sQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDekIsSUFBSSxHQUFHLEdBQUcsT0FBTyxDQUFDLFlBQVksU0FBQyx1QkFBTSxFQUFHLENBQUM7WUFDekMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO2dCQUN6QixJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQzVCLENBQUMsQ0FBQyxDQUFBO1NBQ0w7SUFFTCxDQUFDO0lBRUQsS0FBSztRQUNELElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3JDLENBQUM7SUFFTyxjQUFjO1FBQ2xCLElBQUksU0FBUyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxZQUFZLFNBQUMsdUJBQU0sRUFBRyxDQUFDO1FBQzdFLElBQUksQ0FBQyxVQUFVLEdBQUcsRUFBRSxDQUFDO1FBQ3JCLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQ3BDLENBQUM7SUFFTyxZQUFZO1FBQ2hCLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3JDLENBQUM7SUFFTyxTQUFTLENBQUMsSUFBcUI7UUFDbkMsSUFBSSxJQUFJLENBQUMsY0FBYyxFQUFFO1lBQ3JCLElBQUksSUFBSSxDQUFDLGNBQWMsSUFBSSxJQUFJLEVBQUU7Z0JBQzdCLE9BQU87YUFDVjtpQkFDSTtnQkFDRCxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQzthQUN4QztTQUNKO1FBQ0QsSUFBSSxDQUFDLGNBQWMsR0FBRyxJQUFJLENBQUM7UUFDM0IsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDcEMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3BELENBQUM7SUFFTyxlQUFlLENBQUMsUUFBZ0I7UUFDcEMsSUFBSSxDQUFDLFdBQVcsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQzVDLElBQUksQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUNsRCxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ3ZCLElBQUksQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDNUIsQ0FBQztJQUVPLE9BQU8sQ0FBQyxRQUFnQjtRQUM1QixJQUFJLEdBQUcsR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxDQUFDLE1BQU0sQ0FBQztRQUM3QyxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDN0MsSUFBSSxTQUFTLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNuQyxTQUFTLENBQUMsSUFBSSxHQUFHLEtBQUssQ0FBQztZQUN2QixTQUFTLENBQUMsWUFBWSxTQUFDLDJCQUFhLEdBQUksSUFBSSxDQUFDLEtBQUssR0FBRyxFQUFFLENBQUM7WUFDeEQsU0FBUyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDekM7UUFFRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsR0FBRyxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzFCLElBQUksU0FBaUIsQ0FBQztZQUN0QixJQUFJLENBQUMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLE1BQU0sRUFBRTtnQkFDNUIsU0FBUyxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDbEM7aUJBQ0k7Z0JBQ0QsU0FBUyxHQUFHLHdCQUFVLENBQUMsV0FBVyxDQUFTLElBQUksQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDLEVBQUUsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQztnQkFDMUYsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7YUFDbkM7WUFDRCxTQUFTLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUN4QztJQUNMLENBQUM7SUFFTyxRQUFRLENBQUMsUUFBZ0I7UUFDN0IsSUFBSSxHQUFHLEdBQUcsSUFBSSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsQ0FBQyxNQUFNLENBQUM7UUFDN0MsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzNDLElBQUksSUFBSSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDNUIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDcEM7UUFFRCxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsR0FBRyxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzFCLElBQUksSUFBa0IsQ0FBQztZQUN2QixJQUFJLENBQUMsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sRUFBRTtnQkFDMUIsSUFBSSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDM0I7aUJBQ0k7Z0JBQ0QsSUFBSSxHQUFHLEdBQUcsd0JBQVUsQ0FBQyxXQUFXLENBQWEsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLENBQUM7Z0JBQUEsQ0FBQztnQkFDM0csSUFBSSxHQUFHLEdBQUcsQ0FBQyxZQUFZLFNBQUMsc0JBQVksRUFBRyxDQUFDO2dCQUN4QyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQzthQUM1QjtZQUNELElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDeEQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDbkM7UUFDRCxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3hCLENBQUM7SUFFTyxXQUFXLENBQUMsT0FBZTtRQUMvQixJQUFJLENBQUMsV0FBVyxHQUFHLE9BQU8sQ0FBQztRQUMzQixLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDN0MsSUFBSSxTQUFTLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNuQyxTQUFTLENBQUMsSUFBSSxHQUFHLENBQUMsSUFBSSxPQUFPLENBQUM7WUFDOUIsU0FBUyxDQUFDLFlBQVksU0FBQywyQkFBYSxHQUFJLFNBQVMsR0FBRyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJLHFCQUFPLENBQUMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLHFCQUFPLENBQUMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxDQUFDO1NBQ2xIO1FBRUQsSUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUMvQyxJQUFJLENBQUMsbUJBQW1CLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDbEMsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1lBQzNDLElBQUksSUFBSSxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDNUIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQyxJQUFJLE9BQU8sQ0FBQyxDQUFDO1NBQzNDO0lBQ0wsQ0FBQztJQUVPLG1CQUFtQixDQUFDLFVBQVU7UUFDbEMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFVBQVUsSUFBSSxDQUFDLENBQUMsQ0FBQztRQUN6RCxJQUFJLENBQUMsY0FBYyxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsTUFBTSxHQUFHLENBQUMsQ0FBQyxDQUFDO0lBQzFGLENBQUM7SUFFTyxTQUFTO1FBQ2IsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3hCLENBQUM7SUFFTyxVQUFVO1FBQ2QsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUN2QixDQUFDO0lBRU8sVUFBVSxDQUFDLFNBQWlCO1FBQ2hDLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxXQUFXLEdBQUcsU0FBUyxDQUFDO1FBQzNDLElBQUksT0FBTyxJQUFJLENBQUMsSUFBSSxPQUFPLElBQUksSUFBSSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEdBQUcsQ0FBQyxFQUFFO1lBQzNELElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxDQUFDLENBQUM7U0FDN0I7SUFDTCxDQUFDO0NBQ0o7QUF4TkQsa0NBd05DIn0=","assetPath":"Assets/Scripts/UI/UITutorialPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mTitleText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mTipText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mMiddleBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mLeftArrowBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRighArrowtBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mCloseBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mScroll","type":"UnityEngine.UI.ScrollRect","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mBtnLayout","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mDotLayout","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mSprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UITutorialPanel","description":""},"isCompiled":true}'
+  typescriptHash: f2f5c5c8cac25561d220273fc49595a2
+  onlyWriteTrigger: 0

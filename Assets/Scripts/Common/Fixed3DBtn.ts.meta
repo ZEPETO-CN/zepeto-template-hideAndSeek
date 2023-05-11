@@ -1,0 +1,48 @@
+fileFormatVersion: 2
+guid: 638345c5d749bec4d810a5352d0cfe8f
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst ZEPETO_Character_Controller_1
+    = require(\\\"ZEPETO.Character.Controller\\\");\\r\\nclass Fixed3DBtn extends
+    ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this.mEuler = UnityEngine_1.Vector3.zero;\\r\\n       
+    // OnEnable() {\\r\\n        //     this.mUpdateUICoroutine = this.StartCoroutine(this.UpdateUI());\\r\\n       
+    // }\\r\\n        // // \u4FEE\u6539\u4E3A\u76D1\u542C\\r\\n        // //todo\\r\\n       
+    // private *UpdateUI() {\\r\\n        //     while (true) {\\r\\n        //        
+    if (Camera.main) {\\r\\n        //             let cam = Camera.main;\\r\\n       
+    //             this.mEuler.x = cam.transform.eulerAngles.x;\\r\\n        //            
+    this.mEuler.y = cam.transform.eulerAngles.y;\\r\\n        //             this.transform.localEulerAngles
+    = this.mEuler;\\r\\n        //         }\\r\\n        //         yield new WaitForSeconds(0.1);\\r\\n       
+    //     }\\r\\n        // }\\r\\n        // OnDisable() {\\r\\n        //    
+    if (this.mUpdateUICoroutine != null || this.mUpdateUICoroutine != undefined)
+    {\\r\\n        //         this.StopCoroutine(this.mUpdateUICoroutine);\\r\\n       
+    //         console.log(\\\"Stop Coroutine\\\");\\r\\n        //     }\\r\\n       
+    // }\\r\\n    }\\r\\n    Start() {\\r\\n        this.transform.position = UnityEngine_1.Vector3.op_Addition(this.offset,
+    this.transform.position);\\r\\n    }\\r\\n    Update() {\\r\\n        // this.transform.LookAt(StarDanceLogic.Instance.ZepetoCamear.transform);\\r\\n       
+    // this.ZepetoCamear = ZepetoPlayers.instance.LocalPlayer.zepetoCamera;\\r\\n       
+    if (this.ZepetoCamera == null) {\\r\\n            this.ZepetoCamera = UnityEngine_1.GameObject.Find(\\\"ZepetoCamera/CameraParent/ZepetoCamera\\\");\\r\\n       
+    }\\r\\n        else {\\r\\n            var direction = UnityEngine_1.Vector3.op_Subtraction(this.ZepetoCamera.transform.position,
+    this.transform.position);\\r\\n            direction.y = 0; //\u5982\u679C\u4E0D\u8003\u8651y\u8F74\uFF0C\u6C34\u5E73\u8DD1\u8D70\u7684\u8BDD\\r\\n           
+    this.transform.forward = UnityEngine_1.Vector3.op_Multiply(direction.normalized,
+    -1);\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default = Fixed3DBtn;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRml4ZWQzREJ0bi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIkZpeGVkM0RCdG4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBcUY7QUFDckYsaURBQXFEO0FBQ3JELDZFQUEyRjtBQUUzRixNQUFxQixVQUFXLFNBQVEscUNBQXFCO0lBQTdEOztRQUtZLFdBQU0sR0FBWSxxQkFBTyxDQUFDLElBQUksQ0FBQztRQW9CdkMsZUFBZTtRQUNmLHNFQUFzRTtRQUN0RSxJQUFJO1FBRUosV0FBVztRQUNYLFNBQVM7UUFDVCx3QkFBd0I7UUFDeEIscUJBQXFCO1FBQ3JCLDZCQUE2QjtRQUM3QixxQ0FBcUM7UUFDckMsMkRBQTJEO1FBQzNELDJEQUEyRDtRQUMzRCw2REFBNkQ7UUFDN0QsWUFBWTtRQUNaLHlDQUF5QztRQUN6QyxRQUFRO1FBQ1IsSUFBSTtRQUVKLGdCQUFnQjtRQUNoQixxRkFBcUY7UUFDckYsdURBQXVEO1FBQ3ZELHlDQUF5QztRQUN6QyxRQUFRO1FBRVIsSUFBSTtJQUNSLENBQUM7SUExQ0csS0FBSztRQUNELElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQWJTLHFCQUFPLENBc0Q4eW5CLFdBQVksQ0F6Q3YwbkIsSUFBSSxDQUFDLE1BQU0sRUFBRyxJQUFJLENBQUMsU0FBUyxDQUFDLFFBQVEsQ0FBQSxDQUFDO0lBQ3BFLENBQUM7SUFFRCxNQUFNO1FBQ0YseUVBQXlFO1FBQ3pFLHVFQUF1RTtRQUV2RSxJQUFJLElBQUksQ0FBQyxZQUFZLElBQUksSUFBSSxFQUFFO1lBQzNCLElBQUksQ0FBQyxZQUFZLEdBQUcsd0JBQVUsQ0FBQyxJQUFJLENBQUMsd0NBQXdDLENBQUMsQ0FBQztTQUNqRjthQUFNO1lBQ0gsSUFBSSxTQUFTLEdBdkJlLHFCQUFPLENBc0Q0M25CLGNBQWUsQ0EvQjk1bkIsSUFBSSxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUMsUUFBUSxFQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFBLENBQUM7WUFDL0UsU0FBUyxDQUFDLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxnQkFBZ0I7WUFDakMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxPQUFPLEdBekJNLHFCQUFPLENBc0Q4a29CLFdBQVksQ0E3QnBtb0IsU0FBUyxDQUFDLFVBQVUsRUFBRyxDQUFDLENBQUMsQ0FBQSxDQUFDO1NBQ3REO0lBQ0wsQ0FBQztDQTJCSjtBQWxERCw2QkFrREMifQ==\",\"assetPath\":\"Assets/Scripts/Common/Fixed3DBtn.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"offset\",\"type\":\"UnityEngine.Vector3\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"Fixed3DBtn\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 869caaacfd22ed8f3990b816281bd42a
+  onlyWriteTrigger: 0

@@ -1,0 +1,73 @@
+fileFormatVersion: 2
+guid: c49a73a8ea8de2340a5ba35ba11c0f8e
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    ModelImageConverter_1 = require(\"../Model/ModelImageConverter\");\r\nconst UnityEngine_UI_1
+    = require(\"UnityEngine.UI\");\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UIManager_1 = require(\"../GameManager/UIManager\");\r\nclass UIModelRandomPanel
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor() {\r\n       
+    super(...arguments);\r\n        this.mTimer = 0;\r\n        this.mMaxInterval
+    = 0.5;\r\n        this.mMinInterval = 0.1;\r\n        this.mAnimationTime = 3;\r\n   
+    }\r\n    Awake() {\r\n        this.mSprites = this.mIconImageList.targetObject.modelList;\r\n       
+    this.mModelLength = this.mSprites.length;\r\n        for (var i = 0; i < this.mIconImgs.length;
+    i++) {\r\n            this.mIconImgs[i] = this.mIconImgs[i].transform.Find(\"Icon\").GetComponent($typeof(UnityEngine_UI_1.Image));\r\n       
+    }\r\n        for (var i = 0; i < this.mIconImgs.length; i++) {\r\n           
+    this.mIconImgs[i].sprite = this.mSprites[i];\r\n        }\r\n        this.CalCountSum();\r\n   
+    }\r\n    Start() {\r\n        this.mReselectBtn.onClick.AddListener(() => {\r\n           
+    //console.log(\"Reselect Button\");\r\n            UIManager_1.default.Instance.SendRandomModel();\r\n           
+    this.mConfirmBtn.interactable = false;\r\n            this.mReselectBtn.interactable
+    = false;\r\n        });\r\n        let _cost = UIManager_1.default.Instance.mGameRule.randomModelCost;\r\n       
+    this.mStarTxt.text = _cost.toString();\r\n        this.mConfirmBtn.onClick.AddListener(()
+    => {\r\n            //console.log(\"Confirm Button\");\r\n            UIManager_1.default.Instance.OnChangeModelCost(this.mTargetId,
+    0);\r\n            this.Hide();\r\n        });\r\n        // this.Show(0);\r\n   
+    }\r\n    UpdateStar(curStar) {\r\n        this.mStarTxt_leftup.text = curStar.toString();\r\n   
+    }\r\n    CalCountSum() {\r\n        this.mTimer = 0;\r\n        let count = 0;\r\n       
+    while (this.mTimer <= this.mAnimationTime) {\r\n            let t = this.mTimer
+    / this.mAnimationTime;\r\n            let waitTime = UnityEngine_1.Mathf.Lerp(this.mMinInterval,
+    this.mMaxInterval, this.mCurve.Evaluate(t));\r\n            this.mTimer += waitTime;\r\n           
+    count++;\r\n        }\r\n        this.mCountSum = count;\r\n        this.mIndexs
+    = new Array(this.mCountSum + this.mSprites.length);\r\n        this.mTimer =
+    0;\r\n    }\r\n    Hide() {\r\n        //this.transform.GetComponent<RectTransform>().anchoredPosition
+    = Vector2.right * 10000;\r\n        this.gameObject.SetActive(false);\r\n   
+    }\r\n    Show(_targetId) {\r\n        this.gameObject.SetActive(true);\r\n       
+    this.mTargetId = _targetId;\r\n        this.transform.GetComponent($typeof(UnityEngine_1.RectTransform)).offsetMin
+    = UnityEngine_1.Vector2.zero;\r\n        this.transform.GetComponent($typeof(UnityEngine_1.RectTransform)).offsetMax
+    = UnityEngine_1.Vector2.zero;\r\n        this.StartCoroutine(this.IE_Show());\r\n   
+    }\r\n    *IE_Show() {\r\n        yield null;\r\n        this.mConfirmBtn.interactable
+    = false;\r\n        this.mReselectBtn.interactable = false;\r\n        let value_a
+    = Math.random() * (this.mModelLength) + \"\";\r\n        let r = parseInt(value_a);\r\n       
+    r--;\r\n        if (r < 0)\r\n            r = 0;\r\n        for (var i = 0; i
+    < this.mIndexs.length; i++) {\r\n            r %= this.mModelLength;\r\n           
+    this.mIndexs[i] = r;\r\n            r++;\r\n        }\r\n        let last_index
+    = this.mIconImgs.length;\r\n        this.mIndexs[this.mCountSum - 1] = this.mTargetId;\r\n       
+    let count = 0;\r\n        this.mTimer = 0;\r\n        while (count < this.mCountSum)
+    {\r\n            let t = this.mTimer / this.mAnimationTime;\r\n            let
+    waitTime = UnityEngine_1.Mathf.Lerp(this.mMinInterval, this.mMaxInterval, this.mCurve.Evaluate(t));\r\n           
+    this.mTimer += waitTime;\r\n            yield new UnityEngine_1.WaitForSeconds(waitTime);\r\n           
+    for (var i = 0; i < this.mIconImgs.length; i++) {\r\n                let index
+    = this.mIndexs[i + count];\r\n                this.mIconImgs[i].sprite = this.mSprites[index];\r\n           
+    }\r\n            //console.log(waitTime, count);\r\n            count++;\r\n       
+    }\r\n        this.mConfirmBtn.interactable = true;\r\n        let _cost = UIManager_1.default.Instance.mGameRule.randomModelCost;\r\n       
+    let _curStar = UIManager_1.default.Instance.CurStar;\r\n        if (_curStar
+    >= _cost)\r\n            this.mReselectBtn.interactable = true;\r\n    }\r\n}\r\nexports.default
+    = UIModelRandomPanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlNb2RlbFJhbmRvbVBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlNb2RlbFJhbmRvbVBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQTZFO0FBQzdFLHNFQUErRDtBQUMvRCxtREFBcUQ7QUFDckQsNkNBQW1HO0FBQ25HLHdEQUFnRDtBQUdoRCxNQUFxQixrQkFBbUIsU0FBUSxxQ0FBcUI7SUFBckU7O1FBYVksV0FBTSxHQUFXLENBQUMsQ0FBQztRQUVwQixpQkFBWSxHQUFXLEdBQUcsQ0FBQztRQUMzQixpQkFBWSxHQUFXLEdBQUcsQ0FBQztRQUMzQixtQkFBYyxHQUFXLENBQUMsQ0FBQztJQXVIdEMsQ0FBQztJQW5IRyxLQUFLO1FBQ0QsSUFBSSxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLFlBQVksQ0FBQyxTQUFTLENBQUM7UUFDM0QsSUFBSSxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQztRQUV6QyxLQUFLLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDNUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsWUFBWSxTQUFDLHNCQUFLLEVBQUcsQ0FBQztTQUN0RjtRQUVELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUM1QyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQy9DO1FBQ0QsSUFBSSxD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","assetPath":"Assets/Scripts/UI/UIModelRandomPanel.ts","manifest":{"properties":[{"assembly":"ZEPETO.Script","name":"mIconImageList","type":"ZEPETO.Script.ZepetoScriptableObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mIconImgs","type":"UnityEngine.UI.Image[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mReselectBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mConfirmBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mStarTxt","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mStarTxt_leftup","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mMaxInterval","type":"System.Single","isArray":false,"initValue":["0.5"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mMinInterval","type":"System.Single","isArray":false,"initValue":["0.1"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"mscorlib","name":"mAnimationTime","type":"System.Single","isArray":false,"initValue":["3"],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mCurve","type":"UnityEngine.AnimationCurve","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIModelRandomPanel","description":""},"isCompiled":true}'
+  typescriptHash: 5616a7000e21d1f7ff1e60d21f00646e
+  onlyWriteTrigger: 0

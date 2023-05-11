@@ -1,0 +1,145 @@
+fileFormatVersion: 2
+guid: 4e6829bdb9f005244a06632506870929
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nexports.GameState = exports.sEventArg
+    = void 0;\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    ZEPETO_World_1 = require(\\\"ZEPETO.World\\\");\\r\\nconst ZEPETO_Multiplay_1
+    = require(\\\"ZEPETO.Multiplay\\\");\\r\\nconst GameMain_1 = require(\\\"../GameMain\\\");\\r\\nvar
+    sEventArg;\\r\\n(function (sEventArg) {\\r\\n    sEventArg[\\\"GameRule\\\"]
+    = \\\"GameRule\\\";\\r\\n    sEventArg[\\\"PlayerChange\\\"] = \\\"PlayerChange\\\";\\r\\n   
+    sEventArg[\\\"PlayerMove\\\"] = \\\"PlayerMove\\\";\\r\\n    sEventArg[\\\"PlayerJump\\\"]
+    = \\\"PlayerJump\\\";\\r\\n    sEventArg[\\\"PlayerInfoSync\\\"] = \\\"PlayerInfoSync\\\";\\r\\n   
+    sEventArg[\\\"ClientReady\\\"] = \\\"ClientReady\\\";\\r\\n    sEventArg[\\\"GameUpdate\\\"]
+    = \\\"GameUpdate\\\";\\r\\n    sEventArg[\\\"ChangeModel\\\"] = \\\"ChangeModel\\\";\\r\\n   
+    sEventArg[\\\"BeAttacked\\\"] = \\\"BeAttacked\\\";\\r\\n    sEventArg[\\\"BeScan\\\"]
+    = \\\"BeScan\\\";\\r\\n    sEventArg[\\\"OnShoot\\\"] = \\\"OnShoot\\\";\\r\\n   
+    sEventArg[\\\"UseBuff\\\"] = \\\"UseBuff\\\";\\r\\n    sEventArg[\\\"PlayerDie\\\"]
+    = \\\"PlayerDie\\\";\\r\\n    sEventArg[\\\"RandomModel\\\"] = \\\"RandomModel\\\";\\r\\n   
+    sEventArg[\\\"SwitchLight\\\"] = \\\"SwitchLight\\\";\\r\\n    sEventArg[\\\"SwitchSuperLight\\\"]
+    = \\\"SwitchSuperLight\\\";\\r\\n    sEventArg[\\\"RoomStateDelayTest\\\"] =
+    \\\"RoomStateDelayTest\\\";\\r\\n    sEventArg[\\\"MessageDelayTest\\\"] = \\\"MessageDelayTest\\\";\\r\\n   
+    sEventArg[\\\"SyncRankReward\\\"] = \\\"SyncRankReward\\\";\\r\\n    sEventArg[\\\"RequestRankRewardEvent\\\"]
+    = \\\"RequestRankReward\\\";\\r\\n    sEventArg[\\\"DailyTaskInfoUpdate\\\"]
+    = \\\"DailyTaskInfoUpdate\\\";\\r\\n    sEventArg[\\\"RequestDailyTaskReward\\\"]
+    = \\\"RequestDailyTaskReward\\\";\\r\\n    sEventArg[\\\"RequestDailyReward\\\"]
+    = \\\"RequestDailyReward\\\";\\r\\n    sEventArg[\\\"SyncDailyReward\\\"] = \\\"SyncDailyReward\\\";\\r\\n   
+    sEventArg[\\\"SyncWeekActivity\\\"] = \\\"SyncWeekActivity\\\";\\r\\n    sEventArg[\\\"ClaimWeekActivityReward\\\"]
+    = \\\"ClaimWeekActivityReward\\\";\\r\\n    sEventArg[\\\"DynamicMapChange\\\"]
+    = \\\"DynamicMapChange\\\";\\r\\n    sEventArg[\\\"QuickMessage\\\"] = \\\"QuickMessage\\\";\\r\\n   
+    sEventArg[\\\"SyncStarRewardInfo\\\"] = \\\"SyncStarRewardInfo\\\";\\r\\n   
+    sEventArg[\\\"ExchangeStarReward\\\"] = \\\"ExchangeStarReward\\\";\\r\\n   
+    sEventArg[\\\"ReceiveStarReward\\\"] = \\\"ReceiveStarReward\\\";\\r\\n    sEventArg[\\\"ClaimSeasonReward\\\"]
+    = \\\"ClaimSeasonReward\\\";\\r\\n    sEventArg[\\\"SyncSeasonInfo\\\"] = \\\"SyncSeasonInfo\\\";\\r\\n   
+    sEventArg[\\\"SyncSeasonReward\\\"] = \\\"SyncSeasonReward\\\";\\r\\n})(sEventArg
+    = exports.sEventArg || (exports.sEventArg = {}));\\r\\nvar GameState;\\r\\n(function
+    (GameState) {\\r\\n    GameState[GameState[\\\"None\\\"] = -1] = \\\"None\\\";\\r\\n   
+    GameState[GameState[\\\"GameWait\\\"] = 0] = \\\"GameWait\\\";\\r\\n    GameState[GameState[\\\"GameOver\\\"]
+    = 1] = \\\"GameOver\\\";\\r\\n    GameState[GameState[\\\"GameRoundOver\\\"]
+    = 2] = \\\"GameRoundOver\\\";\\r\\n    GameState[GameState[\\\"GameMatch\\\"]
+    = 3] = \\\"GameMatch\\\";\\r\\n    GameState[GameState[\\\"GameStart\\\"] = 4]
+    = \\\"GameStart\\\";\\r\\n    GameState[GameState[\\\"ConfirmedModel\\\"] = 5]
+    = \\\"ConfirmedModel\\\";\\r\\n    GameState[GameState[\\\"OpenDoor\\\"] = 6]
+    = \\\"OpenDoor\\\";\\r\\n    GameState[GameState[\\\"PeakMoment\\\"] = 7] = \\\"PeakMoment\\\";\\r\\n})(GameState
+    = exports.GameState || (exports.GameState = {}));\\r\\n// NetManager \u8D1F\u8D23\u7BA1\u7406\u7F51\u7EDC\u6570\u636E\uFF0C\u4EC5\u8D1F\u8D23\u6570\u636E\u7684\u53D1\u9001\u548C\u63A5\u53D7\uFF0C\u4E0D\u8D1F\u8D23\u5904\u7406\u4E1A\u52A1\u903B\u8F91\\r\\n//
+    \u5F53\u6536\u5230\u4FE1\u606F\u540E\uFF0C\u4E0A\u62A5\u7ED9\u4E0A\u7EA7\\r\\n//
+    \u5B9A\u4E49\u6240\u6709\u670D\u52A1\u5668\u4E8B\u4EF6\uFF0C \u901A\u8FC7Room\u53D1\u9001\u7ED9server\\r\\nclass
+    NetManager extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor()
+    {\\r\\n        super(...arguments);\\r\\n        this.mEmptyData = new ZEPETO_Multiplay_1.RoomData();\\r\\n   
+    }\\r\\n    static get Instance() {\\r\\n        return NetManager._instance;\\r\\n   
+    }\\r\\n    Awake() {\\r\\n        NetManager._instance = this;\\r\\n        this.mMultiplay
+    = this.gameObject.GetComponent($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\\r\\n       
+    if (this.mMultiplay == null) {\\r\\n            this.mMultiplay = this.gameObject.AddComponent($typeof(ZEPETO_World_1.ZepetoWorldMultiplay));\\r\\n       
+    }\\r\\n    }\\r\\n    Start() {\\r\\n        this.mMultiplay.add_RoomCreated(this.OnRoomCreated.bind(this));\\r\\n       
+    this.mMultiplay.add_RoomJoined(this.OnRoomJoined.bind(this));\\r\\n        this.mMultiplay.add_RoomError(this.OnRoomError.bind(this));\\r\\n       
+    this.mMultiplay.add_RoomLeave(this.OnRoomLeave.bind(this));\\r\\n    }\\r\\n   
+    OnDestroy() {\\r\\n        if (this.mRoom.IsConnected) {\\r\\n            this.mRoom.Leave(true);\\r\\n           
+    console.error(\\\"room Leave!\\\");\\r\\n        }\\r\\n    }\\r\\n    OnRoomCreated(room)
+    {\\r\\n        this.mRoom = room;\\r\\n        this.BindServerEvent();\\r\\n       
+    console.log(\\\"OnRoomCreated!\\\");\\r\\n    }\\r\\n    OnRoomJoined(room) {\\r\\n       
+    let gameInfo = this.mRoom.State.gameInfo;\\r\\n        gameInfo.add_OnChange((changeValues)
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.GameUpdate, this.mRoom.State.gameInfo);\\r\\n       
+    });\\r\\n        let playerChange = this.mRoom.State.playerChange;\\r\\n       
+    playerChange.add_OnChange((changeValues) => {\\r\\n            console.log(\\\"PlayerChange!\\\");\\r\\n           
+    this.OnReceiveEvent(sEventArg.PlayerChange, this.mRoom.State.players);\\r\\n       
+    });\\r\\n        this.mRoom.State.dynamicMaps.add_OnChange((changeValues) =>
+    {\\r\\n            this.OnReceiveEvent(sEventArg.DynamicMapChange, this.mRoom.State.dynamicMaps);\\r\\n       
+    });\\r\\n        this.OnReceiveEvent(sEventArg.DynamicMapChange, this.mRoom.State.dynamicMaps);\\r\\n       
+    GameMain_1.default.Instance.InitRoomSessionId(this.mRoom.SessionId);\\r\\n       
+    console.log(`OnRoomJoined! , sessionId = ${this.mRoom.SessionId}`);\\r\\n   
+    }\\r\\n    OnRoomError(error) {\\r\\n        // todo \\r\\n        console.error(error.Message);\\r\\n   
+    }\\r\\n    OnRoomLeave(leave) {\\r\\n        // todo\\r\\n        // \u79BB\u5F00\u623F\u95F4\u540E\u505C\u6B62\u53D1\u9001\u6570\u636E\\r\\n       
+    this.mRoom = null;\\r\\n        console.warn(\\\"OnRoomLeave!\\\");\\r\\n   
+    }\\r\\n    /* \u7ED1\u5B9A\u4E8B\u4EF6 */\\r\\n    BindServerEvent() {\\r\\n       
+    // this.mRoom.AddMessageHandler<string>(sEventArg.MessageDelayTest, message =>
+    {\\r\\n        //     this.OnMsgDelayTest();\\r\\n        // });\\r\\n       
+    this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")), sEventArg.GameRule,
+    message => {\\r\\n            this.OnReceiveEvent(sEventArg.GameRule, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.PlayerMove, message =>
+    {\\r\\n            this.OnReceiveEvent(sEventArg.PlayerMove, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")),
+    sEventArg.PlayerInfoSync, message => {\\r\\n            this.OnReceiveEvent(sEventArg.PlayerInfoSync,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")),
+    sEventArg.PlayerJump, message => {\\r\\n            this.OnReceiveEvent(sEventArg.PlayerJump,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")),
+    sEventArg.OnShoot, message => {\\r\\n            this.OnReceiveEvent(sEventArg.OnShoot,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")),
+    sEventArg.SwitchLight, message => {\\r\\n            this.OnReceiveEvent(sEventArg.SwitchLight,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")),
+    sEventArg.SwitchSuperLight, message => {\\r\\n            this.OnReceiveEvent(sEventArg.SwitchSuperLight,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")),
+    sEventArg.BeAttacked, message => {\\r\\n            this.OnReceiveEvent(sEventArg.BeAttacked,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.Double\\\")),
+    sEventArg.RandomModel, message => {\\r\\n            this.OnReceiveEvent(sEventArg.RandomModel,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler($typeof($typeof(\\\"System.String\\\")),
+    sEventArg.PlayerDie, message => {\\r\\n            this.OnReceiveEvent(sEventArg.PlayerDie,
+    message);\\r\\n        });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.BeScan,
+    message => {\\r\\n            this.OnReceiveEvent(sEventArg.BeScan, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.SyncRankReward, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.SyncRankReward, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.SyncDailyReward, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.SyncDailyReward, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.SyncWeekActivity, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.SyncWeekActivity, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.QuickMessage, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.QuickMessage, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.SyncStarRewardInfo, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.SyncStarRewardInfo, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.ReceiveStarReward, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.ReceiveStarReward, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.SyncSeasonInfo, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.SyncSeasonInfo, message);\\r\\n       
+    });\\r\\n        this.mRoom.AddMessageHandler(sEventArg.SyncSeasonReward, message
+    => {\\r\\n            this.OnReceiveEvent(sEventArg.SyncSeasonReward, message);\\r\\n       
+    });\\r\\n    }\\r\\n    OnReceiveEvent(eventName, message) {\\r\\n        GameMain_1.default.Instance.HandleEvent(eventName,
+    message);\\r\\n    }\\r\\n    /* public API */\\r\\n    GetRoomElapsedTime()
+    {\\r\\n        return this.mElapsedTime;\\r\\n    }\\r\\n    SendEvent(eventName,
+    data) {\\r\\n        if (data == null) {\\r\\n            data = this.mEmptyData;\\r\\n       
+    }\\r\\n        if (this.mRoom && this.mRoom.IsConnected) {\\r\\n            this.mRoom.Send(eventName,
+    data.GetObject());\\r\\n        }\\r\\n        else {\\r\\n            console.error(\\\"[SendEvent]
+    room unconnected\\\");\\r\\n            // todo  \u7F13\u5B58data \uFF0C some
+    event \u6062\u590D\u7F51\u7EDC\u540E\u91CD\u53D1\\r\\n        }\\r\\n    }\\r\\n   
+    SendReward(rank, totalRank) {\\r\\n        if (this.mRoom && this.mRoom.IsConnected)
+    {\\r\\n            this.mRoom.Send(sEventArg.RequestRankRewardEvent, [rank, totalRank]);\\r\\n       
+    }\\r\\n        else {\\r\\n            console.error(\\\"[requestRankReward]
+    room unconnected\\\");\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default
+    = NetManager;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTmV0TWFuYWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk5ldE1hbmFnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsaURBQXFEO0FBQ3JELCtDQUFtRDtBQUNuRCx1REFBaUY7QUFDakYsMENBQWtDO0FBRWxDLElBQVksU0FtQ1g7QUFuQ0QsV0FBWSxTQUFTO0lBQ2pCLGtDQUFxQixDQUFBO0lBQ3JCLDBDQUE2QixDQUFBO0lBQzdCLHNDQUF5QixDQUFBO0lBQ3pCLHNDQUF5QixDQUFBO0lBQ3pCLDhDQUFpQyxDQUFBO0lBQ2pDLHdDQUEyQixDQUFBO0lBQzNCLHNDQUF5QixDQUFBO0lBQ3pCLHdDQUEyQixDQUFBO0lBQzNCLHNDQUF5QixDQUFBO0lBQ3pCLDhCQUFpQixDQUFBO0lBQ2pCLGdDQUFtQixDQUFBO0lBQ25CLGdDQUFtQixDQUFBO0lBQ25CLG9DQUF1QixDQUFBO0lBQ3ZCLHdDQUEyQixDQUFBO0lBQzNCLHdDQUEyQixDQUFBO0lBQzNCLGtEQUFxQyxDQUFBO0lBQ3JDLHNEQUF5QyxDQUFBO0lBQ3pDLGtEQUFxQyxDQUFBO0lBQ3JDLDhDQUFpQyxDQUFBO0lBQ2pDLHlEQUE0QyxDQUFBO0lBQzVDLHdEQUEyQyxDQUFBO0lBQzNDLDhEQUFpRCxDQUFBO0lBQ2pELHNEQUF5QyxDQUFBO0lBQ3pDLGdEQUFtQyxDQUFBO0lBQ25DLGtEQUFxQyxDQUFBO0lBQ3JDLGdFQUFtRCxDQUFBO0lBQ25ELGtEQUFxQyxDQUFBO0lBQ3JDLDBDQUE2QixDQUFBO0lBQzdCLHNEQUF5QyxDQUFBO0lBQ3pDLHNEQUF5QyxDQUFBO0lBQ3pDLG9EQUF1QyxDQUFBO0lBQ3ZDLG9EQUF1QyxDQUFBO0lBQ3ZDLDhDQUFpQyxDQUFBO0lBQ2pDLGtEQUFxQyxDQUFBO0FBQ3pDLENBQUMsRUFuQ1csU0FBUyxHQUFULGlCQUFTLEtBQVQsaUJBQVMsUUFtQ3BCO0FBRUQsSUFBWSxTQVVYO0FBVkQsV0FBWSxTQUFTO0lBQ2pCLDBDQUFTLENBQUE7SUFDVCxpREFBWSxDQUFBO0lBQ1osaURBQVksQ0FBQTtJQUNaLDJEQUFpQixDQUFBO0lBQ2pCLG1EQUFhLENBQUE7SUFDYixtREFBYSxDQUFBO0lBQ2IsNkRBQWtCLENBQUE7SUFDbEIsaURBQVksQ0FBQTtJQUNaLHFEQUFjLENBQUE7QUFDbEIsQ0FBQyxFQVZXLFNBQVMsR0FBVCxpQkFBUyxLQUFULGlCQUFTLFFBVXBCO0FBRUQsNENBQTRDO0FBQzVDLGVBQWU7QUFDZiw2QkFBNkI7QUFFN0IsTUFBcUIsVUFBVyxTQUFRLHFDQUFxQjtJQUE3RDs7UUE4S1ksZUFBVSxHQUFHLElBQUksMkJBQVEsRUFBRSxDQUFDO0lBd0J4QyxDQUFDO0lBMUxVLE1BQU0sS0FBSyxRQUFRO1FBQ3RCLE9BQU8sVUFBVSxDQUFDLFNBQVMsQ0FBQztJQUNoQyxDQUFDO0lBR0QsS0FBSztRQUNELFVBQVUsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1FBQzVCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsbUNBQW9CLEVBQUcsQ0FBQztRQUN2RSxJQUFJLElBQUksQ0FBQyxVQUFVLElBQUksSUFBSSxFQUFFO1lBQ3pCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLFNBQUMsbUNBQW9CLEVBQUcsQ0FBQztTQUMxRTtJQUNMLENBQUM7SUFFRCxLQUFLO1FBQ0QsSUFBSSxDQUFDLFVBQVUsaUJBQWdCLElBQUksQ0FBQyxhQUFhLGFBQUM7UUFDbEQsSUFBSSxDQUFDLFVBQVUsZ0JBQWUsSUFBSSxDQUFDLFlBQVksYUFBQztRQUNoRCxJQUFJLENBQUMsVUFBVSxlQUFjLElBQUksQ0FBQyxXQUFXLGFBQUM7UUFDOUMsSUFBSSxDQUFDLFVBQVUsZUFBYyxJQUFJLENBQUMsV0FBVyxhQUFDO0lBQ2xELENBQUM7SUFFRCxTQUFTO1FBQ0wsSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLFdBQVcsRUFBRTtZQUN4QixJQUFJLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUN2QixPQUFPLENBQUMsS0FBSyxDQUFDLGFBQWEsQ0FBQyxDQUFDO1NBQ2hDO0lBQ0wsQ0FBQztJQUVPLGFBQWEsQ0FBQyxJQUFVO1FBQzVCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO1FBQ2xCLElBQUksQ0FBQyxlQUFlLEVBQUUsQ0FBQztRQUN2QixPQUFPLENBQUMsR0FBRyxDQUFDLGdCQUFnQixDQUFDLENBQUM7SUFDbEMsQ0FBQztJQUVPLFlBQVksQ0FBQyxJQUFVO1FBRTNCLElBQUksUUFBUSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQztRQUN6QyxRQUFRLGNBQWEsQ0FBQyxZQUFZLEVBQUUsRUFBRTtZQUNsQyxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDekUsQ0FBQyxFQUFBO1FBRUQsSUFBSSxZQUFZLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsWUFBWSxDQUFDO1FBQ2pELFlBQVksY0FBYSxDQUFDLFlBQVksRUFBRSxFQUFFO1lBQ3RDLE9BQU8sQ0FBQyxHQUFHLENBQUMsZUFBZSxDQUFDLENBQUM7WUFDN0IsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsWUFBWSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBRTFFLENBQUMsRUFBQTtRQUVELElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFdBQVcsY0FBYSxDQUFDLFlBQVksRUFBRSxFQUFFO1lBQ3RELElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLGdCQUFnQixFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ2xGLENBQUMsRUFBQTtRQUVELElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLGdCQUFnQixFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBRTlFLGtCQUFRLENBQUMsUUFBUSxDQUFDLGlCQUFpQixDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLENBQUM7UUFDMUQsT0FBTyxDQUFDLEdBQUcsQ0FBQywrQkFBK0IsSUFBSSxDQUFDLEtBQUssQ0FBQyxTQUFTLEVBQUUsQ0FBQyxDQUFDO0lBQ3ZFLENBQUM7SUFFTyxXQUFXLENBQUMsS0FBcUI7UUFDckMsUUFBUTtRQUNSLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQ2pDLENBQUM7SUFFTyxXQUFXLENBQUMsS0FBcUI7UUFDckMsT0FBTztRQUNQLGNBQWM7UUFDZCxJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQztRQUNsQixPQUFPLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFBO0lBQ2hDLENBQUM7SUFJRCxVQUFVO0lBQ0YsZUFBZTtRQUVuQixnRkFBZ0Y7UUFDaEYsNkJBQTZCO1FBQzdCLE1BQU07UUFFTixJQUFJLENBQUMsS0FBSyxDQUFDLGlCQUFpQixvQ0FBUyxTQUFTLENBQUMsUUFBUSxFQUFFLE9BQU8sQ0FBQyxFQUFFO1lBQy9ELElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLFFBQVEsRUFBRSxPQUFPLENBQUMsQ0FBQztRQUNyRCxDQUFDLEVBQUU7UUFFSCxJQUFJLENBQUMsS0FBSyxDQUFDLGlCQUFpQixDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDekQsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsVUFBVSxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3ZELENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsb0NBQVMsU0FBUyxDQUFDLGNBQWMsRUFBRSxPQUFPLENBQUMsRUFBRTtZQUNyRSxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxjQUFjLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDM0QsQ0FBQyxFQUFFO1FBRUgsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsb0NBQVMsU0FBUyxDQUFDLFVBQVUsRUFBRSxPQUFPLENBQUMsRUFBRTtZQUNqRSxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxVQUFVLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDdkQsQ0FBQyxFQUFFO1FBRUgsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsb0NBQVMsU0FBUyxDQUFDLE9BQU8sRUFBRSxPQUFPLENBQUMsRUFBRTtZQUM5RCxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxPQUFPLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDcEQsQ0FBQyxFQUFFO1FBQ0gsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsb0NBQVMsU0FBUyxDQUFDLFdBQVcsRUFBRSxPQUFPLENBQUMsRUFBRTtZQUNsRSxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxXQUFXLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDeEQsQ0FBQyxFQUFFO1FBQ0gsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsb0NBQVMsU0FBUyxDQUFDLGdCQUFnQixFQUFFLE9BQU8sQ0FBQyxFQUFFO1lBQ3ZFLElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLGdCQUFnQixFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQzdELENBQUMsRUFBRTtRQUNILElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLG9DQUFTLFNBQVMsQ0FBQyxVQUFVLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDakUsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsVUFBVSxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3ZELENBQUMsRUFBRTtRQUVILElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLG9DQUFTLFNBQVMsQ0FBQyxXQUFXLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDbEUsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsV0FBVyxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3hELENBQUMsRUFBRTtRQUVILElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLG9DQUFTLFNBQVMsQ0FBQyxTQUFTLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDaEUsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsU0FBUyxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQ3RELENBQUMsRUFBRTtRQUVILElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUMsU0FBUyxDQUFDLE1BQU0sRUFBRSxPQUFPLENBQUMsRUFBRTtZQUNyRCxJQUFJLENBQUMsY0FBYyxDQUFDLFNBQVMsQ0FBQyxNQUFNLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDbkQsQ0FBQyxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsS0FBSyxDQUFDLGlCQUFpQixDQUFDLFNBQVMsQ0FBQyxjQUFjLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDN0QsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsY0FBYyxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQzNELENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsZUFBZSxFQUFFLE9BQU8sQ0FBQyxFQUFFO1lBQzlELElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLGVBQWUsRUFBRSxPQUFPLENBQUMsQ0FBQztRQUM1RCxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUMsU0FBUyxDQUFDLGdCQUFnQixFQUFFLE9BQU8sQ0FBQyxFQUFFO1lBQy9ELElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLGdCQUFnQixFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQzdELENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsWUFBWSxFQUFFLE9BQU8sQ0FBQyxFQUFFO1lBQzNELElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLFlBQVksRUFBRSxPQUFPLENBQUMsQ0FBQztRQUN6RCxDQUFDLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUMsU0FBUyxDQUFDLGtCQUFrQixFQUFFLE9BQU8sQ0FBQyxFQUFFO1lBQ2pFLElBQUksQ0FBQyxjQUFjLENBQUMsU0FBUyxDQUFDLGtCQUFrQixFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQy9ELENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsaUJBQWlCLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDaEUsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsaUJBQWlCLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDOUQsQ0FBQyxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsS0FBSyxDQUFDLGlCQUFpQixDQUFDLFNBQVMsQ0FBQyxjQUFjLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDN0QsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsY0FBYyxFQUFFLE9BQU8sQ0FBQyxDQUFDO1FBQzNELENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsZ0JBQWdCLEVBQUUsT0FBTyxDQUFDLEVBQUU7WUFDL0QsSUFBSSxDQUFDLGNBQWMsQ0FBQyxTQUFTLENBQUMsZ0JBQWdCLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDN0QsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRU8sY0FBYyxDQUFDLFNBQW9CLEVBQUUsT0FBWTtRQUNyRCxrQkFBUSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsU0FBUyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQ3RELENBQUM7SUFHRCxnQkFBZ0I7SUFDVCxrQkFBa0I7UUFDckIsT0FBTyxJQUFJLENBQUMsWUFBWSxDQUFDO0lBQzdCLENBQUM7SUFHTSxTQUFTLENBQUMsU0FBaUIsRUFBRSxJQUFjO1FBRTlDLElBQUksSUFBSSxJQUFJLElBQUksRUFBRTtZQUNkLElBQUksR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDO1NBQzFCO1FBRUQsSUFBSSxJQUFJLENBQUMsS0FBSyxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsV0FBVyxFQUFFO1lBQ3RDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRSxJQUFJLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQztTQUNoRDthQUNJO1lBQ0QsT0FBTyxDQUFDLEtBQUssQ0FBQyw4QkFBOEIsQ0FBQyxDQUFDO1lBQzlDLG9DQUFvQztTQUN2QztJQUNMLENBQUM7SUFFTSxVQUFVLENBQUMsSUFBWSxFQUFFLFNBQVM7UUFDckMsSUFBSSxJQUFJLENBQUMsS0FBSyxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsV0FBVyxFQUFFO1lBQ3RDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxzQkFBc0IsRUFBRSxDQUFDLElBQUksRUFBRSxTQUFTLENBQUMsQ0FBQyxDQUFDO1NBQ3hFO2FBQ0k7WUFDRCxPQUFPLENBQUMsS0FBSyxDQUFDLHNDQUFzQyxDQUFDLENBQUM7U0FDekQ7SUFDTCxDQUFDO0NBQ0o7QUF0TUQsNkJBc01DIn0=\",\"assetPath\":\"Assets/Scripts/GameManager/NetManager.ts\",\"manifest\":{\"properties\":[],\"name\":\"NetManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 9be7fd3f1675b1f9c260289d228408a5
+  onlyWriteTrigger: 0

@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: 92e9a63e45b54d347a9cbbbc356c57f4
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nconst
+    AudioController_1 = require(\"../GameController/AudioController\");\r\nclass
+    UIRewardPanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    Awake()
+    {\r\n        this.mOKBtn.onClick.AddListener(() => {\r\n            this.gameObject.SetActive(false);\r\n       
+    });\r\n    }\r\n    ShowReward(tip, rewardType) {\r\n        AudioController_1.default.Instance.PlayGetReward();\r\n       
+    this.mTipText.text = tip;\r\n        switch (rewardType) {\r\n            case
+    0 /* COIN */:\r\n                this.mRewardIcon.sprite = this.sprites[0];\r\n               
+    break;\r\n            case 1 /* ZEM */:\r\n                this.mRewardIcon.sprite
+    = this.sprites[1];\r\n                break;\r\n            default:\r\n               
+    break;\r\n        }\r\n    }\r\n}\r\nexports.default = UIRewardPanel;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlSZXdhcmRQYW5lbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlVJUmV3YXJkUGFuZWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSw2Q0FBb0Y7QUFDcEYsbURBQXFEO0FBQ3JELGlEQUFzRDtBQUN0RCw4RUFBdUU7QUFDdkUsdUVBQWdFO0FBRWhFLE1BQXFCLGFBQWMsU0FBUSxxQ0FBcUI7SUFRNUQsS0FBSztRQUVELElBQUksQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDakMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDckMsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQsVUFBVSxDQUFDLEdBQVcsRUFBRSxVQUFzQjtRQUMxQyx5QkFBZSxDQUFDLFFBQVEsQ0FBQyxhQUFhLEVBQUUsQ0FBQztRQUN6QyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksR0FBRyxHQUFHLENBQUM7UUFDekIsUUFBUSxVQUFVLEVBQUU7WUFDaEI7Z0JBQ0ksSUFBSSxDQUFDLFdBQVcsQ0FBQyxNQUFNLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDMUMsTUFBTTtZQUNWO2dCQUNJLElBQUksQ0FBQyxXQUFXLENBQUMsTUFBTSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQzFDLE1BQU07WUFDVjtnQkFDSSxNQUFNO1NBQ2I7SUFDTCxDQUFDO0NBRUo7QUE5QkQsZ0NBOEJDIn0=","assetPath":"Assets/Scripts/UI/UIRewardPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.CoreModule","name":"sprites","type":"UnityEngine.Sprite[]","isArray":true,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mTipText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mOKBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRewardIcon","type":"UnityEngine.UI.Image","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIRewardPanel","description":""},"isCompiled":true}'
+  typescriptHash: 73f19e6501074c991377939c42170b7c
+  onlyWriteTrigger: 0

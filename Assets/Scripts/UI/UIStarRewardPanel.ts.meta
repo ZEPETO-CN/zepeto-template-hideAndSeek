@@ -1,0 +1,94 @@
+fileFormatVersion: 2
+guid: 2ef31230876308142a3537c5e48e39d4
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nconst
+    ConfigManager_1 = require(\"../GameManager/ConfigManager\");\r\nconst UIManager_1
+    = require(\"../GameManager/UIManager\");\r\nconst StarRewardItem_1 = require(\"./StarRewardItem\");\r\nclass
+    UIStarRewardPanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n    constructor()
+    {\r\n        super(...arguments);\r\n        this._curStar = 0;\r\n        this._remainCount
+    = 0;\r\n        this._amount = 0;\r\n        this._drawEnd = true;\r\n       
+    this._drawWining = false;\r\n        this._rewardTime = 1;\r\n        this._rewardTiming
+    = 0;\r\n        this._haloIndex = 0;\r\n        this._rewardIndex = 0;\r\n       
+    this._isPlaying = false;\r\n    }\r\n    Awake() {\r\n        this.mHelpBtn.onClick.AddListener(()
+    => {\r\n            this.mRulePanelObj.SetActive(true);\r\n        });\r\n       
+    this.mExchangeBtn.onClick.AddListener(() => {\r\n            this.ClickExchange();\r\n       
+    });\r\n    }\r\n    Init() {\r\n        this._maxCount = ConfigManager_1.default.STAR_REWARD.exchangeMax;\r\n       
+    this._luckMax = ConfigManager_1.default.STAR_REWARD.luckMax;\r\n        this._costStar
+    = ConfigManager_1.default.STAR_REWARD.cost;\r\n        this.mMaxLuckAmountText.text
+    = \"/\" + this._luckMax;\r\n        this.mExchangeCostText.text = this._costStar
+    + \"\";\r\n        this._remainCount = this._maxCount;\r\n        this.mStarAmountText.text
+    = 0 + \"\";\r\n    }\r\n    ClickExchange() {\r\n        if (this._isPlaying)
+    {\r\n            return;\r\n        }\r\n        if (this._curStar >= this._costStar
+    && this._remainCount > 0) {\r\n            UIManager_1.default.Instance.SendExchangeStarReward();\r\n       
+    }\r\n    }\r\n    Start() {\r\n        this.SetStarRewardItems();\r\n    }\r\n   
+    SetStarRewardItems() {\r\n        this._starRewardItemArray = [];\r\n       
+    let starRewardArray = ConfigManager_1.default.STAR_REWARD_ARRAY;\r\n        for
+    (let i = 0; i < this.mRewardContainer.transform.childCount; i++) {\r\n           
+    let obj = this.mRewardContainer.transform.GetChild(i);\r\n            let item
+    = obj.GetComponent($typeof(StarRewardItem_1.default));\r\n            item.SetItem(starRewardArray[i].amount,
+    starRewardArray[i].rewardType);\r\n            this._starRewardItemArray.push(item);\r\n       
+    }\r\n        this.mStarRewardMask.SetActive(false);\r\n    }\r\n    UpdateStar(curStar)
+    {\r\n        this._curStar = curStar;\r\n        this.mStarAmountText.text =
+    curStar + \"\";\r\n        this.RefreshExchangeButton();\r\n    }\r\n    UpdateStarRewardInfo(starRewardInfo)
+    {\r\n        this.mCurrentLuckAmountText.text = starRewardInfo.luck + \"\";\r\n       
+    this._remainCount = this._maxCount - starRewardInfo.dailyCount;\r\n        let
+    str = \"<color=#F0D256FF>\" + this._remainCount + \"</color>\";\r\n        this.mDailyCountText.text
+    = Localization_1.default.Instance.GetLocalizedTextWithParam(\"Star_Reward_4\",
+    [str]);\r\n        this.RefreshExchangeButton();\r\n    }\r\n    RefreshExchangeButton()
+    {\r\n        if (this._curStar < this._costStar) {\r\n            this.mExchangeBtn.interactable
+    = false;\r\n            return;\r\n        }\r\n        if (this._remainCount
+    <= 0) {\r\n            this.mExchangeBtn.interactable = false;\r\n           
+    return;\r\n        }\r\n        this.mExchangeBtn.interactable = true;\r\n   
+    }\r\n    ShowReward(amount, rewardType) {\r\n        let starRewardArray = ConfigManager_1.default.STAR_REWARD_ARRAY;\r\n       
+    for (let i = 0; i < starRewardArray.length; i++) {\r\n            let starReward
+    = starRewardArray[i];\r\n            if (starReward.rewardType == rewardType
+    && starReward.amount == amount) {\r\n                this._rewardIndex = starReward.id
+    - 1;\r\n                break;\r\n            }\r\n        }\r\n        this._amount
+    = amount;\r\n        this._rewardType = rewardType;\r\n        this.StartPlayDrawAnimation();\r\n   
+    }\r\n    FixedUpdate() {\r\n        if (this._drawEnd) {\r\n            return;\r\n       
+    }\r\n        this._rewardTiming += UnityEngine_1.Time.deltaTime;\r\n        if
+    (this._rewardTiming >= this._rewardTime) {\r\n            this._rewardTiming
+    = 0;\r\n            this._haloIndex++;\r\n            if (this._haloIndex >=
+    this._starRewardItemArray.length) {\r\n                this._haloIndex = 0;\r\n           
+    }\r\n            this.SetHaloPos(this._haloIndex);\r\n        }\r\n    }\r\n   
+    SetHaloPos(index) {\r\n        let lastIndex = 0;\r\n        if (index == 0)
+    {\r\n            lastIndex = this._starRewardItemArray.length - 1;\r\n       
+    }\r\n        else {\r\n            lastIndex = index - 1;\r\n        }\r\n       
+    this._starRewardItemArray[index].SetSelect(true);\r\n        this._starRewardItemArray[lastIndex].SetSelect(false);\r\n       
+    if (this._drawWining && index == this._rewardIndex) {\r\n            this._isPlaying
+    = false;\r\n            this._drawEnd = true;\r\n        }\r\n    }\r\n    StartPlayDrawAnimation()
+    {\r\n        if (!this._isPlaying) {\r\n            this._isPlaying = true;\r\n           
+    this.mStarRewardMask.SetActive(true);\r\n            this._drawEnd = false;\r\n           
+    this._drawWining = false;\r\n            this.StartCoroutine(this.StartDrawAnimation());\r\n       
+    }\r\n    }\r\n    *StartDrawAnimation() {\r\n        this._rewardTime = 1;\r\n       
+    for (let i = 0; i < 9; i++) {\r\n            yield new UnityEngine_1.WaitForSeconds(0.1);\r\n           
+    this._rewardTime -= 0.1;\r\n        }\r\n        yield new UnityEngine_1.WaitForSeconds(2.5);\r\n       
+    for (let i = 0; i < 5; i++) {\r\n            yield new UnityEngine_1.WaitForSeconds(0.1);\r\n           
+    this._rewardTime += 0.05;\r\n        }\r\n        yield new UnityEngine_1.WaitForSeconds(0.5);\r\n       
+    this._drawWining = true;\r\n        yield new UnityEngine_1.WaitUntil(() => this._drawEnd);\r\n       
+    yield new UnityEngine_1.WaitForSeconds(1);\r\n        this.mStarRewardMask.SetActive(false);\r\n       
+    UIManager_1.default.Instance.ShowDailyRewardPanel(this._amount, this._rewardType);\r\n       
+    this.RefreshExchangeButton();\r\n    }\r\n}\r\nexports.default = UIStarRewardPanel;\r\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlTdGFyUmV3YXJkUGFuZWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJVSVN0YXJSZXdhcmRQYW5lbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUE0RjtBQUM1RixtREFBNkM7QUFDN0MsaURBQXFEO0FBQ3JELDhFQUF1RTtBQUN2RSxnRUFBeUU7QUFDekUsd0RBQWlEO0FBQ2pELHFEQUE4QztBQUM5QyxNQUFxQixpQkFBa0IsU0FBUSxxQ0FBcUI7SUFBcEU7O1FBa0JZLGFBQVEsR0FBVyxDQUFDLENBQUM7UUFDckIsaUJBQVksR0FBVyxDQUFDLENBQUM7UUF3RnpCLFlBQU8sR0FBVyxDQUFDLENBQUM7UUFHcEIsYUFBUSxHQUFZLElBQUksQ0FBQztRQUN6QixnQkFBVyxHQUFZLEtBQUssQ0FBQztRQUU3QixnQkFBVyxHQUFHLENBQUMsQ0FBQztRQUNoQixrQkFBYSxHQUFHLENBQUMsQ0FBQztRQUVsQixlQUFVLEdBQVcsQ0FBQyxDQUFDO1FBQ3ZCLGlCQUFZLEdBQVcsQ0FBQyxDQUFDO1FBRXpCLGVBQVUsR0FBWSxLQUFLLENBQUM7SUErRHhDLENBQUM7SUFoS0csS0FBSztRQUNELElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDbkMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDdkMsQ0FBQyxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsWUFBWSxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3ZDLElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztRQUN6QixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLFNBQVMsR0FBRyx1QkFBYSxDQUFDLFdBQVcsQ0FBQyxXQUFXLENBQUM7UUFDdkQsSUFBSSxDQUFDLFFBQVEsR0FBRyx1QkFBYSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENB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","assetPath":"Assets/Scripts/UI/UIStarRewardPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mStarAmountText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mLuckDesText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mCurrentLuckDesText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mCurrentLuckAmountText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mMaxLuckAmountText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mExchangeCostText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mDailyCountText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mHelpBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mExchangeBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mRewardContainer","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mRulePanelObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mStarRewardMask","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIStarRewardPanel","description":""},"isCompiled":true}'
+  typescriptHash: 38a6aa2fe2d8f3ab936a6eda7c986e09
+  onlyWriteTrigger: 0

@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: dddeaefe62e09044e943e07af88e6b8c
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst ZEPETO_Script_1
+    = require(\\\"ZEPETO.Script\\\");\\r\\nclass ChangeModelItem extends ZEPETO_Script_1.ZepetoScriptBehaviour
+    {\\r\\n    constructor() {\\r\\n        super(...arguments);\\r\\n        this.OnClickEvent
+    = null;\\r\\n    }\\r\\n    Start() {\\r\\n        this.mClickBtn.onValueChanged.AddListener((value)
+    => {\\r\\n            if (this.mClickBtn.isOn) {\\r\\n                this.mSelectBorder.SetActive(value);\\r\\n               
+    if (this.OnClickEvent != null) {\\r\\n                    this.OnClickEvent.Invoke(this.mId);\\r\\n               
+    }\\r\\n            }\\r\\n            else {\\r\\n                this.mSelectBorder.SetActive(value);\\r\\n           
+    }\\r\\n        });\\r\\n    }\\r\\n    // \uFF01\uFF01\uFF01 id \u5FC5\u987B\u8DDFmodel\u5BF9\u5E94\\r\\n   
+    SetData(img, id) {\\r\\n        this.mId = id;\\r\\n        this.mImg.sprite
+    = img;\\r\\n    }\\r\\n    Show() {\\r\\n        this.mImg.enabled = true;\\r\\n   
+    }\\r\\n    Hide() {\\r\\n        this.mImg.enabled = false;\\r\\n    }\\r\\n}\\r\\nexports.default
+    = ChangeModelItem;\\r\\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ2hhbmdlTW9kZWxJdGVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiQ2hhbmdlTW9kZWxJdGVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWdEO0FBQ2hELG1EQUErQztBQUMvQyxpREFBcUQ7QUFHckQsTUFBcUIsZUFBZ0IsU0FBUSxxQ0FBcUI7SUFBbEU7O1FBTVcsaUJBQVksR0FBdUIsSUFBSSxDQUFDO0lBOEJuRCxDQUFDO0lBN0JHLEtBQUs7UUFFRCxJQUFJLENBQUMsU0FBUyxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtZQUVoRCxJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxFQUFFO2dCQUNyQixJQUFJLENBQUMsYUFBYSxDQUFDLFNBQVMsQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDcEMsSUFBRyxJQUFJLENBQUMsWUFBWSxJQUFJLElBQUksRUFBQztvQkFDekIsSUFBSSxDQUFDLFlBQVksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO2lCQUN0QzthQUNKO2lCQUNJO2dCQUNELElBQUksQ0FBQyxhQUFhLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO2FBQ3ZDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBQ0Qsb0JBQW9CO0lBQ2IsT0FBTyxDQUFDLEdBQVcsRUFBRSxFQUFXO1FBRW5DLElBQUksQ0FBQyxHQUFHLEdBQUcsRUFBRSxDQUFDO1FBQ2QsSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLEdBQUcsR0FBRyxDQUFDO0lBQzNCLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQzdCLENBQUM7SUFFTSxJQUFJO1FBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDO0lBQzlCLENBQUM7Q0FDSjtBQXBDRCxrQ0FvQ0MifQ==\",\"assetPath\":\"Assets/Scripts/UI/ActionBar/ChangeModelItem.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"mscorlib\",\"name\":\"mId\",\"type\":\"System.Single\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mSelectBorder\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mImg\",\"type\":\"UnityEngine.UI.Image\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mClickBtn\",\"type\":\"UnityEngine.UI.Toggle\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"\",\"name\":\"OnClickEvent\",\"type\":\"UnityEngine.Events.UnityEvent$1\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"ChangeModelItem\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: 9325de0e87c616a72aae9f40d7ec5423
+  onlyWriteTrigger: 0

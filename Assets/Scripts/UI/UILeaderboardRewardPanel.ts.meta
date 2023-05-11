@@ -1,0 +1,45 @@
+fileFormatVersion: 2
+guid: 0a2ccfad41320904498e92868e68acaf
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_1 = require(\"UnityEngine\");\r\nconst
+    UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst
+    Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nconst
+    ConfigManager_1 = require(\"../GameManager/ConfigManager\");\r\nconst UIManager_1
+    = require(\"../GameManager/UIManager\");\r\nconst LeaderBoardRewardItem_1 = require(\"./LeaderBoardRewardItem\");\r\nclass
+    UILeaderboardRewardPanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    Awake() {\r\n        this.Localization();\r\n        this.rewardItemObjs = [];\r\n       
+    this.rewardItemObjs.push(this.mRewardItemObj);\r\n        this.mCloseBtn.onClick.AddListener(()
+    => {\r\n            this.gameObject.SetActive(false);\r\n        });\r\n       
+    this.mLeaderboardBtn.onClick.AddListener(() => {\r\n            UIManager_1.default.Instance.mLeaderboardPanel.SetActive(true);\r\n       
+    });\r\n        this.CreateRewardList();\r\n    }\r\n    Localization() {\r\n       
+    this.mTitleText.text = Localization_1.default.Instance.GetLocalizedText(\"Reward_title\");\r\n       
+    this.mEndText.text = Localization_1.default.Instance.GetLocalizedText(\"Reward_tips\");\r\n   
+    }\r\n    CreateRewardList() {\r\n        let rewardListData = ConfigManager_1.default.Instance.GetRankRewardTable();\r\n       
+    for (var i = 0; i < rewardListData.length; i++) {\r\n            var item;\r\n           
+    if (i > this.rewardItemObjs.length - 1) {\r\n                item = UnityEngine_1.GameObject.Instantiate(this.mRewardItemObj,
+    this.mScrollView.content);\r\n                this.rewardItemObjs.push(item);\r\n           
+    }\r\n            else {\r\n                item = this.rewardItemObjs[i];\r\n           
+    }\r\n            item.transform.localScale = UnityEngine_1.Vector3.one;\r\n           
+    item.GetComponent($typeof(LeaderBoardRewardItem_1.default)).SetItem(rewardListData[i],
+    i);\r\n            item.SetActive(true);\r\n        }\r\n    }\r\n}\r\nexports.default
+    = UILeaderboardRewardPanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlMZWFkZXJib2FyZFJld2FyZFBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlMZWFkZXJib2FyZFJld2FyZFBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWtEO0FBQ2xELG1EQUEwRDtBQUMxRCxpREFBcUQ7QUFDckQsOEVBQXVFO0FBQ3ZFLGdFQUF5RDtBQUN6RCx3REFBaUQ7QUFDakQsbUVBQTREO0FBRTVELE1BQXFCLHdCQUF5QixTQUFRLHFDQUFxQjtJQVV2RSxLQUFLO1FBQ0QsSUFBSSxDQUFDLFlBQVksRUFBRSxDQUFDO1FBQ3BCLElBQUksQ0FBQyxjQUFjLEdBQUcsRUFBRSxDQUFDO1FBQ3pCLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQztRQUM5QyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3BDLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ3JDLENBQUMsQ0FBQyxDQUFDO1FBQ0gsSUFBSSxDQUFDLGVBQWUsQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLEdBQUcsRUFBRTtZQUMxQyxtQkFBUyxDQUFDLFFBQVEsQ0FBQyxpQkFBaUIsQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDekQsQ0FBQyxDQUFDLENBQUM7UUFDSCxJQUFJLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQztJQUM1QixDQUFDO0lBRU8sWUFBWTtRQUNoQixJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxjQUFjLENBQUMsQ0FBQztRQUM5RSxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxhQUFhLENBQUMsQ0FBQztJQUMvRSxDQUFDO0lBRU8sZ0JBQWdCO1FBQ3BCLElBQUksY0FBYyxHQUFHLHVCQUFhLENBQUMsUUFBUSxDQUFDLGtCQUFrQixFQUFFLENBQUM7UUFDakUsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLGNBQWMsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUU7WUFDNUMsSUFBSSxJQUFnQixDQUFDO1lBQ3JCLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsTUFBTSxHQUFHLENBQUMsRUFBRTtnQkFDcEMsSUFBSSxHQUFHLHdCQUFVLENBQUMsV0FBVyxDQUFhLElBQUksQ0FBQyxjQUFjLEVBQUUsSUFBSSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FBQztnQkFDekYsSUFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7YUFDbEM7aUJBQ0k7Z0JBQ0QsSUFBSSxHQUFHLElBQUksQ0FBQyxjQUFjLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDakM7WUFDRCxJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsR0FBRyxxQkFBTyxDQUFDLEdBQUcsQ0FBQztZQUN4QyxJQUFJLENBQUMsWUFBWSxTQUFDLCtCQUFxQixHQUFJLE9BQU8sQ0FBQyxjQUFjLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7WUFDekUsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUN4QjtJQUVMLENBQUM7Q0FFSjtBQTlDRCwyQ0E4Q0MifQ==","assetPath":"Assets/Scripts/UI/UILeaderboardRewardPanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mTitleText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mEndText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mCloseBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mScrollView","type":"UnityEngine.UI.ScrollRect","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.CoreModule","name":"mRewardItemObj","type":"UnityEngine.GameObject","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mLeaderboardBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UILeaderboardRewardPanel","description":""},"isCompiled":true}'
+  typescriptHash: ce5a2cedd5433518fe1f748105632555
+  onlyWriteTrigger: 0

@@ -1,0 +1,54 @@
+fileFormatVersion: 2
+guid: 13ffce6f46532d64badd2a0092e98150
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst BaseManager_1 = require(\\\"./BaseManager\\\");\\r\\nconst
+    UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst NetManager_1 = require(\\\"./NetManager\\\");\\r\\nclass
+    MapManager extends BaseManager_1.default {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this.mIsOpenDoor = true;\\r\\n    }\\r\\n   
+    static get Instance() {\\r\\n        return MapManager._instance;\\r\\n    }\\r\\n   
+    Awake() {\\r\\n        MapManager._instance = this;\\r\\n        this.mStartPos
+    = this.mReadyWall.transform.position;\\r\\n        this.mReadyWall.transform.position
+    = this.mEndPos;\\r\\n    }\\r\\n    OnDisable() {\\r\\n        if (this.mIsOpenDoor)
+    {\\r\\n            this.mReadyWall.transform.position = this.mEndPos;\\r\\n       
+    }\\r\\n    }\\r\\n    // \u5FC3\u8DF3\u540C\u6B65\u6821\u9A8C\\r\\n    UpdateCheck()
+    {\\r\\n        if (this.mIsOpenDoor) {\\r\\n            if (this.mGameState ==
+    NetManager_1.GameState.GameStart) {\\r\\n                this.OnCloseDoor();\\r\\n           
+    }\\r\\n        }\\r\\n        if (this.mGameState == NetManager_1.GameState.OpenDoor
+    && !this.mIsOpenDoor) {\\r\\n            this.OnOpenDoor();\\r\\n        }\\r\\n   
+    }\\r\\n    OnOpenDoor() {\\r\\n        console.error(\\\"OnOpenDoor\\\");\\r\\n       
+    this.mIsOpenDoor = true;\\r\\n        this.StartCoroutine(this.IE_DestoryWall());\\r\\n   
+    }\\r\\n    OnCloseDoor() {\\r\\n        console.error(\\\"OnCloseDoor\\\");\\r\\n       
+    this.mIsOpenDoor = false;\\r\\n        this.mReadyWall.transform.position = this.mStartPos;\\r\\n   
+    }\\r\\n    *IE_DestoryWall() {\\r\\n        let timer = 0;\\r\\n        let animTime
+    = 1;\\r\\n        while (timer < animTime) {\\r\\n            timer += UnityEngine_1.Time.deltaTime;\\r\\n           
+    this.mReadyWall.transform.position = UnityEngine_1.Vector3.Lerp(this.mStartPos,
+    this.mEndPos, timer);\\r\\n            yield null;\\r\\n        }\\r\\n       
+    this.mReadyWall.transform.position = this.mEndPos;\\r\\n    }\\r\\n    OnDynamicMapChange(dynamicMaps)
+    {\\r\\n        if (dynamicMaps == null || dynamicMaps.models == null)\\r\\n           
+    return;\\r\\n        for (var i = 0; i < this.mDynamicModels.length; i++) {\\r\\n           
+    this.mDynamicModels[i].SetActive(false);\\r\\n        }\\r\\n        console.log(dynamicMaps.models);\\r\\n       
+    let models = dynamicMaps.models.split(',');\\r\\n        for (var i = 0; i <
+    models.length; i++) {\\r\\n            let index = parseInt(models[i]);\\r\\n           
+    if (index < this.mDynamicModels.length) {\\r\\n                this.mDynamicModels[index].SetActive(true);\\r\\n           
+    }\\r\\n        }\\r\\n    }\\r\\n}\\r\\nexports.default = MapManager;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWFwTWFuYWdlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIk1hcE1hbmFnZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFDQSwrQ0FBdUM7QUFDdkMsNkNBQXNFO0FBQ3RFLDZDQUF1QztBQUd2QyxNQUFxQixVQUFXLFNBQVEscUJBQVc7SUFBbkQ7O1FBd0JZLGdCQUFXLEdBQWEsSUFBSSxDQUFDO0lBZ0V6QyxDQUFDO0lBcEZVLE1BQU0sS0FBSyxRQUFRO1FBRXRCLE9BQU8sVUFBVSxDQUFDLFNBQVMsQ0FBQztJQUNoQyxDQUFDO0lBTUQsS0FBSztRQUNELFVBQVUsQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDO1FBQzVCLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsUUFBUSxDQUFFO1FBQ3JELElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDO0lBQ3RELENBQUM7SUFVRCxTQUFTO1FBQ0wsSUFBRyxJQUFJLENBQUMsV0FBVyxFQUFDO1lBQ2hCLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDO1NBQ3JEO0lBQ0wsQ0FBQztJQUVELFNBQVM7SUFDVCxXQUFXO1FBQ1AsSUFBRyxJQUFJLENBQUMsV0FBVyxFQUFDO1lBQ2hCLElBQUcsSUFBSSxDQUFDLFVBQVUsSUFBSSxzQkFBUyxDQUFDLFNBQVMsRUFBQztnQkFDdEMsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO2FBQ3RCO1NBQ0o7UUFFRCxJQUFHLElBQUksQ0FBQyxVQUFVLElBQUksc0JBQVMsQ0FBQyxRQUFRLElBQUksQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFDO1lBQzFELElBQUksQ0FBQyxVQUFVLEVBQUUsQ0FBQztTQUNyQjtJQUNMLENBQUM7SUFFRCxVQUFVO1FBQ04sT0FBTyxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUM1QixJQUFJLENBQUMsV0FBVyxHQUFHLElBQUksQ0FBQztRQUN4QixJQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxjQUFjLEVBQUUsQ0FBQyxDQUFDO0lBQy9DLENBQUM7SUFFRCxXQUFXO1FBQ1AsT0FBTyxDQUFDLEtBQUssQ0FBQyxhQUFhLENBQUMsQ0FBQztRQUM3QixJQUFJLENBQUMsV0FBVyxHQUFHLEtBQUssQ0FBQztRQUN6QixJQUFJLENBQUMsVUFBVSxDQUFDLFNBQVMsQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQztJQUN4RCxDQUFDO0lBQ0QsQ0FBQyxjQUFjO1FBQ1gsSUFBSSxLQUFLLEdBQUcsQ0FBQyxDQUFDO1FBQ2QsSUFBSSxRQUFRLEdBQUcsQ0FBQyxDQUFDO1FBQ2pCLE9BQU8sS0FBSyxHQUFHLFFBQVEsRUFBQztZQUNwQixLQUFLLElBQUksa0JBQUksQ0FBQyxTQUFTLENBQUM7WUFDeEIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLHFCQUFPLENBQUMsSUFBSSxDQUM3QyxJQUFJLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxPQUFPLEVBQUUsS0FBSyxDQUN0QyxDQUFDO1lBQ0YsTUFBTSxJQUFJLENBQUM7U0FDZDtRQUNELElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLFFBQVEsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDO0lBQ3RELENBQUM7SUFFRCxrQkFBa0IsQ0FBQyxXQUF5QjtRQUV4QyxJQUFHLFdBQVcsSUFBSSxJQUFJLElBQUksV0FBVyxDQUFDLE1BQU0sSUFBSSxJQUFJO1lBQUUsT0FBUTtRQUU5RCxLQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFFLEVBQUM7WUFDL0MsSUFBSSxDQUFDLGNBQWMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDM0M7UUFDRCxPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUNoQyxJQUFJLE1BQU0sR0FBRyxXQUFXLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUMzQyxLQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLEdBQUcsTUFBTSxDQUFDLE1BQU0sRUFBRSxDQUFDLEVBQUUsRUFBQztZQUNsQyxJQUFJLEtBQUssR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFFaEMsSUFBRyxLQUFLLEdBQUcsSUFBSSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEVBQUM7Z0JBQ2xDLElBQUksQ0FBQyxjQUFjLENBQUMsS0FBSyxDQUFDLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQyxDQUFDO2FBQzlDO1NBQ0o7SUFDTCxDQUFDO0NBRUo7QUF4RkQsNkJBd0ZDIn0=\",\"assetPath\":\"Assets/Scripts/GameManager/MapManager.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mAudioCtrl\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mDynamicModels\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mReadyWall\",\"type\":\"UnityEngine.GameObject\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mEndPos\",\"type\":\"UnityEngine.Vector3\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"MapManager\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: c85fb26c40f0549acc9894747390816f
+  onlyWriteTrigger: 0

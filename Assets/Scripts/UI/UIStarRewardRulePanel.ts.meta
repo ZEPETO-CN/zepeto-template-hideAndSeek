@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: 5a77fdc41877b274fb6bf48d8d92f0bf
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: '{"source":"\"use strict\";\r\nObject.defineProperty(exports, \"__esModule\",
+    { value: true });\r\nconst UnityEngine_UI_1 = require(\"UnityEngine.UI\");\r\nconst
+    ZEPETO_Script_1 = require(\"ZEPETO.Script\");\r\nconst Localization_1 = require(\"../Common/Localization/Scripts/Localization\");\r\nclass
+    UIStarRewardRulePanel extends ZEPETO_Script_1.ZepetoScriptBehaviour {\r\n   
+    Awake() {\r\n        this.mCloseBtn.onClick.AddListener(() => {\r\n           
+    this.Close();\r\n        });\r\n        this.mOKBtn.onClick.AddListener(() =>
+    {\r\n            this.Close();\r\n        });\r\n        this.mTitleText.text
+    = Localization_1.default.Instance.GetLocalizedText(\"Star_Reward_Rule_1\");\r\n       
+    this.mRuleText.text = Localization_1.default.Instance.GetLocalizedText(\"Star_Reward_Rule_2\");\r\n       
+    this.mOKText.text = Localization_1.default.Instance.GetLocalizedText(\"Star_Reward_Rule_3\");\r\n   
+    }\r\n    Start() {\r\n    }\r\n    Close() {\r\n        this.gameObject.SetActive(false);\r\n   
+    }\r\n}\r\nexports.default = UIStarRewardRulePanel;\r\n//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlTdGFyUmV3YXJkUnVsZVBhbmVsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiVUlTdGFyUmV3YXJkUnVsZVBhbmVsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbURBQTZDO0FBQzdDLGlEQUFxRDtBQUNyRCw4RUFBdUU7QUFFdkUsTUFBcUIscUJBQXNCLFNBQVEscUNBQXFCO0lBUXBFLEtBQUs7UUFFRCxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsR0FBRyxFQUFFO1lBQ3BDLElBQUksQ0FBQyxLQUFLLEVBQUUsQ0FBQztRQUNqQixDQUFDLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxHQUFHLEVBQUU7WUFDakMsSUFBSSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ2pCLENBQUMsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLEdBQUcsc0JBQVksQ0FBQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsb0JBQW9CLENBQUMsQ0FBQztRQUNwRixJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO1FBQ25GLElBQUksQ0FBQyxPQUFPLENBQUMsSUFBSSxHQUFHLHNCQUFZLENBQUMsUUFBUSxDQUFDLGdCQUFnQixDQUFDLG9CQUFvQixDQUFDLENBQUM7SUFDckYsQ0FBQztJQUVELEtBQUs7SUFFTCxDQUFDO0lBRU8sS0FBSztRQUNULElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQ3JDLENBQUM7Q0FFSjtBQTlCRCx3Q0E4QkMifQ==","assetPath":"Assets/Scripts/UI/UIStarRewardRulePanel.ts","manifest":{"properties":[{"assembly":"UnityEngine.UI","name":"mCloseBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mOKBtn","type":"UnityEngine.UI.Button","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mTitleText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mRuleText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]},{"assembly":"UnityEngine.UI","name":"mOKText","type":"UnityEngine.UI.Text","isArray":false,"initValue":[],"enumKeys":[],"enumValues":[],"attributes":[]}],"name":"UIStarRewardRulePanel","description":""},"isCompiled":true}'
+  typescriptHash: 81d96c756924f81e1320b2145ef4c22c
+  onlyWriteTrigger: 0

@@ -1,0 +1,112 @@
+fileFormatVersion: 2
+guid: e0e0220e85914864e807746b250a575d
+importerOverride: ZEPETO.Script.Compiler:ZEPETO.Script:TypescriptAssetImporter
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: -1123457745, guid: 54cf806323ffe4418a4ce4cc63fe6b9d, type: 3}
+  isAssemblyDeclarations: 0
+  assembly: 
+  generateAllTypes: 1
+  types: []
+  generateWrapper: 0
+  overrideWrapperTypes: 0
+  wrapperTypes: []
+  WrapperFilters: []
+  wrapperOutputDirectory: Generated
+  compiledResult: "{\"source\":\"\\\"use strict\\\";\\r\\nObject.defineProperty(exports,
+    \\\"__esModule\\\", { value: true });\\r\\nconst UnityEngine_1 = require(\\\"UnityEngine\\\");\\r\\nconst
+    UnityEngine_UI_1 = require(\\\"UnityEngine.UI\\\");\\r\\nconst ZEPETO_Multiplay_1
+    = require(\\\"ZEPETO.Multiplay\\\");\\r\\nconst ZEPETO_Script_1 = require(\\\"ZEPETO.Script\\\");\\r\\nconst
+    Localization_1 = require(\\\"../Common/Localization/Scripts/Localization\\\");\\r\\nconst
+    ConfigManager_1 = require(\\\"../GameManager/ConfigManager\\\");\\r\\nconst NetManager_1
+    = require(\\\"../GameManager/NetManager\\\");\\r\\nconst GameData_1 = require(\\\"../GameStaticData/GameData\\\");\\r\\nconst
+    SeasonRewardItem_1 = require(\\\"./SeasonRewardItem\\\");\\r\\nclass UISeasonReward
+    extends ZEPETO_Script_1.ZepetoScriptBehaviour {\\r\\n    constructor() {\\r\\n       
+    super(...arguments);\\r\\n        this._seasonRewardInfo = [];\\r\\n        this._myScore
+    = 0;\\r\\n        this._maxScore = 0;\\r\\n        this._nextResetTime = 0;\\r\\n       
+    this._intervalId = 0;\\r\\n    }\\r\\n    get Leaderboard() { return GameData_1.default.LEADERBOARD;
+    }\\r\\n    Start() {\\r\\n        let date = new Date();\\r\\n        let hours
+    = -date.getTimezoneOffset() / 60;\\r\\n        this.mRuleText.text = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Season_Reward_Rule\\\",
+    [hours + \\\"\\\"]);\\r\\n    }\\r\\n    OnEnable() {\\r\\n        const roomData
+    = new ZEPETO_Multiplay_1.RoomData();\\r\\n        NetManager_1.default.Instance.SendEvent(NetManager_1.sEventArg.SyncSeasonInfo,
+    roomData);\\r\\n        this._nextResetTime = this.GetNextResetTime();\\r\\n       
+    let countdown = this._nextResetTime - Date.now();\\r\\n        let colorStr =
+    \\\"<color=#FFDF58FF>\\\" + this.formatCountdown(countdown) + \\\"</color>\\\";\\r\\n       
+    this.mEndTime.text = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Season_End_Time\\\",
+    [colorStr]);\\r\\n        this.StartCountDown(countdown);\\r\\n    }\\r\\n   
+    OnDisable() {\\r\\n        if (this._intervalId && this._intervalId != 0) {\\r\\n           
+    clearInterval(this._intervalId);\\r\\n        }\\r\\n    }\\r\\n    Init() {\\r\\n       
+    this._seasonRewardArray = ConfigManager_1.default.SEASON_REWARD_ARRAY;\\r\\n       
+    this.InitSeasonReward();\\r\\n    }\\r\\n    InitSeasonReward() {\\r\\n       
+    this._seasonRewardItems = [];\\r\\n        this._maxScore = this._seasonRewardArray[this._seasonRewardArray.length
+    - 1].score;\\r\\n        for (let i = 0; i < this._seasonRewardArray.length;
+    i++) {\\r\\n            let seasonReward = this._seasonRewardArray[i];\\r\\n           
+    let seasonRewardItem = this.mSeasonRewardObjArray[i].GetComponent($typeof(SeasonRewardItem_1.default));\\r\\n           
+    seasonRewardItem.InitComponent(seasonReward, this.ClickSeasonRewardItem.bind(this));\\r\\n           
+    seasonRewardItem.SetStatus(0, 0);\\r\\n            this._seasonRewardItems.push(seasonRewardItem);\\r\\n       
+    }\\r\\n    }\\r\\n    ClickSeasonRewardItem(id) {\\r\\n        const roomData
+    = new ZEPETO_Multiplay_1.RoomData();\\r\\n        roomData.Add(\\\"id\\\", id);\\r\\n       
+    roomData.Add(\\\"score\\\", this._myScore);\\r\\n        NetManager_1.default.Instance.SendEvent(NetManager_1.sEventArg.ClaimSeasonReward,
+    roomData);\\r\\n        console.log(\\\"\u8BF7\u6C42\u8D5B\u5B63\u5956\u52B1:\\\",
+    id);\\r\\n    }\\r\\n    RefreshMySeasonScore(score) {\\r\\n        this._myScore
+    = score;\\r\\n        this.RefreshView();\\r\\n    }\\r\\n    RefreshView() {\\r\\n       
+    this.mMyScoreNumText.text = this._myScore + \\\"\\\";\\r\\n        for (let i
+    = 0; i < this._seasonRewardItems.length; i++) {\\r\\n            let item = this._seasonRewardItems[i];\\r\\n           
+    let status = 0;\\r\\n            if (item.seasonReward.score <= this._myScore)
+    {\\r\\n                status = 1;\\r\\n                if (this.CheckClaimReward(item.seasonReward.id))
+    {\\r\\n                    status = 2;\\r\\n                }\\r\\n           
+    }\\r\\n            item.SetStatus(this._myScore, status);\\r\\n        }\\r\\n       
+    if (this._myScore >= this._maxScore) {\\r\\n            this.mSlider.maxValue
+    = 1;\\r\\n            this.mSlider.value = 1;\\r\\n        }\\r\\n        else
+    {\\r\\n            this.mSlider.maxValue = this._maxScore;\\r\\n            this.mSlider.value
+    = this._myScore;\\r\\n        }\\r\\n    }\\r\\n    CheckClaimReward(id) {\\r\\n       
+    let isReward = false;\\r\\n        for (let i = 0; i < this._seasonRewardInfo.length;
+    i++) {\\r\\n            if (id == this._seasonRewardInfo[i]) {\\r\\n               
+    isReward = true;\\r\\n                break;\\r\\n            }\\r\\n       
+    }\\r\\n        return isReward;\\r\\n    }\\r\\n    UpdateSeasonReward(seasonRewardInfo)
+    {\\r\\n        this._seasonRewardInfo = seasonRewardInfo;\\r\\n        this.RefreshView();\\r\\n   
+    }\\r\\n    GetNextResetTime() {\\r\\n        let today = new Date();\\r\\n       
+    let resetTime = this.GetFirstDayOfWeek(today, this.Leaderboard.WeekRank.resetDay,
+    this.Leaderboard.WeekRank.resetHour, this.Leaderboard.WeekRank.resetMin, this.Leaderboard.WeekRank.resetSec);\\r\\n       
+    console.log(\\\"\u8D5B\u5B63\u4E0A\u6B21\u91CD\u7F6E\u65F6\u95F4\uFF1A\\\", resetTime.toString());\\r\\n       
+    resetTime.setUTCDate(resetTime.getUTCDate() + 7);\\r\\n        console.log(\\\"\u8D5B\u5B63\u91CD\u7F6E\u65F6\u95F4\uFF1A\\\",
+    resetTime.toString());\\r\\n        return resetTime.getTime();\\r\\n    }\\r\\n   
+    GetFirstDayOfWeek(date, startDay, hours, min, sec, ms = 0) {\\r\\n        let
+    firstDay = new Date(date.setUTCDate(date.getUTCDate() - (7 + date.getUTCDay()
+    - startDay) % 7));\\r\\n        firstDay.setUTCHours(hours, min, sec, ms);\\r\\n       
+    return firstDay;\\r\\n    }\\r\\n    formatCountdown(milliseconds) {\\r\\n       
+    let s = Math.round(milliseconds / 1000);\\r\\n        let time = s + \\\" \\\"
+    + Localization_1.default.Instance.GetLocalizedText(\\\"TIME_TEXT_4\\\");\\r\\n       
+    if (s >= 60) {\\r\\n            let min = Math.floor(s / 60);\\r\\n           
+    let second = s - 60 * min;\\r\\n            time = min + \\\" \\\" + Localization_1.default.Instance.GetLocalizedText(\\\"TIME_TEXT_3\\\")
+    + \\\" \\\" + second + \\\" \\\" + Localization_1.default.Instance.GetLocalizedText(\\\"TIME_TEXT_4\\\");\\r\\n           
+    if (min >= 60) {\\r\\n                let hour = Math.floor(s / 60 / 60);\\r\\n               
+    min = Math.floor((s - hour * 60 * 60) / 60);\\r\\n                time = hour
+    + \\\" \\\" + Localization_1.default.Instance.GetLocalizedText(\\\"TIME_TEXT_2\\\")
+    + \\\" \\\" + min + \\\" \\\" + Localization_1.default.Instance.GetLocalizedText(\\\"TIME_TEXT_3\\\");\\r\\n               
+    if (hour >= 24) {\\r\\n                    let day = Math.floor(s / 60 / 60 /
+    24);\\r\\n                    hour = Math.floor((s - day * 60 * 60 * 24) / 60
+    / 60);\\r\\n                    time = day + \\\" \\\" + Localization_1.default.Instance.GetLocalizedText(\\\"TIME_TEXT_1\\\")
+    + \\\" \\\" + hour + \\\" \\\" + Localization_1.default.Instance.GetLocalizedText(\\\"TIME_TEXT_2\\\");\\r\\n               
+    }\\r\\n            }\\r\\n        }\\r\\n        return time;\\r\\n    }\\r\\n   
+    StartCountDown(countdown) {\\r\\n        this._intervalId = setInterval(() =>
+    {\\r\\n            countdown = countdown - 1000;\\r\\n            if (countdown
+    > 0) {\\r\\n                let colorStr = \\\"<color=#FFDF58FF>\\\" + this.formatCountdown(countdown)
+    + \\\"</color>\\\";\\r\\n                this.mEndTime.text = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Season_End_Time\\\",
+    [colorStr]);\\r\\n            }\\r\\n            else {\\r\\n               
+    let colorStr = \\\"<color=#FFDF58FF>\\\" + this.formatCountdown(countdown) +
+    \\\"</color>\\\";\\r\\n                this.mEndTime.text = Localization_1.default.Instance.GetLocalizedTextWithParam(\\\"Season_End_Time\\\",
+    [colorStr]);\\r\\n                clearInterval(this._intervalId);\\r\\n               
+    this._intervalId = 0;\\r\\n                this.ResetSeason();\\r\\n           
+    }\\r\\n        }, 1000);\\r\\n    }\\r\\n    ResetSeason() {\\r\\n        this._seasonRewardInfo
+    = [];\\r\\n        this._myScore = 0;\\r\\n        this._nextResetTime = this.GetNextResetTime();\\r\\n       
+    this.RefreshView();\\r\\n        let countdown = this._nextResetTime - Date.now();\\r\\n       
+    this.StartCountDown(countdown);\\r\\n    }\\r\\n}\\r\\nexports.default = UISeasonReward;\\r\\n//#
+    sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiVUlTZWFzb25SZXdhcmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJVSVNlYXNvblJld2FyZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLDZDQUF5QztBQUN6QyxtREFBNkM7QUFDN0MsdURBQTRDO0FBQzVDLGlEQUFxRDtBQUNyRCw4RUFBdUU7QUFDdkUsZ0VBQTJFO0FBQzNFLDBEQUFrRTtBQUNsRSx5REFBa0Q7QUFDbEQseURBQWtEO0FBRWxELE1BQXFCLGNBQWUsU0FBUSxxQ0FBcUI7SUFBakU7O1FBV1ksc0JBQWlCLEdBQWEsRUFBRSxDQUFDO1FBQ2pDLGFBQVEsR0FBVyxDQUFDLENBQUM7UUFDckIsY0FBUyxHQUFXLENBQUMsQ0FBQztRQUN0QixtQkFBYyxHQUFXLENBQUMsQ0FBQztRQUMzQixnQkFBVyxHQUFXLENBQUMsQ0FBQztJQTZKcEMsQ0FBQztJQXJLRyxJQUFXLFdBQVcsS0FBSyxPQUFPLGtCQUFRLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQztJQVd6RCxLQUFLO1FBQ0QsSUFBSSxJQUFJLEdBQUcsSUFBSSxJQUFJLEVBQUUsQ0FBQztRQUN0QixJQUFJLEtBQUssR0FBRyxDQUFDLElBQUksQ0FBQyxpQkFBaUIsRUFBRSxHQUFHLEVBQUUsQ0FBQztRQUMzQyxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksR0FBRyxzQkFBWSxDQUFDLFFBQVEsQ0FBQyx5QkFBeUIsQ0FBQyxvQkFBb0IsRUFBRSxDQUFDLEtBQUssR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDO0lBQzlHLENBQUM7SUFFRCxRQUFRO1FBQ0osTUFBTSxRQUFRLEdBQUcsSUFBSSwyQkFBUSxFQUFFLENBQUM7UUFDaEMsb0JBQVUsQ0FBQyxRQUFRLENBQUMsU0FBUyxDQUFDLHNCQUFTLENBQUMsY0FBYyxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQ2xFLElBQUksQ0FBQyxjQUFjLEdBQUcsSUFBSSxDQUFDLGdCQUFnQixFQUFFLENBQUM7UUFDOUMsSUFBSSxTQUFT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\",\"assetPath\":\"Assets/Scripts/UI/UISeasonReward.ts\",\"manifest\":{\"properties\":[{\"assembly\":\"UnityEngine.UI\",\"name\":\"mMyScoreNumText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mEndTime\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mRuleText\",\"type\":\"UnityEngine.UI.Text\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.UI\",\"name\":\"mSlider\",\"type\":\"UnityEngine.UI.Slider\",\"isArray\":false,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]},{\"assembly\":\"UnityEngine.CoreModule\",\"name\":\"mSeasonRewardObjArray\",\"type\":\"UnityEngine.GameObject[]\",\"isArray\":true,\"initValue\":[],\"enumKeys\":[],\"enumValues\":[],\"attributes\":[]}],\"name\":\"UISeasonReward\",\"description\":\"\"},\"isCompiled\":true}"
+  typescriptHash: fba5a9a52f055cb1eb9fead57c887dd1
+  onlyWriteTrigger: 0

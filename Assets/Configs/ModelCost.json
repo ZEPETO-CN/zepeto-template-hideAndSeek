@@ -1,0 +1,317 @@
+[
+    {
+        "name": "dmm_table_01",
+        "cost": 0,
+        "costId": 0
+    },
+    {
+        "name": "dmm_pot_02",
+        "cost": 0,
+        "costId": 1
+    },
+    {
+        "name": "dmm_vendingmachine_01",
+        "cost": 0,
+        "costId": 2
+    },
+    {
+        "name": "dmm_cutlerybox_01",
+        "cost": 0,
+        "costId": 3
+    },
+    {
+        "name": "dmm_bench_01",
+        "cost": 0,
+        "costId": 4
+    },
+    {
+        "name": "dmm_lecturedesk_01",
+        "cost": 0,
+        "costId": 5
+    },
+    {
+        "name": "dmm_waterpurifier_01",
+        "cost": 0,
+        "costId": 6
+    },
+    {
+        "name": "dmm_globe_01",
+        "cost": 0,
+        "costId": 7
+    },
+    {
+        "name": "dmm_locker_01",
+        "cost": 0,
+        "costId": 8
+    },
+    {
+        "name": "dmm_mirror_01",
+        "cost": 0,
+        "costId": 9
+    },
+    {
+        "name": "dmm_skeleton_01",
+        "cost": 0,
+        "costId": 10
+    },
+    {
+        "name": "dmm_waterheater_01",
+        "cost": 0,
+        "costId": 11
+    },
+    {
+        "name": "dmm_box_01",
+        "cost": 0,
+        "costId": 12
+    },
+    {
+        "name": "dmm_menuboard_01",
+        "cost": 0,
+        "costId": 13
+    },
+    {
+        "name": "dmm_chair_02",
+        "cost": 0,
+        "costId": 14
+    },
+    {
+        "name": "dmm_recyclebin_01",
+        "cost": 0,
+        "costId": 15
+    },
+    {
+        "name": "dmm_desk_01",
+        "cost": 0,
+        "costId": 16
+    },
+    {
+        "name": "dmm_chair_03",
+        "cost": 0,
+        "costId": 17
+    },
+    {
+        "name": "dmm_drinkingfountain_01",
+        "cost": 0,
+        "costId": 18
+    },
+    {
+        "name": "dmm_fireextinguisher_01",
+        "cost": 0,
+        "costId": 19
+    },
+    {
+        "name": "dmm_basket_01",
+        "cost": 0,
+        "costId": 20
+    },
+    {
+        "name": "dmm_bag_01",
+        "cost": 0,
+        "costId": 21
+    },
+    {
+        "name": "dmm_soccerball_01",
+        "cost": 0,
+        "costId": 22
+    },
+    {
+        "name": "dmm_mopset_01",
+        "cost": 0,
+        "costId": 23
+    },
+    {
+        "name": "dmm_waterheater_01",
+        "cost": 10,
+        "costId": 24
+    },
+    {
+        "name": "dmm_trashcan_02",
+        "cost": 10,
+        "costId": 25
+    },
+    {
+        "name": "dmm_trashcan_01",
+        "cost": 10,
+        "costId": 26
+    },
+    {
+        "name": "dmm_box_01",
+        "cost": 10,
+        "costId": 27
+    },
+    {
+        "name": "dmm_menuboard_01",
+        "cost": 10,
+        "costId": 28
+    },
+    {
+        "name": "dmm_chair_02",
+        "cost": 10,
+        "costId": 29
+    },
+    {
+        "name": "dmm_recyclebin_02",
+        "cost": 10,
+        "costId": 30
+    },
+    {
+        "name": "dmm_umbrellastand_01",
+        "cost": 10,
+        "costId": 31
+    },
+    {
+        "name": "dmm_chair_01",
+        "cost": 10,
+        "costId": 32
+    },
+    {
+        "name": "dmm_chair_03",
+        "cost": 10,
+        "costId": 33
+    },
+    {
+        "name": "dmm_scale_01",
+        "cost": 10,
+        "costId": 34
+    },
+    {
+        "name": "dmm_fireextinguisher_01",
+        "cost": 10,
+        "costId": 35
+    },
+    {
+        "name": "dmm_hydrantbox_01",
+        "cost": 10,
+        "costId": 36
+    },
+    {
+        "name": "dmm_dillow_01",
+        "cost": 10,
+        "costId": 37
+    },
+    {
+        "name": "dmm_basket_01",
+        "cost": 10,
+        "costId": 38
+    },
+    {
+        "name": "dmm_basket_02",
+        "cost": 10,
+        "costId": 39
+    },
+    {
+        "name": "dmm_bag_01",
+        "cost": 10,
+        "costId": 40
+    },
+    {
+        "name": "dmm_notebook_01",
+        "cost": 10,
+        "costId": 41
+    },
+    {
+        "name": "dmm_microscope_01",
+        "cost": 10,
+        "costId": 42
+    },
+    {
+        "name": "dmm_game_01",
+        "cost": 10,
+        "costId": 43
+    },
+    {
+        "name": "dmm_basketball_01",
+        "cost": 10,
+        "costId": 44
+    },
+    {
+        "name": "dmm_pot_03",
+        "cost": 10,
+        "costId": 45
+    },
+    {
+        "name": "dmm_mopset_01",
+        "cost": 10,
+        "costId": 46
+    },
+    {
+        "name": "dmm_game_01",
+        "cost": 25,
+        "costId": 47
+    },
+    {
+        "name": "dmm_soccerball_01",
+        "cost": 25,
+        "costId": 48
+    },
+    {
+        "name": "dmm_pot_03",
+        "cost": 25,
+        "costId": 49
+    },
+    {
+        "name": "dmm_pot_01",
+        "cost": 25,
+        "costId": 50
+    },
+    {
+        "name": "dmm_beaker_01",
+        "cost": 25,
+        "costId": 51
+    },
+    {
+        "name": "dmm_basketball_01",
+        "cost": 25,
+        "costId": 52
+    },
+    {
+        "name": "dmm_cylinder_01",
+        "cost": 25,
+        "costId": 53
+    },
+    {
+        "name": "dmm_book_01",
+        "cost": 25,
+        "costId": 54
+    },
+    {
+        "name": "dmm_fireextinguisher_01",
+        "cost": 25,
+        "costId": 55
+    },
+    {
+        "name": "dmm_hydrantbox_01",
+        "cost": 25,
+        "costId": 56
+    },
+    {
+        "name": "dmm_dillow_01",
+        "cost": 25,
+        "costId": 57
+    },
+    {
+        "name": "dmm_basket_01",
+        "cost": 25,
+        "costId": 58
+    },
+    {
+        "name": "dmm_basket_02",
+        "cost": 25,
+        "costId": 59
+    },
+    {
+        "name": "dmm_bag_01",
+        "cost": 25,
+        "costId": 60
+    },
+    {
+        "name": "dmm_notebook_01",
+        "cost": 25,
+        "costId": 61
+    },
+    {
+        "name": "dmm_microscope_01",
+        "cost": 25,
+        "costId": 62
+    }
+]
